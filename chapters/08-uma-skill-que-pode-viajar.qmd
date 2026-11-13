@@ -1,0 +1,107 @@
+# Uma skill que pode viajar sem perder o endereço
+
+## Da boa instrução ao procedimento que sobrevive
+
+É fácil escrever um prompt bonito numa conversa e descobrir, uma semana depois, que ninguém consegue repetir o resultado. Às vezes perdemos o texto. Às vezes esquecemos o arquivo de referência. Às vezes executamos a mesma tarefa com uma versão diferente do contrato, sem perceber. O pior cenário é o mais silencioso: o assistente parece obedecer, mas está usando apenas parte das instruções e produz um trabalho que ninguém saberá reconstruir.
+
+Foi assim que começamos a olhar para as skills. Não queremos uma coleção de nomes impressionantes; queremos guardar procedimentos que já se mostraram úteis. A primeira candidata surgiu de uma dificuldade editorial concreta. Precisávamos revisar capítulos sem apagar a voz, sem transformar dúvidas de engenharia em certezas e sem esquecer os dois recursos didáticos que acompanham nossos livros. O procedimento deveria servir também para jogos e documentação de hardware, mantendo uma espinha comum e adaptando os critérios de fidelidade.
+
+Mas **ter instruções guardadas num arquivo não é o mesmo que executar uma habilidade**. Neste capítulo vamos separar quatro estágios: definir o contrato, empacotar os arquivos, instalá-los de maneira controlada e testar o comportamento num ambiente real. Um estágio não ganha o PASS do seguinte por simpatia.
+
+## O pequeno arquivo que abre a porta
+
+O formato Agent Skills estabelece uma pasta com um arquivo chamado `SKILL.md`. Esse arquivo reúne metadados iniciais e instruções. A identificação e a descrição permitem que um agente compatível considere a habilidade quando a tarefa se parece com seu objetivo. Depois, quando a skill é ativada, o sistema pode carregar orientações detalhadas e consultar recursos auxiliares [@agentskillspec2026]. É o princípio da **divulgação progressiva**: não precisamos colocar todas as instruções de todas as habilidades em cada mensagem.
+
+Na nossa primeira skill, os metadados começam com `name` e `description`, e o corpo explica quando usar, que entradas exigir, quais passos executar, que resultado entregar e onde parar. Não precisamos transformar a descrição numa história completa. Ela deve responder claramente: **qual problema esta skill resolve e quando seria apropriado chamá-la?** Se escrevermos “faz tudo em qualquer projeto”, quase qualquer tarefa poderá ativá-la, e a qualidade de suas decisões ficará mais difícil de avaliar.
+
+O corpo da skill tem regras que parecerão familiares. Registrar a versão original. Receber um trecho-alvo. Exigir exemplos de voz aprovados ou reconhecer que o perfil ainda é hipotético. Separar livro, jogo e hardware. Propor o menor diff e entregar uma lista de dúvidas. Rodar verificações mecânicas quando existirem. Parar antes de substituir o arquivo. Nada disso exige que a skill seja um agente independente: é um **método chamado sob demanda**, executado por um ambiente que fornece ou não as ferramentas necessárias.
+
+A pasta contém também `references/contratos-por-dominio.md`. Isso impede que o arquivo principal vire um manual de cem páginas e permite carregar detalhes apenas quando interessarem. Se estivermos revisando um parágrafo narrativo, não precisamos despejar a discussão inteira de sinais elétricos no contexto. Se estivermos documentando uma placa, por outro lado, as ressalvas sobre revisão, esquemático e evidência física deixam de ser opcionais.
+
+## Uma pasta legível é melhor que um truque escondido
+
+A estrutura da skill é deliberadamente pequena:
+
+```text
+skills/
+  revisao-autoral/
+    SKILL.md
+    references/
+      contratos-por-dominio.md
+```
+
+Não precisamos de uma grande biblioteca para começar. Precisamos saber o que cada arquivo faz e por que existe. O `SKILL.md` é o ponto de entrada. O contrato por domínio é a referência. As ferramentas de cópia, comparação e conferência de PDF vivem em diretórios próprios do projeto, porque também podem ser usadas sem a skill. Assim não criamos uma dependência artificial de um modelo para tarefas que os scripts resolvem sozinhos.
+
+Um erro frequente seria embutir no procedimento comandos que alteram arquivos de forma irreversível. Outra tentação seria colocar senhas, identificadores privados ou chaves de API diretamente no arquivo versionado. Nós evitaremos ambos. A habilidade deve carregar **instruções de menor privilégio** e exigir uma confirmação explícita antes de qualquer mudança. A configuração do ambiente continua externa ao contrato, principalmente quando envolve credenciais.
+
+Uma skill também pode dar instruções ruins. O fato de estar numa pasta elegante e possuir um cabeçalho válido não a torna segura. Devemos ler cuidadosamente habilidades de terceiros, inspecionar seus scripts e desconfiar de procedimentos que pedem acesso desnecessário. O mesmo cuidado vale para arquivos recuperados da internet que tentam impor ordens ao agente: conteúdo de referência não deve ganhar autoridade de sistema apenas porque foi lido.
+
+## A primeira tool é um fiscal, não um escritor
+
+Vamos nos deter em algo que a máquina consegue provar com mais segurança: **os arquivos foram copiados integralmente para o destino correto?** Para isso basta Python. O instalador que acompanha este capítulo lê a pasta canônica, confere se há `SKILL.md`, verifica o cabeçalho obrigatório e calcula hashes SHA-256. No modo de simulação, informa as operações previstas sem escrever nada. Na instalação, cria a pasta de destino somente quando não existe uma cópia conflitante; se houver diferença, exige autorização específica para substituí-la.
+
+Em ambientes locais compatíveis, o destino poderá ser `.agents/skills/revisao-autoral/` ou `.claude/skills/revisao-autoral/`. Os primeiros caminhos são reconhecidos por determinadas versões de Codex e Gemini CLI; o segundo aparece na documentação do Claude Code [@openaiskills2026; @geminicli2026; @anthropicskills2026]. **Não faremos desse mapa uma regra universal:** cada leitor deverá confirmar a versão e o local de descoberta de seu aplicativo. Por isso o instalador oferece destinos explícitos e não tenta acessar contas online, instalar plugins ou ativar skills remotamente.
+
+O programa não pergunta a um modelo se um hash combina com outro. Ele calcula. Não pede a uma IA para escolher um diretório que pareça razoável. Recebe o destino em argumento. Não trata um erro de permissão como defeito na qualidade do texto. Informa que a operação falhou. É uma *tool* no sentido mais concreto: uma função com entradas, efeitos e resultado observável.
+
+O valor didático talvez esteja justamente no que ela **não faz**. O instalador não abre Claude Code, Gemini CLI ou Codex para confirmar a descoberta. Não julga se as instruções foram seguidas numa revisão. Não tem permissão para modificar o manuscrito. E não chama nenhuma API de linguagem. Seu sucesso é um **PASS de empacotamento e integridade**, não um PASS de comportamento da skill.
+
+## Um contrato com três tipos de resultado
+
+Para não confundir os estágios, passaremos a registrar três resultados independentes. O primeiro é a **validade estrutural**: o pacote contém os arquivos necessários, o cabeçalho é reconhecido e as referências relativas apontam para arquivos presentes. O segundo é a **integridade do transporte**: os conteúdos no destino são idênticos aos da origem, e o programa não sobrescreveu nada sem autorização. O terceiro é a **eficácia operacional**: ao ser oferecida a um agente real, a skill foi descoberta, ativada quando cabia, respeitou as restrições e produziu um resultado que passou pelos critérios do projeto.
+
+Só conseguimos automatizar integralmente os dois primeiros neste laboratório. O terceiro exigirá um ambiente compatível, uma tarefa representativa, uma versão-base e revisão humana. Não chamaremos o terceiro de PASS porque as pastas ficaram iguais. Essa honestidade é especialmente importante quando queremos transportar o método para o Manual Técnico do TK2000, onde a consequência de um erro pode ser uma ligação elétrica incorreta publicada como se fosse comprovada.
+
+Uma boa bateria de testes também precisa exercitar o caminho ruim. O que acontece se falta `SKILL.md`? E se a descrição está vazia? E se o destino contém uma versão diferente? O instalador deve recusar a operação ou informar claramente sua condição. É melhor descobrir isso num diretório temporário do que enquanto um agente manipula o único exemplar de um livro.
+
+## NA PRÁTICA COM A IA: a skill que precisa mostrar o próprio contrato
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Pedir uma skill pequena, verificável e com limites**
+
+**O que testar.** Observar se um assistente consegue transformar um procedimento recorrente em proposta de skill sem inventar poderes, permissões ou compatibilidade.
+
+**Como proceder.** Escolha uma tarefa textual que você já faz repetidamente. Entregue à IA o objetivo, um exemplo aprovado e o resultado esperado. Não forneça credenciais nem conceda acesso de escrita. Comece apenas com `SKILL.md` e, se necessário, um pequeno arquivo de referências.
+
+**Prompt que usaríamos hoje**
+
+> Quero empacotar o seguinte procedimento recorrente numa Agent Skill. Proponha uma pasta com `SKILL.md`, usando metadados `name` e `description`, e referências auxiliares apenas quando necessárias. Descreva quando a skill deve e não deve ser usada, suas entradas obrigatórias, etapas, saídas e critérios de parada. Não inclua senhas, APIs imaginárias, comandos destrutivos nem recursos que o ambiente não disponibiliza. O resultado deve ser uma PROPOSTA; não declare que a skill foi instalada ou executada. Separe os testes de estrutura, transporte e comportamento. Procedimento: [explique aqui a tarefa]. Exemplo aprovado: [cole aqui].
+
+**Por que funciona.** O pedido limita o escopo, define a estrutura mínima e torna explícito o que continua sem verificação. Ele reduz o risco de receber uma pasta cheia de arquivos que ninguém sabe avaliar. Não garante que a skill seja correta: o modelo ainda pode propor regras inadequadas.
+
+**Como verificar.** Leia o `SKILL.md` proposto e tente responder, sem adivinhações: quando ele será chamado, o que pode alterar, que dados exige e como sabemos que terminou. Em seguida use um verificador local ou uma inspeção manual para conferir os metadados. Execute a instalação somente em diretório temporário e verifique hashes; testar descoberta num ambiente real será um passo distinto.
+:::
+
+Esse roteiro interessa mesmo ao leitor que não pretende instalar uma skill hoje. Ele transforma o ato de escrever instruções numa prática de engenharia: definir entradas, controlar saídas, preservar o que não pode ser mudado e criar testes adequados ao tipo de falha. Se a tarefa não precisa ser repetida, talvez nem mereça virar skill. Nosso catálogo não ganhará um item por capítulo apenas para ficar mais vistoso.
+
+## EXPERIMENTO DO LEITOR: quando a habilidade deveria dizer não
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O caso que não merece sua skill**
+
+Você escreveu ou escolheu uma skill para resolver um problema recorrente. Agora invente três tarefas próximas desse problema, mas não idênticas. Em uma delas, a skill deveria ajudar. Em outra, deveria pedir informações antes de avançar. Na terceira, deveria **recusar-se a agir ou encaminhar a decisão ao responsável**, por falta de competência, dados ou autorização.
+
+Antes de consultar qualquer IA, justifique suas classificações. Onde está a fronteira entre um procedimento útil e uma intromissão? O que muda se o documento é seu, de uma equipe ou de um terceiro? E se a operação é reversível? Se tiver acesso a um ambiente de teste, apresente os três casos sem arquivos valiosos e observe o comportamento; caso contrário, compare sua expectativa com as próprias instruções da skill.
+
+Não procure uma taxa de acerto numa amostra tão pequena. Procure uma condição que você não havia documentado. Quando encontrá-la, decida se deve alterar a skill, melhorar o enunciado da tarefa ou reconhecer que o problema não deveria ser delegado.
+:::
+
+## O mesmo pacote, provas diferentes
+
+No **livro**, testaremos a skill com uma passagem cuja voz já foi reconhecida pelo autor, uma passagem que precisa de revisão e uma lista de elementos intocáveis. O resultado esperado é um conjunto pequeno de correções justificadas, sem deslocar imagens ou perder referências. O teste final continua sendo a leitura humana, apoiada por diferenças verificáveis.
+
+No **jogo**, uma habilidade de revisão pode examinar documentação, diálogos e comentários de código, mas precisará respeitar também a experiência de quem joga. A estabilidade de um script não prova que uma fase permaneceu divertida ou que o tempo de resposta de um controle não mudou. O contrato inclui testes executáveis, screenshots ou vídeos quando apropriados, e julgamento de jogabilidade.
+
+No **hardware**, a mesma estrutura de procedimento ajuda a organizar uma revisão, mas a fonte de autoridade muda. Um esquemático revisado, um datasheet, a identificação da placa e medições rastreáveis têm peso que um parágrafo elegante não possui. Ao transportar uma skill para esse domínio, ela precisa ganhar instruções de **não inferir ligações nem fabricar medidas**. A revisão do TK2000 colocará isso à prova numa escala maior.
+
+Essas três aplicações nos devolvem à pergunta inicial: o que é realmente reutilizável? A sequência de trabalho — receber referência, delimitar escopo, propor, comparar, testar e pedir aprovação — permanece. A definição de sucesso muda. É por isso que temos um arquivo pequeno de contrato por domínio, em vez de declarar que qualquer texto, jogo ou placa pode ser revisado com a mesma régua invisível.
+
+## E se amanhã mudarmos o nome do ambiente?
+
+O modo de distribuição de uma habilidade deve ser tratado como adaptador. Podemos manter a pasta canônica no Git e produzir uma cópia para o diretório reconhecido pela ferramenta local. Podemos empacotar a pasta em ZIP para um serviço que aceite upload. Podemos até transformar parte das instruções num plugin, quando houver justificativa e permissões adequadas. **O método não deve nascer prisioneiro de um único botão de instalação.**
+
+Nosso teste de transporte não encerra a história. Ele apenas coloca as condições em ordem: primeiro sabemos o que a skill contém, depois sabemos para onde foi, depois sabemos se o aplicativo a reconheceu e só então sabemos se resolveu o problema. Cada etapa exige evidência própria. O leitor que aceitar essa disciplina terá menos demonstrações mágicas — e muito mais resultados que consegue reproduzir.
+
+No próximo trecho desta obra, começaremos a combinar habilidades e ferramentas em fluxos reais, com estado, checkpoints, falhas e recuperação. O desafio será não transformar um método cuidadoso num labirinto de automações. A oficina deve continuar simples o bastante para que uma pessoa consiga entender o que acabou de acontecer, inclusive quando alguma coisa der errado.

@@ -100,8 +100,15 @@ python workflows/auditoria_editorial.py . --pdf /caminho/para/a/previa_v0.6.pdf 
 
 Nenhuma dessas operações chama API de IA, escreve no manuscrito ou publica no GitHub. A skill ainda precisa ser testada no ambiente do agente escolhido, e o agente descrito no diretório `agents/` não existe como programa funcional.
 
-## Emenda v0.7.1 — o segundo livro e revisão futura por blocos
+## Emenda v0.7.1 — o segundo livro e a revisão em blocos
 
-A Apresentação agora apresenta ao leitor o *Manual Técnico do TK2000* como obra independente já em desenvolvimento, adotada como **prova final** do método — não como promessa de conclusão automática. Os capítulos existentes não foram reescritos. O procedimento futuro de revisão pelo autor está em `docs/PLANO_REVISAO_POR_BLOCOS.md`; a primeira passada completa ainda não terminou.
+A Apresentação passou a explicar ao leitor o Manual Técnico do TK2000 como obra independente já em desenvolvimento e prova final externa do método. O plano de revisão por blocos editáveis está em `docs/PLANO_REVISAO_POR_BLOCOS.md`, sem alterar capítulos previamente escritos.
 
-Para instalar Quarto no Windows, use https://quarto.org/docs/get-started/ e execute `quarto --version`, `quarto check` e `quarto render --to html` na raiz do projeto. Geração PDF exige a dependência TeX (`quarto install tinytex`).
+## Rodada v0.8 — ambientes, portabilidade e transporte verificado
+
+- Capítulos 7 e 8, em primeira passada: as famílias ChatGPT, Claude e Gemini; transporte de um contrato entre ambientes; escrita, empacotamento e teste de uma Agent Skill.
+- O livro continua a comparar **livro, jogo e hardware** e a preservar os boxes `NA PRÁTICA COM A IA` e `EXPERIMENTO DO LEITOR` de maneira independente.
+- Novo `tools/skills/instalar_skill_local.py`: copia a skill canônica para diretórios locais compatíveis em modo de simulação (padrão), com preflight, hashes SHA-256, detecção de conflito e backup em substituições autorizadas. Não instala recursos em contas online nem invoca modelos.
+- `tests/test_instalar_skill_local.py` testa comportamento local de transporte. PASS nesses testes não comprova ativação ou eficácia da skill em ChatGPT, Claude Code, Gemini CLI ou Codex. Ver `docs/PORTABILIDADE_SKILLS.md` e `docs/RELATORIO_DE_TESTES_v0.8.md`.
+- Fonte versionada: GitHub `main`. Espelho da pasta Quarto no Drive do autor em `Projetosia/Livro — IA fazendo IA (ou quase)/02_Manuscrito/Quarto_Fonte`. Prévia web pública renderizada pelo GitHub Actions e publicada no Pages se o build passar. **Não há sincronização automática bidirecional entre Drive e GitHub**.
+- O defeito `EDITORIAL-PDF-059` da prévia PDF v0.6 continua um caso conhecido preservado, sem correção nesta rodada. Provas locais de Pandoc não substituem Quarto nativo nem aprovação de publicação.

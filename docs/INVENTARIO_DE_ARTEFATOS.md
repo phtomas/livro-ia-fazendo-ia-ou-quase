@@ -41,3 +41,15 @@ O detector de PDF **retorna código 1** quando encontra erro, e o workflow tamb�
 4. Implementar o controlador de aprovações do agente — sem credenciais embutidas — e verificar que um erro de permissão suspende a execução.
 5. Testar um bloco representativo do Manual TK2000 sem alterá-lo antes da autorização específica.
 6. Reproduzir uma melhoria de layout da página 59 **apenas em versão futura e com comparação**, preservando o PDF defeituoso histórico como fixture.
+
+
+## Atualização v0.8
+
+| Peça | Local | Estado comprovado | Ainda não comprovado |
+| --- | --- | --- | --- |
+| Capítulos 7–8 | `chapters/07-*`, `chapters/08-*` | Texto e marcadores estruturais presentes | Voz aprovada, acabamento final, entendimento do leitor |
+| Instalador local de skill | `tools/skills/instalar_skill_local.py` | Testes unitários de dry-run, cópia por hash, idempotência, conflito, backup, metadata e symlinks | Instalação na máquina do autor ou em produto remoto |
+| Skill revisão autoral | `skills/revisao-autoral/` | Pacote canônico legível e integridade de cópia local | Descoberta, ativação e qualidade da revisão num host real |
+| Matriz de compatibilidade | `docs/PORTABILIDADE_SKILLS.md` | Documentação de caminhos e condições consultadas em 13/11/2026 | Portabilidade futura em qualquer versão; execução cruzada |
+
+**Regra:** não confundir integridade dos arquivos com eficácia da habilidade. `PASS` local não preenche campos de ensaio de host.

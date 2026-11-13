@@ -36,3 +36,9 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - Capítulo 6: diagrama em três camadas **modelo/skill/tool**, com uma faixa de aprovação humana e três saídas específicas (livro, jogo, hardware). Ainda não desenhado.
 - Capítulos 2–5: fluxograma de seleção sem IA → script → modelo pequeno → agente, com custo e provas **sem dados inventados**. Ainda não desenhado.
 - A página 59 do PDF v0.6 é um caso de comparação antes/depois **reservado para uma rodada futura**, não uma licença para corrigir silenciosamente o exemplo. Há seis trechos monoespaçados fora do retângulo no diagnóstico inicial. A aprovação dependerá de inspeção visual.
+
+## Sugestões da rodada v0.8 (ainda não desenhadas)
+
+- **Capítulo 7:** esquema de três camadas: contrato independente → adaptadores de ambiente → execuções e evidências; evitar logotipos como se fossem equivalência técnica.
+- **Capítulo 8:** diagrama de estados `PACKAGED → TRANSPORTED → DISCOVERED → ACTIVATED → EFFECTIVE`, com gates independentes e caminho de falha. Esta figura poderá usar o próprio log do instalador como caso real.
+- Não atribuir a esses desenhos resultados não testados. Manter a geração das figuras na segunda passada editorial, conforme decisão do autor.

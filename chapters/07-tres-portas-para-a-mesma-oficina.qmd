@@ -1,0 +1,101 @@
+# Três portas para a mesma oficina
+
+## Não estamos escolhendo uma torcida
+
+Depois de organizar nossos primeiros contratos, construir verificadores e assistir ao GitHub publicar uma prévia do próprio livro, seria tentador acreditar que já encontramos a ferramenta definitiva. Afinal, estamos trabalhando dentro de uma conversa com IA, escrevendo capítulos, criando scripts, conferindo arquivos e mantendo versões. Para que procurar outra coisa?
+
+A resposta está no tipo de problema que aparece quando a oficina começa a crescer. Uma conversa é excelente para discutir o que ainda não compreendemos. Um ambiente de desenvolvimento pode ser mais conveniente para percorrer dezenas de arquivos, executar testes e observar as diferenças antes de confirmar uma alteração. Uma API pode servir quando precisamos repetir uma operação de modo programático, medir seu consumo e integrar respostas a um sistema maior. E uma ferramenta local, sem IA, continua sendo a melhor escolha para muitas tarefas. **Não há um campeão universal. Há ambientes que oferecem capacidades e limites distintos.**
+
+Os nomes mais conhecidos hoje incluem ChatGPT e suas ferramentas de trabalho e desenvolvimento, Claude e Claude Code, Gemini e Gemini CLI. Podemos olhar para essas famílias sem transformar o livro numa tabela de preços ou numa comparação de botões que envelhece na próxima atualização. O que nos interessa é reconhecer **o que estamos autorizando, em que espaço o trabalho acontece e que evidência o ambiente consegue produzir**. A interface muda; essas perguntas continuam úteis.
+
+Nossa intenção também não é demonstrar que uma plataforma executa melhor que outra com base em meia dúzia de respostas bonitas. Seria um teste injusto, sem controle das entradas, das ferramentas disponíveis, dos modelos realmente utilizados e dos critérios de avaliação. Vamos começar por algo mais modesto: aprender a levar **o mesmo contrato** para ambientes diferentes, observando o que chega inteiro e o que precisa ser adaptado.
+
+## Três perguntas antes de abrir a conversa
+
+Antes de escrever a primeira linha de um prompt, pergunte onde estão os arquivos, o que pode ser executado e quem tem autoridade para aprovar mudanças. Uma conversa que recebe um trecho colado não tem automaticamente acesso ao diretório em que o texto foi escrito. Uma aplicação conectada ao Google Drive pode localizar documentos autorizados, mas isso não significa que consiga executar um compilador na sua máquina. Um terminal que consegue rodar Python tem um alcance distinto de uma interface que apenas sugere código. E um agente que recebeu permissão para consultar um repositório não está necessariamente autorizado a publicar nele.
+
+**Onde está o contexto?** Talvez esteja na conversa, em arquivos anexados, numa pasta local, num repositório versionado ou em fontes acessíveis por um conector. Cada lugar possui uma forma diferente de atualização. Quando uma página do livro muda no GitHub, o texto que copiamos para uma conversa antiga não se transforma magicamente na nova versão. Quando alteramos um `.qmd` no Drive sincronizado, a mudança existe no computador, mas não aparece automaticamente como commit no GitHub. Duas cópias não constituem uma única fonte de verdade só porque têm o mesmo título.
+
+**Que operações são reais?** Uma IA pode explicar como instalar o Quarto, orientar a criação de uma skill ou desenhar uma proposta de circuito. Para afirmar que compilou o PDF, precisa ter executado a compilação e inspecionado o resultado. Para dizer que uma placa responde a um sinal, precisa de evidência do circuito adequado, e não de uma simulação imaginada. Para declarar um jogo jogável, precisamos de execução e observação, não apenas de um programa que não apresenta erro de sintaxe.
+
+**Quem decide?** Em nosso fluxo editorial, os scripts podem ler, contar, comparar e produzir relatórios. Uma IA pode propor alterações. O autor aprova a voz, o conteúdo e a publicação. Se uma plataforma tornar fácil demais misturar essas etapas, nosso trabalho será recolocar as fronteiras onde elas fazem falta. A facilidade de apertar um botão não é uma justificativa para abrir mão da responsabilidade.
+
+## ChatGPT, Claude e Gemini: famílias, não caixas idênticas
+
+Quando falamos em **ChatGPT**, não estamos falando apenas de uma caixa para digitar perguntas. Dependendo do produto e da configuração disponível, podemos trabalhar em conversa, em espaços com arquivos, com conectores, com recursos de desenvolvimento e com habilidades reutilizáveis. A documentação de skills da OpenAI distingue instruções reutilizáveis de ferramentas que realizam ações e mostra como o sistema pode descobrir uma habilidade por sua descrição [@openaiskills2026]. Isso não significa que qualquer pasta `SKILL.md` deixada no Google Drive seja automaticamente instalada na interface web. **A distribuição e a ativação continuam dependendo do ambiente.**
+
+A família **Claude** oferece uma distinção semelhante entre a experiência de conversar com textos e artefatos, os recursos de skills em produtos compatíveis e o ambiente Claude Code para trabalhar com arquivos e comandos. A documentação oficial descreve skills customizadas em pastas com `SKILL.md`, além de formas próprias de disponibilizá-las em seus produtos [@anthropicskills2026]. A frase importante não é “Claude aceita skills”, e sim **“qual Claude, por qual mecanismo e com quais permissões?”**. Uma habilidade que foi lida numa sessão não deve ser registrada como instalada em outra por dedução.
+
+Na família **Gemini**, também encontramos uma interface conversacional, APIs e o Gemini CLI. O CLI documenta a descoberta de habilidades sob diretórios de projeto ou usuário e uma etapa de ativação sujeita a consentimento, além de arquivos de contexto mais permanentes como `GEMINI.md` [@geminicli2026]. Isso nos oferece um caminho interessante para repetir experiências, mas continua sendo necessário verificar a versão efetivamente instalada e a lista de skills que o programa reconheceu.
+
+Essas diferenças não impedem a construção de um método comum. Pelo contrário: **elas nos obrigam a separar o método de seu mecanismo de instalação.** O contrato editorial pertence ao nosso projeto. A maneira de oferecê-lo ao assistente pertence ao ambiente. Se amanhã aparecer outra plataforma, teremos trabalho de adaptação, não a obrigação de reescrever nossos princípios do zero.
+
+## O que viaja inteiro e o que fica pelo caminho
+
+Imagine o pedido: “Revise esta página de um manual sem alterar fatos, valores ou ligações elétricas; mostre as diferenças e não sobrescreva o original”. Podemos apresentá-lo em qualquer assistente de texto. Nesse nível, o contrato viaja quase inteiro. Mas a execução logo revela diferenças.
+
+Numa conversa sem acesso a arquivos, o leitor fornece o trecho e recebe uma proposta. Conseguimos verificar o texto lado a lado, mas não conferimos automaticamente todos os documentos do projeto. Num ambiente com ferramentas para ler arquivos, o assistente pode recuperar a versão canônica e produzir um diff. Se houver um terminal, podemos executar um script que calcula o hash do original e interrompe uma substituição perigosa. Se houver acesso a um conector, podemos buscar uma referência atualizada; ainda precisaremos conferir de qual conta e de qual pasta veio.
+
+E se dois ambientes aceitarem `SKILL.md`? Ainda assim não sabemos se a descrição fez a skill ser descoberta, se seu corpo foi carregado, se os arquivos auxiliares puderam ser lidos ou se os comandos incluídos realmente foram executados. A existência do arquivo é **prova de empacotamento**, não de comportamento. Vamos guardar essa distinção no relatório, porque ela evitará muitos triunfos imaginários.
+
+Aqui vale uma advertência sobre nomes de modelos. O nome que selecionamos na tela, o modelo anunciado por uma aplicação e o identificador que uma API registra por chamada não são necessariamente a mesma evidência. Se um serviço faz roteamento entre modelos, precisamos de registros por chamada para sustentar qualquer análise de custo e capacidade. Se a informação não estiver disponível, o resultado correto é **modelo efetivo não verificado**. Não vale completar a lacuna com confiança.
+
+## Nosso primeiro transporte: da conversa para a pasta
+
+Já criamos uma skill candidata de revisão autoral. Ela vive em `skills/revisao-autoral/`, tem um arquivo `SKILL.md`, um contrato específico para livro, jogo e hardware e regras claras de parada. Até este ponto, seu estado era honesto: **arquivo criado, não homologado**. Nada garante que o assistente de uma plataforma específica tenha reconhecido a pasta, quanto mais que a revisão resultante tenha preservado a voz do autor.
+
+O primeiro transporte será **local e mecânico**. Um pequeno instalador não pergunta a um modelo como copiar arquivos. Ele verifica o pacote, examina o destino e oferece uma simulação. Se houver arquivos já instalados, não os apaga silenciosamente. Quando autorizado, monta uma cópia da skill nos diretórios que diferentes ambientes procuram. Depois compara os conteúdos por hash. Essa operação testa o transporte dos arquivos; o teste da skill dentro de ChatGPT, Claude ou Gemini permanece outra experiência.
+
+Escolhemos esse caminho porque ele nos dá um controle de regressão simples. A origem fica versionada no repositório. O instalador recebe a origem e o destino explicitamente. Cada execução informa o que teria feito ou o que fez. Se a skill mudar na versão seguinte, será possível identificar qual cópia ficou antiga. É menos vistoso que um agente que promete adaptar qualquer habilidade para qualquer plataforma, porém muito mais fácil de auditar.
+
+A compatibilidade merece nota especial. Algumas versões do Codex e do Gemini CLI aceitam a localização `.agents/skills/` no projeto, enquanto Claude Code documenta `.claude/skills/` [@openaiskills2026; @geminicli2026; @anthropicskills2026]. **Esses caminhos não são uma promessa de compatibilidade eterna.** Quando o leitor executar este laboratório, deverá consultar a documentação de sua versão e confirmar a descoberta com o comando ou a interface do produto, sem conceder permissões adicionais desnecessárias.
+
+## NA PRÁTICA COM A IA: manter a mesma pergunta, mudar o ambiente
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Um contrato, duas conversas, nenhuma alteração automática**
+
+**O que testar.** Observar o que permanece estável quando apresentamos a mesma tarefa de revisão em dois ambientes de IA, sem confundir qualidade da resposta com acesso real a ferramentas.
+
+**Como proceder.** Escolha um texto próprio de 150 a 250 palavras, sem dados privados. Anote seu objetivo e três critérios de aprovação. Abra duas sessões novas, de preferência em serviços diferentes, e forneça exatamente o mesmo texto. Não autorize execução de comandos nem escrita em arquivos. Registre nome do serviço, modalidade de acesso, data e modelo informado, se conhecido.
+
+**Prompt que usaríamos hoje**
+
+> Analise o texto a seguir como revisor técnico. Preserve números, significado, exemplos e voz do autor. Apresente primeiro três problemas concretos de clareza, indicando trechos. Depois ofereça uma proposta mínima de revisão e um resumo das diferenças. Não invente fontes nem diga que executou testes ou acessou arquivos. Não salve nem publique nada. Se faltar referência para confirmar uma afirmação técnica, marque-a como NÃO VERIFICADA. Critérios de sucesso: preservar fatos, explicar alterações e apontar incertezas. Texto: [cole aqui seu texto].
+
+**Por que funciona.** Mantemos constantes os requisitos observáveis e restringimos o teste à análise textual. Assim conseguimos observar diferenças sem atribuí-las imediatamente a supostas capacidades do modelo. O experimento não controla todas as variáveis — sistemas e versões podem diferir — e não produz ranking científico.
+
+**Como verificar.** Compare cada resposta com o original. Conte mudanças de sentido, informações acrescentadas sem fonte, alterações de voz e justificativas verificáveis. Classifique cada critério separadamente e registre qual plataforma de fato teve acesso ao material. Se não houve acesso a ferramentas, não marque prova de execução.
+:::
+
+O leitor pode repetir essa atividade sem assinatura de API, sem instalar agentes e sem compartilhar uma pasta inteira. Em nossa oficina, o resultado será tratado como **amostra de comportamento**, não como selo de compatibilidade. O passo seguinte não será escolher o vencedor, mas descobrir quais partes do contrato precisamos explicitar melhor.
+
+## EXPERIMENTO DO LEITOR: a fronteira que você escolhe
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O que você não quer entregar à ferramenta?**
+
+Pense em uma tarefa sua, de preferência uma que ainda esteja incompleta. Pode ser a revisão de um texto, a montagem de uma fase de jogo ou o diagnóstico de uma placa. Sem consultar a IA, desenhe três círculos: o que a ferramenta pode **ler**, o que pode **propor** e o que poderia **alterar**. Algumas coisas ficarão fora dos três.
+
+Escolha uma decisão que você faria questão de manter nas suas mãos. O que poderia dar errado se ela fosse delegada? E que prova concreta faria você considerar a delegação no futuro? Não há obrigação de concluir que agentes são perigosos nem de concluir que são superiores: o objetivo é explicitar sua fronteira de confiança.
+
+Depois, compare sua decisão com a de outra pessoa ou com um segundo caso de natureza diferente. Talvez o limite aceitável para corrigir pontuação seja incompatível com o limite para alterar uma ROM. Registre **o que mudou e por quê**, usando seus próprios critérios antes de pedir uma opinião à IA.
+:::
+
+## Um livro, um jogo e uma placa olhando para a mesma régua
+
+No **livro**, a portabilidade se mede pelo quanto o contrato preserva voz, fontes, sequência e formatação, mesmo quando muda o assistente. Uma revisão pode ter excelente português e ainda perder uma legenda ou quebrar a apresentação de um box. Nossos testes de estrutura continuam necessários, qualquer que seja o modelo utilizado.
+
+Num **jogo**, o texto do contrato viaja, mas a prova exige execução. Um assistente que altera um algoritmo de colisão precisa mostrar código e teste, e o autor ainda deverá avaliar a sensação de controle. O prompt não informa sozinho se o personagem atravessou a plataforma ou se o jogo se tornou frustrante.
+
+No **hardware**, o limite fica ainda mais claro. Podemos compartilhar instruções para ler esquemáticos, organizar hipóteses e conferir pinagens. Nenhum ambiente ganha a capacidade de medir uma placa física só porque recebeu uma skill chamada `diagnostico`. A proveniência da fotografia, a revisão do circuito, os instrumentos e a bancada continuam fazendo parte da prova.
+
+Ao trocar de plataforma, portanto, não trocamos de princípios. Mudamos a forma de chegar às fontes e aos instrumentos. Um bom método deve tornar essa diferença visível, e não escondê-la atrás de um nome comercial.
+
+## O ponto a partir do qual vale construir
+
+Concluímos este percurso com uma descoberta talvez menos empolgante que uma lista de recursos exclusivos, porém mais duradoura: **o ambiente é parte do experimento**. Se não registrarmos onde o procedimento foi executado, que arquivos estavam disponíveis e quais permissões foram concedidas, a reprodução será incompleta.
+
+No próximo capítulo abriremos nossa skill de revisão autoral, arquivo por arquivo, e prepararemos seu transporte local. O leitor verá o que pode ser verificado sem IA — sintaxe, empacotamento, cópia e integridade — e o que ainda requer experimentar a habilidade em um assistente real. Só então fará sentido discutir a diferença entre ter uma skill e possuir um sistema confiável que a utiliza.

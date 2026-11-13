@@ -2,7 +2,8 @@
 
 - Apresentação: rascunho v0.2 revisado para revisão do autor.
 - Capítulo 1: rascunho v0.2 revisado para revisão do autor.
-- Capítulos 2–5: agora redigidos em primeira passada, revisão autoral pendente. Capítulos 6–21: apenas esboçados no projeto editorial.
+- **Estado atual:** Capítulos 1–8 redigidos em primeira passada; capítulos 9–21 ainda previstos no projeto editorial. Revisão autoral integral pendente.
+- As notas abaixo documentam estados históricos sucessivos e não substituem o estado atual.
 - Ainda sem avaliações formais de fidelidade da voz ou validação da paginação.
 - Quarto não está instalado neste ambiente, logo ainda não foi possível validar renderização nativa.
 - Bibliografia e créditos: fontes públicas primárias citadas no corpo; seguir auditando antes da publicação.
@@ -64,9 +65,16 @@
 - Documentos em `docs/` distinguem baseline conhecido e status dos componentes.
 - Quarto nativo ainda não foi renderizado neste ambiente; as provas Pandoc são prévias, não miolo aprovado.
 
-## Emenda editorial v0.7.1 — apresentação do TK2000 e plano de revisão por blocos
+## Emenda v0.7.1 — TK2000 contextualizado e revisão por blocos
 
-- Acrescentada somente uma passagem de contextualização do *Manual Técnico do TK2000* à Apresentação (`index.qmd`), em linguagem destinada ao leitor; capítulos 1–6 não foram alterados.
-- Criado `docs/PLANO_REVISAO_POR_BLOCOS.md`: a revisão humana acontecerá após a primeira passada, com documentos editáveis por blocos, diffs e reintegração controlada.
-- O manual TK2000 permanece intocado. O plano e o texto da Apresentação não equivalem à execução de teste final.
-- Quarto nativo no Windows do autor ainda deve ser instalado e testado. PDF 0.7 não foi regenerado nesta emenda.
+- Acrescentada uma passagem narrativa à Apresentação situando o Manual Técnico do TK2000 como livro independente que será a prova externa do método.
+- Criado `docs/PLANO_REVISAO_POR_BLOCOS.md`. O autor examinará blocos editáveis depois de concluída a primeira passada; esta emenda não iniciou a revisão.
+
+## Rodada v0.8 — capítulos 7–8 e transporte local de skills
+
+- Capítulos 7 `Três portas para a mesma oficina` e 8 `Uma skill que pode viajar sem perder o endereço` incluídos na fonte; cada capítulo possui box NA PRÁTICA COM A IA e EXPERIMENTO DO LEITOR autônomo.
+- Comparação entre ChatGPT, Claude e Gemini feita por tipos de ambiente, contexto e permissões; não há benchmark nem ranking de modelos. Informações operacionais dependem de produto e versão.
+- Ferramenta `tools/skills/instalar_skill_local.py`: empacotamento e instalação local com simulação, validação mínima de frontmatter, hash, prevenção de sobrescrita e backup. A execução em diretório temporário foi testada; **não foi provado carregamento ou comportamento em nenhum dos aplicativos externos**.
+- 13 testes unitários locais PASS. Verificação estrutural dos oito capítulos PASS. Essas evidências não aprovam voz, segurança total, paginação ou publicação.
+- Capítulos 1–6 não foram reescritos. A Apresentação segue a emenda v0.7.1. A falha `EDITORIAL-PDF-059` permanece registrada como defeito conhecido da prova v0.6, sem correção.
+- Quarto nativo no GitHub Pages deverá ser verificado depois do commit; prévia Pandoc local não é publicação final.

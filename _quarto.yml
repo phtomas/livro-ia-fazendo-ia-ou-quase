@@ -25,6 +25,8 @@ book:
     - chapters/04-quando-criar-um-agente.qmd
     - chapters/05-provas-custos-e-seguranca.qmd
     - chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd
+    - chapters/07-tres-portas-para-a-mesma-oficina.qmd
+    - chapters/08-uma-skill-que-pode-viajar.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd
