@@ -31,6 +31,8 @@ book:
     - chapters/10-quem-deixa-o-agente-decidir.qmd
     - chapters/11-o-primeiro-ciclo-supervisionado.qmd
     - chapters/12-quando-uma-skill-merece-confianca.qmd
+    - chapters/13-a-ferramenta-que-nao-precisa-de-opiniao.qmd
+    - chapters/14-duas-copias-uma-historia.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

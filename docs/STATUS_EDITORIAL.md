@@ -96,3 +96,12 @@
 - A avaliação de propostas numéricas cobre apenas os tokens e trechos protegidos; `PASS_LIMITED` não confirma fatos nem voz.
 - Os erros não descritos que o autor identificou foram deliberadamente mantidos fora do conhecimento do processo para a revisão final; não presumir ausência de erros pelo PASS dos verificadores.
 - O PDF histórico com problema na página 59 não foi modificado.
+
+
+## Rodada v1.1 — Capítulos 13–14 e detecção de divergências entre espelhos
+
+- Os capítulos 13 e 14 foram redigidos em primeira passada. Abordam tools determinísticas e a separação entre GitHub, Google Drive, Quarto e aprovação autoral; contêm cada um um box NA PRÁTICA COM A IA e um EXPERIMENTO DO LEITOR distinto.
+- `tools/sync/conferir_espelhos.py` é um comparador local, somente de leitura, de duas árvores com hashes SHA-256; aceita manifesto de linha de base opcional e produz relatório JSON. **Não é sincronização entre provedores, agente LLM ou resolução automática de conflitos.**
+- Testes unitários incluindo o novo comparador: 44 PASS; as origens não foram modificadas. Nenhuma divergência real entre Google Drive e GitHub foi deduzida de testes com diretórios temporários.
+- A nova falha editorial apontada pelo autor segue **não localizada** e não foi corrigida por adivinhação. Defeitos históricos de PDF permanecem registrados. O conjunto de verificadores não prova ausência de erros no manuscrito.
+- Apresentação e Capítulos 1–12 preservados byte a byte nesta rodada; revisão autoral final continuará em blocos depois da primeira passada.

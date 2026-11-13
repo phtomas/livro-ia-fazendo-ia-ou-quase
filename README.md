@@ -138,3 +138,10 @@ O PDF Pandoc é prova de leitura, não miolo final. A prévia Quarto HTML é ger
 - Exemplos em `examples/`, testes em `tests/`; relatórios em `docs/RELATORIO_DE_TESTES_v1.0.md`.
 - Defeito histórico da página 59 da v0.6 permanece como fixture conhecida. A ausência de detecção na página 59 da v0.9 não equivale a correção, porque o detector não encontrou quadro elegível nessa página.
 - Leitura web: https://phtomas.github.io/livro-ia-fazendo-ia-ou-quase/ (atualizada após commit e sucesso do GitHub Actions).
+
+
+## Rodada v1.1 — Capítulos 13 e 14 e auditoria de cópias
+
+Os capítulos `13-a-ferramenta-que-nao-precisa-de-opiniao.qmd` e `14-duas-copias-uma-historia.qmd` completam o primeiro laboratório sobre tools determinísticas, revisão de cópias e responsabilidades entre GitHub, Drive e Quarto. A tool `tools/sync/conferir_espelhos.py` **não sincroniza arquivos**: compara árvores locais, calcula SHA-256 e emite JSON, impedindo automaticamente a ideia de que a cópia mais recente é a correta. Para executar: `python tools/sync/conferir_espelhos.py --canon DIR_A --espelho DIR_B --report fora_das_pastas.json`. A opção `--snapshot` cria manifesto prévio, permitindo classificar mudanças unilaterais e concorrentes.
+
+Os novos testes são locais; nem o transporte entre provedores nem a reconciliação automática foram homologados. Preservar as falhas editoriais anteriores e a nova ocorrência não detalhada pelo autor para a revisão final em blocos. Esta rodada não corrige textos anteriores.

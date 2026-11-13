@@ -77,3 +77,14 @@ O detector de PDF **retorna código 1** quando encontra erro, e o workflow tamb�
 | Casos textuais | `examples/avaliacao/` | Preservação de +5V e reprovação da troca para +12V | Dados inteiramente didáticos, não medição elétrica |
 
 A regra continua: um teste executado prova a operação e o critério testado, não tudo o que o título do componente sugere.
+
+
+## Atualização v1.1 — detector de espelhos
+
+| Peça | Caminho | Estado | Limitação obrigatória |
+| --- | --- | --- | --- |
+| Comparador de árvores locais | `tools/sync/conferir_espelhos.py` | **TESTADO EM DIRETÓRIOS TEMPORÁRIOS**, sem alterar as origens | Não acessa GitHub/Drive por API, não sincroniza, não determina autoria e não resolve conflitos |
+| Linha de base JSON | Opção `--snapshot` | **TESTADA** | Exige captura anterior às edições; hash não prova quando nem por quem um texto foi alterado |
+| Auditoria de divergências | `--canon` / `--espelho` / `--report` | **TESTADA** | Resultado `RECONCILIACAO_PENDENTE` exige decisão externa; sem linha-base não infere direção |
+
+**Estado global da oficina:** componentes determinísticos testados sob condições limitadas; agente LLM remoto, sincronização bidirecional automática e revisão humana final não comprovados. A nova ocorrência editorial observada pelo autor permanece sem localização declarada.

@@ -1,0 +1,113 @@
+# Duas cópias, uma história: GitHub, Drive e a confiança entre elas
+
+## O livro estava no lugar certo, mas não do jeito certo
+
+Talvez a melhor demonstração de nossa oficina tenha começado com uma reclamação perfeitamente justa. Estávamos produzindo capítulos, executando testes e fazendo commits, enquanto guardávamos PDFs e pacotes ZIP no Google Drive. Em certo momento, o autor perguntou por que precisava baixar os fontes para fazer o *render* com o Quarto. Afinal, a pasta `Projetosia` já existia em seu Drive, e o aplicativo Google Drive para computador já sincronizava esses arquivos com o Windows.
+
+A observação obrigou-nos a perceber algo que a quantidade de commits havia escondido: **arquivar não é o mesmo que organizar um espaço de trabalho.** O ZIP preserva uma versão para recuperação, mas o Quarto trabalha melhor com a árvore de fontes acessível como diretório: `_quarto.yml`, `chapters`, `appendices`, `styles.css`, `filters` e os programas de apoio. O PDF é a prova de leitura; não é a fonte editável. As duas coisas são necessárias, porém resolvem problemas diferentes.
+
+Corrigimos a organização. Passamos a manter o projeto descompactado dentro da pasta do usuário e, em paralelo, o repositório do livro no GitHub. Configuramos ainda uma ação que executa o Quarto a cada atualização da branch principal e publica a prévia HTML no GitHub Pages. Quando a publicação falhou por falta da configuração inicial do Pages, não tratamos a etapa anterior, que havia produzido HTML, como prova de publicação. Fomos ao log, identificamos o erro, ajustamos a configuração e executamos novamente. A sequência real ensinou mais que uma captura de tela perfeita.
+
+Mas resta um assunto: possuir as duas cópias e publicar uma página não garante que todos estejam olhando a mesma versão. Se o autor editar um `.qmd` no Windows, o Drive poderá sincronizá-lo, mas o GitHub não receberá automaticamente um commit. Se a IA modificar o repositório, a cópia do Drive precisará receber a nova versão. A automação do Pages depende do GitHub; ela não observa magicamente cada arquivo do Google Drive [@googledrivesync2026; @quartopages2026].
+
+É aqui que nosso método precisa deixar de ser apenas uma boa rotina de trabalho e se transformar num **contrato entre repositórios, cópias e pessoas**.
+
+## O que cada lugar é responsável por guardar
+
+O **GitHub** fornece a história de mudanças do projeto. Um commit aponta para uma versão identificada da árvore de arquivos. Podemos comparar versões, observar quais arquivos mudaram e recuperar uma edição anterior. Isso não faz do GitHub o dono da autoria nem dispensa a aprovação. Ele é o registro técnico escolhido para acompanhar as fontes versionadas.
+
+O **Google Drive** é o espaço cotidiano em que o autor encontra documentos, materiais de pesquisa, PDFs e também o espelho editável do Quarto. Sua sincronização com o computador facilita a consulta e a edição local, inclusive de arquivos `.qmd` no Windows. O Drive não é um substituto automático do histórico de commits; é outro serviço, com mecanismos próprios para armazenar e sincronizar mudanças [@googledrivesync2026].
+
+O **Quarto** transforma as fontes organizadas em um livro para leitura na web, em EPUB ou em PDF, respeitadas as dependências de cada formato. A página que abrimos no GitHub Pages é uma saída compilada, não a mesma coisa que editar um capítulo. O Quarto recomenda que a publicação seja precedida pela renderização completa, justamente porque a prévia parcial de um capítulo pode não refletir alterações globais [@quarto2026].
+
+E o **autor** continua responsável por decidir quando uma mudança de conteúdo deve integrar a obra. No nosso projeto, essa etapa ficará especialmente visível na revisão final por blocos editáveis, depois da primeira redação completa. Uma mudança de voz não deve ser aprovada porque passou em um teste de hashes, assim como uma medição elétrica não deve ser aprovada porque uma figura ficou bonita.
+
+## Um único ponto de decisão, sem fingir que há um único armazenamento
+
+Gosto de pensar no repositório como a *fonte canônica versionada* e no Drive como um *espelho de trabalho* — duas funções complementares. Isso não quer dizer que uma edição feita no Drive seja descartável. Pelo contrário: se o autor corrigir um capítulo ali, essa edição passa a ser uma proposta de mudança que precisa entrar no histórico. O que não podemos fazer é deixar as duas versões evoluírem separadamente e depois escolher uma pelo nome da pasta.
+
+Nossa regra operacional será simples de enunciar e exigente de cumprir: **antes de atualizar uma cópia, verificar a outra; antes de substituir um arquivo divergente, preservar a diferença; antes de declarar sincronizado, conferir o conteúdo.** Esse contrato deve ser seguido também por nós, que estamos escrevendo o livro com a ajuda da IA.
+
+O primeiro nível de comparação é feito por hashes. O segundo, quando há divergência, é o diff textual. O terceiro é a autorização de quem responde pelo conteúdo. Uma alteração pode ser tecnicamente válida, editorialmente inadequada ou simplesmente incompleta. O bom sistema não elimina essas possibilidades de seu relatório.
+
+O nosso novo comparador offline assume que duas pastas já estão disponíveis. Ele não tem um conector para entrar no Google Drive nem uma credencial para ler o GitHub. Em testes, usamos diretórios temporários que representam duas cópias. Para confrontar ambientes externos de verdade, precisaremos recuperar os arquivos através das ferramentas autorizadas, montar uma linha de base confiável e só então chamar o comparador. Isso é uma limitação assumida do protótipo, não uma funcionalidade omitida na publicidade.
+
+## Do erro 403 ao commit verificável
+
+Lembramos de quando tentamos enviar o livro para seu repositório pela primeira vez. O repositório existia, mas a integração não possuía permissão para gravar nele. O GitHub devolveu erro `403`. Após o autor autorizar o acesso ao novo repositório nas configurações, pudemos criar commits e conferir a presença dos arquivos. Não foi uma conversa em que alguém disse “feito”: o resultado foi observado no serviço.
+
+Esse episódio mostra por que precisamos guardar três identificadores diferentes. O primeiro é o **objeto** que queremos alterar, como `chapters/14-duas-copias-uma-historia.qmd`. O segundo é a **versão esperada**, por exemplo o commit ou hash do arquivo que lemos antes de propor uma mudança. O terceiro é a **permissão para a operação**, concedida pelo responsável no ambiente correto. Saber que uma conexão existe não prova que ela pode escrever num repositório novo.
+
+Uma atualização segura pode ser descrita assim: ler a versão atual; comparar com a base de trabalho; produzir uma proposta delimitada; verificar o resultado; registrar a mudança com uma mensagem de commit; e só depois informar o novo identificador. Se a branch avançou no intervalo, não convém forçar a atualização silenciosamente. Precisamos recuperar o novo estado e reconciliar as diferenças. O Git documenta a resolução de conflitos como parte normal da integração de alterações, sem eleger automaticamente um vencedor [@gitmerge2026].
+
+A mesma prudência vale para o Drive. Se um arquivo de mesmo nome já existe, criar uma nova cópia pode gerar confusão. Atualizar o arquivo identificado, mantendo sua posição, costuma facilitar o trabalho. Mas antes é preciso verificar se essa é a cópia certa e se não recebeu uma edição humana depois da última sincronização. Um `update` tecnicamente bem-sucedido pode ser editorialmente desastroso quando substitui um trabalho não examinado.
+
+## A sequência que vamos exigir da oficina
+
+Nossa rotina terá cinco portões. **Identificar:** saber de quais pastas e versões estamos falando. **Comparar:** registrar diferenças por arquivo, sem adivinhação. **Decidir:** classificar cada mudança como aceita, rejeitada ou pendente de revisão. **Aplicar:** executar apenas as modificações aprovadas, com backup e controle de permissões. **Comprovar:** conferir a árvore resultante, o commit e o destino da publicação.
+
+Essa sequência é um *workflow*, não um agente que pensa por conta própria. Podemos automatizar operações com regras fixas e manter a intervenção humana nos portões apropriados. Se futuramente um modelo ajudar a propor conflitos de merge ou revisar o texto alterado, precisaremos identificar qual modelo participou, quais arquivos recebeu e quais argumentos usou. O trabalho de uma IA não fica mais confiável por esconder as fronteiras entre sugestão e decisão.
+
+Para o leitor, isso também evita uma confusão de vocabulário. A **skill** pode ensinar o método de revisão por blocos. A **tool** pode comparar hashes. O **workflow** pode impor a ordem dos passos. O **agente**, quando existir, poderá escolher tarefas dentro dos limites permitidos. O **autor** continua responsável pela obra. Chamar toda essa organização de “uma IA que faz tudo” apagaria justamente o que queremos ensinar.
+
+Nossa política não depende de aplicativos específicos. Amanhã podemos trocar o Drive por outro serviço ou publicar noutro repositório. Precisaremos adaptar os conectores, os caminhos e as permissões, mas não a obrigação de comparar, registrar e aprovar. Essa é a parte portátil do método.
+
+## A publicação é uma prova diferente da renderização
+
+O resultado do Quarto é particularmente didático. Um job pode executar `quarto render --to html` com sucesso, produzir uma pasta `_book` válida e, ainda assim, falhar na etapa de implantação. Foi exatamente o que aconteceu quando o GitHub Pages ainda não estava habilitado. O artefato existia; a URL pública não estava comprovada.
+
+Hoje temos o fluxo configurado para disparar quando novos commits entram na branch principal. Isso ajuda a manter a leitura web atualizada. Mesmo assim, um workflow com símbolo verde não substitui a inspeção do livro. O HTML pode ter links quebrados, uma figura mal dimensionada ou uma passagem ruim de ler. O PDF, por sua vez, pode apresentar transbordamento de código mesmo quando a versão HTML parece excelente. Cada formato precisa de uma bateria própria e, no fechamento editorial, de revisão visual adequada.
+
+Por decisão do autor, estamos acumulando alguns problemas conhecidos de diagramação como casos de regressão. A ferramenta de PDF já encontrou código ultrapassando retângulos em versões anteriores. Não corrigimos silenciosamente esses erros. O teste final será exigir que o método descubra, documente, proponha e conserte defeitos sem provocar novos. Não confundiremos esse futuro com um PASS obtido hoje.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 14 — Duas versões sem vencedor automático**
+
+**O que testar.** Usar uma linha de base para identificar mudanças em duas árvores e interromper uma atualização ambígua antes que conteúdo seja perdido.
+
+**Como proceder.** Prepare duas cópias de um projeto pequeno e registre uma linha de base antes de fazer alterações. Modifique um arquivo apenas na pasta que representa o Drive e outro de modo diferente nas duas pastas. Execute o comparador do capítulo anterior sem nenhuma operação de cópia ou sobrescrita.
+
+**Prompt que usaríamos hoje**
+
+> Receba o relatório de comparação de duas árvores e a linha de base da revisão. Classifique diferenças como mudanças de um único lado ou conflitos, apresente os arquivos que exigem decisão humana e sugira uma ordem de investigação. Não presuma que a cópia mais recente ou o GitHub está sempre correto. Não altere arquivos, faça merge nem publique nada sem aprovação explícita.
+
+**Comandos locais**
+
+```sh
+python tools/sync/conferir_espelhos.py \
+  --canon pasta_git --snapshot baseline.json
+python tools/sync/conferir_espelhos.py \
+  --canon pasta_git --espelho pasta_drive \
+  --baseline baseline.json --report diferencas.json
+```
+
+**Por que funciona.** A linha de base permite distinguir uma alteração unilateral de duas alterações incompatíveis. O relatório explicita o limite da informação; a decisão de qual texto aceitar permanece fora da ferramenta.
+
+**Como verificar.** Confirme que o conflito produz `RECONCILIACAO_PENDENTE` e que os conteúdos das duas pastas continuam intactos. Leia o relatório JSON e compare manualmente o arquivo em conflito. O programa não deve enviar nada ao GitHub, ao Drive nem ao Pages.
+:::
+
+## A história muda quando se trata de jogo ou de hardware
+
+Num **livro**, uma mudança pode melhorar a legibilidade sem alterar uma informação técnica. A reconciliação envolve voz, citações, capítulos e versões de leitura. A prova final será o manual do TK2000: um manuscrito que já existia, com suas próprias decisões e pendências, submetido a uma revisão controlada e, depois, à aprovação do autor. Não seria aceitável substituir um bloco editado com cuidado porque um arquivo temporário tem uma data mais recente.
+
+Num **jogo**, o conflito pode ocorrer entre código, gráficos e efeitos sonoros. Um arquivo de sprites idêntico por hash ajuda a confirmar a identidade do recurso, mas não prova que a tela renderiza bem. A reintegração exige testes em emulador, conferência de controles e observação do comportamento do jogo. Se um arquivo de mapa de fases mudou nas duas árvores, precisamos descobrir por quê antes de escolher a versão.
+
+No **hardware**, os arquivos podem representar esquemas, PCBs, bibliotecas de footprints, netlists e resultados de ERC/DRC. Um merge textual inadequado pode transformar uma netlist correta em uma conexão errada sem parecer absurdo numa revisão superficial. Nenhuma ferramenta de sincronização deve reinterpretar os circuitos. O fechamento exige comparação visual e lógica de esquemas, consistência de revisão e, quando aplicável, ensaios físicos identificados.
+
+As diferenças de consequência ajudam a entender por que insistimos tanto no contrato comum. O método não muda: identificar, comparar, decidir, aplicar e verificar. O critério de aprovação, sim. Uma frase pode ser elegante; um jogo precisa ser jogável; uma placa precisa obedecer à física.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Você conseguiria reconstruir a história?**
+
+Sem pedir orientação à IA, escolha um pequeno conjunto de três arquivos pessoais. Salve uma linha de base, faça uma mudança numa cópia e outra mudança conflitante numa segunda cópia. Antes de rodar qualquer ferramenta, escreva sua previsão do estado de cada arquivo: igual, alterado de um lado ou conflito.
+
+Compare sua previsão com o resultado do comparador. Depois tente reconstruir, somente com os hashes, *por que* cada arquivo foi alterado. Você provavelmente perceberá que os hashes identificam conteúdos, mas não intenções. Anote quais informações adicionais seriam necessárias — uma mensagem de commit, um comentário de revisão, uma conversa com quem editou, um teste executado — e formule uma regra que impediria a perda da sua melhor versão.
+:::
+
+## Um livro que guarda a memória do próprio trabalho
+
+Antes de seguirmos, vale reconhecer a escala dessa transformação. Começamos com uma conversa sobre como ensinar IA. Criamos um manuscrito em Quarto, organizamos repositório e Drive, publicamos uma leitura online, construímos verificadores e aprendemos a registrar seus limites. Agora acrescentamos uma ferramenta para impedir que nossas próprias cópias se desencontrem sem aviso.
+
+Ainda falta muito: agentes com capacidade comprovada de escolher ferramentas, avaliações controladas em diferentes ambientes, custos medidos, figuras editoriais, a revisão de todos os capítulos e a aplicação completa ao TK2000. Mas já existe uma história reproduzível de decisões técnicas e editoriais. É isso que queremos oferecer ao leitor. **O livro não se torna “vivo” porque uma IA escreve sem parar; torna-se vivo quando cada mudança pode ser entendida, questionada, recuperada e aprovada.**

@@ -55,3 +55,10 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - **Capítulo 11:** desenho de um ciclo `proposta externa → política → adaptador → evidência → checkpoint`, com bloqueio explícito em `PUBLISH` e destaque para a ausência de LLM nesta primeira implementação.
 - **Capítulo 12:** matriz de níveis de teste da skill (arquivo íntegro, descoberta, ativação, eficácia, aprovação) e representação de um falso PASS numérico que muda o grau de certeza.
 - O autor ocultou deliberadamente novos defeitos encontrados no livro; nenhuma imagem deve ser usada para esconder falhas conhecidas ou desconhecidas antes da revisão final.
+
+
+## Novas oportunidades na rodada v1.1
+
+- **Capítulo 13:** esquema de I/O da ferramenta: duas árvores → hashes → diferenças → relatório → decisão humana, explicitando que não há sincronização.
+- **Capítulo 14:** fluxograma dos portões identificar → comparar → decidir → aplicar → comprovar, mostrando GitHub, Drive e Quarto em camadas distintas.
+- Não desenhar as figuras nesta primeira passada; fonte e legenda deverão ser revisadas pelo autor na rodada visual.

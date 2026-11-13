@@ -1,0 +1,86 @@
+{
+  "pdf": "/mnt/data/IA_fazendo_IA_Previa_v1.1/IA_fazendo_IA_Previa_de_leitura_v1.1.pdf",
+  "tool": "verificar_pdf_boxes.py",
+  "light_boxes_inspected": 49,
+  "issue_count": 9,
+  "findings": [
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": ", encoding",
+      "right_edge_pt": 403.87,
+      "box_right_pt": 393.47,
+      "over_pt": 10.39
+    },
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": ", encoding",
+      "right_edge_pt": 409.11,
+      "box_right_pt": 393.47,
+      "over_pt": 15.63
+    },
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "sha256(copia.read_byt",
+      "right_edge_pt": 456.18,
+      "box_right_pt": 393.47,
+      "over_pt": 62.71
+    },
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "name",
+      "right_edge_pt": 403.88,
+      "box_right_pt": 393.47,
+      "over_pt": 10.4
+    },
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "(p.name",
+      "right_edge_pt": 409.11,
+      "box_right_pt": 393.47,
+      "over_pt": 15.63
+    },
+    {
+      "page": 63,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "\"PASS: nomes e conteúdo conferidos na pasta temporária\"",
+      "right_edge_pt": 414.34,
+      "box_right_pt": 393.47,
+      "over_pt": 20.86
+    },
+    {
+      "page": 117,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "../ensaio-checkpoint",
+      "right_edge_pt": 445.72,
+      "box_right_pt": 393.47,
+      "over_pt": 52.25
+    },
+    {
+      "page": 117,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "../ensaio-checkpoint",
+      "right_edge_pt": 445.72,
+      "box_right_pt": 393.47,
+      "over_pt": 52.25
+    },
+    {
+      "page": 127,
+      "kind": "CODE_OVERFLOW_RIGHT",
+      "text": "CHECK_STRUCTURE",
+      "right_edge_pt": 403.88,
+      "box_right_pt": 393.47,
+      "over_pt": 10.4
+    }
+  ],
+  "status": "FAIL",
+  "scope": "Apenas transbordamento geométrico de spans monoespaçados em quadros claros. PASS_LIMITED não garante página correta.",
+  "pages_inspected_range": [
+    1,
+    183
+  ]
+}

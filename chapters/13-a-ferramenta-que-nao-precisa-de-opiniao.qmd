@@ -1,0 +1,103 @@
+# A ferramenta que não precisa de opinião
+
+## Quando um comando honesto vale mais que uma resposta brilhante
+
+Existe um momento perigoso em qualquer projeto com inteligência artificial. A conversa está indo tão bem que começamos a fazer perguntas à IA até para assuntos que um programa de dez linhas resolveria com mais precisão. “Estes dois arquivos são idênticos?” “Quantas páginas há neste PDF?” “A figura ultrapassou a margem?” “O código copiado tem o mesmo conteúdo do original?” A IA pode responder de forma convincente. Entretanto, se não tiver lido os arquivos e executado a comparação, a resposta será apenas um palpite vestido para a ocasião.
+
+Foi esse problema que nos fez criar as primeiras *tools* da oficina. Algumas conferem a integridade de cópias; outras examinam limites de determinados elementos de um PDF, verificam números numa proposta de edição ou registram checkpoints. Não usamos um modelo de linguagem para calcular um hash SHA-256. Também não deixamos que uma ferramenta de hashes se declare especialista em estilo literário. **Cada componente precisa conhecer o seu trabalho — e, principalmente, aquilo que está fora dele.**
+
+Até aqui trabalhamos com a anatomia de agentes, skills, contratos e fluxos. Agora vale olhar para a ferramenta como um objeto de engenharia. Diferentemente de um prompt, uma ferramenta possui uma interface operacional: recebe argumentos, produz dados e, às vezes, provoca efeitos. Sua qualidade depende do comportamento observado, não de quantas vezes ela é mencionada numa documentação.
+
+A pergunta útil deixa de ser “como faço a IA executar isso?” e passa a ser “que parte disso merece sequer ser entregue à IA?”. Se precisarmos comparar duas pastas, o sistema operacional já sabe ler os arquivos e uma biblioteca de hashes já sabe produzir uma impressão digital do conteúdo. Podemos pedir ao modelo que interprete o relatório depois. Mas o relatório deve nascer de uma operação determinística, repetível e com regras conhecidas.
+
+## O contrato da operação vem antes do código
+
+Ao criar uma ferramenta, convém escrever primeiro a frase que define seu alcance: **“Dadas estas entradas, farei estas operações e entregarei estas evidências, sem tocar em nenhum outro objeto.”** Essa frase pode parecer burocrática. Na prática, ela evita que uma ferramenta denominada “verificar” comece, por excesso de iniciativa, a “corrigir” arquivos que não deveria modificar.
+
+O contrato tem cinco partes. A primeira é a entrada: diretórios, nomes de arquivos, parâmetros, formatos. A segunda é a transformação: o que será contado, calculado, comparado ou convertido. A terceira é a saída: relatório, código de retorno, arquivos produzidos. A quarta é a fronteira: o que a ferramenta explicitamente não faz. A quinta é a prova: como um segundo procedimento conseguirá verificar o resultado sem confiar apenas na declaração da primeira ferramenta.
+
+Nosso verificador de propostas textuais, por exemplo, não aprova uma revisão. Ele identifica alterações em números e expressões protegidas. O verificador de PDF não garante que a página ficou bonita. Ele procura certas transgressões geométricas. Essa linguagem de limites não diminui os programas; torna-os utilizáveis. Quando sabemos o que não foi verificado, sabemos qual é a próxima pergunta.
+
+Há também as consequências de executar a operação duas vezes. Ler um arquivo e calcular um hash normalmente produz o mesmo resultado enquanto o conteúdo for o mesmo. Criar uma pasta pode ser seguro se o programa reconhecer que ela já existe. Renomear um diretório, pagar uma compra ou publicar uma edição são ações de natureza diferente: repetidas por engano, podem causar dano ou duplicação. É por isso que usamos a ideia de **idempotência** quando ela realmente se aplica. Não é um selo mágico que podemos colocar em qualquer comando.
+
+## Uma ferramenta para duas cópias do mesmo livro
+
+Nossa oficina encontrou um caso muito adequado para esse laboratório. Durante a preparação deste livro, mantivemos o projeto no GitHub e produzimos cópias no Google Drive. A princípio, guardávamos pacotes ZIP e PDFs no Drive. O autor observou que precisava dos `.qmd` individualmente, numa pasta sincronizada com seu computador, para trabalhar diretamente no Quarto. Organizamos então um espelho descompactado, com seus capítulos, estilos, filtros e programas.
+
+O problema parecia resolvido, mas havia uma armadilha. **Sincronizar um arquivo entre Drive e computador não cria automaticamente um commit no GitHub.** São dois mecanismos distintos. O Drive acompanha mudanças na pasta sincronizada, enquanto o Git registra versões no repositório. Uma página editada num lugar pode permanecer antiga no outro. E, se as duas versões forem modificadas independentemente, escolher uma para substituir a outra sem comparação pode destruir trabalho. A documentação do Drive explica a sincronização local; a do Git trata o conflito de integração como uma situação que exige resolução, não adivinhação [@googledrivesync2026; @gitmerge2026].
+
+Em vez de escrever imediatamente um “sincronizador inteligente”, começamos por algo mais prudente: `tools/sync/conferir_espelhos.py`. O programa recebe dois diretórios, lê seus arquivos e compara os hashes. Seu primeiro papel é **detectar diferenças**, não decidir qual versão vencerá. Ele ignora diretórios de trabalho gerados como `_book` e `.git`, recusa links simbólicos e não chama qualquer serviço externo. Ao final, escreve um relatório JSON fora das duas árvores examinadas.
+
+Se os arquivos forem iguais, o relatório devolve `PASS_IDENTICO`. Se houver divergências, devolve `RECONCILIACAO_PENDENTE`. Não basta aparecer “deu erro” na tela: o relatório lista quais caminhos diferem, quais existem apenas de um lado e quais impressões digitais foram observadas. A ferramenta não transfere conteúdo entre as duas pastas, não apaga nada e não executa `git push`.
+
+Esse desenho incorpora deliberadamente uma limitação: dois hashes diferentes provam que os conteúdos diferem; **não provam qual deles é o mais novo ou o correto**. Se você abriu o capítulo no computador, melhorou uma frase e esqueceu de avisar a equipe, a cópia do Drive poderá ser a versão desejada. Se a IA atualizou o texto no GitHub, talvez o repositório tenha a mudança legítima. Apenas comparar tamanhos ou datas não resolve o problema de autoria e intenção.
+
+## A importância da linha de base
+
+Para tornar a comparação mais informativa, introduzimos um terceiro objeto: um manifesto de linha de base. Ele representa os hashes de uma versão conhecida antes de ocorrerem novas edições. Agora podemos confrontar três estados: o que existia, o que está no repositório e o que está no espelho local.
+
+Se o arquivo do GitHub continuar igual à base e o do Drive mudar, o programa poderá informar `ALTERADO_ESPELHO`. Se acontecer o contrário, `ALTERADO_CANON`. Se ambos mudarem de formas diferentes, teremos `CONFLITO_OU_DUAS_MUDANCAS`. Essa classificação fornece uma direção provável de alteração, mas não uma ordem de sobrescrita. Um conflito legítimo pode precisar de uma revisão de texto linha a linha, de contato com o autor ou de um pequeno merge supervisionado.
+
+Aqui existe um princípio maior do nosso método: **nenhuma ferramenta deve deduzir autorização a partir da própria capacidade de detectar uma diferença**. Um medidor pode mostrar que as tensões estão diferentes; não lhe cabe trocar o regulador. Um comparador de arquivos pode apontar um conflito; não lhe cabe decidir que uma das pessoas escreveu pior.
+
+A linha de base precisa ser verdadeira. Se a criarmos depois da divergência e fingirmos que representa o estado anterior, qualquer conclusão será enganosa. Por isso o programa exige um manifesto explícito para comparar três estados. Sem ele, informa apenas o que encontrou. E para evitar que o próprio relatório entre na comparação, o arquivo de saída deve ficar fora das pastas auditadas.
+
+## O que significa uma saída útil
+
+Programas que serão chamados por workflows e agentes precisam produzir algo mais confiável do que uma frase humana otimista. Nosso verificador usa códigos de retorno diferentes: `0` para comparação idêntica, `1` para divergência encontrada e `2` para erro de entrada ou condição que impede uma avaliação segura. O relatório JSON permite que outra etapa trabalhe com campos explícitos, sem ter de interpretar a entonação da saída do terminal.
+
+É importante que a convenção seja documentada. Um código `1` não significa necessariamente que o programa quebrou: neste caso, significa que cumpriu seu trabalho ao encontrar algo que precisa ser reconciliado. O workflow deve distinguir **execução bem-sucedida do detector** de **aprovação dos arquivos examinados**. A mesma confusão já apareceu quando descobrimos o código ultrapassando o retângulo de uma página do nosso PDF. Detectar a falha foi um PASS da ferramenta e um FAIL da diagramação.
+
+Outra boa prática é evitar que o relatório inclua indiscriminadamente o conteúdo dos documentos. Nossos arquivos podem mencionar pessoas, manuscritos inéditos e informações técnicas. Uma lista de caminhos relativos e hashes costuma ser suficiente para o primeiro diagnóstico. Ela não substitui políticas de proteção dos arquivos, mas reduz o risco de publicar trechos privados num log. Nosso código também não deve embutir senhas ou tokens de acesso a repositórios. Para executar a comparação local, não precisamos deles.
+
+## O resultado não cabe numa demonstração ensaiada
+
+Uma ferramenta não fica aprovada porque acertou apenas o exemplo que seu autor preparou. Criamos testes de comparação idêntica, divergência de conteúdo, arquivo exclusivo de uma pasta, uso de linha de base, alteração bilateral, ignorar diretórios temporários e recusa de caminhos inseguros. A bateria precisa incluir casos que tentam provocar o comportamento errado.
+
+É possível que os testes passem e ainda exista uma falha não prevista — especialmente em sistemas de arquivos com permissões, caracteres incomuns, links, mudanças simultâneas e outras condições. Não transformaremos nossos primeiros ensaios em promessa de sincronização universal. O programa é um **comparador offline de duas árvores**, não uma ferramenta de concorrência distribuída. Enquanto ele lê uma pasta, outro processo pode modificá-la; um ambiente de produção precisaria tratar isso com isolamento, snapshots ou novos testes antes de publicar.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 13 — A ferramenta que relata e não manda**
+
+**O que testar.** Distinguir uma ferramenta que mede diferenças de um agente que decide qual conteúdo deve prevalecer.
+
+**Como proceder.** Faça duas cópias de uma pequena pasta de textos. Coloque um arquivo idêntico nas duas e altere outro apenas em uma. Execute a comparação e leia o relatório sem substituir nenhuma cópia. Para um segundo ensaio, crie o manifesto antes de alterar os arquivos.
+
+**Prompt que usaríamos hoje**
+
+> Leia o relatório JSON produzido pelo comparador. Explique quais arquivos divergem e quais conclusões estão efetivamente sustentadas pelos hashes. Não decida qual versão deve substituir a outra, não execute cópias e não afirme conhecer a ordem das edições sem uma linha de base confiável. Prepare perguntas objetivas para o responsável pelo manuscrito.
+
+**Comando local**
+
+```sh
+python tools/sync/conferir_espelhos.py \
+  --canon pasta_git --espelho pasta_drive \
+  --report auditoria_espelhos.json
+```
+
+**Por que funciona.** O Python calcula hashes reais; o modelo pode interpretar as diferenças e formular a próxima ação, mas não inventa medições nem recebe autoridade para sobrescrever.
+
+**Como verificar.** Com arquivos iguais, espere `PASS_IDENTICO` e código `0`. Com arquivos diferentes, espere `RECONCILIACAO_PENDENTE` e código `1`. Confira ao menos um arquivo manualmente. O relatório deve permanecer fora das árvores examinadas; se o programa não conseguir ler um diretório, a saída correta é `NO_GO`, não uma aprovação.
+:::
+
+## Livro, jogo e hardware: a mesma disciplina, consequências diferentes
+
+Para **um livro**, a ferramenta pode conferir se dois capítulos têm o mesmo conteúdo, se surgiram arquivos novos, se desapareceu uma referência e se uma mudança precisa da revisão do autor. No futuro, ela poderá integrar a preparação dos blocos DOCX do nosso processo editorial. Mas nem um hash nem um diff reconhecem sozinhos se a voz foi preservada ou se uma argumentação ficou melhor.
+
+Para **um jogo**, o mesmo princípio se aplica aos fontes e recursos. Podemos medir se um mapa de fases mudou, se os sprites são os mesmos, se uma ROM de teste foi substituída e se os arquivos entregues correspondem à versão versionada. Um resultado diferente não é necessariamente defeito: talvez o desenvolvedor tenha alterado a dificuldade de propósito. O PASS de integridade precisa ser acompanhado de teste em execução, com controles e comportamento observados.
+
+Para **hardware**, hashes podem identificar esquemáticos, netlists, arquivos de PCB e relatórios de ERC/DRC. Aqui o risco de uma comparação superficial é ainda maior. Dois arquivos KiCad idênticos não provam que a placa foi montada corretamente; dois relatórios iguais não provam que a tensão de alimentação está dentro do esperado. A ferramenta ajuda a assegurar a identidade do documento analisado. As medições em bancada e a revisão do circuito continuam independentes.
+
+O leitor talvez perceba que estamos ficando mais exigentes com cada programa que criamos. É de propósito. Em projetos reais, a maioria dos problemas não surge porque faltava uma função espetacular. Surge porque um arquivo errado foi escolhido, uma autorização foi presumida ou um PASS foi entendido como algo maior do que realmente era.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O que você nunca deixaria uma ferramenta decidir?**
+
+Escolha três arquivos de um projeto pessoal e imagine que outra pessoa fez alterações enquanto você trabalhava. Sem utilizar IA, escreva num papel como decidiria quais mudanças aceitar. Você permitiria que um programa escolhesse automaticamente uma cópia só porque é mais recente? Que informação adicional precisaria para ter confiança?
+
+Crie uma hipótese sobre o que um comparador de hashes pode concluir e outra sobre o que ele não pode concluir. Experimente com duas pastas próprias, modificando um único arquivo. Observe o resultado e tente formular uma regra de aprovação que dependa de uma pessoa. Se descobrir que sua regra é vaga, isso não é um fracasso: é o que o experimento queria tornar visível.
+:::
+
+A ferramenta que não precisa de opinião não encerra a discussão. Ela libera nossa atenção para decisões que realmente a exigem. No capítulo seguinte, veremos por que isso se torna indispensável quando o mesmo projeto mora no GitHub, aparece no Google Drive e é editado pelo autor no computador.

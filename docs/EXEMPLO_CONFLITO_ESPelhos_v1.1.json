@@ -1,0 +1,20 @@
+{
+  "arquivos_canon": 1,
+  "arquivos_espelho": 1,
+  "estado": "RECONCILIACAO_PENDENTE",
+  "formato": "comparacao-v1",
+  "iguais": 0,
+  "itens": [
+    {
+      "arquivo": "capitulo.qmd",
+      "canon_sha256": "dcd7c93f062e93e7089e031f7caac00079dd5621de48c6a3fa0a7bda5d04f4c8",
+      "espelho_sha256": "1d3a4b600e2c1de018c46948fa802eb41b4cb8f82467e3a928a3c4254f785bb5",
+      "estado": "CONFLITO_OU_DUAS_MUDANCAS"
+    }
+  ],
+  "modifica_fontes": false,
+  "modo": "trilateral",
+  "pendencias": 1,
+  "usa_ia": false,
+  "nota": "Ensaio offline com duas pastas temporárias; não compara Google Drive/GitHub reais."
+}
