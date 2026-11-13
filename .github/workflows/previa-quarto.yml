@@ -1,0 +1,55 @@
+name: Prévia Quarto — HTML e GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: previa-quarto-pages
+  cancel-in-progress: true
+
+jobs:
+  render:
+    name: Gerar HTML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperar o manuscrito
+        uses: actions/checkout@v4
+      - name: Instalar Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Conferir contratos estruturais
+        run: |
+          python3 scripts/verificar_boxes.py
+          python3 scripts/verificar_estrutura.py
+      - name: Gerar livro HTML
+        run: quarto render --to html
+      - name: Guardar prévia para download na aba Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: livro-html
+          path: _book/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Preparar publicação GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _book/
+
+  publicar:
+    name: Publicar leitura na web
+    needs: render
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publicar a prévia
+        id: deploy
+        uses: actions/deploy-pages@v4
