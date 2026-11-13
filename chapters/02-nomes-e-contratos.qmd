@@ -1,0 +1,117 @@
+# Dar nome às peças antes de montar a máquina
+
+## Quando tudo virou agente
+
+Há uma curiosidade no mundo da inteligência artificial: mal aprendemos a fazer alguma coisa e logo aparece uma palavra nova para descrevê-la. Durante algum tempo, bastava dizer que estávamos conversando com uma IA. Depois vieram os prompts especiais, os assistentes personalizados, as ferramentas, as skills, os agentes, os workflows, os servidores MCP e uma variedade de siglas que fariam inveja à documentação de um computador dos anos 1980.
+
+O problema não é a existência dessas palavras. Em engenharia, dar nomes diferentes a funções diferentes costuma ajudar bastante. O problema aparece quando passamos a chamar tudo de *agente*. Um script que renomeia arquivos vira agente. Uma lista de instruções para revisar textos vira agente. Uma conversa com três mensagens vira uma equipe de agentes. E, quando precisamos explicar por que determinada automação falhou, descobrimos que o mesmo nome estava escondendo cinco mecanismos distintos.
+
+Foi exatamente esse tipo de confusão que quisemos evitar ao começar este livro. No manual do TK90X, por exemplo, não nos faltavam respostas de IA sobre como melhorar um documento. Faltava preservar decisões editoriais entre revisões. A solução não era necessariamente criar uma inteligência mais poderosa. Era descobrir quais regras deveriam estar escritas, quais verificações poderiam ser feitas por programas e quais decisões ainda pertenciam ao autor.
+
+Imagine uma oficina em que alguém peça uma chave de fenda e receba, em resposta, uma palestra sobre a superioridade das ferramentas elétricas. Talvez a palestra seja interessante. Mas o parafuso continua esperando. Vamos, então, separar as peças que realmente temos à disposição e entender o que cada uma resolve.
+
+## O pedido, as instruções e o contexto
+
+O ponto de partida mais conhecido é o **prompt**: o conteúdo que apresentamos a um modelo para orientar uma resposta ou uma tarefa. Pode ser tão curto quanto “explique o que é uma ROM” ou tão detalhado quanto um contrato de revisão de vinte páginas. O tamanho, por si, não determina a qualidade. O que importa é a informação necessária para resolver o problema e os limites que impedem uma resposta de parecer correta enquanto muda aquilo que não deveria.
+
+Quando pedimos “deixe este parágrafo melhor”, estamos dando uma intenção. Quando especificamos “corrija a gramática, preserve os números e não altere a voz do autor”, acrescentamos restrições. Se ainda fornecermos dois exemplos de boa escrita e o trecho a revisar, o modelo receberá material sobre o qual trabalhar. A tarefa é a mesma, mas a liberdade para interpretar a palavra *melhor* diminuiu.
+
+Nem tudo isso precisa aparecer no mesmo lugar. Há plataformas com instruções persistentes, documentos de projeto, arquivos de orientação, mensagens temporárias e fontes recuperadas durante a execução. Vamos chamá-los de **contexto de trabalho** quando precisarmos tratar do conjunto. Em termos práticos, contexto é aquilo que o sistema recebe ou consegue consultar para executar a tarefa; não é sinônimo de uma memória perfeita nem de acesso ilimitado aos arquivos da máquina.
+
+Uma instrução persistente pode dizer “não modifique capítulos aprovados sem autorização”. Um documento editorial pode definir fontes, margens e linguagem. O prompt daquela rodada pode pedir apenas para corrigir uma legenda. Misturar essas três camadas em uma mensagem gigantesca funciona às vezes, mas cria outro problema: toda pequena tarefa passa a carregar regras que talvez não tenham relação com ela. Mais adiante veremos como isso afeta tokens, custo e manutenção.
+
+Vale uma distinção discreta, mas importante: **uma instrução não é uma capacidade**. Escrever “verifique todas as imagens” não dá ao modelo acesso às imagens nem cria, por milagre, um programa capaz de medir suas dimensões. A instrução define o que deveria acontecer. Precisamos de outra peça para realizar a operação.
+
+## A ferramenta que faz, em vez de apenas dizer
+
+Essa outra peça costuma receber o nome de **tool**, ou simplesmente *ferramenta*. Pode ser um programa Python, uma função do sistema, uma API de consulta, um banco de dados, um leitor de arquivos ou um conector com um serviço externo. Ela executa alguma operação definida e devolve um resultado observável.
+
+Pense numa tarefa banal: copiar todos os arquivos de uma pasta para outra. Uma IA pode escrever um programa para isso ou acionar um programa que já existe. Mas a cópia em si não precisa ser produzida por um modelo de linguagem. O sistema operacional faz o trabalho, e podemos conferir tamanho, quantidade de arquivos e hashes. Se nenhum modelo for chamado durante a operação, não haverá consumo de tokens de inferência daquela cópia; isso não significa que tempo de máquina e armazenamento tenham custo zero.
+
+O mesmo raciocínio vale para medir a altura de uma figura, contar palavras, procurar um termo, verificar se um arquivo existe ou comparar duas versões de texto. Quando o resultado depende de uma regra exata e há um programa confiável para aplicá-la, não faz sentido pedir a um modelo caro que adivinhe o resultado a cada execução.
+
+O que muda quando a ferramenta precisa consultar um serviço externo? Passamos a lidar com credenciais, permissões, limites de requisição e consequências reais. Ler a lista de arquivos do Drive não é igual a apagar uma pasta. Preparar uma sugestão de commit não é igual a publicar o repositório. A ferramenta deve ter autorização compatível com a operação, e a saída precisa ser conferida. Uma instrução educada não substitui um controle de acesso.
+
+## Uma habilidade que pode sobreviver à conversa
+
+Depois de repetir a mesma verificação em vários capítulos, logo percebemos que há instruções que merecem ser guardadas. Em ambientes que suportam **skills**, podemos empacotar um procedimento reutilizável com nome, descrição, instruções e, em alguns casos, arquivos auxiliares e scripts. Em outros ambientes, um guia versionado ainda pode desempenhar parte desse papel sem receber o nome comercial de skill.
+
+Um exemplo do nosso acervo seria a habilidade de revisar a voz autoral. Ela não precisaria conter o livro inteiro, mas deveria saber onde encontrar nosso guia de voz, quais mudanças são permitidas, que tipos de erro devem ser sinalizados e em que momento devolver uma dúvida ao autor. Quando convocada, aplicaria esse método ao capítulo recebido.
+
+Observe o que a skill **não** é. Ela não é necessariamente um modelo novo. Não prova que o trabalho foi executado. Não garante que a plataforma reconhecerá o mesmo formato em outro produto. E não deve levar a executar qualquer script desconhecido apenas porque o arquivo se chama `SKILL.md`. Uma habilidade reutilizável merece a mesma inspeção que dedicaríamos a uma ferramenta instalada por terceiros.
+
+A documentação da Anthropic descreve esse tipo de organização como um carregamento progressivo: metadados ajudam a localizar a skill, instruções detalhadas entram quando ela é pertinente e recursos adicionais só precisam ser lidos conforme a tarefa [@anthropicskills2026]. É uma arquitetura útil para controlar contexto, mas **não devemos transformar uma possibilidade de economia de tokens em promessa universal**. Cada plataforma e cada execução precisam ser verificadas.
+
+Nossa regra continua simples: se uma conversa resolveu bem o problema uma vez, guarde a resposta. Se a tarefa se repete e depende de critérios estáveis, vale considerar um procedimento reutilizável. Se a tarefa é mecânica, procure uma ferramenta determinística. Só depois pergunte se vale acrescentar autonomia.
+
+## Workflow não é sinônimo de agente
+
+Chegamos à distinção que mais frequentemente provoca confusão. Um **workflow** organiza o trabalho em etapas conhecidas. Ele pode ter condições, bifurcações, reexecuções e pontos de parada. Nada exige que todas as etapas chamem um modelo de IA.
+
+O caminho editorial mais curto do nosso livro, por exemplo, poderia ser descrito assim: receber o capítulo, conferir se os dois recursos didáticos necessários estão presentes, verificar referências, gerar uma prévia, apresentar as diferenças ao autor e aguardar aprovação. O sistema pode executar cada etapa sempre na mesma ordem, com regras claras. Isso é um workflow mesmo quando uma das etapas usa IA para revisar a prosa.
+
+Um **agente**, na definição operacional que adotaremos, recebe um objetivo e alguma liberdade para escolher o próximo passo com base no estado encontrado. Ele pode decidir buscar uma fonte, chamar uma ferramenta, comparar resultados, pedir ajuda ou interromper uma execução. A liberdade é **limitada** por permissões, orçamento, critérios de qualidade e decisões reservadas ao responsável humano.
+
+Essa distinção é uma convenção útil, não uma tentativa de corrigir o vocabulário de todas as empresas. Há ferramentas comerciais que chamam de agentes processos bastante guiados. Outras oferecem workflows com decisões tomadas por modelos. O que nos interessa é a pergunta por trás do nome: **quem escolhe os passos e com base em que evidência?**
+
+Na pesquisa de arquitetura de agentes publicada pela Anthropic, workflows são apresentados como sistemas nos quais modelos e ferramentas seguem caminhos de código predefinidos; agentes permitem que o modelo conduza mais dinamicamente o processo e o uso das ferramentas [@anthropic2024]. A própria recomendação é começar simples e aumentar a complexidade apenas quando houver uma razão demonstrável. Isso combina muito bem com o nosso P5: simplicidade é força.
+
+Imagine que queremos localizar todas as legendas que ficaram azuis num manuscrito. Se sabemos onde está o documento e qual estilo verificar, um script ou uma rotina editorial parece suficiente. Se não sabemos em qual capítulo a falha surgiu, precisamos consultar vários arquivos, distinguir cores intencionais de acidentais e selecionar o verificador adequado, talvez um agente possa ajudar. Mesmo assim, a decisão de alterar o livro inteiro não precisa ser entregue ao agente.
+
+O erro seria partir diretamente para uma equipe com cinco especialistas, um supervisor e reuniões de consenso, sem ter demonstrado que o procedimento mais curto falha. Em projetos de IA, a complexidade não aparece apenas no código. Ela também aparece nas permissões, nos tokens consumidos, na dificuldade de reproduzir um resultado e na quantidade de lugares onde a mesma regra pode ficar desatualizada.
+
+## MCP, protocolos e outros nomes que parecem ferramentas
+
+Há ainda uma camada que não devemos misturar com as anteriores. O **MCP — Model Context Protocol** — é um protocolo para conectar aplicações de IA a recursos e ferramentas oferecidos por sistemas externos. Em termos gerais, ele define formas de descoberta e comunicação entre quem solicita uma capacidade e quem a oferece. Não transforma, sozinho, um programa comum em agente inteligente.
+
+Podemos ter um servidor que exponha uma operação de leitura de arquivos, uma consulta a documentos ou uma ferramenta capaz de verificar dados. O cliente compatível pode descobri-las e utilizá-las segundo sua implementação e permissões. O MCP ajuda a estabelecer a conexão; não prova que a ferramenta está correta, nem concede autorização que o usuário não possui. O mesmo servidor pode ser usado em projetos muito diferentes, desde que seu contrato e sua segurança sejam respeitados.
+
+Outro engano seria imaginar que toda tool precisa de um servidor MCP. Uma função Python chamada diretamente por um script continua sendo ferramenta. MCP se torna interessante quando precisamos de integração padronizada entre componentes. Criar um servidor inteiro apenas para copiar arquivos de uma pasta local talvez seja uma excelente demonstração de engenharia... mas dificilmente será a opção mais simples para copiar aqueles arquivos.
+
+Já **A2A** trata, em determinadas arquiteturas, de comunicação entre agentes. É outra camada, com perguntas próprias sobre identidade, mensagens, descoberta e delegação. Não precisamos trazer esse protocolo para o primeiro exercício. Antes de conectar vários agentes, precisamos entender muito bem a responsabilidade de apenas um.
+
+## O menor conjunto que resolve o problema
+
+Vamos voltar ao livro que está em suas mãos. Precisamos garantir que o parágrafo sobre autoria permaneça destacado, que o box “NA PRÁTICA COM A IA” não desapareça e que o “EXPERIMENTO DO LEITOR” continue independente. Não é uma tarefa única. São três exigências diferentes.
+
+A decisão editorial pertence ao autor. A obrigação de preservar os elementos deve constar do contrato. Um verificador de marcação consegue apontar se os dois boxes existem. Outra verificação pode procurar o trecho destacado, comparando o conteúdo com a edição aprovada. Uma IA pode sugerir melhorias de clareza, mas não deve interpretar “melhorar” como autorização para reescrever o que não foi solicitado. O workflow entrega os resultados ao autor. Nesse cenário, **não precisamos presumir que um agente autônomo seja necessário**.
+
+\Needspace{13\baselineskip}
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Desmontar uma tarefa antes de dar nome à solução**
+
+**O que testar.** Descobrir se uma tarefa realmente exige agente, skill, tool, workflow ou apenas um bom pedido.
+
+**Como proceder.** Escolha uma atividade que se repete: organizar notas, revisar uma página, conferir uma planilha ou copiar arquivos. Descreva primeiro o resultado esperado e o que não pode ser alterado. Não autorize nenhuma ação externa nesta rodada.
+
+**Prompt que usaríamos hoje**
+
+> Quero resolver a tarefa abaixo usando a solução mais simples que seja confiável. Primeiro separe o que depende de julgamento humano, o que pode ser feito por um programa determinístico, o que exige interpretação de linguagem e o que requer acesso a ferramentas ou serviços. Depois proponha três alternativas crescentes: sem modelo de IA, com IA assistida e com agente. Para cada uma, informe requisitos, permissões, custos a medir, falhas possíveis e critério de aceitação. Não implemente nem execute nada; apresente apenas o plano para minha avaliação. Tarefa: [DESCREVA AQUI].
+
+**Por que funciona.** A comparação impede que o nome da solução seja escolhido antes de conhecermos o problema. Também torna visíveis operações que podem ser verificadas sem gerar texto novo a cada vez.
+
+**Como verificar.** Confira se a alternativa mínima resolve os requisitos e preserva seus limites. Uma proposta mais sofisticada só merece avançar se trouxer uma vantagem que possa ser testada. Se o sistema disser que precisa de um agente apenas porque a tarefa “usa IA”, ainda não respondeu à pergunta.
+:::
+
+O prompt é útil para organizar opções, não para decidir sozinho qual delas é melhor. A melhor ferramenta depende do contexto concreto, das permissões disponíveis e do preço que pagaremos pelo erro. Uma pessoa pode preferir uma rotina manual porque executará a tarefa uma única vez. Outra pode automatizar a mesma rotina porque a repetirá centenas de vezes. Ambas podem estar certas.
+
+\Needspace{13\baselineskip}
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Cinco tarefas, cinco escolhas**
+
+Olhe para suas atividades de uma semana e escolha cinco tarefas pequenas. Não procure exemplos na internet; use algo que você realmente fez ou gostaria de fazer. Para cada uma, escreva qual é o resultado observável que indicaria conclusão e quem teria autoridade para aprová-lo.
+
+Antes de pedir opinião a qualquer IA, responda por conta própria: qual parte depende de julgamento? Qual parte seria repetida exatamente do mesmo jeito? Em que etapa uma permissão poderia causar dano? E o que aconteceria se a ferramenta errasse em silêncio?
+
+Agora imagine duas versões do processo: uma feita apenas com recursos comuns do computador e outra com a participação de IA. Você pode experimentar ambas, se forem seguras. Compare não só velocidade, mas a facilidade de perceber o erro, repetir a tarefa e explicar a decisão. **Não existe obrigação de a opção com IA vencer.** A descoberta que importa é reconhecer quais problemas merecem essa ferramenta.
+:::
+
+## Uma escolha pequena hoje evita um projeto impossível amanhã
+
+Os nomes começam a fazer sentido quando deixam de ser propaganda e se tornam parte de uma decisão de engenharia. Prompt orienta uma solicitação. Contexto fornece material e regras. Skill preserva um procedimento. Tool executa uma operação. Workflow coordena etapas conhecidas. Agente escolhe caminhos dentro de limites. Protocolos como MCP ajudam sistemas diferentes a conversar. E a pessoa responsável continua decidindo o que pode ser delegado.
+
+No capítulo seguinte, vamos olhar para dentro de um agente de verdade: que modelo ele usa, o que sabe sobre a tarefa, onde guarda estado, quais ferramentas pode chamar e, sobretudo, como reconhece a hora de parar. A experiência do nosso próprio repositório GitHub fornecerá um exemplo excelente dessa última habilidade. Antes de mandar um sistema agir, precisamos saber o que ele deveria fazer quando recebe um “não”.

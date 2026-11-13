@@ -61,3 +61,12 @@ O Capítulo 1 conserva os dois boxes da v0.3 e recebeu um experimento autônomo 
 A pauta `docs/TOKENS_ROTEAMENTO_E_CUSTOS.md` foi acrescentada ao planejamento, **sem alterar a redação já aprovada para análise**. Vamos comparar algoritmos locais, modelos menores, escalonamento e medições reais de entrada/saída. O contador de tokens, quando for implementado, terá de distinguir previsão, medição e preço do provedor. Nenhum resultado de laboratório foi declarado PASS nesta etapa.
 
 **Repositório remoto previsto:** `phtomas/livro-ia-fazendo-ia-ou-quase` (ainda não criado). Manter privado até revisão editorial e definição da licença de texto e código.
+
+
+## Rodada v0.5 — Capítulos 2 e 3, prova final TK2000
+
+- O Capítulo 1 e a apresentação não foram reescritos nesta rodada.
+- Novos rascunhos: `chapters/02-nomes-e-contratos.qmd` e `chapters/03-por-dentro-do-agente.qmd`, cada um com box **NA PRÁTICA COM A IA** e **EXPERIMENTO DO LEITOR** independentes.
+- Requisito decisivo do autor: a **prova final do método** será editar o *Manual Técnico do TK2000*, com fidelidade de ilustrações, voz, tom, didática e publicação, sem fechar artificialmente pendências de engenharia. Plano: `docs/PROVA_FINAL_TK2000.md`.
+- Pendente: aprovação autoral dos novos capítulos, ensaios reproduzíveis com agentes e renderização Quarto nativa. A prévia Pandoc não é prova final do projeto.
+- Repositório remoto foi criado e recebeu commits no GitHub. Confirmar visibilidade e licença antes de publicar quaisquer arquivos de terceiros ou do livro TK2000.

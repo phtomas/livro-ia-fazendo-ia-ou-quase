@@ -17,6 +17,8 @@ book:
   chapters:
     - index.qmd
     - chapters/01-um-livro-que-aprende.qmd
+    - chapters/02-nomes-e-contratos.qmd
+    - chapters/03-por-dentro-do-agente.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

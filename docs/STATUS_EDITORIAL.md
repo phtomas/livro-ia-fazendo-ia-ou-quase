@@ -32,3 +32,13 @@
 - Criada diagramação e tratamento semântico próprios para os experimentos em HTML/EPUB/PDF.
 - Contrato editorial e verificador atualizados: dois recursos são identificados separadamente; ausência de experimento exige avaliação editorial, não criação automática de conteúdo irrelevante.
 - Quarto nativo ainda não foi renderizado neste ambiente; provas geradas com Pandoc (não finais). Revisão de voz e aprovação autoral pendentes.
+
+
+## Rodada v0.5 — 13/11/2026
+
+- Capítulos 2 e 3 produzidos como **rascunhos para leitura do autor**.
+- Cada capítulo possui um box de uso da IA e um experimento do leitor autônomo; a qualidade depende de revisão humana.
+- O Capítulo 3 relata o caso GitHub 403 da redação desta obra, usando apenas fatos registrados; os registros JSON são expressamente fictícios e didáticos.
+- Prova final de integração reservada ao Manual Técnico do TK2000: `docs/PROVA_FINAL_TK2000.md`. O manuscrito TK2000 não foi modificado.
+- A fonte Quarto passa a incluir os novos capítulos. Bibliografia técnica adicionada com fontes primárias.
+- O Quarto ainda não foi executado neste ambiente; qualquer prévia com Pandoc deve ser identificada como **prévia não nativa**.

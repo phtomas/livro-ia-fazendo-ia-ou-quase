@@ -1,0 +1,126 @@
+# Por dentro de um agente: quem decide, quem faz e quem responde
+
+## Um erro 403 também ensina engenharia
+
+O repositório deste livro nasceu de um jeito que qualquer pessoa que já trabalhou com software reconhecerá. Criamos o espaço no GitHub, organizamos os arquivos e tentamos enviar o primeiro commit. A conexão com o serviço existia, o repositório aparecia nas consultas e tínhamos um projeto inteiro preparado para ser versionado. Só havia um detalhe: na hora de gravar, o GitHub respondeu com um erro **403 — acesso negado à integração**.
+
+Poderíamos ter tratado a mensagem como um obstáculo irritante e pedido para a IA tentar outra vez. Não teria adiantado. O problema não estava no texto do capítulo, no formato Quarto nem no comando de commit. A integração autorizada a trabalhar com alguns repositórios ainda não possuía acesso ao novo. Depois de identificar essa diferença, a pessoa responsável ampliou a autorização apenas para aquele repositório. Repetimos a operação, conferimos os arquivos enviados e verificamos os commits produzidos.
+
+Há uma lição de arquitetura nessa pequena história. Uma ferramenta pode existir e estar funcionando sem que o agente tenha **permissão** para utilizá-la naquele destino. Um modelo pode compreender perfeitamente uma instrução sem conseguir executar a ação. E uma mensagem dizendo “enviei” não vale como prova de que o servidor realmente recebeu o arquivo.
+
+Quando falamos em construir um agente, precisamos saber onde ficam essas fronteiras. Caso contrário, acabamos montando um sistema que parece autônomo porque escreve explicações convincentes, mas não sabe o que fazer diante do primeiro erro concreto. Vamos abrir a caixa e olhar as peças, uma por uma, como faríamos com qualquer outro equipamento.
+
+## O modelo é o motor, não a máquina inteira
+
+A primeira peça costuma receber quase toda a atenção: o **modelo de linguagem**. Ele interpreta entradas, propõe textos, pode selecionar chamadas de ferramentas e ajuda a decidir caminhos. Mas sozinho não constitui necessariamente um agente operacional. Sem um ambiente que execute suas decisões, ele pode apenas descrever o que faria. Sem instruções claras, pode escolher uma resposta que não corresponde ao nosso objetivo. Sem ferramentas ou arquivos, não pode verificar fatos que estão fora de seu alcance.
+
+O modelo também não é uma escolha neutra. Há diferenças de capacidade, velocidade, custo, disponibilidade e suporte a chamadas de ferramentas. Uma tarefa de classificação simples pode funcionar bem com um modelo econômico ou até com regras tradicionais; uma investigação técnica delicada pode exigir mais contexto e revisão. A resposta correta não é usar sempre o mais poderoso. Precisamos escolher e, principalmente, **medir**. Em capítulo posterior, registraremos tokens de entrada e saída, custo e identidade do modelo devolvida pela API quando esses dados estiverem disponíveis.
+
+Quando um sistema mostra um nome comercial de modelo na interface, isso não autoriza concluir que todos os passos internos utilizaram exatamente a mesma versão. Em algumas arquiteturas há roteamento, ferramentas externas ou múltiplas chamadas. Se a plataforma expõe o identificador efetivo de cada chamada, nós o registramos. Se não expõe, declaramos a limitação. Perguntar ao próprio modelo “qual modelo você é?” não substitui telemetria da execução.
+
+Esse cuidado vale também para a palavra *inteligência*. O modelo pode ser excelente em propor uma investigação e ainda não ter acesso ao instrumento que confirma a hipótese. Em hardware, a bancada mantém a palavra final. Na editoração, o arquivo renderizado e a revisão humana desempenham papéis semelhantes.
+
+## Objetivo, contrato e estado: três coisas que não devem se confundir
+
+O **objetivo** diz aonde queremos chegar. “Preparar um capítulo para revisão” descreve uma intenção, mas ainda não define o que é permitido fazer. O **contrato** acrescenta escopo, restrições e critérios: preservar o texto aprovado, não inventar fontes, destacar dúvidas técnicas, não publicar sem consentimento e entregar uma comparação das alterações. O **estado**, por sua vez, informa onde estamos agora: qual versão do arquivo foi aberta, que verificações passaram, quais falharam e qual etapa aguarda decisão.
+
+Parece uma distinção burocrática até o dia em que uma conversa longa começa a repetir uma hipótese descartada. Se guardamos apenas o objetivo, o sistema pode voltar a iniciar o trabalho do zero. Se guardamos apenas o estado, podemos terminar executando uma sequência de operações sem lembrar para que elas servem. Se esquecemos o contrato, uma correção gramatical pode virar autorização para reescrever um capítulo.
+
+Em nossas obras anteriores, aprendemos a usar snapshots e documentos de passagem de bastão justamente para preservar o estado que importa. Isso não exige uma memória mística. É um arquivo, uma tabela ou um registro suficientemente claro para permitir que outra sessão — ou outra pessoa — continue o trabalho sem fingir que presenciou o que aconteceu antes.
+
+Um estado mínimo poderia ter a aparência abaixo. **É apenas um exemplo didático; não representa o log real do GitHub nem de uma execução deste livro.**
+
+```json
+{
+  "tarefa": "revisar_capitulo",
+  "arquivo": "capitulo_02.qmd",
+  "versao_origem": "rascunho-v1",
+  "etapa": "aguardando_aprovacao",
+  "verificacoes": {
+    "boxes": "PASS",
+    "referencias": "PARTIAL",
+    "prova_visual": "PENDENTE"
+  },
+  "permitido_publicar": false
+}
+```
+
+O valor desse registro não está na sintaxe JSON, que poderíamos substituir por uma ficha de papel. Está no compromisso de não transformar **PENDENTE** em **PASS** apenas porque o texto final ficou bonito. O estado precisa ser atualizado quando uma operação realmente acontece e deve apontar para evidências que possamos consultar.
+
+## Contexto, conhecimento e memória não são a mesma gaveta
+
+Um agente pode trabalhar com informações que chegam por caminhos diferentes. Parte está no pedido atual: o capítulo, as imagens e a instrução de revisão. Parte fica em documentos permanentes: contrato editorial, guia de voz e regras de publicação. Outra parte pode ser recuperada de fontes externas, conforme as ferramentas disponíveis. E há o histórico do que o sistema fez durante a execução.
+
+Chamamos de **contexto** o material efetivamente disponível para aquela etapa. **Conhecimento** é um conjunto de fontes ou dados que podem ser consultados; ele não precisa estar inteiro no contexto a todo momento. **Memória**, em uso prático, é o mecanismo ou registro que preserva informações entre passos ou sessões, quando a plataforma oferece esse recurso ou quando nós mesmos o implementamos em arquivos.
+
+Essa distinção economiza confusão e, às vezes, dinheiro. Se um manual técnico contém centenas de páginas, talvez seja preferível localizar a seção necessária a enviar o livro inteiro em todas as chamadas. Mas recuperação tem seus próprios riscos: buscar o capítulo errado, citar uma versão antiga ou retirar uma frase do contexto correto. A economia só é boa quando a qualidade não se perde.
+
+Também existe uma fronteira de segurança. Um documento encontrado numa pesquisa pode conter instruções escritas por terceiros. O conteúdo dele é material para análise, não uma ordem para que nosso agente revele credenciais, mude o objetivo ou execute comandos. Precisamos distinguir **dados consultados** de **instruções autorizadas**. Isso se torna especialmente importante quando conectamos ferramentas a e-mails, repositórios, sistemas internos e sites da internet.
+
+Não é necessário construir um banco vetorial antes de começar. Se temos quatro documentos, uma pasta organizada e uma boa busca textual podem ser suficientes. Se o acervo crescer e os testes mostrarem perda de precisão ou tempo excessivo de localização, a recuperação estruturada passa a fazer sentido. Mais uma vez, a arquitetura deve responder ao problema real.
+
+## Ferramentas, permissões e o direito de parar
+
+A próxima peça são as ferramentas. Um agente editor pode receber acesso de leitura ao manuscrito, uma função de comparação de arquivos, um verificador de boxes e um renderizador. Essas quatro capacidades são diferentes. Consultar o texto não autoriza modificá-lo. Identificar uma figura cortada não é o mesmo que substituí-la. Gerar uma prévia não equivale a publicar uma edição.
+
+Podemos desenhar três zonas de operação. Na primeira, o agente **observa** e registra evidências. Na segunda, **prepara mudanças reversíveis**, como uma nova versão do capítulo ou um relatório de diferenças. Na terceira, executa ações com consequências maiores: sobrescrever o original, excluir arquivos, mudar permissões, publicar ou enviar mensagens a terceiros. A passagem para a terceira zona precisa de uma autorização explícita e compatível com o risco.
+
+O erro 403 do nosso GitHub ilustra uma proteção funcionando. O sistema poderia tentar de novo, mas não poderia conceder a si mesmo uma permissão que não possuía. Foi necessário identificar o requisito, expor a limitação e deixar a decisão com quem controlava a conta. O agente mais útil naquele momento não seria o que insistisse por horas. Seria aquele capaz de dizer: “A operação está bloqueada; aqui está a causa observável, e este é o ponto em que preciso de sua intervenção”.
+
+**Parar é uma capacidade operacional.** Não se trata de desistir diante do primeiro contratempo. Trata-se de reconhecer que certas condições mudam a natureza do trabalho. Se uma ferramenta devolve erro de autenticação, não queremos que o agente contorne o controle. Se um número do capítulo não coincide com o esquema, não queremos que invente um valor mais plausível. Se o autor aprovou a página anterior, não queremos que uma revisão local a altere silenciosamente.
+
+A documentação de execução de agentes descreve um ciclo em que o modelo recebe a tarefa, pode solicitar ferramentas, observa resultados e continua até produzir a saída ou atingir uma condição de parada [@openaiagents2026]. O ciclo é útil, mas não deve ser confundido com autorização ilimitada. Os mecanismos concretos de aprovação variam entre plataformas; nosso método exige que estejam claros e testados.
+
+## Um agente também precisa saber o que é prova
+
+Depois de configurar modelo, objetivo e ferramentas, falta a pergunta mais incômoda: **como saber se deu certo?** O modelo pode produzir uma resposta final impecável e, mesmo assim, não ter realizado a tarefa. No exemplo do GitHub, a prova foi a existência do commit remoto e a leitura dos arquivos enviados. No exemplo da revisão editorial, a prova envolve comparação do texto, resultado dos verificadores e inspeção visual da edição gerada. São evidências distintas.
+
+Um verificador automático pode contar dois boxes no capítulo. Isso é útil, mas não demonstra que os boxes ensinam alguma coisa. O programa pode confirmar que a imagem cabe na margem, mas não garante que o esquema foi desenhado corretamente. Um agente pode afirmar que revisou as referências, mas nossa confiança depende de poder abrir a origem e conferir o que foi citado.
+
+Não devemos exigir o impossível de cada etapa. O teste de marcação não precisa julgar a beleza do texto. A revisão humana não precisa recalcular o hash de cem arquivos. O objetivo é distribuir a responsabilidade de modo que cada mecanismo produza a evidência que está em condições de produzir.
+
+No Manual Técnico do TK2000, que reservamos como laboratório final deste livro, essa separação será ainda mais importante. Já existe um manuscrito candidato e um registro de pendências técnicas que distingue documentos históricos, esquemas, implementações derivadas e medições ainda não feitas. Ao melhorar figuras ou reescrever uma explicação, não poderemos transformar uma hipótese sobre o circuito em afirmação de bancada. A editoração terá de avançar sem falsificar o estado da investigação.
+
+## O primeiro contrato de agente — antes de programar
+
+O melhor momento para definir um agente é antes de entregar a ele uma pasta inteira e pedir “resolva”. Vamos começar com um contrato pequeno, quase sem tecnologia. Ele deve explicar o objetivo, os materiais, as ferramentas disponíveis, o que não pode mudar e a condição de parada. Só depois estudaremos como implementar a execução em uma plataforma específica.
+
+\Needspace{13\baselineskip}
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Projetar um agente que sabe quando pedir ajuda**
+
+**O que testar.** Transformar uma tarefa ambígua num contrato executável e auditável, sem conceder autonomia desnecessária.
+
+**Como proceder.** Escolha um documento próprio ou um conjunto de arquivos de teste, sem informações privadas. Apresente a tarefa como uma simulação: a IA não deverá executar ferramentas nem alterar arquivos. Primeiro avaliaremos somente a qualidade do contrato.
+
+**Prompt que usaríamos hoje**
+
+> Quero projetar um agente de revisão documental, mas ainda não autorizei nenhuma execução. Defina: objetivo; entradas e fontes permitidas; operações determinísticas que devem ser ferramentas; tarefas que exigem interpretação de linguagem; permissões de leitura e escrita; formato do estado; evidências de cada etapa; condições de parada; situações que exigem aprovação humana; e critérios para declarar PASS, PARTIAL ou NO-GO. Inclua um exemplo de falha por permissão negada e mostre como o agente deve reagir sem tentar contornar o bloqueio. Não invente resultados de testes nem afirme ter acessado meus arquivos. Se uma etapa for simples demais para justificar um modelo, proponha executá-la por código comum.
+
+**Por que funciona.** O contrato separa decisões do modelo, operações das ferramentas e autoridade humana. É mais fácil avaliar os riscos antes de instalar programas ou liberar credenciais do que descobrir depois que a automação recebeu poderes demais.
+
+**Como verificar.** Leia o contrato como se fosse o responsável pela segurança do projeto. É possível identificar quem autoriza publicação e exclusão? O agente tem limite de tentativas? As evidências são observáveis? Há algum item que diz apenas “verificar” sem informar como? Se houver, o contrato ainda está incompleto.
+:::
+
+Um contrato bem escrito não prova que o agente funcionará. Ele nos dá, isto sim, condições para descobrir quando não funciona. A implementação real virá acompanhada de testes, permissões limitadas e comparação com uma alternativa mais simples. Não há mérito em produzir um documento de arquitetura gigantesco para a tarefa de corrigir uma vírgula.
+
+\Needspace{13\baselineskip}
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O momento em que você diria “pare”**
+
+Pense numa tarefa que você confiaria a outra pessoa: organizar fotografias, revisar uma carta, preparar arquivos para impressão ou conferir uma lista de compras. Escolha algo simples o suficiente para imaginar o processo inteiro.
+
+Anote três situações: uma em que você deixaria essa pessoa decidir sozinha; outra em que aceitaria uma proposta, mas gostaria de conferir antes; e uma terceira em que exigiria sua autorização **antes** de qualquer ação. Depois pergunte a si mesmo por que colocou cada situação nessa categoria. O risco depende do preço, do esforço para desfazer, de quem seria afetado ou de outro motivo?
+
+Agora transporte suas respostas para um agente hipotético. Ele precisaria de todas as permissões desde o início? Poderia trabalhar primeiro numa cópia? O que lhe permitiria comprovar o resultado? Você pode repetir o exercício com um amigo e comparar as fronteiras escolhidas. **O objetivo não é adivinhar a política correta, mas descobrir qual responsabilidade você está disposto a delegar e por quê.**
+:::
+
+## Da autonomia ao método
+
+Já conseguimos enxergar a estrutura de um agente sem tratar sua implementação como um truque. Temos um modelo que interpreta e propõe; um objetivo; instruções que estabelecem limites; contexto e conhecimento para fundamentar decisões; estado para continuar sem esquecer; ferramentas que executam operações; permissões que delimitam autoridade; um ciclo de trabalho; critérios de parada; e evidências que permitem verificar o resultado.
+
+Falta, naturalmente, transformar essa arquitetura em algo que rode. Mas antes disso precisamos enfrentar uma pergunta de bom senso: **será que toda tarefa merece esse conjunto de peças?** Em alguns casos, um agente reduzirá trabalho e erro. Em outros, apenas trocará uma operação simples por um sistema mais caro e mais difícil de verificar. O próximo capítulo colocará essa escolha sob exame. E, quando chegarmos ao teste final com o TK2000, não bastará que nossos agentes saibam produzir páginas bonitas. Eles precisarão preservar a história, o estado das pendências, a voz do autor e as provas que tornam um manual técnico digno de confiança.
