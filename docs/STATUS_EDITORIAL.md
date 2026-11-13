@@ -63,3 +63,10 @@
 - Matriz livro × jogo × hardware registrada em `docs/MATRIZ_LIVRO_JOGO_HARDWARE.md`, sem modificações retroativas nos capítulos 1 a 5.
 - Documentos em `docs/` distinguem baseline conhecido e status dos componentes.
 - Quarto nativo ainda não foi renderizado neste ambiente; as provas Pandoc são prévias, não miolo aprovado.
+
+## Emenda editorial v0.7.1 — apresentação do TK2000 e plano de revisão por blocos
+
+- Acrescentada somente uma passagem de contextualização do *Manual Técnico do TK2000* à Apresentação (`index.qmd`), em linguagem destinada ao leitor; capítulos 1–6 não foram alterados.
+- Criado `docs/PLANO_REVISAO_POR_BLOCOS.md`: a revisão humana acontecerá após a primeira passada, com documentos editáveis por blocos, diffs e reintegração controlada.
+- O manual TK2000 permanece intocado. O plano e o texto da Apresentação não equivalem à execução de teste final.
+- Quarto nativo no Windows do autor ainda deve ser instalado e testado. PDF 0.7 não foi regenerado nesta emenda.

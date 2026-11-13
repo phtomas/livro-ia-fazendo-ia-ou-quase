@@ -99,3 +99,9 @@ python workflows/auditoria_editorial.py . --pdf /caminho/para/a/previa_v0.6.pdf 
 ```
 
 Nenhuma dessas operações chama API de IA, escreve no manuscrito ou publica no GitHub. A skill ainda precisa ser testada no ambiente do agente escolhido, e o agente descrito no diretório `agents/` não existe como programa funcional.
+
+## Emenda v0.7.1 — o segundo livro e revisão futura por blocos
+
+A Apresentação agora apresenta ao leitor o *Manual Técnico do TK2000* como obra independente já em desenvolvimento, adotada como **prova final** do método — não como promessa de conclusão automática. Os capítulos existentes não foram reescritos. O procedimento futuro de revisão pelo autor está em `docs/PLANO_REVISAO_POR_BLOCOS.md`; a primeira passada completa ainda não terminou.
+
+Para instalar Quarto no Windows, use https://quarto.org/docs/get-started/ e execute `quarto --version`, `quarto check` e `quarto render --to html` na raiz do projeto. Geração PDF exige a dependência TeX (`quarto install tinytex`).
