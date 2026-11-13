@@ -1,6 +1,6 @@
 # IA fazendo IA — ou quase (manuscrito de trabalho)
 
-Este repositório local contém o **pacote editorial revisto v0.4**, ainda não aprovado e ainda não publicado. O arquivo `index.qmd` é a apresentação; `chapters/01-um-livro-que-aprende.qmd` é o Capítulo 1. Os anexos de princípios e glossário têm texto inicial e estão sujeitos à revisão. Todos os demais capítulos permanecem no sumário editorial, sem texto preparado. Não extrapole o estado de avanço.
+Este repositório local contém o **manuscrito editorial v0.6**, em primeira passada e ainda não aprovado para publicação. O arquivo `index.qmd` é a apresentação; `chapters/01-...` a `chapters/05-...` contêm os cinco primeiros capítulos. Os anexos de princípios e glossário têm texto inicial; capítulos 6–21 permanecem no sumário editorial, sem texto completo. Não extrapole o estado de avanço.
 
 ## Como gerar o livro
 
@@ -16,7 +16,7 @@ Este repositório local contém o **pacote editorial revisto v0.4**, ainda não 
 - Roteiro e capítulos ainda sujeitos à revisão de voz pelo autor: SIM.
 - Quarto instalado no ambiente desta primeira preparação: NÃO.
 - Renderização Quarto e inspeção visual de EPUB/PDF/HTML: NÃO REALIZADAS aqui.
-- Repositório GitHub remoto criado: NÃO.
+- Repositório GitHub remoto criado: SIM; `phtomas/livro-ia-fazendo-ia-ou-quase`, público.
 - Publicação KDP/UICLAP: NÃO.
 
 ## Contratos editoriais
@@ -27,7 +27,7 @@ P9: não reinventar a roda e dar crédito à origem de ideias, métodos e recurs
 
 P10: simbiose e cuidado, com parceria responsável e crescimento conjunto. As produções derivadas em áudio/vídeo não podem introduzir informações novas sem verificação.
 
-Em um próximo ciclo de revisão, associar o manuscrito a um repositório Git remoto (preferencialmente privado até aprovação editorial), estabelecer um arquivo `VOICE_PROFILE.md` aprovado e gerar um teste editorial repetível.
+O Git remoto já contém o manuscrito. Permanecem pendentes aprovação do perfil de voz, licenciamento e validação de publicação.
 
 ## Revisão v0.2 — solicitação do autor em 13/11/2026
 
@@ -40,7 +40,7 @@ Em um próximo ciclo de revisão, associar o manuscrito a um repositório Git re
 
 ## Visualização e notas de compilação v0.2
 
-O pacote inclui `styles.css` para espaçamento dos exemplos no HTML/EPUB, `estilo-referencias.csl` com termo pt-BR **acessado em** e `pdf-preambulo.tex` para evitar a quebra de fichas conceituais no PDF. Os arquivos `book-meta.yaml` e `pdf-preambulo.tex` servem também à prévia com Pandoc.
+O pacote inclui `styles.css` para espaçamento dos exemplos e prefixo de capítulo no HTML/EPUB, `estilo-referencias.csl` com termo pt-BR **acessado em** e `pdf-preambulo.tex` para evitar a quebra de fichas conceituais no PDF. Os arquivos `book-meta.yaml` e `pdf-preambulo.tex` servem também à prévia com Pandoc.
 
 **Validações locais da prévia Pandoc (não Quarto):** PDF em 16 × 23 cm; sem texto cortado, destaque integral, fichas de conceitos não divididas, bibliografia usando “Acessado em” e glossário sem página órfã. EPUB validado como arquivo ZIP e presença de capítulos confirmada. Repetir a verificação após renderização nativa do Quarto.
 
@@ -60,7 +60,7 @@ O Capítulo 1 conserva os dois boxes da v0.3 e recebeu um experimento autônomo 
 
 A pauta `docs/TOKENS_ROTEAMENTO_E_CUSTOS.md` foi acrescentada ao planejamento, **sem alterar a redação já aprovada para análise**. Vamos comparar algoritmos locais, modelos menores, escalonamento e medições reais de entrada/saída. O contador de tokens, quando for implementado, terá de distinguir previsão, medição e preço do provedor. Nenhum resultado de laboratório foi declarado PASS nesta etapa.
 
-**Repositório remoto previsto:** `phtomas/livro-ia-fazendo-ia-ou-quase` (ainda não criado). Manter privado até revisão editorial e definição da licença de texto e código.
+**Repositório remoto:** `phtomas/livro-ia-fazendo-ia-ou-quase` já criado e público por configuração atual. Revisar licença antes da distribuição definitiva.
 
 
 ## Rodada v0.5 — Capítulos 2 e 3, prova final TK2000
@@ -70,3 +70,12 @@ A pauta `docs/TOKENS_ROTEAMENTO_E_CUSTOS.md` foi acrescentada ao planejamento, *
 - Requisito decisivo do autor: a **prova final do método** será editar o *Manual Técnico do TK2000*, com fidelidade de ilustrações, voz, tom, didática e publicação, sem fechar artificialmente pendências de engenharia. Plano: `docs/PROVA_FINAL_TK2000.md`.
 - Pendente: aprovação autoral dos novos capítulos, ensaios reproduzíveis com agentes e renderização Quarto nativa. A prévia Pandoc não é prova final do projeto.
 - Repositório remoto foi criado e recebeu commits no GitHub. Confirmar visibilidade e licença antes de publicar quaisquer arquivos de terceiros ou do livro TK2000.
+
+## Revisão v0.6 — numeração e primeira passada de redação
+
+- Livro com capítulos 1–5 e anexos. Os dois novos são `chapters/04-quando-criar-um-agente.qmd` e `chapters/05-provas-custos-e-seguranca.qmd`.
+- Títulos e subseções numerados automaticamente; **não incluir `Capítulo N` ou `N.1` nos headings da fonte**. O CSS e o preâmbulo PDF exibem `Capítulo N` no sumário.
+- `scripts/gerar_previa.sh` gera provas via Pandoc (HTML, EPUB e PDF), **não são renderizações nativas do Quarto**.
+- O plano de figuras e fluxogramas está em `docs/PLANO_VISUAL_SEGUNDA_PASSADA.md`; produzir imagens úteis e auditáveis na segunda revisão, não imagens decorativas.
+- Os boxes de uso da IA e os experimentos do leitor permanecem distintos. Testar scripts e revisar visualmente as páginas.
+- GitHub remoto já existe e é público; substituir notas antigas sobre inexistência por este estado; a licença editorial está pendente de decisão autoral.

@@ -10,3 +10,10 @@
 % Experimento do leitor: descoberta autônoma, visualmente distinto do box com IA.
 \definecolor{experimentoBorder}{HTML}{8D8B70}
 \definecolor{experimentoBg}{HTML}{FBFAF5}
+
+% Livro: capítulos nomeados e numeração hierárquica no sumário (KOMA scrreprt).
+% Nunca numerar títulos manualmente nos arquivos .qmd.
+\renewcommand{\chaptername}{Capítulo}
+\KOMAoptions{chapterprefix=true}
+\newcommand*\formatChapterTocNumber[1]{Capítulo~#1\enspace}
+\DeclareTOCStyleEntry[entrynumberformat=\formatChapterTocNumber,numwidth=7em]{tocline}{chapter}

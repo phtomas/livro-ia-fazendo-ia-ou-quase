@@ -2,7 +2,7 @@
 
 - Apresentação: rascunho v0.2 revisado para revisão do autor.
 - Capítulo 1: rascunho v0.2 revisado para revisão do autor.
-- Capítulos 2–21: apenas esboçados no documento editorial v0.3, não incluídos neste pacote.
+- Capítulos 2–5: agora redigidos em primeira passada, revisão autoral pendente. Capítulos 6–21: apenas esboçados no projeto editorial.
 - Ainda sem avaliações formais de fidelidade da voz ou validação da paginação.
 - Quarto não está instalado neste ambiente, logo ainda não foi possível validar renderização nativa.
 - Bibliografia e créditos: fontes públicas primárias citadas no corpo; seguir auditando antes da publicação.
@@ -42,3 +42,12 @@
 - Prova final de integração reservada ao Manual Técnico do TK2000: `docs/PROVA_FINAL_TK2000.md`. O manuscrito TK2000 não foi modificado.
 - A fonte Quarto passa a incluir os novos capítulos. Bibliografia técnica adicionada com fontes primárias.
 - O Quarto ainda não foi executado neste ambiente; qualquer prévia com Pandoc deve ser identificada como **prévia não nativa**.
+
+## Revisão v0.6 — numeração e capítulos 4–5
+
+- Contrato: capítulos e seções numerados automaticamente; prefixo `Capítulo` no sumário PDF/HTML. Capítulos em `.qmd` conservam títulos sem número manual.
+- Apresentação e anexos não numerados; subtítulos internos igualmente marcados como `.unnumbered`.
+- Capítulos 4 e 5 redigidos; cada um contém box NA PRÁTICA COM A IA e EXPERIMENTO DO LEITOR; revisão humana pendente.
+- Plano da segunda passada visual em docs/PLANO_VISUAL_SEGUNDA_PASSADA.md; figuras e dados ainda não gerados.
+- Preview com Pandoc e PDF scrreprt; fonte canônica Quarto com `number-sections`, `number-depth` e `toc-depth`; compilação Quarto nativa ainda pendente.
+- Falta revisão autoral do texto; não chamar o capítulo de aprovado por teste estrutural.

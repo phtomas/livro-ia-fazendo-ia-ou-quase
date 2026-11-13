@@ -45,3 +45,8 @@ body { line-height: 1.55; }
 }
 .experimento-do-leitor p { margin: .75em 0; }
 .experimento-do-leitor p:first-child { margin-top: 0; color: #59543a; font-weight: 700; }
+
+/* Numeração automática editorial: capítulo no título e no índice; seção 1.1, 1.2. */
+h1:not(.unnumbered) > .header-section-number::before { content: "Capítulo "; }
+#TOC > ul > li > a > .toc-section-number::before { content: "Capítulo "; }
+.sidebar-item-text .chapter-number::before { content: "Capítulo "; }

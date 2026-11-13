@@ -1,6 +1,6 @@
 # Apresentação {.unnumbered}
 
-## Uma ideia que resolveu se multiplicar
+## Uma ideia que resolveu se multiplicar {.unnumbered}
 
 Há livros que começam com uma pergunta. Este começou com várias, e elas tinham o hábito inconveniente de aparecer justamente quando parecia que já havíamos encontrado uma resposta.
 

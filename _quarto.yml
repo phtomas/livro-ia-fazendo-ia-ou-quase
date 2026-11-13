@@ -3,6 +3,9 @@ project:
   output-dir: _book
 
 lang: pt-BR
+number-sections: true
+number-depth: 2
+toc-depth: 2
 bibliography: references.bib
 csl: estilo-referencias.csl
 link-citations: true
@@ -19,6 +22,8 @@ book:
     - chapters/01-um-livro-que-aprende.qmd
     - chapters/02-nomes-e-contratos.qmd
     - chapters/03-por-dentro-do-agente.qmd
+    - chapters/04-quando-criar-um-agente.qmd
+    - chapters/05-provas-custos-e-seguranca.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

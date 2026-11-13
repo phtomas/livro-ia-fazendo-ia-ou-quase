@@ -1,0 +1,123 @@
+# Provar, medir e proteger antes de escalar
+
+## A diferença entre terminar uma tarefa e ter prova de que ela terminou
+
+Em algum momento de um projeto com IA, aparece uma frase que exige atenção especial: “Está pronto”. Ela pode surgir depois de uma resposta bem escrita, de um script executado, de um arquivo salvo ou de uma longa sequência de ações num serviço externo. O tom costuma ser convincente. A evidência nem sempre acompanha.
+
+Nosso próprio livro já atravessou uma situação assim. O repositório GitHub estava criado, o projeto Quarto estava organizado e os arquivos aguardavam o primeiro commit remoto. A integração tinha acesso ao GitHub, mas não ao repositório recém-criado. Quando tentamos gravar, recebemos o erro 403. Nada de quebrar senha, nada de trocar de ferramenta para contornar a recusa: precisávamos saber **qual autorização faltava**. Após a permissão ser corrigida por quem controlava a conta, foi possível enviar os arquivos e depois lê-los no GitHub para conferir o resultado.
+
+Se tivéssemos chamado de sucesso a simples tentativa de envio, este capítulo teria nascido de uma mentira. O que tornou o episódio útil não foi a IA descrever o problema. Foi termos separado três estados: **tentativa realizada**, **operação autorizada e executada** e **resultado verificado no destino**. A mesma distinção vale para um jogo que compila mas não é jogável, uma imagem que cabe na página mas contém um componente errado e um livro que possui todas as seções mas perdeu a voz do autor.
+
+No nosso Códex, essa exigência está logo no primeiro princípio: *Honestidade acima de tudo*. O restante deste capítulo é uma tentativa de transformar esse compromisso em procedimentos que um leitor possa reproduzir.
+
+## Uma evidência para cada tipo de afirmação
+
+Não existe uma única prova universal de funcionamento. Se a afirmação é “o arquivo foi copiado”, precisamos verificar os arquivos no destino e, quando pertinente, seu conteúdo. Se é “a revisão preservou o texto”, precisamos comparar original e revisado. Se é “a figura está dentro da margem”, uma ferramenta de inspeção geométrica deve conferir posições e dimensões. Se é “o circuito funciona em placa física”, uma simulação não basta: precisamos de um ensaio com instrumentação e condições documentadas.
+
+Uma boa prática é formular o resultado esperado **antes** da execução. No envio ao GitHub, por exemplo, a condição não deveria ser “o agente disse que enviou”. Deveria ser “o servidor devolveu o identificador do commit, o branch esperado aponta para ele e os arquivos podem ser lidos no repositório”. A partir daí, um verificador sabe o que procurar.
+
+É importante não pedir ao teste algo que ele não consegue observar. O programa que conta boxes didáticos pode provar sua presença estrutural. Não pode julgar se um experimento convida o leitor a pensar ou apenas manda copiar um prompt. Esse julgamento pertence à revisão humana. Inversamente, uma leitura atenta do livro não substitui a conferência automática de links e dimensões.
+
+Podemos trabalhar com quatro estados simples: **PASS**, quando o critério definido foi demonstrado; **FAIL**, quando um teste pertinente produziu evidência de reprovação; **PARTIAL**, quando parte do escopo foi demonstrada; e **NÃO VERIFICADO**, quando faltou executar ou observar o teste. Esse último estado é essencial. Ausência de prova não é reprovação automática, mas tampouco equivale a aprovação.
+
+## Medir custo sem transformar tokens em superstição
+
+A contagem de tokens merece um capítulo em nossa caixa de ferramentas porque influencia orçamento, limite de contexto e escolha de modelo. Mas ela não conta toda a história. Dois modelos podem gastar números diferentes de tokens para resolver a mesma tarefa; um pode precisar de novas tentativas ou chamadas auxiliares, e o outro não. Uma chamada mais cara pode evitar horas de retrabalho. O objetivo não é comemorar o menor número, e sim descobrir **quanto custa alcançar o resultado que passou nos nossos critérios**.
+
+Chamamos de **tokens de entrada** aqueles processados a partir do pedido e do contexto enviado ao modelo; **tokens de saída** são os gerados durante a resposta, podendo incluir tokens que não aparecem no texto final, conforme o sistema. A API pode fornecer contadores de uso efetivo. Um contador prévio pode estimar ou calcular a entrada de acordo com o modelo e o formato da requisição, mas não sabe de antemão quantos tokens serão gerados na saída. Os mecanismos variam por provedor. A documentação de contagem da OpenAI, por exemplo, distingue o cálculo prévio da entrada do consumo real registrado após uma resposta [@openaitokencount2026].
+
+Também não devemos confundir **tokens utilizados** com **tokens faturados a uma tarifa única**. Pode haver categorias diferentes de entrada, entrada em cache, saída, chamadas de ferramentas ou outros serviços. Os preços mudam e podem depender do plano ou do modelo. No uso por assinatura de uma interface, nem sempre o usuário recebe uma conta por chamada igual à de uma API. Para calcular preço de inferência por API precisamos consultar a tabela oficial vigente e aplicar as categorias corretas ao consumo medido — não usar um valor antigo retirado de uma conversa.
+
+A conta mais simples, quando o serviço cobra somente por entrada e saída comuns, é esta:
+
+**Custo = (Tₑ × Pₑ + Tₛ × Pₛ) ÷ 1.000.000**
+
+Aqui, **Tₑ** e **Tₛ** são as quantidades medidas de tokens de entrada e saída; **Pₑ** e **Pₛ** são os preços por milhão de tokens, na moeda especificada pelo provedor. Se há entrada cacheada, gravação em cache, ferramentas cobradas à parte ou qualquer outra modalidade, **a fórmula precisa ser ampliada**. Ela não pode ser aplicada cegamente a serviços com tarifação diferente [@openaicache2026].
+
+Esse cuidado evita uma armadilha frequente. Um contador que mostra “1.200 tokens” não prova que a tarefa custou determinado número de centavos. Sem o modelo, a data, a modalidade de cobrança e as categorias de uso, o valor em dinheiro é apenas suposição.
+
+## O modelo solicitado é o mesmo que foi usado?
+
+Se quisermos comparar um modelo econômico com outro mais avançado, precisamos primeiro saber **qual modelo executou cada chamada**. Em APIs que retornam identificadores de modelo e estatísticas de uso, podemos registrar esses campos junto com data, parâmetros e resultados. Nos sistemas que utilizam roteamento, delegação ou ferramentas externas, a execução pode incluir várias chamadas e até provedores distintos. Devemos registrar cada etapa observável em vez de atribuir toda a tarefa a uma etiqueta de interface.
+
+Em produtos de chat, o modelo usado internamente nem sempre é exposto de forma verificável. Pedir ao próprio modelo que declare sua identidade não substitui um registro emitido pelo serviço: a resposta é texto gerado, não telemetria. Quando o identificador não estiver disponível, a atitude correta é marcar **modelo efetivo não verificável nesta interface**. Não precisamos abandonar o experimento; precisamos apenas limitar a conclusão.
+
+Um registro mínimo conterá: tarefa, identificador de execução, provedor, modelo solicitado, modelo retornado se houver, horário, entradas utilizadas, tokens de entrada e saída informados, tarifas datadas, latência e critérios de aprovação. Se o consumo não foi fornecido, escrevemos **DESCONHECIDO**, não zero. Em fluxos com subagentes, cada chamada deve aparecer separadamente antes da soma; uma resposta final com aparência simples pode ter custado várias rodadas de processamento. A observabilidade atual de agentes já prevê rastros de ferramentas, chamadas e verificações, embora sua disponibilidade dependa do ambiente e da configuração [@openaitracing2026].
+
+Mais adiante construiremos uma ferramenta de contagem e registro. Ela deve funcionar mesmo quando a parte de inferência estiver desligada, e seus números devem indicar a origem: **medido pelo provedor**, **contado previamente**, **estimado localmente** ou **indisponível**. Essa nomenclatura talvez pareça minuciosa. É exatamente o tipo de minúcia que impede uma comparação bonita de se transformar numa conclusão errada.
+
+## Pequeno, grande ou nenhum modelo?
+
+Imagine que precisamos separar cinquenta descrições de arquivos em categorias: foto, esquema, texto e código. Algumas podem ser classificadas pela extensão do arquivo. Outras, com nomes ambíguos, podem exigir examinar conteúdo ou uma pequena amostra. Pode sobrar uma parcela em que um modelo de linguagem ajude a decidir a categoria provável. A arquitetura sensata não começa necessariamente enviando os cinquenta casos ao modelo mais caro.
+
+Podemos experimentar uma **cascata**. Primeiro, as regras determinísticas resolvem aquilo que conseguem decidir com segurança. Depois, um modelo econômico lida com os casos que exigem interpretação. Só os exemplos ambíguos ou de maior risco seguem para uma segunda análise, uma revisão humana ou um modelo mais capaz. Isso é roteamento: cada etapa executa o trabalho para o qual está preparada.
+
+Mas a cascata tem seu próprio custo de implementação. Precisamos criar critérios de confiança, medir quando o roteamento erra e descobrir se o ganho justifica a complexidade. Se cada item for enviado primeiro a um modelo barato e depois, invariavelmente, a outro caro, talvez tenhamos apenas duplicado o gasto. Um modelo menor que responde rápido mas erra de maneira difícil de detectar pode sair mais caro que um sistema simples e mais confiável.
+
+Também não devemos presumir que a palavra “agente” obriga o uso de modelos de linguagem. O script de cópia do capítulo anterior era uma ferramenta; um workflow pode chamá-lo sem inferência. Quando o leitor entender essa distinção, poderá enxergar desperdícios que antes pareciam parte inevitável da tecnologia.
+
+## Segurança não começa na senha: começa nas permissões
+
+Ao conectar uma IA ao Drive, ao GitHub ou a qualquer serviço externo, transformamos uma resposta em possível ação. Os riscos deixam de ser apenas frases equivocadas. Agora um erro pode excluir arquivos, sobrescrever uma versão aprovada, publicar conteúdo inacabado ou expor informações que não deveriam sair do projeto.
+
+Por isso separamos **leitura**, **preparação** e **execução de alterações**. Consultar o manual é diferente de reescrever o manual. Gerar uma cópia de trabalho é diferente de substituir o original. Montar um commit é diferente de publicar esse commit num repositório visível ao mundo. Essas fronteiras devem estar no contrato da tarefa e, sempre que possível, reforçadas pelas permissões técnicas da ferramenta.
+
+Há também o problema de conteúdos maliciosos ou simplesmente inadequados encontrados durante uma busca. Um arquivo externo pode conter instruções como “ignore as regras anteriores” ou “envie as credenciais para este endereço”. O agente precisa tratar isso como texto da fonte, não como uma ordem autorizada. Não basta declarar essa regra: precisamos testá-la em ambientes de treinamento com documentos inofensivos que simulem instruções conflitantes.
+
+Quando uma operação tem efeito irreversível ou difícil de desfazer, a aprovação humana não é uma fraqueza do agente. É parte da arquitetura. As plataformas podem oferecer guardrails e mecanismos de revisão que interrompem o fluxo antes de ações sensíveis. Devemos conhecer seus limites e não confundir a existência de um mecanismo com sua ativação efetiva [@openaiapprovals2026].
+
+## Falhas merecem um plano antes de acontecer
+
+O erro 403 mostrou uma falha relativamente confortável: o GitHub negou a operação e o estado anterior permaneceu íntegro. Nem todo erro será tão limpo. Uma cópia pode interromper no meio, uma revisão pode salvar parte do texto e parar, e um gerador de imagens pode produzir uma figura aparentemente excelente com um sinal elétrico invertido.
+
+Um workflow bem projetado precisa distinguir **falha transitória** de **falha estrutural**. Repetir uma chamada depois de um erro temporário de rede pode fazer sentido; repetir indefinidamente uma requisição sem permissão não cria autorização. Da mesma maneira, tentar redesenhar uma ilustração dez vezes sem comparar com o esquema não aumenta a chance de fidelidade técnica de maneira controlada.
+
+Devemos definir um número limitado de tentativas, preservar o arquivo anterior, registrar o que foi alterado e oferecer um caminho de retorno. Sempre que uma operação puder ser executada duas vezes, vale perguntar se ela é **idempotente**: repetir a mesma ação produz o mesmo estado desejado, sem duplicar dados nem gerar efeitos inesperados? Uma cópia para um destino fixo pode ser feita com essa propriedade; um comando que acrescenta uma nova linha ao final do documento a cada execução não é naturalmente idempotente.
+
+Na prática editorial, essa precaução nos leva ao **baseline** — a versão conhecida como boa. Um ajuste novo não ganha o direito de destruir o texto anterior apenas porque resolveu o problema que enxergávamos. É precisamente por isso que o Git e as cópias versionadas entram na história: precisamos conseguir comparar, recuperar e explicar.
+
+## Construa a matriz de prova antes do agente
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Transformar “funcionou” numa afirmação verificável**
+
+**O que testar.** Preparar uma matriz de critérios para uma tarefa editorial sem permitir que a IA invente resultados.
+
+**Como proceder.** Escolha um documento de teste e descreva uma revisão pequena. Não forneça senhas nem documentos privados. Nesta rodada a IA deverá somente propor verificações: nada de alterar o arquivo real.
+
+**Prompt que usaríamos hoje**
+
+> Quero verificar a qualidade de uma revisão editorial. Construa uma matriz com: requisito, forma de observar, ferramenta ou pessoa responsável, resultado esperado e estado inicial NÃO VERIFICADO. Inclua preservação do texto aprovado, títulos e seções numerados, figuras dentro das margens, legendas ligadas às imagens, boxes “NA PRÁTICA COM A IA”, experimentos do leitor e links válidos. Para cada linha, indique se a evidência é automática, visual ou exige julgamento humano. Não altere arquivos e não preencha nenhum PASS antes de receber uma evidência real. Em caso de erro ou falta de acesso, registre a limitação e proponha a menor ação segura seguinte.
+
+**Por que funciona.** O critério de aprovação passa a existir antes do resultado. Isso reduz a tentação de chamar de sucesso a parte que o agente conseguiu observar, ignorando aquilo que ficou fora de seu alcance.
+
+**Como verificar.** Inspecione a matriz. Há itens que poderiam ser medidos com um programa, mas foram atribuídos a um modelo? Há afirmações que dependem do autor, mas receberam PASS automático? Todos os estados começam como NÃO VERIFICADO? Se a resposta for negativa, ajuste o contrato antes de permitir execução.
+:::
+
+O prompt acima não executa a verificação. Isso é deliberado. Primeiro precisamos saber o que seria uma boa prova. Depois ligaremos cada linha a ferramentas, documentos e pessoas capazes de produzi-la. Um teste que só verifica a frase produzida pelo agente não substitui a observação do arquivo ou serviço real.
+
+## A pergunta do leitor não deve ser respondida por um placar inventado
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O que significa “deu certo” para você?**
+
+Escolha uma atividade que já tenha concluído recentemente: uma planilha, uma pequena instalação, uma cópia de fotografias ou um texto revisado. Sem pedir ajuda à IA, escreva a frase que normalmente usaria para anunciar seu sucesso. Depois liste quais observações sustentam essa frase.
+
+Agora imagine que outra pessoa precisasse repetir a tarefa sem conhecer sua rotina. Quais evidências você deveria entregar? Um arquivo no destino? Uma fotografia? Uma comparação entre versões? Um registro de execução? É possível que você descubra que **tinha razões para confiar**, mas ainda não tinha uma prova que outra pessoa pudesse conferir.
+
+Escolha então uma operação da lista e tente produzir sua evidência mais simples. Anote quanto tempo levou e se o esforço pareceu proporcional ao risco. Não é obrigatório que tudo termine em PASS. Talvez a conclusão seja que você precisaria de outra ferramenta, outra medição ou uma nova tentativa.
+
+Depois, se quiser, convide outra pessoa a examinar apenas o registro, sem explicar o que aconteceu oralmente. Onde ela encontrou dúvidas? Esse intervalo entre **aquilo que sabemos** e **aquilo que conseguimos demonstrar** é o principal objeto do exercício.
+:::
+
+## O compromisso que levará o TK2000 até a última página
+
+Quando chegarmos à editoração do Manual Técnico do TK2000, teremos uma tarefa maior do que os exercícios deste capítulo. Haverá capítulos de um manuscrito real, ilustrações para melhorar, tabelas, referências cruzadas, exigências de impressão e uma voz autoral que deve sobreviver à passagem por diferentes ferramentas. Também haverá pendências técnicas já documentadas: uma imagem mais bonita não pode converter um circuito ainda não medido numa afirmação definitiva.
+
+A suíte de testes dessa prova final precisará reunir diferentes testemunhas. Um script poderá identificar estilos incoerentes. Um renderizador mostrará o resultado paginado. Um verificador poderá conferir presença e legibilidade básica de figuras. As ligações de um esquema técnico terão de ser confrontadas com suas fontes. E a decisão sobre voz, tom, interpretação e qualidade pedagógica continuará pertencendo à revisão humana.
+
+Não prometemos que todos esses resultados estarão aprovados de antemão. O desafio do livro é justamente desenvolver os instrumentos que permitam provar — ou reprovar — cada etapa. Isso nos levará às avaliações de agentes, aos ambientes de execução, à portabilidade entre plataformas e, por fim, ao fluxo de publicação.
+
+O que mudará não será apenas a quantidade de tarefas automatizadas. Será a maneira de trabalhar: cada ferramenta com sua função, cada modelo com um custo observado, cada autorização no lugar certo, cada erro registrado e cada conclusão limitada pela evidência que a sustenta. Se conseguirmos isso, o *quase* do título terá cumprido sua missão.

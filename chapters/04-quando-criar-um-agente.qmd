@@ -1,0 +1,161 @@
+# Quando criar um agente — e quando deixar a ferramenta em paz
+
+## A máquina mais sofisticada para uma tarefa de dois segundos
+
+Imagine uma pasta com cinquenta fotografias de uma placa eletrônica. Queremos preservá-las numa cópia de segurança, mantendo os nomes e a estrutura original. É possível abrir uma conversa com a IA, explicar o objetivo, criar um agente com acesso ao disco, pedir que ele planeje a operação e aguardar seu relatório. Também é possível usar o gerenciador de arquivos do computador. Os dois caminhos podem levar à cópia. Só um deles, porém, faz sentido como ponto de partida.
+
+Quando alguém começa a aprender agentes, é natural querer utilizá-los em tudo. Há prazer em ver um sistema interpretar um pedido e conduzir uma tarefa. Mas construir uma solução não é o mesmo que escolher uma boa solução. Se o resultado é perfeitamente definido, as entradas são conhecidas e o procedimento já existe, acrescentar um modelo de linguagem pode apenas trazer latência, custo e uma nova classe de erro.
+
+Isso não diminui a inteligência artificial. Pelo contrário: uma das capacidades mais úteis de um bom assistente é reconhecer **quando não precisa participar**. O P5, *Simplicidade é força*, não é um elogio à pobreza de recursos. É um convite a aplicar a complexidade certa no lugar certo. Essa escolha coincide com a recomendação de começar pelo sistema mais simples que resolva o problema, antes de adotar workflows e agentes mais autônomos [@anthropic2024].
+
+A pergunta central deste capítulo não será “qual agente podemos criar?”, mas **“qual parte do problema exige interpretação, decisão ou adaptação?”**. O restante deve ser resolvido pelas ferramentas que já temos.
+
+## Primeiro separe o que sabemos do que precisamos descobrir
+
+Uma operação de cópia tem um contrato relativamente claro: origem, destino, arquivos selecionados, política para nomes repetidos e maneira de conferir o resultado. Podemos discutir se devemos sobrescrever um arquivo existente, mas essa discussão deve acontecer **antes** da cópia; não precisamos de uma inferência nova para cada arquivo transferido.
+
+Uma revisão editorial é diferente. O programa pode localizar títulos com tamanho incorreto, procurar palavras proibidas e verificar se todos os capítulos possuem os boxes definidos no contrato. Já decidir se uma passagem ficou fria demais para a voz do autor exige interpretação. O computador não encontra a resposta apenas medindo caracteres e margens.
+
+Uma investigação de circuito é ainda menos previsível. Uma tela preta pode nos obrigar a consultar um esquema, verificar alimentação, comparar sinais de clock, inspecionar uma ROM e só então escolher o próximo teste. Não conseguimos antecipar cada caminho possível sem fazer uma árvore enorme. Aqui a capacidade de reorganizar o plano diante da evidência pode compensar a presença de um agente — desde que ele não confunda hipótese com medição.
+
+A diferença aparece quando fazemos três perguntas: **o resultado é definido por regras exatas?**; **o caminho de execução é conhecido de antemão?**; **há decisões que dependem de interpretar informações novas durante a execução?**. As respostas não formam uma fórmula mágica, mas reduzem bastante a chance de montarmos uma arquitetura maior que o próprio problema.
+
+## Cinco soluções possíveis, nenhuma delas obrigatoriamente superior
+
+Antes de desenhar um agente, gosto de imaginar uma escada curta. Na base está a ação manual, quando a tarefa é rara e simples. Um degrau acima vem o programa determinístico, para operações precisas que se repetem. Depois aparece uma única consulta à IA, quando precisamos interpretar ou redigir algo, mas não executar uma cadeia de ações. Em seguida há o workflow, em que passos e verificações estão definidos. Por último está o agente, capaz de selecionar próximos passos dentro de um contrato e de um conjunto de ferramentas autorizadas.
+
+A escada não é uma classificação de prestígio. Um programa Python que compara hashes pode ser mais correto que um agente equipado com o melhor modelo disponível. Um workflow de três etapas pode ser mais fácil de auditar que uma equipe de especialistas virtuais. E uma conversa direta pode gerar uma revisão melhor que um processo de dez chamadas, se a tarefa não exigir as dez chamadas.
+
+::: {.conceito-cartao}
+**Ação manual**
+
+**Boa escolha quando:** a tarefa acontece uma vez, leva pouco tempo e não justifica manutenção de software.
+
+**Exemplo:** mover uma fotografia para a pasta certa depois de conferi-la.
+:::
+
+::: {.conceito-cartao}
+**Programa ou tool determinística**
+
+**Boa escolha quando:** sabemos transformar entradas em saídas e conseguimos testar o resultado automaticamente.
+
+**Exemplo:** copiar arquivos, conferir hashes, localizar imagens maiores que a margem de impressão.
+:::
+
+::: {.conceito-cartao}
+**Uma chamada ao modelo**
+
+**Boa escolha quando:** precisamos de interpretação localizada e o resultado pode ser avaliado diretamente.
+
+**Exemplo:** sugerir duas alternativas para tornar um parágrafo mais claro sem alterar o texto original.
+:::
+
+::: {.conceito-cartao}
+**Workflow**
+
+**Boa escolha quando:** há etapas definidas, controles intermediários e pouca necessidade de escolher caminhos novos.
+
+**Exemplo:** extrair texto, verificar formatação, gerar uma prévia e produzir um relatório de problemas.
+:::
+
+::: {.conceito-cartao}
+**Agente**
+
+**Boa escolha quando:** o próximo passo depende de evidência ainda desconhecida e precisamos de seleção dinâmica de ferramentas, com limites de acesso e de custo.
+
+**Exemplo:** investigar uma falha editorial, descobrir de qual arquivo ela veio e escolher verificadores conforme o tipo de problema.
+:::
+
+Uma tarefa pode subir ou descer nessa escada ao longo do projeto. Quando escrevíamos o primeiro capítulo deste livro, a inspeção da voz precisava de atenção humana e apoio da IA. Ao descobrirmos regras que podiam ser descritas e verificadas, parte do trabalho desceu para programas simples. A tecnologia ficou menos vistosa — e o processo ficou melhor.
+
+## O preço de carregar uma inteligência onde não precisamos dela
+
+Tokens são uma das unidades usadas para medir o processamento de entradas e saídas dos modelos de linguagem. Não correspondem diretamente a palavras, caracteres nem segundos de uso. O consumo depende do modelo, da estrutura da solicitação, de ferramentas declaradas, do contexto reaproveitado e de outros fatores. Algumas plataformas permitem conhecer esses números; outras mostram apenas limites ou estimativas. Trataremos a medição com mais cuidado no capítulo seguinte e voltaremos a ela num laboratório específico.
+
+Por ora, basta distinguir dois trabalhos. **Copiar arquivos com Python não precisa consumir tokens de inferência**: o interpretador Python e o sistema de arquivos realizam a cópia. Se uma IA escreveu o script ou decidiu quando acioná-lo, essas etapas podem ter consumido tokens, mas a transferência dos bytes não exige uma nova chamada ao modelo. Também não devemos concluir que toda operação local custa zero: disco, eletricidade, manutenção e tempo continuam existindo.
+
+Uma segunda fonte de desperdício é enviar a mesma documentação completa a cada passo. Se a IA precisa conferir apenas o título de uma figura, não há motivo automático para incluir vinte capítulos e todas as fotografias. Podemos passar um trecho localizado, preservar um contrato comum e recuperar o restante quando for necessário. Essa economia precisa ser comprovada: recortar demais o contexto pode induzir erros que custarão mais caro para corrigir.
+
+A terceira fonte é a escolha inadequada de modelo. Nem sempre o mais poderoso é o mais econômico para tarefas simples; nem sempre o mais barato entrega a qualidade necessária. Por isso, em vez de perguntar qual modelo é “melhor”, vamos perguntar **quanto custa obter um resultado aprovado**. Uma classificação de trechos pode ser feita com regras, com um modelo econômico ou com um modelo avançado. A escolha definitiva dependerá de testes com os mesmos exemplos e critérios. É uma questão de engenharia, não de torcida por marcas.
+
+## A fronteira entre automatizar e autorizar
+
+Uma decisão importante pode exigir pouco processamento e, ainda assim, não ser delegável. Apagar um arquivo antigo é uma operação tecnicamente simples. Alterar a visibilidade de um repositório é um clique. Publicar um livro pode ser tão fácil quanto enviar o arquivo final. Nenhuma dessas ações se torna segura só porque sabemos automatizá-la.
+
+No Capítulo 3 vimos que o GitHub recusou a escrita porque a integração não havia recebido acesso ao repositório novo. O erro 403 foi uma evidência concreta da fronteira de autorização. Um agente útil diagnosticou a causa e aguardou uma autorização legítima; não tentou contornar o controle. Depois houve a verificação remota dos arquivos. Esse episódio será nosso modelo para separar **capacidade de execução**, **permissão** e **comprovação**.
+
+Na editoração, usaremos uma regra semelhante. Um agente poderá sugerir trocar uma figura, mas uma figura técnica deve ser conferida diante do esquema original. Poderá preparar uma revisão, mas não substituir silenciosamente o capítulo aprovado. Poderá detectar ausência de uma ficha catalográfica, mas não inventar informações bibliográficas. Autorizar uma operação reversível não dá autorização implícita para uma irreversível.
+
+Isso também simplifica o desenho do sistema: quanto menos ações perigosas ele puder executar, menos mecanismos precisaremos construir para impedir que as execute por engano.
+
+## Uma ferramenta pequena que podemos realmente provar
+
+Vamos construir a primeira peça que não precisa de modelo algum: um copiador de arquivos com verificação. Ele deve operar **apenas numa pasta de testes**, para não colocar nosso acervo real em risco. Aqui usaremos Python porque é portátil e compreensível; o Explorador de Arquivos do Windows também poderia resolver a tarefa, sem prejuízo do princípio.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — O trabalho que não precisa de tokens de IA**
+
+**O que testar.** Reproduzir uma cópia de arquivos com conferência de integridade, sem enviar arquivos para um modelo de linguagem.
+
+**Como proceder.** Crie uma pasta de testes vazia. Execute o script abaixo com Python 3; ele cria uma origem, copia dois arquivos para outra pasta e confere o conteúdo por SHA-256. Não executa exclusões e não utiliza a rede.
+
+**Prompt que usaríamos hoje**
+
+> Se você quiser pedir ajuda a uma IA para compreender o exemplo, explique: “Leia este script Python sem executá-lo. Descreva as entradas, as saídas, os riscos de sobrescrita e as evidências que permitem afirmar que a cópia funcionou. Não proponha um agente para realizar a transferência, a menos que exista uma necessidade demonstrada de decisão dinâmica.” O código, porém, pode funcionar sem fazer essa pergunta à IA.
+
+```python
+from pathlib import Path
+from shutil import copy2
+from hashlib import sha256
+from tempfile import TemporaryDirectory
+
+with TemporaryDirectory() as base:
+    raiz = Path(base)
+    origem = raiz / "origem"
+    destino = raiz / "destino"
+    origem.mkdir()
+    destino.mkdir()
+    (origem / "um.txt").write_text("primeiro arquivo", encoding="utf-8")
+    (origem / "dois.txt").write_text("segundo arquivo", encoding="utf-8")
+
+    for arquivo in origem.iterdir():
+        copia = destino / arquivo.name
+        copy2(arquivo, copia)
+        if sha256(arquivo.read_bytes()).digest() != sha256(copia.read_bytes()).digest():
+            raise RuntimeError(f"Cópia diferente: {arquivo.name}")
+
+    if sorted(p.name for p in origem.iterdir()) != sorted(p.name for p in destino.iterdir()):
+        raise RuntimeError("Listas de arquivos diferentes")
+    print("PASS: nomes e conteúdo conferidos na pasta temporária")
+```
+
+**Por que funciona.** A tarefa tem entradas, transformação e verificação definidos por código. O `TemporaryDirectory` impede que o exercício utilize acidentalmente seus diretórios de trabalho e remove os arquivos de teste ao final. Não há chamada a LLM no script.
+
+**Como verificar.** Execute o programa e confira a mensagem. Em seguida, remova *apenas no exemplo*, uma das linhas de `copy2` ou altere o conteúdo de uma cópia para ver o que as verificações detectam. O código tem de parar com erro ou deixar de declarar PASS se a condição for violada. **O PASS aqui pertence à execução no seu computador**, não a uma suposta execução feita pelos autores para todas as máquinas.
+:::
+
+Um detalhe faz diferença: se utilizarmos a IA para escrever o programa, haverá trabalho com IA no desenvolvimento. Isso não transforma a cópia numa inferência. A distinção entre **criar uma ferramenta** e **executar uma ferramenta** acompanhará os próximos laboratórios e será particularmente útil ao medir custos.
+
+## Experimente antes de escolher a arquitetura
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Qual é a menor solução confiável?**
+
+Escolha três tarefas de sua rotina. Uma deve ser repetitiva e objetiva; outra deve exigir interpretação; a terceira deve ter algum risco se executada de forma errada. Não precisam envolver programação: organizar notas, revisar uma mensagem e enviar um arquivo já são exemplos suficientes.
+
+Sem consultar a IA, descreva como resolveria cada uma manualmente. Depois imagine o que mudaria com uma ferramenta simples, uma conversa, um workflow e um agente. Em qual abordagem você consegue explicar melhor o que será feito? Em qual delas a operação pode ser conferida? Qual é mais fácil de desfazer?
+
+Tente implementar **somente a opção mais simples** que pareça suficiente, ou simule o procedimento por escrito se não tiver as ferramentas. Anote uma dificuldade concreta que realmente encontrou. Só então pergunte se um degrau adicional resolveria essa dificuldade.
+
+Há um resultado que merece ser aceito de antemão: talvez você descubra que **não precisa de IA alguma naquela tarefa**. Isso não é fracasso do experimento. É a descoberta que queremos permitir que você faça por conta própria.
+:::
+
+## O melhor agente também pode recomendar não criar um agente
+
+Chegamos a uma consequência curiosa: conforme ganhamos experiência com agentes, deveríamos criar alguns a menos. Um agente de diagnóstico pode descobrir que um programa determinístico já responde à pergunta. Uma skill de publicação pode apontar que existe um modelo editorial aprovado a reutilizar. Uma investigação pode mostrar que ainda faltam fatos para automatizar uma decisão — e então a melhor ação é registrar a pendência, não inventar um caminho.
+
+Não estamos abolindo a autonomia. Estamos colocando-a a serviço do problema. Quando houver incerteza real, escolhas condicionadas à evidência e ferramentas complementares, avançaremos para agentes. Quando o procedimento já estiver claro, uma tool ou um workflow será suficiente. Quando a decisão pertencer ao autor, o sistema preparará o material e pedirá autorização.
+
+No próximo capítulo, essa escolha ganhará números e critérios de aceitação: quanto custou, quanto demorou, qual modelo foi usado quando foi possível comprová-lo, quantos tokens entraram e saíram, quais testes passaram e quais falharam. **A arquitetura não estará aprovada porque parece elegante. Estará aprovada quando a evidência justificar seu uso.**
