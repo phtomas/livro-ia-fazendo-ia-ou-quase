@@ -33,6 +33,8 @@ book:
     - chapters/12-quando-uma-skill-merece-confianca.qmd
     - chapters/13-a-ferramenta-que-nao-precisa-de-opiniao.qmd
     - chapters/14-duas-copias-uma-historia.qmd
+    - chapters/15-os-frameworks-nao-decidem-por-nos.qmd
+    - chapters/16-medindo-a-oficina.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

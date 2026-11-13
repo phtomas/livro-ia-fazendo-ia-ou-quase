@@ -145,3 +145,17 @@ O PDF Pandoc é prova de leitura, não miolo final. A prévia Quarto HTML é ger
 Os capítulos `13-a-ferramenta-que-nao-precisa-de-opiniao.qmd` e `14-duas-copias-uma-historia.qmd` completam o primeiro laboratório sobre tools determinísticas, revisão de cópias e responsabilidades entre GitHub, Drive e Quarto. A tool `tools/sync/conferir_espelhos.py` **não sincroniza arquivos**: compara árvores locais, calcula SHA-256 e emite JSON, impedindo automaticamente a ideia de que a cópia mais recente é a correta. Para executar: `python tools/sync/conferir_espelhos.py --canon DIR_A --espelho DIR_B --report fora_das_pastas.json`. A opção `--snapshot` cria manifesto prévio, permitindo classificar mudanças unilaterais e concorrentes.
 
 Os novos testes são locais; nem o transporte entre provedores nem a reconciliação automática foram homologados. Preservar as falhas editoriais anteriores e a nova ocorrência não detalhada pelo autor para a revisão final em blocos. Esta rodada não corrige textos anteriores.
+
+
+## Rodada v1.2 — frameworks e instrumentos de medição
+
+A primeira passada agora inclui os Capítulos 15–16. O Capítulo 15 apresenta cinco famílias de frameworks com um **protocolo de aceitação proposto**, não um benchmark de desempenho. Consulte `docs/CONTRATO_AVALIACAO_FRAMEWORKS.md`.
+
+O Capítulo 16 acompanha `tools/observabilidade/resumir_execucoes.py`, exemplos sintéticos de consumo de tokens e tarifas fictícias. O analisador **não faz chamadas de IA**, não autentica registros de provedor e não pode inferir o modelo realmente executado.
+
+```sh
+python -m unittest discover -s tests -p 'test_*.py' -v
+python tools/observabilidade/resumir_execucoes.py --runs examples/metricas/execucoes_sinteticas.jsonl --rates examples/metricas/tarifas_ficticias.json --output dist/metricas.json
+```
+
+O Drive do autor é um espelho de trabalho e o GitHub é o histórico versionado. A publicação no Pages continua sujeita ao workflow e à confirmação de resultado. Problemas de layout e as ocorrências editoriais deliberadamente não reveladas pelo autor permanecem em aberto para a segunda passada.

@@ -105,3 +105,13 @@
 - Testes unitários incluindo o novo comparador: 44 PASS; as origens não foram modificadas. Nenhuma divergência real entre Google Drive e GitHub foi deduzida de testes com diretórios temporários.
 - A nova falha editorial apontada pelo autor segue **não localizada** e não foi corrigida por adivinhação. Defeitos históricos de PDF permanecem registrados. O conjunto de verificadores não prova ausência de erros no manuscrito.
 - Apresentação e Capítulos 1–12 preservados byte a byte nesta rodada; revisão autoral final continuará em blocos depois da primeira passada.
+
+
+## Rodada v1.2 — critérios de escolha, custos e tokens
+
+- Capítulos 15 e 16 em primeira passada; Capítulos 1–14 e Apresentação preservados sem intervenção editorial.
+- Comparação documental de LangGraph, CrewAI, Microsoft Agent Framework, OpenAI Agents SDK e Google ADK. **Nenhum benchmark de framework foi executado.**
+- Contrato de aceitação em `docs/CONTRATO_AVALIACAO_FRAMEWORKS.md`: futuros adaptadores devem demonstrar permissões, retomadas e provas.
+- Laboratório sintético e ferramenta de resumo de execuções com entrada JSONL; sem API de modelos, sem preços reais e sem detecção independente da identidade do modelo.
+- As falhas de PDF detectadas anteriormente e as falhas que o autor deliberadamente não descreveu continuam pendentes e não serão corrigidas por adivinhação.
+- Verificar testes e renderização antes de afirmar PASS desta rodada.

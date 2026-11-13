@@ -1,0 +1,103 @@
+# Os frameworks não decidem por nós
+
+## A oficina ganhou ferramentas. Precisa agora de uma fábrica?
+
+Depois de construir uma ferramenta que compara arquivos sem apagá-los, descobrimos um defeito curioso nas conversas sobre agentes: quanto mais pequena a tarefa, maior a vontade de colocar uma estrutura gigantesca ao seu redor. De repente, a operação que antes exigia um script passa a pedir um gerente, três especialistas, uma memória de longo prazo, uma fila de mensagens e uma reunião para decidir quem vai abrir o arquivo. O resultado impressiona no desenho e costuma esconder a pergunta essencial: **que problema concreto essa nova arquitetura resolveu?**
+
+Não temos nada contra frameworks. Seria estranho, depois de tanto defender o aproveitamento do trabalho de outras pessoas, resolver criar todas as peças da nossa oficina do zero. Frameworks são uma forma de não reinventar a roda. O equívoco está em tratá-los como se a roda decidisse por conta própria para onde devemos ir. Eles oferecem abstrações, execução, integração e observabilidade. Continuamos responsáveis pelo objetivo, pelas permissões, pelos testes e pelo modo de interpretar um resultado.
+
+Nesta altura do livro já temos material para fazer uma escolha menos apaixonada. Nosso controlador supervisionado lê planos externos, consulta uma política de permissões, chama algumas ferramentas locais, produz relatórios e interrompe ações não autorizadas. Nosso workflow com checkpoints sabe reconhecer quando a entrada mudou. O comparador identifica diferenças entre duas árvores. Nada disso exige, por enquanto, que um modelo escolha sozinho as próximas etapas. Talvez um framework acrescente persistência melhor, visualização de grafos ou conectores; talvez acrescente apenas dependências e trabalho de manutenção. É precisamente essa diferença que precisamos avaliar.
+
+Vamos examinar cinco famílias conhecidas — **LangGraph, CrewAI, Microsoft Agent Framework, OpenAI Agents SDK e Google Agent Development Kit (ADK)** — como propostas de arquitetura, não como marcas concorrendo a um troféu. O levantamento das capacidades foi realizado sobre documentação oficial consultada em novembro de 2026; APIs e recursos podem mudar. Neste capítulo **não executamos um benchmark entre essas cinco plataformas**. Seria desonesto converter suas páginas de documentação numa tabela de vencedores.
+
+## O que estamos tentando orquestrar
+
+Imagine o trabalho final com o Manual Técnico do TK2000. Um capítulo chega para revisão. Primeiro precisamos identificar a versão e as fontes. Depois verificamos se imagens, referências e legendas continuam presentes. A IA pode propor uma redação mais clara, mas não deve inventar um barramento nem converter uma hipótese sobre a PAL em medição comprovada. A proposta passa pelo detector de números e por outros testes que ainda construiremos. O autor examina o resultado. Somente então uma versão identificada segue para integração e renderização.
+
+Desenhado no papel, o fluxo parece uma fileira de caixas. Na prática, surgem desvios. Se uma referência falta, a redação deve parar? Se a figura está ilegível, voltamos ao arquivo original? Se a revisão do autor altera uma expressão técnica, o validador precisa rodar de novo? Se um conector devolve `403`, quem pede a autorização correta e como evita repetir a mesma tentativa inutilmente? **Essas perguntas falam sobre estado, condição, retomada e autoridade**, não sobre o carisma de um modelo.
+
+Nossos scripts já começaram a responder a algumas delas. Ainda não respondem a todas. Um framework poderá ser útil quando o número de caminhos e retomadas crescer além do que convém manter em código próprio, ou quando uma integração comprovadamente economizar trabalho. A comparação justa começa congelando a mesma entrada e o mesmo contrato, executando dois caminhos e medindo resultados. Não basta trocar a palavra *workflow* pela palavra *agente* e fotografar um diagrama maior.
+
+## Cinco maneiras de organizar a mesma bancada
+
+O **LangGraph** se apresenta como um runtime de orquestração com grafos, estado compartilhado, nós e transições, pensado para execuções duráveis, interrupções e intervenção humana. Sua documentação distingue o runtime de bibliotecas de modelos e ferramentas: ele pode combinar etapas determinísticas e etapas conduzidas por LLM sem prescrever um único tipo de agente [@langgraph2026]. Para nossa oficina, a questão seria se o grafo oferece uma maneira mais auditável de expressar os checkpoints do que nosso controlador atual. O nome *graph* não prova que os nós foram configurados corretamente nem que os efeitos externos são idempotentes.
+
+O **CrewAI** organiza responsabilidades em agentes e equipes (*crews*) e também oferece *Flows*, com execução estruturada, eventos, estados e passagem entre tarefas [@crewaiflows2026]. Ele é interessante quando queremos comparar especializações bem delimitadas: alguém pesquisa referências, outro sugere uma redação e um terceiro prepara um relatório. Mas um elenco de papéis bem descritos não comprova que os especialistas concordam com os fatos. E um fluxo de publicação não pode entregar a um papel chamado “editor-chefe” uma autorização que o autor nunca concedeu.
+
+O **Microsoft Agent Framework** reúne agentes, ferramentas, sessões, middleware e workflows funcionais ou em grafo. A documentação o apresenta como sucessor da experiência acumulada com AutoGen e Semantic Kernel, com recursos para fluxos duráveis, checkpoints e participação humana [@msagentframework2026]. É uma arquitetura a considerar quando o projeto depende de integração com aplicações, serviços e telemetria daquele ecossistema. O detalhe crítico é identificar a linguagem, versão e provedor: um recurso documentado num runtime não deve ser presumido em todos os outros.
+
+O **OpenAI Agents SDK** privilegia um conjunto pequeno de primitivas: agente com instruções e ferramentas, delegação entre agentes, guardrails, sessões e rastreamento de execução. A documentação também distingue o agente que mantém o controle e chama especialistas como ferramentas de um *handoff* que transfere o controle da interação [@openaiagentssdk2026]. Essa distinção importa mais que o exemplo vistoso. Se um agente de revisão consultar outro para classificar referências, talvez desejemos que o agente principal continue responsável pela proposta. Transferir a conversa inteira a um especialista muda o contrato de execução e pode mudar o contexto disponível.
+
+O **Google ADK** apresenta agentes, ferramentas, roteamento e workflows. Sua documentação atual destaca fluxos em grafo e dinâmicos; os modelos anteriores de sequência, paralelo e repetição ainda aparecem como formatos de referência, mas não devem ser apresentados como a única arquitetura disponível [@googleadk2026]. O motivo de nossa curiosidade não é a marca do modelo: é a possibilidade de transportar contratos e verificar explicitamente os mecanismos de fluxo, estado e observabilidade. Não vamos declarar equivalência entre uma configuração do ADK e um grafo LangGraph apenas porque ambos desenham setas.
+
+O que esses projetos têm em comum é uma promessa razoável: evitar que cada equipe reescreva a infraestrutura de coordenação. O que eles **não** têm em comum, necessariamente, são semânticas de persistência, comportamento de erro, formato de ferramentas, política de autenticação, custo operacional e compatibilidade entre versões. A matriz abaixo não pontua qualidade. Ela indica o que deveríamos testar antes de escolher.
+
+| Família | Ponto de atenção para nosso laboratório | Prova que ainda falta |
+|:--|:--|:--|
+| LangGraph | Estado, transições, checkpoints e retomada | Reproduzir falha e retomada com a mesma entrada |
+| CrewAI | Equipes e fluxos orientados a eventos | Medir se dividir papéis melhora o trabalho |
+| Microsoft Agent Framework | Workflow, middleware e integrações | Verificar versão, conector e privilégio efetivo |
+| OpenAI Agents SDK | Ferramentas, handoffs, guardrails e traces | Comparar delegação com chamada a ferramenta |
+| Google ADK | Grafo, agentes, tools e avaliação | Rodar o mesmo contrato com evidência de execução |
+
+## Uma migração só se justifica com uma diferença observável
+
+Poderíamos, amanhã, reescrever todo o controlador do livro usando um desses frameworks. Seria um grande capítulo sobre instalação, dependências e mensagens de erro. Só não saberíamos se o leitor ficou com uma ferramenta melhor. Preferimos preparar um *contrato neutro* que o novo runtime terá de satisfazer antes de merecer a migração.
+
+O contrato começa com uma entrada identificada: caminho e hash do manuscrito, versão do perfil editorial e escopo do capítulo. Em seguida, impõe uma sequência mínima: ler, inventariar, propor, validar, registrar e solicitar aprovação. Ao encerrar, exige um registro do que foi executado, por qual ferramenta, com qual resultado e sob quais permissões. Se falhar, precisa declarar a etapa, permitir diagnóstico e evitar que a tentativa seguinte reutilize indevidamente um PASS anterior. A publicação, a mudança de conteúdo autoral e a remoção de uma ressalva técnica exigem decisão explícita do responsável.
+
+Esse contrato pode ser implementado com Python puro ou por adaptadores de um framework. **A arquitetura não é a prova; a execução é a prova.** A adoção de um runtime deve diminuir código de infraestrutura, melhorar a recuperação de falhas, reduzir risco ou proporcionar um recurso que nos faltava. Ela não recebe aprovação apenas porque um tutorial mostra como desenhar três agentes coloridos.
+
+Também precisamos controlar a atualização. Um framework traz dependências transitivas, ajustes de API e, possivelmente, serviços pagos. Mudar a versão no meio de um experimento altera as condições do teste. O laboratório deve guardar a versão da biblioteca, do Python e dos adaptadores utilizados, além do modelo solicitado e do modelo efetivamente observado quando houver chamada externa. Se o provedor não expuser o segundo, escreveremos **DESCONHECIDO**. Isso vale igualmente para o custo de uma chamada que ninguém mediu.
+
+## Não confundir o grafo com a autorização
+
+Uma transição chamada `aprovar_publicacao` é apenas um nome até que exista uma autorização autêntica. O software precisa saber quem aprovou, o quê, em qual versão e para qual destino. Uma linha de texto numa resposta do modelo não deve se transformar em consentimento administrativo. O erro `403` que encontramos no GitHub nos ensinou isso na prática: o programa possuía instruções de envio, mas não possuía a permissão correspondente naquele repositório.
+
+Há outra armadilha: o runtime pode oferecer guardrails e checkpoints que funcionam muito bem em testes locais, enquanto uma operação externa envia e-mails duplicados ou sobrescreve arquivos. Retomar um grafo não volta automaticamente o mundo externo ao estado anterior. Uma aplicação precisa projetar operações idempotentes, detectar repetição e preservar registros. Nossos testes de cópia e de reconciliação tornam essa preocupação visível num exemplo pequeno, antes de ela aparecer num manual técnico de centenas de páginas.
+
+## Uma peça nova na oficina: contrato de migração
+
+Em vez de instalar cinco frameworks para anunciar cinco resultados que não executamos, guardaremos em `docs/CONTRATO_AVALIACAO_FRAMEWORKS.md` um roteiro de aceitação com casos de prova. O documento não declara suporte comprovado em nenhum produto. É uma lista que qualquer adaptador candidato deverá atravessar: entrada imutável, política de permissões, ação negada, falha recuperável, checkpoint, relatório de efeitos e diferença entre modelo solicitado e modelo realmente identificado.
+
+A decisão de não instalar tudo agora é deliberada. Há ambientes que exigem chave, assinatura, serviço externo, dependências e autorizações. Podemos ensinar os princípios com nossos programas locais, deixando a execução comparativa de plataformas para um laboratório controlado. O leitor não precisa gastar dinheiro para compreender onde a arquitetura pode falhar. E, quando gastarmos, registraremos exatamente a condição do experimento.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 15 — O framework precisa provar seu valor**
+
+**O que testar.** Fazer um assistente propor a arquitetura mínima para o fluxo editorial, mas impedir que confunda lista de capacidades documentadas com recursos efetivamente ensaiados.
+
+**Como proceder.** Leia `docs/CONTRATO_AVALIACAO_FRAMEWORKS.md`. Escolha um cenário pequeno: inventariar um capítulo, conferir os boxes, comparar a proposta de revisão e interromper antes da publicação. Peça duas arquiteturas, uma com nosso Python local e outra com um framework candidato. Exija uma matriz de diferenças e de provas ainda necessárias.
+
+**Prompt que usaríamos hoje**
+
+> Compare nosso workflow Python com uma implementação candidata em LangGraph, CrewAI, Microsoft Agent Framework, OpenAI Agents SDK ou Google ADK. Preserve o contrato de permissões e a entrada identificada por hash. Não afirme que executou a nova plataforma. Liste versões, dependências, pontos de falha e testes necessários. Mantenha a autorização humana fora do controle do modelo e indique quais ações permanecem somente simuladas.
+
+**Por que funciona.** O mesmo contrato fixa o que deve permanecer correto; a comparação separa infraestrutura útil de abstrações que apenas mudam nomes. Ela ainda não demonstra desempenho.
+
+**Como verificar.** Rejeite toda proposta que não tenha saída verificável, que trate documentação como execução ou que permita publicar sem aprovação. Marque cada item como `DOCUMENTADO`, `PROPOSTO`, `TESTADO` ou `NÃO TESTADO`; não preencha um estado pelo outro.
+:::
+
+## O mesmo contrato em um livro, um jogo e uma placa
+
+No **livro**, um workflow pode ter centenas de arquivos e referências cruzadas. A complexidade nasce de revisões humanas, figuras, diferentes formatos de saída e da obrigação de não perder o texto aprovado. Um grafo que saiba pausar para avaliação de um parágrafo pode ser útil; um que apenas repita a ordem fixa dos nossos scripts talvez não acrescente nada. O TK2000 será nosso teste final porque o manuscrito já existe com pendências próprias e ilustrações técnicas que exigem prova.
+
+Num **jogo**, os nós mudam de significado. Um agente pode gerar uma proposta de sprite ou código, mas a prova de jogabilidade exige compilação e execução no emulador. Há estados que importam para o jogador, e não para o runtime: fase, colisão, tempo de resposta, controle, som. Se o fluxo decide que o jogo está pronto porque o arquivo foi salvo, o framework falhou no contrato do domínio, ainda que seus gráficos estejam corretos.
+
+No **hardware**, a situação é mais séria. Uma sugestão de alteração em esquema pode produzir netlist e passar por ERC/DRC, sem provar que o circuito funcionará numa placa física. Podemos coordenar consulta ao datasheet, comparação de revisões, simulação, geração de relatório e parada antes de fabricar. Mas nenhuma equipe de agentes recebe autoridade para inverter uma ligação, aplicar tensão ou declarar uma ULA corrigida sem o ensaio apropriado. O contrato técnico acompanha o estado do experimento, não a confiança do texto produzido.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Quando a complexidade ajuda?**
+
+Sem consultar uma IA, desenhe numa folha o menor fluxo que permite concluir uma tarefa sua. Pode ser revisar uma receita, organizar um pequeno acervo, preparar um programa ou reparar um equipamento. Marque cada decisão que realmente depende de interpretação humana e cada ação que uma função simples executaria sem dúvida.
+
+Agora acrescente uma falha: o arquivo muda depois da leitura, a conexão cai ou a pessoa responsável recusa uma alteração. O que precisou mudar no desenho? Você precisa de um grafo, de uma fila, de um checkpoint, de um simples `if` ou apenas de uma instrução melhor? Escreva primeiro sua escolha e seu critério de prova. Só então mostre os dois desenhos a uma IA e peça uma crítica. Compare as razões dela com as suas, sem trocar evidência por entusiasmo.
+:::
+
+## Uma estrutura é boa quando continua compreensível
+
+Nossa primeira versão de um agente não ficará mais madura por ser reescrita em cinco frameworks ao mesmo tempo. Ficará madura quando soubermos reproduzir os casos que ele aceita, os casos que recusa e os que exige levar a uma pessoa. Quando as ferramentas forem insuficientes, teremos um motivo concreto para adotar outra biblioteca. Até lá, simplicidade não é pobreza arquitetural: **é uma maneira de conservar visíveis as decisões que realmente importam**.
+
+No próximo capítulo, vamos medir o preço de esquecer esse cuidado. Não apenas em dinheiro, mas em chamadas desnecessárias, verificações repetidas, informação perdida e conclusões anunciadas antes de seu tempo.

@@ -1,0 +1,112 @@
+# Medir a oficina antes de colocar mais máquinas
+
+## Uma vitória que não sabemos quanto custou
+
+Imagine que uma IA revisou vinte páginas do nosso livro. O texto ficou mais claro, a bibliografia continuou intacta e o programa de inspeção não encontrou um novo erro de diagramação. Estamos tentados a chamar isso de sucesso e passar ao capítulo seguinte. Mas uma pergunta atravessa a bancada: quantas chamadas foram necessárias? E quantas tentativas fracassaram antes da última? Utilizamos o modelo solicitado ou outro, selecionado por um roteador? Havia um script capaz de fazer parte do serviço sem gastar um único token de inferência? Quanto custou obter uma proposta que o autor ainda não aprovou?
+
+A resposta não está no entusiasmo da ferramenta. Está no registro de execução. Uma oficina sem medidores pode produzir resultados excelentes, mas terá dificuldade para repetir, comparar ou melhorar seu modo de trabalhar. Conhecemos essa situação no hardware: uma fonte pode aparentar funcionar até que uma carga revele seu problema. Em software e IA, o equivalente é anunciar “mais rápido”, “mais barato” ou “mais preciso” sem dizer o que foi observado e sob quais condições.
+
+Este capítulo é a nossa tentativa de instalar instrumentos de bancada na própria oficina editorial. Não procuraremos inventar uma pontuação universal para agentes, nem reproduzir uma tabela de preços que envelhecerá antes de o livro sair da gráfica. Queremos saber **o que registramos, o que conseguimos calcular e o que permanece desconhecido**. Isso vale para uma revisão de texto, para um jogo de TK90X e para uma placa desenhada em KiCad.
+
+## A unidade de medida não é a conversa: é a tarefa
+
+Uma conversa pode misturar dez solicitações, três modelos, várias ferramentas e um arquivo alterado sem aviso. Para comparar soluções, precisamos definir uma unidade de trabalho. No livro, pode ser “revisar a seção 8.3 preservando números, citações e voz”; no jogo, “implementar e testar uma nova condição de colisão”; no hardware, “gerar e conferir a netlist de uma revisão identificada da placa”. Essa unidade deve ter **entrada congelada**, **critérios de aceitação**, **saída identificável** e **estado de aprovação**.
+
+Duas execuções que resolvem tarefas diferentes não constituem um comparativo. Se um agente recebeu todo o manual e outro recebeu apenas uma página, dividir o consumo de tokens pelo número de parágrafos não corrige a diferença de contexto. Se um modelo teve acesso ao repositório e outro recebeu um texto colado, não estamos avaliando apenas o modelo. Se uma tentativa alterou o próprio arquivo de referência antes da segunda, perdemos a igualdade de entrada. É por isso que guardamos hash, commit e instruções de teste.
+
+O indicador mais importante, portanto, não é “tokens por resposta” isoladamente. É **custo por tarefa que atingiu o critério de aceitação**, acompanhado de qualidade, tempo, intervenção humana, risco e evidência. Uma execução barata, mas incorreta, não é economia. Um modelo forte pode custar mais por chamada e menos por tarefa válida; um script pode resolver melhor uma etapa inteira por não precisar interpretar nada. Só o experimento dirá.
+
+## O que é token e o que não é medição
+
+Tokens são unidades de representação usadas pelos modelos para processar entrada e produzir saída. Não são equivalentes a palavras, letras ou bytes. O mesmo texto pode ser dividido de modo diferente por tokenizadores, famílias de modelos e modalidades. Nosso laboratório de tokens terá duas medidas distintas: uma **estimativa antes da chamada**, feita por ferramenta de contagem compatível com a configuração conhecida, e um **consumo relatado pelo serviço**, quando o provedor devolver dados de uso. Estimativa não deve se transformar silenciosamente em medição.
+
+Há ainda categorias que precisamos separar. Tokens de entrada podem incluir trechos reutilizados a partir de um cache, cobrados em condições diferentes. Tokens de saída podem custar outra tarifa. Dependendo do provedor, há chamadas de ferramenta, busca, armazenamento, imagens, áudio, execução de código ou outras modalidades com cobrança própria. Os termos e valores mudam: nossa planilha precisa de **tabela de preços datada, moeda, unidade e categoria**, nunca de um número solto que alguém lembra de cabeça [@openaiapipricing2026; @openaitokencount2026].
+
+Uma conta pedagógica ajuda, desde que os valores sejam declarados **fictícios**. Suponha um modelo de laboratório com entrada a US$1,00 por milhão de tokens, entrada em cache a US$0,20 e saída a US$4,00. Uma execução com 8.000 tokens de entrada, dos quais 2.000 foram servidos pelo cache, e 1.000 de saída teria custo de inferência estimado assim:
+
+**Custo = [(6.000 × US$1,00) + (2.000 × US$0,20) + (1.000 × US$4,00)] ÷ 1.000.000 = US$0,0104.**
+
+Esse **US$0,0104 é apenas um exemplo aritmético com tarifas inventadas**, não um preço atual de ChatGPT, Claude, Gemini ou de qualquer API. Se uma busca cobrou separadamente, devemos acrescentá-la. Se não conhecemos o custo de ferramenta, a soma total é **desconhecida**, embora a parcela de inferência possa ser estimada. Um valor desconhecido não vale zero, e uma cobrança publicada pelo provedor não é automaticamente igual à nossa estimativa.
+
+## Modelo solicitado não significa modelo executado
+
+Um dos problemas mais interessantes aparece quando um gateway ou roteador escolhe um modelo diferente daquele que escrevemos no pedido. Às vezes isso acontece por configuração; em outros casos, por fallback, disponibilidade ou política de uma plataforma. Não devemos atribuir ao modelo solicitado um resultado que ele não produziu. Nosso registro terá **modelo solicitado**, **modelo efetivo informado pelo provedor**, **origem dessa identificação** e, quando a execução atravessar mais de um serviço, **cada salto observável**.
+
+Se o serviço não devolver a identificação efetiva, escreveremos `DESCONHECIDO`. Não basta o assistente responder “sou o modelo X”. Tampouco basta a página de configuração apresentar um nome. Precisamos do identificador observado na resposta de API, no log confiável ou em outra evidência que identifique a execução. Quando o produto não expõe esse nível de detalhe, a comparação de modelos deve assumir essa limitação. A verdade parcial é mais útil do que uma precisão inventada.
+
+Também registraremos a categoria da tarefa. Aquele modelo pequeno e barato que classifica cem títulos com excelente resultado pode falhar ao interpretar uma cláusula, reconstituir uma lógica de seleção ou avaliar uma falha de temporização. Nosso processo de roteamento começa por identificar o problema, não por escolher sempre o menor preço. **Assertividade primeiro, velocidade depois**: a economia só existe se o resultado satisfizer o contrato.
+
+## Um contador com menos promessas e mais provas
+
+Criamos em `tools/observabilidade/resumir_execucoes.py` um pequeno analisador de registros locais. Ele lê eventos JSONL, um objeto JSON por execução, e uma tabela explícita de tarifas **fictícias**. Para cada item, confere se tokens de entrada e saída foram informados, separa a parcela de cache e, quando há identificação confiável do modelo e uma tarifa correspondente, calcula a estimativa de inferência. Não precisa de chave de API nem de acesso a serviços externos.
+
+O programa se recusa a adivinhar o consumo quando um campo falta. Rejeita um cache maior que a entrada, números negativos e identificadores duplicados. Se o modelo efetivo não foi relatado, não copia o nome solicitado para esse campo. Se faltar preço de ferramenta, não declara um custo total. E o relatório é explicitamente um **resumo de registros declarados**, não auditoria de fatura, nem verificação independente de que uma chamada de IA realmente ocorreu.
+
+Nossos exemplos de entrada são sintéticos e identificados dessa forma. Um deles descreve uma etapa Python sem modelo; outro contém uso de tokens fictício e uma tabela de tarifa fictícia; o terceiro omite a identificação do modelo efetivo. Assim o leitor pode executar o programa sem pagar por uma chamada e, ao mesmo tempo, observar que o terceiro caso deve continuar sem custo calculado. A medição de uma plataforma real virá quando tivermos os logs e a permissão apropriada, sem expor prompts privados ou chaves.
+
+Podemos também guardar a duração da tarefa, a quantidade de tentativas, as ferramentas invocadas e o resultado da verificação. Mas é preciso resistir à vontade de preencher campos vazios com médias de mercado. O relatório deve conservar o que foi medido e distinguir dados fornecidos, dados derivados e avaliações humanas. Nosso lema não muda quando o assunto é uma conta de US$0,01.
+
+## Fazer menos chamadas pode melhorar a arquitetura
+
+A regra mais útil para economizar tokens costuma vir antes de escolher o modelo: **não peça a um modelo aquilo que uma função determinística consegue provar melhor**. Copiar arquivos, calcular SHA-256, validar uma lista de caminhos, identificar transbordamentos geométricos conhecidos ou conferir a presença de capítulos não depende de criatividade. Essas tarefas continuam consumindo tempo de máquina, mas não necessitam do custo e da variabilidade de uma inferência.
+
+Quando a tarefa pede interpretação, a conversa muda. Uma revisão de voz ou uma comparação de dois parágrafos exige julgamento. Mesmo assim, podemos reduzir trabalho repetido separando a coleta mecânica de fatos da proposta textual, reutilizando resultados identificados por hash e enviando ao modelo somente o contexto pertinente. O ganho em tokens precisará ser medido; não vamos imprimir um percentual de economia porque a ideia parece boa.
+
+Outra estratégia é a **cascata de modelos**: tentar primeiro a solução mais simples permitida e encaminhar apenas casos ambíguos ou críticos a um modelo com maior capacidade. Isso pode ser útil, mas precisa de um detector de falha suficientemente confiável. Se a triagem classifica incorretamente um risco elétrico como trivial, a economia é um péssimo negócio. Por essa razão, nossa política de roteamento precisa incluir o domínio, a consequência do erro e a possibilidade de verificação independente. O leitor verá na prática, mais adiante, que “barato primeiro” não é sinônimo de “barato sempre”.
+
+## Qualidade, segurança e custo devem caber no mesmo relatório
+
+Uma métrica sem consequência tende a virar enfeite. Podemos contar as vezes que um verificador rodou, mas o número só ajuda se sabemos quantas falhas reais foram encontradas, quantos falsos positivos surgiram e quais erros ele não poderia detectar. Os nove transbordamentos que nosso detector apontou nas páginas do PDF demonstram que há problemas geométricos; **não demonstram que toda a diagramação foi auditada**. E o usuário já indicou pequenas falhas editoriais que ainda não descreveu. Seria incorreto declarar sucesso geral porque os testes do código terminaram verdes.
+
+Da mesma forma, aprovar a sintaxe de uma skill não prova que sua revisão respeita a voz do autor. Contar chamadas de LLM não comprova que uma frase está correta. E uma ação bloqueada por política não é falha da ferramenta: pode ser justamente a prova de que o limite funcionou. Nosso relatório terá pelo menos três dimensões separadas: **funcionamento do mecanismo**, **qualidade da tarefa** e **autorização para aplicar o resultado**.
+
+Se pudermos repetir a mesma tarefa com entradas equivalentes, começaremos a medir proporção de propostas aceitas, tempo total, necessidade de retrabalho, custo estimado e quantas decisões humanas foram necessárias. Mas esses números só fazem sentido depois de um conjunto suficiente de casos reais, com amostras identificadas. Até lá, preferimos tabelas que reconheçam os espaços em branco.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 16 — Medir sem inventar consumo**
+
+**O que testar.** Produzir um relatório local que distingue custos estimados, tokens relatados, modelo efetivamente identificado e dados ausentes, usando somente registros sintéticos.
+
+**Como proceder.** Execute o analisador de `tools/observabilidade` com os arquivos de `examples/metricas`. Leia as três saídas e encontre o caso em que o modelo foi solicitado, mas não identificado pelo provedor. Depois peça a uma IA uma proposta de experimento real, sem executar nenhuma API paga.
+
+**Prompt que usaríamos hoje**
+
+> Com base neste relatório de execuções sintéticas, desenhe um experimento controlado para comparar uma ferramenta Python, um modelo pequeno e um modelo mais capaz na mesma tarefa. Identifique variáveis de controle, critérios de qualidade, versão dos modelos, logs de uso, preços datados, ferramentas cobradas e autorização para gastar. Não converta a simulação em resultados medidos nem atribua um modelo efetivo sem evidência do provedor.
+
+**Comando local**
+
+```sh
+python tools/observabilidade/resumir_execucoes.py \
+  --runs examples/metricas/execucoes_sinteticas.jsonl \
+  --rates examples/metricas/tarifas_ficticias.json \
+  --output dist/metricas.json
+```
+
+**Por que funciona.** O experimento separa o custo aritmético de um preço declarado e uma execução observada. Os campos ausentes permanecem ausentes, e o programa não emite chamadas de IA.
+
+**Como verificar.** Confirme que o caso sintético com tarifa conhecida produz uma estimativa de inferência, enquanto o caso sem modelo efetivo fica com custo `null`. Confirme também que os dados são rotulados como sintéticos e que o relatório não afirma ter sido emitido pelo provedor.
+:::
+
+## Livro, jogo e hardware: três noções distintas de resultado
+
+Para o **livro**, o denominador pode ser um capítulo revisado e aprovado, com todas as referências preservadas, diferenças registradas e PDF sem novos defeitos introduzidos. Tokens por parágrafo sem aprovação autoral seria uma medida secundária. Uma edição aprovada custando mais pode ser preferível a cinco revisões baratas que o autor precisa desfazer.
+
+Para o **jogo**, podemos medir custo até um teste reproduzível no emulador, número de regressões, compilação, travamentos, comportamento dos controles e tempo de resposta. Um agente que gera muitas linhas de código, mas não entrega uma fase jogável, está produzindo volume, não progresso. O tempo de execução dos testes locais e a quantidade de correções também fazem parte do custo da tarefa.
+
+Para o **hardware**, a consequência do erro pesa de outra forma. O custo real envolve consulta de esquemas, validação de componentes, simulação, fabricação e bancada. A IA pode economizar horas ao organizar hipóteses, mas uma netlist aparentemente correta não substitui a medida física. Um roteamento de modelos deve reservar tratamento mais cuidadoso para dados de tensão, temporização, revisão de placa e qualquer decisão capaz de causar dano. Nesse domínio, o preço de um token é quase irrelevante diante do custo de uma placa equivocada.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O que você chamaria de barato?**
+
+Escolha uma tarefa pequena que já realizou. Sem pedir ajuda à IA, descreva duas estratégias: uma muito econômica em operações, mas que pode exigir retrabalho, e outra mais cuidadosa, que precisa de uma etapa extra de conferência. Dê a ambas o mesmo objetivo verificável. Anote quais custos você sabe medir — tempo, quantidade de passos, material, erros — e quais está apenas supondo.
+
+Agora acrescente um erro difícil de perceber, como um número trocado num texto, uma colisão intermitente num jogo ou a pinagem de um conector. Sua classificação da opção “barata” mudou? Explique por quê, sem tentar fabricar estatísticas. Finalmente, apresente sua avaliação a uma IA e peça que critique as variáveis esquecidas. O objetivo do experimento é descobrir **o que precisa ser medido antes de otimizar**, e não vencer um campeonato imaginário de eficiência.
+:::
+
+## O custo que não aparece no extrato
+
+Há também custos que não vêm numa fatura. Escrever uma skill que ninguém entende, manter um fluxo cuja execução não pode ser reproduzida, espalhar credenciais por arquivos de configuração, perder um manuscrito ao sobrescrever o Drive e publicar um desenho incorreto são despesas de manutenção, risco e confiança. Algumas serão mensuráveis com o tempo; outras exigirão julgamento humano. Nenhuma melhora porque o preço por milhão de tokens caiu.
+
+Queremos uma oficina que possa crescer sem deixar seus instrumentos atrás de si. O próximo desafio não é acrescentar mais um agente à coleção, mas aplicar o conjunto a trabalhos reais, com cada etapa observável. O livro nos ensinou a construir os medidores. Agora precisamos usá-los sem confundir uma coluna preenchida com conhecimento suficiente. **Medir é a forma mais prática de continuar humilde diante de uma máquina muito convincente.**

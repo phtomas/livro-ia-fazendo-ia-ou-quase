@@ -62,3 +62,10 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - **Capítulo 13:** esquema de I/O da ferramenta: duas árvores → hashes → diferenças → relatório → decisão humana, explicitando que não há sincronização.
 - **Capítulo 14:** fluxograma dos portões identificar → comparar → decidir → aplicar → comprovar, mostrando GitHub, Drive e Quarto em camadas distintas.
 - Não desenhar as figuras nesta primeira passada; fonte e legenda deverão ser revisadas pelo autor na rodada visual.
+
+
+## Sugestões da v1.2 — segunda passada
+
+- **Capítulo 15:** quadro comparativo das cinco famílias, com faixas de estado `DOCUMENTADO → PROPOSTO → TESTADO`, sem estrelas nem nota fictícia.
+- **Capítulo 16:** arquitetura da medição — tarefa identificada → registro de execução → tokens relatados → tarifa datada → estimativa e gate humano; usar somente casos sintéticos rotulados até obter logs reais.
+- **Falhas de PDF:** preservar fixtures existentes e acrescentar inspeção ampla quando abrirmos a segunda passada, sem pressupor quais erros o autor observou.

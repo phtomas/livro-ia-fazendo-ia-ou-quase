@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "origin": "LOCAL_DECLARED_RECORDS_NOT_PROVIDER_AUDIT",
+  "rates_unit": "USD_per_1M_tokens",
+  "rate_card_label": "FICTICIO — preços inventados apenas para demonstrar aritmética",
+  "input_sha256": "7916a3a22cec0616904e629b94a5acc8fae5bffdae28aa81cc8cbf21050006bc",
+  "records": [
+    {
+      "run_id": "SINT-001",
+      "kind": "deterministic",
+      "domain": "livro",
+      "model_requested": null,
+      "model_effective_observed": null,
+      "model_identification": "UNKNOWN",
+      "usage_reported_in_record": false,
+      "input_tokens": null,
+      "cached_input_tokens": null,
+      "output_tokens": null,
+      "model_estimate_usd": null,
+      "tool_cost_declared_usd": "0",
+      "total_estimate_usd": null,
+      "result_claim": "PASS_LOCAL",
+      "evidence_ref_claim": "exemplo-ficticio-001"
+    },
+    {
+      "run_id": "SINT-002",
+      "kind": "model_call",
+      "domain": "livro",
+      "model_requested": "modelo-lab-A",
+      "model_effective_observed": "modelo-lab-A",
+      "model_identification": "REPORTED_BY_PROVIDER",
+      "usage_reported_in_record": true,
+      "input_tokens": 8000,
+      "cached_input_tokens": 2000,
+      "output_tokens": 1000,
+      "model_estimate_usd": "0.0104",
+      "tool_cost_declared_usd": "0",
+      "total_estimate_usd": "0.0104",
+      "result_claim": "PENDING_HUMAN_REVIEW",
+      "evidence_ref_claim": "exemplo-ficticio-002"
+    },
+    {
+      "run_id": "SINT-003",
+      "kind": "model_call",
+      "domain": "hardware",
+      "model_requested": "modelo-lab-B",
+      "model_effective_observed": null,
+      "model_identification": "UNKNOWN",
+      "usage_reported_in_record": false,
+      "input_tokens": null,
+      "cached_input_tokens": null,
+      "output_tokens": null,
+      "model_estimate_usd": null,
+      "tool_cost_declared_usd": null,
+      "total_estimate_usd": null,
+      "result_claim": "UNKNOWN",
+      "evidence_ref_claim": null
+    }
+  ],
+  "warnings": [
+    "Esta ferramenta não confirma se chamadas de IA ocorreram, nem autentica logs.",
+    "Modelo efetivo só aparece se reportado por provider_response no registro declarado.",
+    "Tarifas fictícias: estimativas não representam fatura real.",
+    "Campos null significam desconhecido, jamais custo zero.",
+    "Claims de qualidade e evidência não são verificados independentemente."
+  ]
+}

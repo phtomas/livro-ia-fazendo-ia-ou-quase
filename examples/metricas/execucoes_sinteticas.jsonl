@@ -1,0 +1,3 @@
+{"run_id":"SINT-001","kind":"deterministic","domain":"livro","result_claim":"PASS_LOCAL","evidence_ref":"exemplo-ficticio-001","tool_cost_usd":"0"}
+{"run_id":"SINT-002","kind":"model_call","domain":"livro","model_requested":"modelo-lab-A","model_effective_reported":"modelo-lab-A","model_id_source":"provider_response","reported_usage":{"input_tokens":8000,"cached_input_tokens":2000,"output_tokens":1000},"tool_cost_usd":"0","result_claim":"PENDING_HUMAN_REVIEW","evidence_ref":"exemplo-ficticio-002"}
+{"run_id":"SINT-003","kind":"model_call","domain":"hardware","model_requested":"modelo-lab-B","model_effective_reported":null,"reported_usage":null,"tool_cost_usd":null,"result_claim":"UNKNOWN","evidence_ref":null}

@@ -88,3 +88,13 @@ A regra continua: um teste executado prova a operação e o critério testado, n
 | Auditoria de divergências | `--canon` / `--espelho` / `--report` | **TESTADA** | Resultado `RECONCILIACAO_PENDENTE` exige decisão externa; sem linha-base não infere direção |
 
 **Estado global da oficina:** componentes determinísticos testados sob condições limitadas; agente LLM remoto, sincronização bidirecional automática e revisão humana final não comprovados. A nova ocorrência editorial observada pelo autor permanece sem localização declarada.
+
+
+## Atualização v1.2 — orquestração e medição
+
+| Peça | Local | Estado | Não comprova |
+| --- | --- | --- | --- |
+| Contrato de migração de frameworks | `docs/CONTRATO_AVALIACAO_FRAMEWORKS.md` | DOCUMENTADO | Execução de framework externo |
+| Ferramenta de registros | `tools/observabilidade/resumir_execucoes.py` | TESTES LOCAIS A CONFERIR | Cobrança real, chamada de IA ou origem autêntica do log |
+| Dados sintéticos | `examples/metricas/` | FICTÍCIOS por definição | Modelo usado em serviços reais |
+| Capítulos 15–16 | `chapters/15-*`, `chapters/16-*` | PRIMEIRA PASSADA | Aprovação autoral e gráfica |
