@@ -51,3 +51,15 @@
 - Plano da segunda passada visual em docs/PLANO_VISUAL_SEGUNDA_PASSADA.md; figuras e dados ainda não gerados.
 - Preview com Pandoc e PDF scrreprt; fonte canônica Quarto com `number-sections`, `number-depth` e `toc-depth`; compilação Quarto nativa ainda pendente.
 - Falta revisão autoral do texto; não chamar o capítulo de aprovado por teste estrutural.
+
+## Rodada v0.7 — voz autoral e os primeiros componentes reutilizáveis
+
+- Capítulo 6 redigido em primeira passada, com comparação concreta entre livro, jogo e hardware, um box de uso da IA e um experimento autônomo do leitor. **Ainda não revisado pelo autor**.
+- Uma skill candidata foi empacotada em `skills/revisao-autoral/SKILL.md` segundo a especificação Agent Skills. **Não instalada nem avaliada num runtime de agentes**.
+- A ferramenta `tools/editorial/verificar_pdf_boxes.py` executa checagem geométrica de texto monoespaçado que transborda quadros claros em PDF. Sua capacidade é limitada a esse tipo de artefato; não é um verificador de toda a diagramação.
+- Dois testes unitários sintéticos (um PASS_LIMITED, um FAIL) executados. O PDF v0.6, página 59, reproduziu a condição conhecida com seis spans fora do limite; o documento fonte e o PDF v0.6 não foram corrigidos.
+- `workflows/auditoria_editorial.py` encadeia validações sem LLM, sem alteração ao manuscrito, e produz relatórios; resultado da linha de base PDF esperado é PARTIAL_KNOWN_FAIL.
+- Arquivo `agents/orquestrador-editorial.md` contém **apenas projeto de arquitetura**, não implementação.
+- Matriz livro × jogo × hardware registrada em `docs/MATRIZ_LIVRO_JOGO_HARDWARE.md`, sem modificações retroativas nos capítulos 1 a 5.
+- Documentos em `docs/` distinguem baseline conhecido e status dos componentes.
+- Quarto nativo ainda não foi renderizado neste ambiente; as provas Pandoc são prévias, não miolo aprovado.

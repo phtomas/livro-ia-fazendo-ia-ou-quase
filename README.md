@@ -79,3 +79,23 @@ A pauta `docs/TOKENS_ROTEAMENTO_E_CUSTOS.md` foi acrescentada ao planejamento, *
 - O plano de figuras e fluxogramas está em `docs/PLANO_VISUAL_SEGUNDA_PASSADA.md`; produzir imagens úteis e auditáveis na segunda revisão, não imagens decorativas.
 - Os boxes de uso da IA e os experimentos do leitor permanecem distintos. Testar scripts e revisar visualmente as páginas.
 - GitHub remoto já existe e é público; substituir notas antigas sobre inexistência por este estado; a licença editorial está pendente de decisão autoral.
+
+## Rodada v0.7 — produzir, não apenas descrever
+
+O Capítulo 6 foi incluído na primeira passada editorial: voz autoral e como ela se traduz em **livro**, **jogo** e **hardware**. O capítulo contém um box `NA PRÁTICA COM A IA` e um `EXPERIMENTO DO LEITOR` autônomo. Sua aprovação editorial continua pendente.
+
+Nesta rodada acrescentamos uma **skill candidata** em `skills/revisao-autoral/`, duas **tools determinísticas** em `tools/`, um **workflow executável** em `workflows/`, a **arquitetura (não implementação)** de um agente em `agents/` e uma matriz comparativa em `docs/MATRIZ_LIVRO_JOGO_HARDWARE.md`. O estado preciso de cada peça está no [inventário](docs/INVENTARIO_DE_ARTEFATOS.md).
+
+**Linha de base conhecida:** a página 59 do PDF de leitura v0.6 apresenta linhas de código saindo do retângulo. Foi preservada, conforme decisão do autor. O detector identifica esse erro e registra `FAIL`, sem alterá-lo. O workflow declara `PARTIAL_KNOWN_FAIL`, não um PASS editorial. Confira `docs/CASES_DE_REGRESSAO.md`.
+
+Para executar as verificações locais, com Python 3.11+ e PyMuPDF instalado:
+
+```sh
+python -m unittest discover -s tests -p 'test_*.py' -v
+python scripts/verificar_boxes.py
+python scripts/verificar_estrutura.py
+python tools/editorial/verificar_pdf_boxes.py /caminho/para/a/previa_v0.6.pdf --page 59
+python workflows/auditoria_editorial.py . --pdf /caminho/para/a/previa_v0.6.pdf --pdf-page 59 --report dist/auditoria.json
+```
+
+Nenhuma dessas operações chama API de IA, escreve no manuscrito ou publica no GitHub. A skill ainda precisa ser testada no ambiente do agente escolhido, e o agente descrito no diretório `agents/` não existe como programa funcional.

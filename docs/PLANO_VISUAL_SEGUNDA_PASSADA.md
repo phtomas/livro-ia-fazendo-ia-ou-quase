@@ -30,3 +30,9 @@
 Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Mermaid, DOT ou SVG editável, conforme o caso). Cada imagem deve ter um identificador estável, legenda e referência no corpo. Criar uma suíte de regressão de PDFs que verifica margens e detecta quebras indesejadas na diagramação.
 
 **Status:** nenhum gráfico de dados foi inventado ou aprovado nesta primeira passada. O roadmap deve ser revisitado antes da terceira rodada de capítulos e no início da fase visual.
+
+## Revisão v0.7 — gráficos vinculados aos artefatos reais
+
+- Capítulo 6: diagrama em três camadas **modelo/skill/tool**, com uma faixa de aprovação humana e três saídas específicas (livro, jogo, hardware). Ainda não desenhado.
+- Capítulos 2–5: fluxograma de seleção sem IA → script → modelo pequeno → agente, com custo e provas **sem dados inventados**. Ainda não desenhado.
+- A página 59 do PDF v0.6 é um caso de comparação antes/depois **reservado para uma rodada futura**, não uma licença para corrigir silenciosamente o exemplo. Há seis trechos monoespaçados fora do retângulo no diagnóstico inicial. A aprovação dependerá de inspeção visual.

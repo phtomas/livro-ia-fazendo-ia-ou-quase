@@ -24,6 +24,7 @@ book:
     - chapters/03-por-dentro-do-agente.qmd
     - chapters/04-quando-criar-um-agente.qmd
     - chapters/05-provas-custos-e-seguranca.qmd
+    - chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

@@ -1,0 +1,113 @@
+# A voz que a ferramenta não deve apagar
+
+## A página estava correta. O autor, não.
+
+Há um tipo de erro que não aparece no compilador, não acende uma luz vermelha no teste de regressão e pode até receber elogios numa revisão apressada. O texto está correto, as frases são fluidas, os subtítulos parecem bem distribuídos. Ainda assim, quem escreveu a obra olha para aquela página e não se reconhece nela.
+
+Já vimos algo semelhante acontecer enquanto trabalhávamos no Manual Técnico do TK90X. Ao transformar registros de investigação em narrativa, precisamos tomar decisões que um corretor ortográfico não toma: quando explicar um princípio elétrico antes de apontar o componente; quando interromper a leitura para mostrar um risco; como separar aquilo que a documentação afirma daquilo que nossa bancada efetivamente mediu. Uma revisão pode acertar todos os acentos e errar precisamente essas escolhas. O resultado parece técnico, mas perde o ritmo de quem está convidando o leitor a abrir uma máquina e compreender seu funcionamento.
+
+No livro que você tem nas mãos, o aviso chegou por um caminho ainda mais curioso. Nós corrigimos uma tabela apertada, destacamos um parágrafo importante e padronizamos referências. A apresentação melhorou. Mas esquecemos um elemento que já se tornara nossa marca: os boxes **NA PRÁTICA COM A IA**. A primeira correção recuperou esses boxes. Veio então outra observação do autor: no *IA fazendo jogos*, havia algo diferente, e igualmente precioso — **o experimento do leitor**, um convite a investigar por conta própria, não apenas a repetir um prompt. O segundo recurso ganhou seu próprio formato e sua própria cor.
+
+Esse episódio ilustra o problema central deste capítulo. **A voz de um livro não é somente a escolha das palavras; é também a maneira como conduzimos o aprendizado.** Preservar a primeira sem preservar a segunda seria guardar a aparência e descartar o método.
+
+## Estilo não é uma ordem para imitar adjetivos
+
+Quando pedimos a uma IA que escreva “no meu estilo”, entregamos uma instrução muito menos precisa do que parece. O modelo pode tomar como referência palavras frequentes, tamanho de frases ou grau de formalidade. Mas o que nos interessa talvez seja outra coisa: começar por uma dúvida concreta, construir a explicação sem paternalismo, não repetir ressalvas que já foram resolvidas, usar um exemplo de bancada quando ele realmente esclarece e terminar cada trecho abrindo a próxima pergunta.
+
+Não queremos uma caricatura do autor, nem um texto em que toda frase receba o mesmo tempero. Uma boa voz suporta mudanças de andamento. Um capítulo sobre história pode ser mais narrativo; um procedimento de medição precisa ser mais direto; um box de segurança deve interromper a leitura sem pedir licença. A unidade da obra vem das decisões que atravessam esses formatos, não da obrigação de que todos soem idênticos.
+
+Por isso vamos separar quatro camadas que costumam ser colocadas no mesmo saco.
+
+**A camada narrativa** responde a como conversamos com o leitor. Começamos pela consequência de um problema ou pela definição formal? Apresentamos os tropeços como parte da descoberta ou apenas os enumeramos? Em que momento cabe uma frase leve — e em que momento ela atrapalha?
+
+**A camada técnica e editorial** conserva aquilo que não pode mudar por gosto: nomenclatura, grandezas, versões de placa, referências, títulos, legendas e fonte documental. Num manual, trocar o nome de um sinal por uma expressão “mais elegante” pode destruir a precisão. Num livro sobre IA, misturar um identificador de modelo solicitado com o modelo realmente executado pode produzir uma conclusão falsa.
+
+**A camada operacional** determina como o trabalho avança. O capítulo deve conter um box de uso da IA quando houver prática pertinente? Precisa convidar o leitor a uma investigação autônoma? Uma modificação de capítulo exige comparação com a versão anterior? Aqui o estilo se transforma em contrato e em sequência de trabalho.
+
+**A camada dos limites** responde à pergunta mais importante: até onde podemos mexer? Corrigir concordância não autoriza inventar uma medição, alterar uma conclusão histórica, substituir uma citação, acrescentar material de terceiros sem crédito ou redesenhar uma ligação elétrica que nunca conferimos. Nem toda sugestão boa deve ser aplicada automaticamente.
+
+A ferramenta pode aprender a respeitar essas camadas, mas precisamos torná-las observáveis. “Deixe bonito” não define onde ela deve parar.
+
+## Os exemplos que ensinam mais do que um adjetivo
+
+Imagine que selecionamos três passagens do mesmo autor. A primeira abre um capítulo explicando por que determinada peça existe. A segunda conduz uma investigação com valores medidos e ressalvas proporcionais. A terceira convida o leitor a realizar um pequeno teste. Em vez de pedir que a IA invente uma teoria sobre nossa escrita, podemos perguntar **quais escolhas aparecem repetidamente nos três exemplos**.
+
+A resposta inicial será uma hipótese. Talvez ela identifique que gostamos de frases curtas, mas isso não explica a forma de raciocinar. Talvez confunda entusiasmo com excesso de exclamações. É aqui que entra a curadoria humana: selecionamos quais observações são de fato características da nossa obra, rejeitamos o que é acidental e distinguimos preferências de obrigações.
+
+Um bom perfil de voz precisa incluir também exemplos de **como não escrever**. Entre “não soar como relatório” e um parágrafo corrigido lado a lado com o original, o par comparativo costuma ser muito mais instrutivo. Podemos indicar: neste trecho o texto introduziu uma dúvida já encerrada; aqui trocou um fato por uma hipótese; aqui criou um subtítulo que quebrou o ritmo; aqui mexeu numa frase cuja simplicidade era deliberada.
+
+Há uma consequência prática. Nosso perfil de voz não pode nascer com a etiqueta **APROVADO** apenas porque conseguimos preencher um arquivo Markdown. A primeira versão será uma hipótese construída com exemplos. Ela só se tornará referência canônica quando o autor reconhecer nela seu método e quando novas revisões preservarem, em vez de deformarem, os textos já aceitos.
+
+## A mesma espinha, três oficinas diferentes
+
+Talvez este seja o ponto mais útil para quem pretende levar uma skill ou um agente de um projeto para outro. A estrutura do método continua; **o contrato específico muda**.
+
+Num **livro técnico**, a unidade de trabalho é uma explicação que atravessa várias páginas. Precisamos preservar a voz, a sequência didática, a coerência das legendas e os vínculos entre afirmações, esquemas e referências. Um capítulo sem figura pode estar perfeito; uma figura bonita com ligação errada não está. O revisor deve entregar texto comparado, pendências identificadas e um motivo explícito para cada alteração sensível.
+
+Na **criação de um jogo**, preservar a voz não significa necessariamente conservar a prosa. A voz do jogo aparece na fantasia, no ritmo, na sensação dos controles, nos efeitos e na identidade de seus personagens. Uma IA pode melhorar a organização de um código e, ao mesmo tempo, mudar a dificuldade ou eliminar o pequeno intervalo que tornava uma colisão compreensível. O contrato de fidelidade precisa pedir uma build anterior, cenas de referência, critérios de jogabilidade e comparação do que o jogador percebe. O equivalente de uma legenda órfã pode ser um som que dispara sem a animação correspondente.
+
+No **desenvolvimento de hardware**, a voz pessoal pode orientar a maneira de documentar, mas não vota sobre a eletricidade. Esquemático, revisão física, pinagem, temporização, faixa de tensão e resultados de medição são a referência. Uma mudança no desenho que deixe o circuito mais simétrico visualmente não pode alterar conexões. Um agente de documentação deve separar descrição elegante de ligação comprovada. Onde faltou bancada, o texto declara o limite; não o esconde sob confiança verbal.
+
+Repare que não criamos três métodos incompatíveis. Continuamos exigindo contexto, evidência, mudança mínima, comparação, teste e aprovação. Mudamos aquilo que conta como **fidelidade ao original** e os instrumentos capazes de observá-la. Esse é o sentido de transportar um método, em vez de copiar instruções sem olhar para o problema.
+
+## Uma skill não é a instalação de uma memória mágica
+
+Agora podemos dar forma à primeira habilidade reutilizável deste livro. No repositório, começaremos com uma pasta de skill que contém um `SKILL.md`, orientações e arquivos de apoio. O formato permite descrever quando usar o procedimento, quais fontes consultar, como produzir uma proposta de revisão e onde exigir aprovação. Em ambientes que aceitam esse padrão, a pasta poderá ser instalada ou referenciada segundo as regras de cada ferramenta [@agentskillspec2026].
+
+O ponto de partida será modesto: **uma skill de revisão autoral**, não um agente que reescreve livros inteiros sozinho. Ela receberá um documento de referência, um trecho a revisar, a descrição do tipo de material — livro, jogo ou hardware — e um limite de escopo. Sua saída deverá separar proposta textual, mudanças feitas, dúvidas técnicas e decisões pendentes.
+
+A primeira versão da skill é um **artefato versionado**, mas isso ainda não prova que ela produz revisões melhores. Para provar, teremos de usá-la em textos de teste, comparar com uma revisão sem o contrato e pedir ao autor que avalie o resultado. Um script consegue contar boxes; não consegue sentir, com a mesma autoridade do autor, se uma passagem preservou a maneira de contar a história.
+
+### O que já podemos executar sem modelo
+
+Algumas partes dessa oficina são rigorosamente mecânicas. Podemos verificar se cada capítulo tem título, se as seções estão numeradas na fonte de publicação, se determinados boxes estão presentes ou se o PDF contém texto que ultrapassa a área de um quadro. Não faz sentido gastar tokens para descobrir algo que o próprio arquivo informa com precisão.
+
+Foi assim que transformamos um detalhe apontado pelo autor em **caso de teste**. Na prévia v0.6, página 59, linhas do exemplo Python saem da caixa e avançam além da margem útil. A página não será corrigida por enquanto. Ela será o nosso controle positivo: um verificador de diagramação deve encontrá-la e registrar um **FAIL**, preservando a evidência. Se uma versão futura disser PASS sem corrigir ou justificar o defeito, o instrumento estará errado — ou olhando para o lugar errado.
+
+A fotografia de um problema editorial, por si só, não conserta o livro. Mas é a diferença entre discutir uma impressão vaga e possuir uma condição reprodutível. A partir daí podemos experimentar diminuir a fonte do código, quebrar linhas, reformular o exemplo ou mudar sua apresentação — **uma alteração por vez, sem reescrever o texto ao redor**. Só depois compararemos o novo PDF com o anterior. A melhoria terá de vencer a prova, não apenas parecer melhor.
+
+## Na prática: transformar uma preferência em contrato
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Construindo uma regra de voz que possa ser auditada**
+
+**O que testar.** Investigar se a IA consegue identificar preferências recorrentes de escrita sem transformá-las automaticamente em leis e sem alterar fatos técnicos.
+
+**Como proceder.** Escolha dois trechos de sua autoria que você considera bons e uma terceira passagem que gostaria de revisar. Remova dados pessoais e segredos. Faça o pedido em uma sessão nova; nesta rodada, não autorize escrita em nenhum arquivo original.
+
+**Prompt que usaríamos hoje**
+
+> Você receberá dois textos de referência escritos por mim e um terceiro texto para avaliação. Primeiro, identifique até cinco decisões narrativas ou didáticas recorrentes nos exemplos, citando passagens que as sustentem. Separe **observação**, **hipótese** e **regra ainda não aprovada**. Não imite erros acidentais nem invente preferências. Em seguida, proponha apenas mudanças de clareza e coesão no terceiro texto, preservando fatos, valores, fontes e meu ponto de vista. Mostre um comparativo antes/depois e explique o motivo de cada mudança significativa. Não altere arquivos. Qualquer mudança de conteúdo técnico deve ser indicada como dúvida para decisão humana, não aplicada automaticamente.
+
+**Por que funciona.** Os exemplos ancoram a análise num material concreto, o limite de cinco observações evita listas genéricas e o comparativo deixa visível aquilo que o modelo pretende mudar. Nada disso garante fidelidade; cria um modo mais fácil de detectar quando ela foi perdida.
+
+**Como verificar.** Confira se cada regra sugerida aparece de fato nos textos de referência. Leia as versões lado a lado. Marque o que melhorou, o que mudou de sentido e o que permanece discutível. Uma regra só entra no perfil canônico depois de aprovação do autor e de uma nova experiência em outro trecho.
+:::
+
+O teste não exige assinatura de uma API nem instalação de biblioteca. Se o modelo não tiver acesso a arquivos, basta colar trechos curtos. É até desejável começar assim: menos permissões, menos variáveis e nenhum risco de ele substituir um capítulo aprovado por uma versão que você não pediu.
+
+## O experimento que deve acontecer antes da ferramenta
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Quando uma melhoria apaga a identidade**
+
+Pense numa explicação que você gosta de dar. Pode ser sobre uma máquina, uma regra de jogo, uma receita, uma ferramenta que utiliza no trabalho. Escreva um parágrafo como contaria a alguém curioso que está sentado ao seu lado.
+
+Agora prepare, **sem usar IA**, uma segunda versão mais impessoal, como se fosse um aviso burocrático. Tente conservar os mesmos fatos. Peça a duas pessoas que leiam os textos sem dizer qual você prefere. Qual delas lhes ensinou melhor? Qual pareceu mais confiável? Elas chegaram à mesma conclusão?
+
+Observe as razões, não apenas os votos. Talvez a versão formal tenha servido melhor a uma instrução de segurança; talvez a versão conversada tenha explicado melhor o funcionamento. Tente descobrir **que função cada voz cumpriu**, em vez de declarar que uma delas é universalmente superior.
+
+Por fim, imagine transportar o mesmo conteúdo para um manual técnico, para as instruções de um jogo e para a documentação de uma placa. O que você conservaria? O que precisaria mudar? Registre suas respostas antes de pedir opinião a qualquer modelo.
+:::
+
+## Os limites que não negociaremos na próxima revisão
+
+Há ainda uma diferença entre **instruir** um sistema e **dar a ele autorização para agir**. Uma skill de revisão pode sugerir alterações; isso não lhe concede permissão para publicar, excluir capítulos, atualizar o GitHub ou substituir um arquivo do TK2000. Um workflow poderá executar testes em modo de leitura e produzir relatórios sem precisar desse poder. Só quando tivermos resultados estáveis e uma etapa explícita de aprovação começaremos a considerar operações com escrita.
+
+É tentador terminar este capítulo anunciando que construímos um editor autônomo. Não construímos. Temos o começo de um sistema: uma habilidade formalizada, verificadores determinísticos, um contrato de aprovação e uma fila de casos reais. A parte mais difícil — provar que as propostas respeitam o autor — continuará exigindo leituras, comparações e ajustes.
+
+Quando isso estiver sólido, poderemos ensinar um agente a escolher o procedimento adequado: revisão de voz para a narrativa, inspeção de margens para o PDF, auditoria de fontes para uma afirmação técnica e encaminhamento humano para uma dúvida sem prova. Até lá, a melhor autonomia talvez seja saber **o momento exato de não prosseguir**.
+
+O próximo passo será conhecer os ambientes em que essas peças podem trabalhar. A tecnologia muda depressa. O contrato que acabamos de construir precisa sobreviver a essa mudança — e continuar fazendo sentido quando trocarmos o livro por um jogo ou por uma placa sobre a bancada.

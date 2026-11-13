@@ -1,0 +1,97 @@
+{
+  "workflow": "auditoria_editorial.py",
+  "versao": "0.1",
+  "timestamp_utc": "2026-11-13T20:30:46.468449+00:00",
+  "root": ".",
+  "usa_llm": false,
+  "modifica_manuscrito": false,
+  "checks": [
+    {
+      "script": "scripts/verificar_boxes.py",
+      "exit_code": 0,
+      "output": "PASS chapters/01-um-livro-que-aprende.qmd experimento 1: marcador explícito presente\nPASS chapters/01-um-livro-que-aprende.qmd box 1: 6 marcadores estruturais presentes\nPASS chapters/01-um-livro-que-aprende.qmd box 2: 6 marcadores estruturais presentes\nPASS chapters/02-nomes-e-contratos.qmd experimento 1: marcador explícito presente\nPASS chapters/02-nomes-e-contratos.qmd box 1: 6 marcadores estruturais presentes\nPASS chapters/03-por-dentro-do-agente.qmd experimento 1: marcador explícito presente\nPASS chapters/03-por-dentro-do-agente.qmd box 1: 6 marcadores estruturais presentes\nPASS chapters/04-quando-criar-um-agente.qmd experimento 1: marcador explícito presente\nPASS chapters/04-quando-criar-um-agente.qmd box 1: 6 marcadores estruturais presentes\nPASS chapters/05-provas-custos-e-seguranca.qmd experimento 1: marcador explícito presente\nPASS chapters/05-provas-custos-e-seguranca.qmd box 1: 6 marcadores estruturais presentes\nPASS chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd experimento 1: marcador explícito presente\nPASS chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd box 1: 6 marcadores estruturais presentes\nExperimentos do leitor encontrados: 6\nAVISO: BOX COM IA e EXPERIMENTO DO LEITOR são recursos didáticos DIFERENTES. PASS estrutural não comprova conteúdo nem diagramação.\n",
+      "stderr": "",
+      "status": "PASS_STRUCTURE"
+    },
+    {
+      "script": "scripts/verificar_estrutura.py",
+      "exit_code": 0,
+      "output": "PASS: 6 capítulos com numeração automática; apresentação, anexos e referências não numerados\nNOTA: checagem estrutural não substitui Quarto nem paginação.\n",
+      "stderr": "",
+      "status": "PASS_STRUCTURE"
+    }
+  ],
+  "sha256_qmd": {
+    "chapters/01-um-livro-que-aprende.qmd": "151e844772c28dced803bbc70358c912d2dabd6655084e55f7ff9c737ae307d5",
+    "chapters/02-nomes-e-contratos.qmd": "eb57d7584c89a80d6fd725636f3ca30044294d296889e4051324df4ec4c87c5f",
+    "chapters/03-por-dentro-do-agente.qmd": "12581168aaf21b120d09db786540afb4f6cde1b03ff575569eb94150d1cb1473",
+    "chapters/04-quando-criar-um-agente.qmd": "fe877ae6a95f20eb13d9183917530f9f794b2d9e3b959e035814a2fd2d9bb9ee",
+    "chapters/05-provas-custos-e-seguranca.qmd": "f66ffb1ee7e82b22bdff11530bc6ebab3c92711a67b9c65ff857d7820a317603",
+    "chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd": "17e1d897b16c7ae3e1c67db6b8f9b7ddf0e211cc83ad1d3949eba6efab914927"
+  },
+  "pdf": {
+    "pdf": "IA_fazendo_IA_Capitulos_1_a_5_v0.6.pdf (baseline externa, preservada)",
+    "tool": "verificar_pdf_boxes.py",
+    "pages_inspected": [
+      59
+    ],
+    "light_boxes_inspected": 1,
+    "issue_count": 6,
+    "findings": [
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": ", encoding",
+        "right_edge_pt": 403.87,
+        "box_right_pt": 393.47,
+        "over_pt": 10.39
+      },
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": ", encoding",
+        "right_edge_pt": 409.11,
+        "box_right_pt": 393.47,
+        "over_pt": 15.63
+      },
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": "sha256(copia.read_byt",
+        "right_edge_pt": 456.18,
+        "box_right_pt": 393.47,
+        "over_pt": 62.71
+      },
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": "name",
+        "right_edge_pt": 403.88,
+        "box_right_pt": 393.47,
+        "over_pt": 10.4
+      },
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": "(p.name",
+        "right_edge_pt": 409.11,
+        "box_right_pt": 393.47,
+        "over_pt": 15.63
+      },
+      {
+        "page": 59,
+        "kind": "CODE_OVERFLOW_RIGHT",
+        "text": "\"PASS: nomes e conteúdo conferidos na pasta temporária\"",
+        "right_edge_pt": 414.34,
+        "box_right_pt": 393.47,
+        "over_pt": 20.86
+      }
+    ],
+    "status": "FAIL",
+    "scope": "Apenas transbordamento geométrico de spans monoespaçados em quadros claros. PASS_LIMITED não garante página correta.",
+    "sha256": "54fc56e4904a068c15aeb3c040b4d51d3c334c4767152b7482018d93b438523e"
+  },
+  "status": "PARTIAL_KNOWN_FAIL",
+  "requires_human_approval": true,
+  "message": "PASS de estrutura não prova voz, precisão técnica ou aprovação para publicação. Falha do PDF mantém seu próprio estado FAIL."
+}
