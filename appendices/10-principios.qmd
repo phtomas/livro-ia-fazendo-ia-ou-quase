@@ -1,0 +1,72 @@
+# Anexo A — Os dez princípios canônicos {.unnumbered}
+
+## O método nasceu antes do manual
+
+Quando uma solução se repete, pode virar técnica. Quando um erro se repete, talvez esteja pedindo uma regra. Nossa história com inteligência artificial reuniu os dois casos. Nas primeiras experiências com hardware, jogos e documentação, as orientações estavam dispersas em conversas, mensagens e decisões de bancada. Com o tempo, começamos a registrar o que não queríamos esquecer.
+
+Os registros do projeto ToK'ra chegaram a reunir regras específicas de engenharia e princípios mais amplos. Era útil distinguir as duas coisas: um mandamento sobre clocks de FPGA não serve, literalmente, para revisar um livro; já a obrigação de medir e documentar pode acompanhar qualquer projeto. Dessa organização surgiu o **Códex do Método**, consolidado em uma lista de dez princípios universais. O documento original reconhece a colaboração humana e a co-curadoria por IA; aqui preservamos sua história sem transformar a lista em uma verdade aplicável sem reflexão a qualquer pessoa [@codexmetodo2026].
+
+O primeiro princípio manteve um nome que parece uma contradição: **P1 · P14 histórico**. O antigo P14, Honestidade acima de tudo, foi colocado na primeira posição por sua importância, mas conservou seu codinome como lembrança de uma regra que sobreviveu às mudanças de projeto. O P9 foi fixado na nona posição; o P10, *Simbiose e cuidado*, encerra a lista. Esta é a numeração dos dez princípios gerais; não deve ser confundida com os dezoito mandamentos técnicos da ToK'ra, que pertencem ao projeto e podem ser adaptados a outros contextos.
+
+## A lista que usamos
+
+**P1 · P14 histórico — Honestidade acima de tudo.** Admitir incerteza, limite e erro. Nunca declarar que algo funcionou sem prova. A verdade vale mais que uma resposta agradável.
+
+**P2 — Rastrear o sinal da origem ao destino.** Seguir o problema até a causa, em vez de confundir sintomas com explicações. Uma hipótese orienta o próximo teste, não encerra a investigação.
+
+**P3 — Medir vence adivinhar.** Onde há meios de verificar, a realidade tem prioridade sobre o palpite: uma medição, um registro, um teste, uma fonte.
+
+**P4 — Decodificar o real antes de agir.** Ler primeiro o arquivo, a imagem, o circuito, o erro ou o dado que efetivamente existe. Não preencher lacunas com o que seria plausível.
+
+**P5 — Simplicidade é força.** Preferir a solução suficiente e sólida. Acrescentar complexidade somente quando seus benefícios forem demonstrados.
+
+**P6 — Isolar e fatiar.** Dividir o problema em etapas verificáveis; partir da base que funciona e acrescentar uma variável por vez.
+
+**P7 — Assertividade primeiro, velocidade depois.** O avanço confiável economiza o retrabalho de refazer depressa aquilo que nunca foi suficientemente testado.
+
+**P8 — Documentar para reproduzir.** Guardar decisões, procedimentos, resultados e versões fora da memória de uma conversa para que o trabalho possa ser retomado e auditado.
+
+**P9 — Não reinventar a roda.** Procurar soluções existentes, compreender por que foram feitas daquele modo e reaproveitar o validado, atribuindo o devido crédito.
+
+**P10 — Simbiose e cuidado.** Humanos e IA podem colaborar, aprender com a revisão mútua e dividir responsabilidades sem confundir execução automática com autoridade humana. Cuidar do processo e das pessoas faz parte do trabalho.
+
+Esta apresentação conserva os nomes canônicos do Códex, mas resume suas explicações em prosa própria para este livro. O registro integral permanece no acervo editorial do autor [@codexmetodo2026].
+
+## Como transformamos uma experiência em um princípio
+
+Não começamos perguntando quantos princípios teríamos. Primeiro apareceram situações recorrentes. Uma resposta convincente que não resistia à bancada lembrava a importância do P3. Uma alteração que quebrava o já validado exigia o P8. Um módulo que poderia ter sido reaproveitado, mas foi refeito do zero, mostrou o valor do P9. A lista amadureceu quando os problemas particulares passaram a apontar para modos de pensar que também funcionavam fora daquele projeto.
+
+Isso não significa que todos os princípios nasceram de uma única experiência, nem que a numeração nunca mudou. O Códex v2 registra uma consolidação de orientações anteriores, preservando o apelido histórico P14 e separando princípios universais das práticas operacionais. **A história do método é também uma história de revisão.**
+
+## Laboratório — Crie o seu próprio conjunto de princípios
+
+Não copie a nossa lista apenas porque ela ficou bonita impressa. Comece lembrando situações em que seu trabalho deu certo e outras em que você precisou voltar atrás. Anote três erros que não gostaria de repetir, três decisões que vale a pena preservar e o que poderia ter evitado cada problema.
+
+Depois, transforme essas observações em regras curtas, escritas com seus próprios termos. Para cada uma, responda a quatro perguntas:
+
+1. **De onde veio?** Uma experiência concreta, não apenas uma preferência.
+2. **O que orienta?** Uma decisão que pode ser tomada de maneira diferente.
+3. **Como verificar?** Um comportamento ou resultado observável.
+4. **Quando revisar?** Uma condição em que a regra pode estar errada ou ter perdido utilidade.
+
+Guarde o conjunto em um arquivo simples e datado, por exemplo `PRINCIPIOS_DO_PROJETO.md`. Faça um agente consultá-lo antes de uma tarefa pequena; depois, confira se ele obedeceu às regras relevantes. Caso tenha falhado, investigue se o problema estava no texto, no acesso ao arquivo, na interpretação ou no teste. Não acrescente dez novas regras para corrigir uma única palavra mal definida.
+
+Os princípios não devem servir como decoração moral nem como uma espécie de legislação imutável. São contratos úteis enquanto ajudam as pessoas a trabalhar melhor. O nosso conjunto ficará presente ao longo dos capítulos, mas o objetivo desta experiência é que cada leitor construa o seu.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência — Seus próprios princípios**
+
+**O que testar.** Formular regras próprias a partir de experiências reais, sem copiar nosso conjunto.
+
+**Como proceder.** Relate três situações, o que ocorreu e o que faria diferente. Retire dados pessoais ou sigilosos.
+
+**Prompt que usaríamos hoje**
+
+> Com base nestes relatos meus, proponha até três princípios. Para cada um, indique a experiência de origem, a decisão que orienta, o modo de verificar e quando revê-lo. Não invente situações e não copie princípios de outros projetos. Apresente tudo como sugestão, para minha aprovação.
+
+**Por que funciona.** Uma regra ligada a uma experiência e a um teste pode orientar escolhas futuras.
+
+**Como verificar.** Confira se cada princípio corresponde a um fato do relato. Se não corresponder, rejeite. Salve os princípios aprovados em um arquivo datado.
+:::

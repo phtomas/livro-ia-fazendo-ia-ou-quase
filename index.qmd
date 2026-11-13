@@ -1,0 +1,32 @@
+# Apresentação {.unnumbered}
+
+## Uma ideia que resolveu se multiplicar
+
+Há livros que começam com uma pergunta. Este começou com várias, e elas tinham o hábito inconveniente de aparecer justamente quando parecia que já havíamos encontrado uma resposta.
+
+A primeira era relativamente simples: como utilizar a inteligência artificial para desenvolver um projeto técnico sem transformar toda decisão em uma aposta na eloquência da máquina? Essa pergunta nos acompanhou em computadores antigos, placas eletrônicas, ferramentas de bancada, jogos e livros. A IA pesquisava, propunha, escrevia e ajudava a organizar. Nós levávamos as propostas ao encontro dos arquivos, dos programas, dos instrumentos e, quando necessário, da realidade menos diplomática de uma placa que insistia em não funcionar.
+
+Com o tempo, apareceu um segundo problema. A conversa se tornava cada vez mais produtiva, mas também mais comprida. Uma solução já descartada voltava pela janela. Uma regra editorial aprovada desaparecia no capítulo seguinte. Um programa que havia passado num teste deixava de passar depois de uma alteração aparentemente inocente. O que antes era uma boa conversa precisava se transformar num modo de trabalhar.
+
+Foi quando começamos a organizar instruções, papéis, procedimentos, ferramentas, registros de estado e critérios de aprovação. Não porque tivéssemos a ambição de criar um exército de agentes — isso seria um ótimo modo de complicar a vida antes mesmo de começar —, mas porque a mesma pergunta aparecia em projetos muito diferentes: **como fazer a IA colaborar de maneira consistente sem tomar para si decisões que continuam sendo nossas?**
+
+A ideia deste livro nasceu daí. Enquanto procurávamos uma maneira de ensinar agentes, skills, ferramentas e automações, percebemos que a própria escrita do livro seria um laboratório adequado. Seria possível criar um assistente para pesquisar referências, outro procedimento para revisar a voz do autor, uma ferramenta para conferir arquivos, um roteiro de publicação e testes para verificar o que cada etapa realmente fez. Mais adiante, poderíamos aplicar esses princípios à criação de jogos e a projetos de hardware. Se a organização funcionasse apenas para produzir textos sobre ela mesma, o resultado seria bem menos interessante.
+
+Aqui surge o *quase* do título. **IA fazendo IA — ou quase.** A inteligência artificial pode ajudar a projetar seus próprios instrumentos de trabalho, mas não transforma automaticamente uma sugestão em boa engenharia. Ela não substitui a responsabilidade do autor, a autorização de quem responde por um projeto, a verificação de uma fonte ou a prova de que alguma coisa funciona. O *quase* é um lembrete de que há trabalho humano e conhecimento acumulado por trás de cada resultado confiável.
+
+Este não será um catálogo de comandos para decorar. Comandos mudam, botões trocam de lugar e plataformas ganham nomes novos. Queremos compreender o suficiente para decidir quando uma conversa resolve o problema, quando vale guardar um procedimento numa skill, quando precisamos de uma ferramenta real e quando um agente pode receber alguma autonomia. Depois, sim, colocar a mão na massa — ainda que, em algumas etapas, a mão fique no teclado e o ferro de solda tire uma folga. :-)
+
+Também queremos que cada leitor encontre sua própria forma de trabalhar. Nossos livros carregam uma voz particular: gostam de contar o caminho, não apenas a chegada; preferem explicar uma medição a anunciar uma vitória; admitem humor onde ele não atrapalha a precisão. O leitor não precisa adotar essa voz. Precisa descobrir a sua e aprender a preservá-la mesmo quando a maior parte do texto, do código ou do trabalho operacional passar por uma IA.
+
+Há mais duas regras que merecem ficar claras desde o início. A primeira: não vamos apresentar como descoberta nossa aquilo que outras pessoas já construíram. Livros, cursos, artigos, comunidades e documentações anteriores são parte da história e receberão os créditos apropriados. A segunda: não chamaremos de concluído aquilo que não pudermos verificar. Um texto convincente não prova a correção de um circuito; um relatório bonito não prova a revisão de um livro; e um agente que diz ter executado dez tarefas talvez ainda precise mostrar os resultados de cada uma.
+
+Também carregamos dez princípios de trabalho que não nasceram de uma reunião para escolher frases de efeito. Foram sendo reconhecidos e formalizados ao longo de projetos reais. O leitor encontrará o conjunto completo em um anexo e, mais adiante, conhecerá a história de sua criação e um exercício para construir princípios próprios. O objetivo não é exigir que todos pensem como nós, mas mostrar como transformar experiência em critérios que possam orientar uma IA e, sobretudo, as nossas decisões.
+
+O material que acompanha esta obra será versionado para que exemplos, arquivos e complementos possam evoluir sem obrigar o leitor a descartar o livro a cada mudança de interface. Parte do conteúdo poderá ganhar entrevistas narradas, vídeos explicativos e demonstrações práticas. Esses recursos serão complementos, não substitutos da leitura nem desculpa para simplificar o que exige rigor.
+
+Ao final, esperamos ter conseguido algo mais valioso que ensinar uma lista de ferramentas. Queremos que você saiba construir um modo de trabalho próprio, que continue compreensível quando a plataforma mudar e que possa ser compartilhado com outras pessoas sem esconder de onde vieram as ideias.
+
+É nesse espírito que começamos: pesquisar o que já existe, experimentar o que faz sentido, atribuir corretamente as contribuições e melhorar juntos.
+
+> **Nosso compromisso:** nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçamos juntos.
+

@@ -1,0 +1,39 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: pt-BR
+bibliography: references.bib
+csl: estilo-referencias.csl
+link-citations: true
+filters:
+  - filters/boxes.lua
+
+book:
+  title: "IA fazendo IA — ou quase"
+  subtitle: "Agentes, skills e ferramentas: do livro ao jogo e ao hardware"
+  author: "Autoria a confirmar"
+  date: "2026-11-13"
+  chapters:
+    - index.qmd
+    - chapters/01-um-livro-que-aprende.qmd
+    - appendices/10-principios.qmd
+    - appendices/glossario.qmd
+    - references.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
+    css: styles.css
+  epub:
+    toc: true
+    css: styles.css
+  pdf:
+    toc: true
+    documentclass: scrreprt
+    include-in-header: pdf-preambulo.tex
+
+execute:
+  freeze: auto

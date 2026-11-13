@@ -1,0 +1,53 @@
+# Glossário de trabalho {.unnumbered}
+
+A cada capítulo aparecerão expressões que talvez sejam familiares para quem programa e estranhas para quem começou a usar uma IA há poucos dias. O glossário existe para evitar a armadilha das *buzzwords*: dar nome em inglês a algo não torna o assunto mais sofisticado. Estas são definições operacionais para o livro, não promessas de que todas as plataformas usarão os termos da mesma maneira.
+
+**Agente.** Sistema que recebe um objetivo e pode escolher, dentro de limites, algumas ações e ferramentas a partir do estado da tarefa. Autonomia de execução não equivale a autorização irrestrita.
+
+**API (Application Programming Interface).** Interface documentada para permitir que programas solicitem operações ou consultem dados de outro sistema.
+
+**Automação.** Execução programada ou disparada por condição. Pode ser totalmente determinística e nem sempre precisa de um agente de IA.
+
+**Checkpoint.** Ponto de conferência em que se registram estado, evidências e, quando necessário, aprovação antes de prosseguir.
+
+**CLI (Command-Line Interface).** Ferramenta utilizada por comandos digitados num terminal, como um programa chamado a partir do Windows PowerShell.
+
+**Conector.** Integração que permite uma ferramenta acessar recursos de outro serviço, dentro de permissões específicas.
+
+**Contexto.** Informações disponíveis ao modelo numa tarefa: instruções, conversa, arquivos, resultados de ferramentas e outros elementos fornecidos naquele momento.
+
+**Critério de aceite.** Condição explícita que permite verificar se um resultado satisfaz uma tarefa. Não é sinônimo de a IA dizer que terminou.
+
+**Evals (avaliações).** Conjunto de testes e critérios para comparar a qualidade ou confiabilidade de saídas de um sistema de IA.
+
+**Git.** Sistema de controle de versões que registra mudanças em arquivos e permite comparar, revisar e recuperar estados anteriores.
+
+**GitHub.** Serviço de hospedagem e colaboração em repositórios Git. Git e GitHub não são a mesma coisa.
+
+**Guardrail.** Limite ou verificação que tenta impedir ações ou saídas inadequadas; sua eficácia precisa ser testada, não presumida.
+
+**Handoff.** Transferência organizada de uma tarefa ou de contexto entre pessoas, agentes ou sessões.
+
+**LangGraph.** Biblioteca para organizar aplicações de IA por estados, nós e transições, incluindo ciclos e interrupções controladas.
+
+**MCP (Model Context Protocol).** Protocolo usado para oferecer recursos, ferramentas e interações de contexto a aplicações compatíveis.
+
+**Modelo de linguagem (LLM).** Sistema treinado para processar e gerar linguagem, entre outras modalidades; sua capacidade de produzir texto plausível não garante precisão factual.
+
+**Prompt.** Instrução ou entrada apresentada ao modelo para orientar uma tarefa. Seu efeito depende também do contexto e das permissões efetivas.
+
+**Quarto.** Sistema aberto de publicação que transforma arquivos-fonte estruturados em livros e outros documentos, em formatos como HTML, EPUB e PDF.
+
+**RAG (Retrieval-Augmented Generation).** Abordagem em que se recuperam informações relevantes de fontes externas para auxiliar a geração de respostas.
+
+**Skill.** Procedimento reutilizável, normalmente com instruções e recursos especializados, carregado quando uma tarefa justifica seu uso. O mecanismo exato varia conforme a plataforma.
+
+**Snapshot.** Registro conciso de um estado conhecido do projeto, usado para retomar o trabalho sem depender exclusivamente da memória de uma conversa.
+
+**Tool (ferramenta).** Capacidade executável, como uma função, API, programa, conector ou medidor automatizado, que realiza uma operação observável.
+
+**Workflow (fluxo de trabalho).** Sequência ou grafo de etapas e decisões predefinidas para produzir um resultado verificável.
+
+**Buzzword.** Palavra muito usada, às vezes de forma vaga, que pode encobrir uma distinção importante. Neste livro, o termo só será útil quando vier acompanhado de definição e exemplo.
+
+*Este glossário será ampliado durante a escrita, mantendo os termos consistentes entre texto, vídeos, áudios e exemplos.*

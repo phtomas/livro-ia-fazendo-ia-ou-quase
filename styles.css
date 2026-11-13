@@ -1,0 +1,47 @@
+/* Editorial: IA fazendo IA — ou quase, v0.2 */
+body { line-height: 1.55; }
+.conceito-cartao { margin: 1.1em 0 1.4em 0; padding: 0.85em 1.15em; border-left: 3px solid #718296; background: rgba(120,140,158,.055); break-inside: avoid; page-break-inside: avoid; }
+.conceito-cartao p { margin: 0.45em 0; }
+.conceito-cartao p:first-child { margin-top: 0; }
+.exercicio { margin: 1.2em 0; padding: 1em 1.15em; border: 1px solid #98a5b1; break-inside: avoid; }
+.exercicio p { margin: 0.7em 0; }
+.destaque-autoral { margin: 1.4em 0; }
+.destaque-autoral blockquote { border-left: 3px solid #596f84; margin: 0; padding: .55em 1em; font-style: normal; }
+.destaque-autoral blockquote p { margin: .45em 0; }
+
+/* Box transversal da série: o que testar, como proceder, por que funciona e como verificar. */
+.na-pratica-com-ia {
+  margin: 1.7em 0 2.0em;
+  padding: 1.10em 1.25em;
+  border: 1px solid #aab6c1;
+  border-left: 5px solid #4b6682;
+  border-radius: 0.25em;
+  background: #f4f7fa;
+  line-height: 1.55;
+  break-inside: auto;
+  page-break-inside: auto;
+}
+.na-pratica-com-ia p { margin: 0.65em 0; }
+.na-pratica-com-ia p:first-child { color: #264663; font-weight: 700; letter-spacing: .025em; margin-top: 0; }
+.na-pratica-com-ia blockquote {
+  border-left: 2px solid #8a9eb2;
+  padding: 0.2em 0.8em;
+  margin: 0.8em 0;
+  color: #283747;
+  background: #eaf0f5;
+  font-style: normal;
+}
+.na-pratica-com-ia strong { color: #273f55; }
+
+/* Experimento do leitor: descoberta autônoma, distinto do box com IA. */
+.experimento-do-leitor {
+  margin: 1.8em 0 2em;
+  padding: 1.0em 1.2em;
+  border-top: 2px solid #8d8b70;
+  border-bottom: 1px solid #bbb8a0;
+  background: #fbfaf5;
+  line-height: 1.60;
+  break-inside: auto;
+}
+.experimento-do-leitor p { margin: .75em 0; }
+.experimento-do-leitor p:first-child { margin-top: 0; color: #59543a; font-weight: 700; }

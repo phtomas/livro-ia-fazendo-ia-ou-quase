@@ -1,0 +1,240 @@
+# Um livro que aprende a ser escrito
+
+## O problema não era escrever mais depressa
+
+Um livro técnico pode começar a dar trabalho muito depois de seu texto estar pronto. Essa é uma descoberta que parece evidente para qualquer editor, mas ganha um sabor especial quando boa parte do manuscrito foi produzida com a ajuda de inteligência artificial. A máquina escreve com velocidade admirável. Uma página pode nascer enquanto ainda estamos escolhendo o título da seguinte. Só que a velocidade de produção do texto não resolve, por si, a consistência da obra.
+
+Aprendemos isso de maneira bastante concreta na preparação de um manual sobre o TK90X. Havia capítulos, diagramas, fotografias, tabelas, explicações e revisões sucessivas. À medida que o material crescia, apareciam problemas que não tinham relação direta com a capacidade de explicar eletrônica: títulos com tamanhos diferentes, fontes que mudavam sem motivo, figuras ultrapassando os limites de impressão, legendas fora do padrão e até uma página quase vazia porque uma legenda havia se separado da imagem. Em outro momento, a redação parecia um relatório frio, embora a história por trás daqueles circuitos estivesse longe de ser fria.
+
+Não se tratava de falta de inteligência ou de falta de texto. O problema era outro. Tínhamos aprendido a pedir bons parágrafos, mas ainda precisávamos garantir que as regras aprovadas sobrevivessem de uma etapa à seguinte. Precisávamos distinguir o trabalho de explicar um circuito do trabalho de revisar sua representação, conferir a paginação, preservar o estilo e preparar a publicação. E precisávamos de algo que nos ajudasse a perceber os erros antes que eles se multiplicassem por um livro inteiro.
+
+Foi nesse ponto que a discussão deixou de ser apenas sobre prompts e passou a ser sobre organização do trabalho. Se uma instrução editorial deve valer para vinte capítulos, por que ela precisaria ser reescrita a cada conversa? Se uma revisão exige sempre as mesmas verificações, por que depender da memória de quem está revisando? E se um programa pode medir uma margem, comparar arquivos ou verificar links, por que pedir à IA que adivinhe aquilo que uma ferramenta consegue conferir?
+
+As respostas a essas perguntas nos aproximam do assunto deste livro. Não começaremos instalando uma coleção de bibliotecas nem desenhando dez agentes com nomes vistosos. Começaremos pelo motivo de sua existência. Quando o problema está claro, a arquitetura costuma ficar menos misteriosa — e, quase sempre, menor.
+
+## Uma conversa ainda é uma excelente ferramenta
+
+Há uma tentação comum quando descobrimos um recurso novo: passar a utilizá-lo em tudo. Se aprendemos a criar agentes, logo queremos um para pesquisar, outro para escrever, um terceiro para revisar, mais dois para discordar dos anteriores e talvez um coordenador para organizar a reunião. Parece moderno. Também pode produzir uma quantidade impressionante de trabalho para fazer algo que uma conversa bem orientada resolveria.
+
+Uma IA conversacional é valiosa justamente porque permite explorar o que ainda não sabemos. Podemos trazer uma ideia incompleta, apresentar alternativas, descobrir contradições e mudar de rumo sem escrever um programa. Para planejar o capítulo que você está lendo, por exemplo, não foi necessário dar autonomia a um sistema externo. Bastou reunir decisões anteriores, consultar referências pertinentes, escolher o recorte e começar a redigir. Foi uma colaboração assistida, não uma execução autônoma entregue a um robô invisível.
+
+Esse ponto de partida coincide com uma recomendação importante da engenharia de sistemas com IA: antes de acrescentar camadas de autonomia e orquestração, procure a solução mais simples que satisfaça a necessidade. Workflows previsíveis e agentes mais autônomos são abordagens distintas; a escolha depende do problema, não da moda do momento [@anthropic2024].
+
+Uma boa conversa, porém, tem limites. Ela pode esquecer uma decisão anterior, perder acesso a um arquivo, confundir duas versões de um documento ou simplesmente não possuir a ferramenta necessária para agir no mundo. Um modelo pode explicar como verificar links, mas explicar não é verificar. Pode propor uma correção para um esquema eletrônico, mas propor não é medir. Quando as mesmas tarefas começam a se repetir, ou quando os resultados exigem rastreabilidade, precisamos tirar parte do trabalho da conversa e colocá-la num processo que possa ser inspecionado.
+
+## O que realmente muda quando organizamos o trabalho
+
+Imagine que queremos revisar um capítulo recém-escrito. O pedido inicial talvez seja: “Confira este texto e deixe-o melhor”. É um ponto de partida aceitável para explorar ideias, mas a palavra *melhor* esconde decisões importantes. Melhor para quem? Podemos alterar a voz do autor? Corrigir um número? Trocar um termo técnico? Remover uma hipótese ainda aberta? O que fazer se uma afirmação não tiver fonte?
+
+Agora imagine que acrescentamos um pequeno contrato: preservar a voz autoral, não inventar dados, separar correções de estilo de dúvidas técnicas, mostrar o que foi alterado e pedir aprovação antes de substituir o original. A tarefa continua simples, mas ganhou limites e critérios. Ainda não precisamos de um agente. Precisamos de instruções melhores.
+
+Na revisão seguinte, percebemos que estamos repetindo o mesmo contrato. Nesse momento vale guardar o procedimento em um documento reutilizável. Uma *skill* pode cumprir esse papel em ambientes que aceitam esse tipo de pacote: registra quando deve ser utilizada, as entradas esperadas, a sequência de verificações e a forma de apresentar o resultado. Em outros ambientes, podemos começar com um guia ou modelo de instrução equivalente. O importante não é a extensão do arquivo, e sim a capacidade de repetir um método sem depender da lembrança de cada conversa.
+
+Suponha, depois, que precisamos conferir se as imagens de um documento ultrapassam a área de impressão. A IA pode ler a regra editorial e interpretar o problema, mas uma medição de posição e dimensão deveria ser feita por software apropriado. Surge então uma *tool*, uma ferramenta de verdade: um programa, uma função, uma API ou um conector que executa uma operação observável. A IA pode decidir quando solicitar essa conferência; a medição não deveria depender de sua imaginação.
+
+Por fim, talvez tenhamos uma tarefa que exija escolher caminhos durante a execução: identificar qual capítulo precisa de revisão técnica, localizar arquivos relacionados, chamar o verificador adequado, analisar os resultados e interromper o trabalho quando aparecer uma dúvida que exige decisão humana. É nesse tipo de situação que um agente pode fazer diferença. Mas note a ordem: primeiro compreendemos o problema, depois organizamos o método, em seguida oferecemos ferramentas e, somente quando necessário, delegamos decisões operacionais.
+
+Não existe uma fronteira universal e perfeita para cada palavra. Plataformas diferentes usam *agente* e *workflow* de maneiras parcialmente distintas. Neste livro, adotaremos uma distinção prática: **workflow** é uma sequência de trabalho com etapas e desvios previamente definidos; **agente** é um sistema que, dentro de limites, pode escolher seus próximos passos a partir do estado da tarefa e dos resultados obtidos. Essa separação ajuda a decidir o que construir e a verificar se o aumento de autonomia trouxe benefício real [@anthropic2024].
+
+Para não espremer cinco conceitos numa tabela, vamos separar as peças. Cada uma tem uma pergunta própria e um exemplo simples do nosso livro. Essa diferença visual também faz parte do método: o leitor precisa conseguir relacionar o nome, a pergunta e a aplicação sem ficar procurando a continuação de uma linha.
+
+\Needspace{10\baselineskip}
+
+::: {.conceito-cartao}
+**Instrução**
+
+**Pergunta:** O que deve ser respeitado?
+
+**Exemplo:** Não alterar medidas sem evidência.
+:::
+
+\Needspace{10\baselineskip}
+
+::: {.conceito-cartao}
+**Skill — habilidade reutilizável**
+
+**Pergunta:** Como repetir um procedimento?
+
+**Exemplo:** Revisar a voz autoral e conferir referências seguindo critérios previamente registrados.
+:::
+
+\Needspace{10\baselineskip}
+
+::: {.conceito-cartao}
+**Tool — ferramenta**
+
+**Pergunta:** Que operação real pode ser executada?
+
+**Exemplo:** Verificar links ou medir as dimensões das imagens.
+:::
+
+\Needspace{10\baselineskip}
+
+::: {.conceito-cartao}
+**Workflow — fluxo de trabalho**
+
+**Pergunta:** Em que ordem o trabalho acontece?
+
+**Exemplo:** Redigir, verificar, revisar e submeter à aprovação.
+:::
+
+\Needspace{10\baselineskip}
+
+::: {.conceito-cartao}
+**Agente**
+
+**Pergunta:** Quem escolhe os próximos passos, dentro de limites definidos?
+
+**Exemplo:** Selecionar verificadores conforme o tipo de pendência, interpretar resultados e encaminhar dúvidas ao responsável.
+:::
+
+Não é uma receita para fabricar cinco componentes em cada projeto. É uma forma de evitar que conceitos diferentes sejam empilhados sob a mesma palavra. Às vezes, só precisaremos da primeira peça. Saber parar cedo também faz parte da competência técnica.
+
+## O primeiro laboratório nasce do próprio manuscrito
+
+Vamos transformar essa discussão numa experiência que qualquer leitor possa repetir. O material necessário é modesto: um trecho original de sua autoria, uma IA conversacional que permita trabalhar com texto e alguns minutos de atenção. Não é preciso programar, pagar por uma API ou conceder acesso ao computador.
+
+Escolha um parágrafo que você mesmo tenha escrito. Pode ser uma explicação técnica, um relato de viagem, uma receita, uma anotação de trabalho. O conteúdo não importa tanto quanto uma condição: você deve conhecer o assunto o suficiente para reconhecer quando a IA distorceu seu significado.
+
+Faça primeiro um pedido aberto: “Revise este texto para ficar melhor”. Guarde o original e a resposta. Observe o que aconteceu. A IA modificou apenas ortografia e clareza ou começou a acrescentar argumentos? Retirou alguma característica que você considera pessoal? Introduziu informações que você não forneceu? Talvez o resultado seja excelente. Talvez pareça escrito por outra pessoa. Ambos são resultados úteis, desde que sejamos capazes de descrevê-los.
+
+Em seguida, execute uma segunda rodada com um contrato explícito. Você pode adaptar o modelo a seguir:
+
+\Needspace{20\baselineskip}
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 1 — Um pedido que já contém critérios**
+
+**O que testar.** Comparar uma revisão sem critérios com outra que preserve explicitamente a voz e os fatos do autor.
+
+**Como proceder.** Use o trecho original escolhido acima. Guarde as duas respostas e observe as diferenças antes de aceitar qualquer modificação.
+
+**Prompt que usaríamos hoje**
+
+**Tarefa**
+
+Revisar um trecho de minha autoria.
+
+**Preserve**
+
+Fatos, números, exemplos, linha de raciocínio e a maneira como me dirijo ao leitor.
+
+**Permissões**
+
+Corrigir gramática, pontuação, repetição desnecessária e problemas claros de fluidez.
+
+**Restrições**
+
+Não inventar fontes, resultados, citações ou experiências; não trocar afirmações técnicas por suposições; não acrescentar conclusões que eu não apresentei.
+
+**Saída**
+
+Entregar o texto revisado e, em seguida, indicar as mudanças relevantes e as dúvidas que exigem minha decisão. Não substituir o original sem minha aprovação.
+
+**Por que funciona.** O pedido transforma “melhorar” em uma tarefa com limites e um resultado que podemos comparar. Isso não garante acerto; facilita sua conferência.
+
+**Como verificar.** Compare o original com cada resposta. Houve fatos inventados? O sentido mudou? O texto ainda tem a sua voz? Só aprove a revisão depois de conferir.
+:::
+
+Compare as duas versões, não apenas pela impressão de que uma ficou mais bonita, mas por quatro perguntas objetivas. O significado foi preservado? Houve informações inventadas? A leitura melhorou? E o texto continua parecendo seu? Registre as respostas. Se quiser, peça a outra pessoa que leia sem saber qual versão foi produzida por IA.
+
+Não apresentaremos esse exercício como uma prova científica de superioridade de um prompt sobre outro. Um único trecho e uma única rodada não sustentam uma conclusão desse tamanho. Trata-se de uma primeira observação controlada, suficiente para revelar o que muda quando trocamos um pedido vago por instruções verificáveis. Mais adiante, construiremos testes com vários trechos, critérios estáveis e comparação entre plataformas.
+
+O passo seguinte será guardar as instruções que realmente funcionaram. Esse registro poderá se tornar uma skill editorial. Mas só depois de repetirmos a experiência e descobrirmos quais regras valem a pena preservar. Não queremos empacotar um erro com uma capa bonita e chamá-lo de método.
+
+## O box que esquecemos — e o que esse erro ensina
+
+Este livro já nos ofereceu um primeiro teste de continuidade editorial. Quando revisamos a edição anterior, melhoramos a apresentação dos conceitos, corrigimos termos e abrimos espaço para o glossário. O resultado ficou mais legível. Mas uma regra que acompanha nossos livros técnicos não chegou à nova obra: os boxes **“NA PRÁTICA COM A IA”**, nos quais mostramos ao leitor o que experimentar, como fazer, por que a proposta merece ser testada e que evidência procurar. Havia até um exercício neste capítulo; faltava apresentá-lo no formato didático que havíamos construído nas outras obras.
+
+A falha é instrutiva porque não nasceu da falta de texto. Nasceu de um requisito que permaneceu implícito para quem executava a revisão. Pedimos alguns ajustes e recebemos também mudanças não solicitadas, mas não exigimos uma comparação completa com o contrato editorial da série. O arquivo podia estar gramaticalmente correto e, ainda assim, ter perdido parte de sua identidade. Se uma IA não sabe que determinado elemento é obrigatório, pode removê-lo, reformulá-lo ou simplesmente deixar de criá-lo sem perceber que algo importante desapareceu.
+
+Em vez de corrigir isso apenas acrescentando um quadro e seguindo adiante, vamos guardar a lição. Uma regra recorrente precisa morar fora da lembrança da conversa, em um documento consultável e em verificações de regressão. A verificação automática pode apontar a ausência do box; já a qualidade do conteúdo — se o teste é útil, seguro, fiel ao assunto e compreensível — continuará exigindo revisão humana. As duas formas de controle se complementam.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 2 — Encontrar uma regra editorial esquecida**
+
+**O que testar.** Identificar a ausência de uma convenção editorial ao comparar um capítulo com outro já aprovado.
+
+**Como proceder.** Separe um capítulo seu e outro com o box didático. Entregue os dois à IA, usando o pedido abaixo. Nesta rodada, permita somente leitura e diagnóstico.
+
+**Prompt que usaríamos hoje**
+
+> Compare meu capítulo com o modelo editorial fornecido. Confira a presença do box “NA PRÁTICA COM A IA”, seus objetivos, procedimento, explicação e critérios de verificação. Aponte ausências e sugira apenas a menor correção necessária, citando o trecho relevante. Não altere arquivos nem reescreva passagens que não estão em avaliação.
+
+**Por que funciona.** A referência e a lista de elementos esperados substituem o vago “mantenha o estilo” por um contrato verificável.
+
+**Como verificar.** Confira cada ocorrência no documento real. Marque **PASS** se tudo estiver presente e claro, **PARTIAL** se estiver incompleto e **FAIL** se faltar. A presença pode ser contada por software; o conteúdo precisa de revisão humana.
+:::
+
+Há algo que não queremos perder nessa correção. O quadro anterior ensina **como pedir uma análise à IA**. Já o experimento do leitor não precisa começar por um prompt: ele deve começar pela curiosidade de quem lê. Um ajuda a conduzir a ferramenta; o outro ajuda a desenvolver o nosso próprio critério. Se confundirmos os dois, corremos o risco de transformar aprendizado em mera obediência a instruções.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — A regra que você nunca escreveu**
+
+Antes de consultar a IA, procure dois textos seus: um que você considera bom e outro mais recente. Pode ser uma explicação, uma mensagem de trabalho ou uma receita. O que há no primeiro que faz você reconhecê-lo como seu?
+
+Escreva três características que gostaria de preservar: talvez a abertura pelo problema, os exemplos, o humor ou o cuidado de nunca alterar números sem conferir a fonte. **Não peça à IA que faça essa escolha.**
+
+Agora leia o texto mais recente. O que foi preservado? O que melhorou? Há algo que se perdeu? Se puder, peça a alguém que compare os textos sem saber qual veio primeiro e confronte as observações.
+
+Registre o que concluiu, mesmo que nada tenha sido perdido. Mais tarde, suas observações ajudarão a construir regras e testes. **Aqui, a descoberta precisa ser sua.**
+:::
+
+## A voz do autor não está à venda junto com a ferramenta
+
+Há uma consequência importante desse pequeno teste. Quando alguém pede à IA que escreva “como eu”, não está solicitando apenas uma coleção de adjetivos. A voz de um autor envolve escolhas de assunto, ordem de exposição, vocabulário, ritmo e sensibilidade para aquilo que merece explicação. No nosso caso, uma história de laboratório tende a avançar do sintoma para a investigação e daí para uma conclusão que a evidência permita. Mas outro autor pode preferir começar pela teoria e depois mostrar a aplicação. Nenhum deles precisa abrir mão de sua identidade para usar inteligência artificial.
+
+O desafio será tornar essa identidade comunicável. Por isso construiremos, em capítulo próprio, um perfil de voz baseado em textos escolhidos pelo leitor, exemplos que considera bons e ruins, regras editoriais e testes de fidelidade. Também separaremos o estilo narrativo da conduta operacional. Um agente que escreve de maneira descontraída não está autorizado a publicar sem pedir permissão; um agente que escreve com extrema formalidade não ganha, por isso, autoridade para corrigir medidas técnicas que não compreende.
+
+\Needspace{9\baselineskip}
+
+::: {.destaque-autoral}
+> **Preservar a voz humana é um dos motivos para não delegar tudo.** A IA poderá sugerir caminhos e realizar trabalho pesado, mas a autoria exige seleção, julgamento e responsabilidade. Há uma diferença grande entre aceitar uma boa frase proposta pela ferramenta e permitir que ela defina, sem nossa intervenção, aquilo que pretendíamos dizer.
+:::
+
+## Três plataformas, um problema que deve sobreviver a elas
+
+Vamos trabalhar com ChatGPT, Gemini e Claude, que apelidamos de “as três Marias”. Cada uma reúne produtos, interfaces e formas de extensão que precisam ser distinguidos. Personalizar uma conversa não é necessariamente instalar uma ferramenta. Salvar um procedimento não significa ganhar acesso ao disco. E criar um agente na API não é a mesma coisa que usar um assistente na interface de chat.
+
+Ao longo da obra, teremos exemplos equivalentes, sempre que as capacidades disponíveis permitirem. Em alguns casos haverá um caminho sem programação; em outros, demonstraremos bibliotecas, scripts, conectores e orquestradores como LangGraph. Não prometemos que um arquivo poderá ser copiado sem adaptação entre todas as plataformas. O objetivo é preservar a parte durável do trabalho: regras, procedimentos, fontes, testes e limites. As particularidades de instalação serão documentadas com data, porque sabemos que interfaces mudam.
+
+Já temos uma experiência que justifica esse cuidado. Em projetos anteriores, começamos com longas conversas e, quando a continuidade ficou difícil, passamos a registrar o estado do trabalho em arquivos, dividir papéis, organizar procedimentos e exigir evidências de execução. Esse acervo será revisado e aproveitado como matéria-prima. O leitor verá o que funcionou, o que dependeu de uma plataforma e o que precisou ser ajustado. Não fingiremos que tudo nasceu pronto ou que cada automação merece se tornar um produto.
+
+## Um livro vivo, mas não um livro sem conclusão
+
+Existe outro problema peculiar a ensinar tecnologia em movimento: a ferramenta pode mudar antes que o capítulo chegue ao leitor. Se descrevemos apenas onde clicar, escrevemos algo que envelhece rapidamente. Se falamos apenas de ideias abstratas, deixamos de ensinar como fazer. Precisamos das duas coisas, em camadas diferentes.
+
+Escolhemos o Quarto para organizar a fonte editorial em arquivos versionáveis e produzir formatos de leitura a partir do mesmo material. A documentação oficial prevê livros em HTML pesquisável, EPUB e PDF, entre outras opções [@quarto2026]. O Git registrará a história das alterações e permitirá associar cada exemplo à versão que foi testada. A distribuição digital poderá passar pelo KDP, e a impressão física será avaliada para edições estáveis. Nada disso nos dispensa de conferir o resultado final em cada formato. Um EPUB e um livro impresso não têm as mesmas exigências de paginação, figuras e legibilidade.
+
+Também queremos oferecer entrevistas narradas, vídeos explicativos e pequenas demonstrações. Um capítulo sobre skills poderá ter uma conversa introdutória, seguida de uma gravação mostrando como criar uma e testar seu comportamento. A mídia será derivada de um texto aprovado e receberá sua própria revisão técnica. Afinal, uma voz agradável pode explicar uma informação errada com a mesma desenvoltura com que explica a correta.
+
+Essa escolha nos obriga a pensar em versões. Quem comprar ou baixar uma edição precisa saber de quando ela é, que ferramentas foram utilizadas nos testes e onde encontrar correções posteriores. Atualizar não é apagar o passado; é documentar o que mudou e por quê. É uma oportunidade de ensinar, pelo exemplo, a integração entre escrita, Git, automações e publicação.
+
+## P9 e P10: aprender com os outros sem apagar os outros
+
+Antes de começar este livro, fomos procurar o que já estava publicado. Encontramos livros de engenharia de IA, agentes e frameworks, documentação dos fabricantes, cursos e projetos abertos. Era possível aproveitar muito conhecimento sem recontar, como se fossem nossas, experiências que pertencem a outras pessoas. O princípio P9 — não reinventar a roda — serve para poupar tempo e respeitar trabalho acumulado.
+
+O P9 traz uma responsabilidade inseparável da economia de esforço: reaproveitar o que já foi validado **com crédito**. Ler uma obra e compreender suas ideias não autoriza copiar capítulos, desenhos ou exemplos e trocar algumas palavras. Referências técnicas devem ser reconhecidas; trechos e imagens de terceiros exigem análise das condições de uso; créditos não são enfeites. A honestidade do P1 reforça esse cuidado.
+
+O P10 tem outro nome no nosso Códex: **Simbiose e cuidado**. É a ideia de que humano e IA trabalham em parceria, com responsabilidades distintas, aprendendo e revendo decisões juntos. É dele que vem o final do nosso lema: *“E cresçam juntos.”* Os dois princípios se complementam, mas não vamos trocar o significado de um pelo do outro apenas para fazer uma frase bonita [@codexmetodo2026].
+
+Isso vale inclusive para a IA que nos ajuda a escrever. Se o modelo gerar uma figura, precisaremos conferir sua exatidão e registrar como foi criada. Se sugerir uma citação, precisaremos localizar a fonte real. Se montar um vídeo, precisaremos examinar o que foi dito e mostrado. A facilidade de produção não reduz a obrigação de responder pelo conteúdo. Ao contrário, aumenta a importância dos nossos procedimentos de revisão.
+
+## Princípios e palavras: duas ferramentas para não perder o rumo
+
+No início deste livro, convém saber que esses dez princípios têm uma história anterior aos agentes. O primeiro deles, Honestidade acima de tudo, preserva até um apelido antigo — *P14, o eterno*. O P9 foi mantido na nona posição por decisão expressa, e o P10 fecha o conjunto porque recorda por que fazemos tudo isso. Eles nasceram de problemas, acertos e revisões, não de uma coleção de slogans [@codexmetodo2026].
+
+No **Anexo A**, reunimos a lista canônica, sua origem e um primeiro exercício para o leitor estabelecer princípios próprios. No **Glossário**, começamos a traduzir as palavras que aparecem nestas páginas — *prompt*, *workflow*, *skill*, *tool*, *MCP* e tantas outras —, sem deixar que o excesso de nomes atrapalhe o aprendizado. Ambos serão ampliados à medida que o texto avançar.
+
+## O próximo passo não é contratar uma equipe de robôs
+
+Chegamos ao fim do primeiro capítulo com uma escolha deliberada: ainda não criamos um sistema multiagente para o leitor instalar. Seria fácil apresentar uma grande arquitetura logo na abertura; difícil seria explicar por que cada peça existe. Preferimos começar com um problema pequeno e verdadeiro, experimentar uma instrução melhor e perceber quais regras merecem sobreviver à conversa.
+
+No capítulo seguinte, vamos separar com mais cuidado o vocabulário: prompt, contexto, instruções permanentes, conhecimento, workflow, agente, skill, ferramenta e conectores. Não para colecionar nomes, mas para responder a uma pergunta que nos acompanhará até o fim da jornada: **qual é a menor estrutura que permite fazer este trabalho com qualidade, segurança e resultados verificáveis?**
+
+Se você fez a experiência de revisão, guarde o texto original, as duas respostas e suas observações. São os primeiros artefatos de seu próprio laboratório. Se não fez, tudo bem; pode voltar a ela depois. O importante é não confundir a sensação de progresso com uma evidência de progresso. Uma coisa costuma ser mais agradável. A outra é que nos permite continuar sem tropeçar exatamente no mesmo lugar.
+
