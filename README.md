@@ -55,3 +55,9 @@ A v0.3 recupera o recurso didático das obras anteriores. Exemplos e regras est�
 O box **NA PRÁTICA COM A IA** demonstra uma operação reproduzível, normalmente com prompt e verificação. O **EXPERIMENTO DO LEITOR** é uma atividade independente de investigação pessoal, com hipótese, observação e conclusão próprias. Um não substitui o outro. A distinção nasce do método usado em *IA fazendo jogos* e está detalhada em `docs/CONTRATO_EDITORIAL.md`.
 
 O Capítulo 1 conserva os dois boxes da v0.3 e recebeu um experimento autônomo que dispensa IA. O arquivo `scripts/verificar_boxes.py` identifica separadamente os componentes; a qualidade didática segue sujeita à revisão humana. Foi feita comparação de texto (somente inserções no Capítulo 1) e prova Pandoc em PDF/EPUB/HTML. Quarto nativo ainda não foi renderizado.
+
+## Próximo assunto didático: tokens e roteamento de modelos
+
+A pauta `docs/TOKENS_ROTEAMENTO_E_CUSTOS.md` foi acrescentada ao planejamento, **sem alterar a redação já aprovada para análise**. Vamos comparar algoritmos locais, modelos menores, escalonamento e medições reais de entrada/saída. O contador de tokens, quando for implementado, terá de distinguir previsão, medição e preço do provedor. Nenhum resultado de laboratório foi declarado PASS nesta etapa.
+
+**Repositório remoto previsto:** `phtomas/livro-ia-fazendo-ia-ou-quase` (ainda não criado). Manter privado até revisão editorial e definição da licença de texto e código.
