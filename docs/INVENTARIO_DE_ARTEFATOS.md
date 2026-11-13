@@ -65,3 +65,15 @@ O detector de PDF **retorna código 1** quando encontra erro, e o workflow tamb�
 | Capítulos 9–10 | `chapters/09-*`, `chapters/10-*` | Texto e marcadores didáticos | Revisão autoral, avaliação didática com leitores |
 
 **Atenção:** checkpoint vinculado a hashes dos fontes `.qmd`, `index.qmd` e `_quarto.yml`; ainda não monitora alterações em versões de verificadores nem dependências externas. A política limita apenas uma decisão de demonstração, não a execução de ferramentas.
+
+
+## Atualização v1.0 — ciclo supervisionado e fiscal de propostas
+
+| Peça | Fonte | Estado | Limites da prova |
+| --- | --- | --- | --- |
+| Ciclo supervisionado | `agents/ciclo_supervisionado.py` | Testes e execução com plano externo, política e relatório | Sem LLM, sem identidade de aprovador, sem publicação |
+| Exemplos de plano | `examples/plano_supervisionado_*.json` | Um PASS_LIMITED e um bloqueio HALTED_POLICY esperado | Planos roteirizados, não escolhidos por modelo |
+| Fiscal de revisão | `tools/editorial/avaliar_proposta.py` | Testes de preservação de unidades e expressões | Não interpreta fatos, voz, bibliografia ou layout |
+| Casos textuais | `examples/avaliacao/` | Preservação de +5V e reprovação da troca para +12V | Dados inteiramente didáticos, não medição elétrica |
+
+A regra continua: um teste executado prova a operação e o critério testado, não tudo o que o título do componente sugere.

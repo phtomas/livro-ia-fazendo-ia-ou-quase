@@ -1,0 +1,54 @@
+{
+  "prototype": "ciclo_supervisionado",
+  "version": "0.1",
+  "goal": "Conferir a estrutura do livro sem editar nem publicar",
+  "source_of_proposal": "demonstracao_roteirizada",
+  "model_requested": null,
+  "model_reported": null,
+  "model_verified": false,
+  "uses_llm": false,
+  "status": "PASS_LIMITED",
+  "steps_requested": 3,
+  "steps_observed": [
+    {
+      "action": "READ_SOURCE",
+      "policy": "ALLOW_READ_ONLY",
+      "executed": true,
+      "status": "PASS",
+      "path": "index.qmd",
+      "sha256": "3680869a78238ccbd6a514c7093d5bb209ff9a3f58199556a4f352085a9aa6d6",
+      "characters": 7422,
+      "step": 1
+    },
+    {
+      "action": "CHECK_STRUCTURE",
+      "policy": "ALLOW_READ_ONLY",
+      "executed": true,
+      "status": "PASS",
+      "results": [
+        {
+          "tool": "verificar_boxes.py",
+          "return_code": 0,
+          "stdout_tail": "-quando-uma-skill-merece-confianca.qmd experimento 1: marcador explícito presente\nPASS chapters/12-quando-uma-skill-merece-confianca.qmd box 1: 6 marcadores estruturais presentes\nExperimentos do leitor encontrados: 12\nAVISO: BOX COM IA e EXPERIMENTO DO LEITOR são recursos didáticos DIFERENTES. PASS estrutural não comprova conteúdo nem diagramação.\n"
+        },
+        {
+          "tool": "verificar_estrutura.py",
+          "return_code": 0,
+          "stdout_tail": "PASS: 12 capítulos com numeração automática; apresentação, anexos e referências não numerados\nNOTA: checagem estrutural não substitui Quarto nem paginação.\n"
+        }
+      ],
+      "step": 2
+    },
+    {
+      "action": "GENERATE_REPORT",
+      "policy": "ALLOW_READ_ONLY",
+      "executed": true,
+      "status": "PASS",
+      "note": "O relatório final é escrito pelo controlador, fora do manuscrito.",
+      "step": 3
+    }
+  ],
+  "changed_manuscript": false,
+  "published": false,
+  "approval_authentication": "not_implemented"
+}

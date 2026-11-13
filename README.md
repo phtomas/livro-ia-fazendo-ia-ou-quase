@@ -128,3 +128,13 @@ python agents/politica_orquestrador.py --action PUBLISH
 ```
 
 O PDF Pandoc é prova de leitura, não miolo final. A prévia Quarto HTML é gerada pelo workflow em `.github/workflows/previa-quarto.yml` a cada commit em `main`, com publicação no GitHub Pages. O projeto Quarto fonte é espelhado para o Google Drive do autor (`Projetosia/.../Quarto_Fonte`), sem ligação automática entre Git e Drive.
+
+
+## Rodada v1.0 — ciclo supervisionado e avaliação da skill
+
+- Capítulos 11 e 12 em primeira redação; Capítulos 1 a 10 e a Apresentação **sem qualquer alteração**.
+- `agents/ciclo_supervisionado.py`: ciclo operacional de leitura e propostas, com política aplicada em cada passo. Lê planos externos JSON e para diante de ações bloqueadas. **Não possui integração a LLM** e não publica nada.
+- `tools/editorial/avaliar_proposta.py`: fiscal limitado de números/unidades e expressões protegidas; nunca substitui revisão de conteúdo, de voz ou aprovação humana.
+- Exemplos em `examples/`, testes em `tests/`; relatórios em `docs/RELATORIO_DE_TESTES_v1.0.md`.
+- Defeito histórico da página 59 da v0.6 permanece como fixture conhecida. A ausência de detecção na página 59 da v0.9 não equivale a correção, porque o detector não encontrou quadro elegível nessa página.
+- Leitura web: https://phtomas.github.io/livro-ia-fazendo-ia-ou-quase/ (atualizada após commit e sucesso do GitHub Actions).

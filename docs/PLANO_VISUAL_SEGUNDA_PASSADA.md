@@ -48,3 +48,10 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 
 - **Capítulo 9:** máquina de estados `INVENTORIED → STRUCTURE_OK → WAITING_HUMAN`, com ramos `INTERRUPTED`, `STRUCTURE_FAILED` e `BLOCKED`. Desenhar a partir do código testado, e não de resultados inventados.
 - **Capítulo 10:** separar visualmente **modelo (propõe)**, **política (autoriza)**, **executor (faz)**, **prova (registra)** e **humano (aprova)**. Nenhum diagrama pode insinuar que o agente autônomo já está operando.
+
+
+## Sugestões v1.0 (segunda passada, ainda não geradas)
+
+- **Capítulo 11:** desenho de um ciclo `proposta externa → política → adaptador → evidência → checkpoint`, com bloqueio explícito em `PUBLISH` e destaque para a ausência de LLM nesta primeira implementação.
+- **Capítulo 12:** matriz de níveis de teste da skill (arquivo íntegro, descoberta, ativação, eficácia, aprovação) e representação de um falso PASS numérico que muda o grau de certeza.
+- O autor ocultou deliberadamente novos defeitos encontrados no livro; nenhuma imagem deve ser usada para esconder falhas conhecidas ou desconhecidas antes da revisão final.

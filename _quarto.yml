@@ -29,6 +29,8 @@ book:
     - chapters/08-uma-skill-que-pode-viajar.qmd
     - chapters/09-o-fluxo-que-sabe-onde-parou.qmd
     - chapters/10-quem-deixa-o-agente-decidir.qmd
+    - chapters/11-o-primeiro-ciclo-supervisionado.qmd
+    - chapters/12-quando-uma-skill-merece-confianca.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

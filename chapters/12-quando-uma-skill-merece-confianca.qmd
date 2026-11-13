@@ -1,0 +1,97 @@
+# Quando uma skill merece confiança
+
+## Uma habilidade pode estar instalada e ainda fazer besteira
+
+No capítulo sobre portabilidade, conseguimos transportar os arquivos da nossa skill de revisão autoral para diretórios locais diferentes. O instalador examinou a pasta, conferiu hashes, protegeu contra sobrescritas indevidas e produziu resultados repetíveis. Isso foi uma boa conquista. Mas vale recordar exatamente o que demonstramos: os arquivos chegaram inteiros ao destino. **Não demonstramos que um assistente encontrou a skill, decidiu usá-la nem que a revisão resultante preservou a voz do autor.**
+
+A distinção parece pequena até precisarmos revisar um capítulo de eletrônica. Imagine um trecho que diz “o esquema indica +5V, mas essa tensão ainda não foi medida no exemplar real”. Um revisor apressado pode transformar a frase em “a tensão de +5V foi confirmada na placa”. O número não mudou. O texto ficou mais curto. A informação, entretanto, deixou de ser uma limitação documental e passou a afirmar uma medição inexistente. Nenhum corretor ortográfico poderá chamar isso de melhoria.
+
+Há um problema semelhante na escrita de jogos. Uma revisão de código pode manter os nomes das funções e ainda alterar a ordem dos eventos, fazendo uma colisão deixar de funcionar. Na editoração de um livro, uma mudança pode preservar o sentido técnico e destruir a voz que torna o texto reconhecível. Uma skill útil precisa lidar com essas diferenças ou, no mínimo, reconhecer quando não possui provas para validá-las.
+
+Precisamos, portanto, separar **validade do pacote**, **ativação**, **execução**, **qualidade do resultado** e **aprovação final**. Cada uma dessas afirmações exige um teste próprio. Chamar todas simplesmente de “skill funcionando” seria confortável, mas pouco honesto. Nossa oficina já tem exemplos suficientes de como esse tipo de atalho termina.
+
+## Uma coleção de casos vale mais que um elogio
+
+Podemos começar montando um pequeno conjunto de casos de avaliação. O primeiro contém uma revisão simples, em que apenas a fluidez muda. O segundo troca um número ou uma unidade. O terceiro elimina uma ressalva que deveria permanecer. O quarto tenta corrigir um texto sem referência suficiente e deveria devolver uma dúvida, não uma afirmação inventada. O quinto é uma boa oportunidade de manter as mãos longe do original: a saída ideal pode ser “nenhuma alteração necessária”.
+
+Esses casos não precisam começar como uma prova estatística de excelência. Primeiro, queremos descobrir **que tipo de erro nossa habilidade ainda deixa passar**. Cada entrada deve incluir o texto original, as regras aplicáveis e a resposta esperada. A versão do contrato deve ser registrada. Se uma avaliação encontrar um erro, não devemos apagar o caso depois de corrigi-lo; ele se torna parte da bateria que protegerá as próximas versões.
+
+A revisão do livro inteiro virá mais tarde, quando tivermos o manuscrito completo e pudermos separá-lo em blocos editáveis. A nossa skill poderá então apoiar a preparação de cada bloco, mas a aprovação continuará sendo humana. Isso não é uma desconfiança genérica da IA: é a diferença prática entre uma ferramenta de assistência e a autoria de uma obra.
+
+O conjunto de testes também precisa evitar uma armadilha. Se avaliarmos apenas respostas de uma mesma conversa, com os mesmos exemplos disponíveis e regras que acabamos de mostrar ao modelo, poderemos medir lembrança em vez de generalização. Em ensaios futuros, separaremos casos de desenvolvimento e casos de avaliação, identificaremos a versão do modelo efetivamente utilizado e repetiremos amostras. Quando não houver dados suficientes para uma conclusão, diremos que não há.
+
+## Um fiscal muito simples, porém verificável
+
+Para ilustrar o primeiro nível de avaliação, criamos `tools/editorial/avaliar_proposta.py`. Ele recebe um texto original e uma proposta de revisão, extrai tokens numéricos com unidades comuns e confere se os conjuntos coincidem. Também recebe, opcionalmente, expressões que precisam continuar presentes. O resultado informa o hash dos dois arquivos, as alterações numéricas e as expressões protegidas que desapareceram.
+
+O programa não pede a um modelo que “preste atenção aos números”; ele compara. Se o texto tinha `5V` e a proposta traz `12V`, o resultado é `FAIL_GUARDRAIL`. Se os números e as expressões protegidas permanecem, ele devolve `PASS_LIMITED`. **O sufixo é parte do resultado:** o programa não entende se a interpretação técnica continua correta. Ele não examina fontes, não mede o hardware, não reconhece autoria e não aprova a redação.
+
+Existe ainda um detalhe técnico sobre esse verificador. Ele utiliza uma expressão regular, não um analisador universal de unidades. Isso funciona para nossos casos de demonstração, mas pode falhar com outras grafias, expoentes, tabelas, números escritos por extenso e notação especializada. Um teste que não acusa um problema fora de seu campo de visão não pode ser utilizado para afirmar que o problema inexiste. A abrangência do verificador é um dado a registrar, não um constrangimento a esconder.
+
+O próprio código da ferramenta acompanha o livro, junto com testes que cobrem uma revisão preservando o número, uma alteração de tensão, a remoção de uma expressão protegida e um caso em que não há nenhuma mudança. É uma base para novas verificações, não um substituto dos olhos e do julgamento do autor.
+
+## Quando o teste passa e a frase continua errada
+
+Retomemos a primeira frase: “O esquema indica +5V; não houve medição física”. Agora compare com uma proposta: “O circuito entrega +5V; não houve medição física”. O nosso contador pode aceitar o mesmo número, e a expressão “não houve medição física” permanece. Mesmo assim, a nova frase parece atribuir ao circuito real um comportamento que antes estava restrito ao esquema. **Precisamos ler, entender e confrontar a fonte.**
+
+Esse é o motivo para não transformar os verificadores em um único número de qualidade. Um relatório pode apresentar “100% dos tokens numéricos preservados” e, ao mesmo tempo, esconder uma afirmação indevida. O texto precisa de outros critérios: fidelidade às referências, preservação do grau de certeza, manutenção de relações de causa e efeito, clareza da explicação e coerência com a voz do capítulo. Esses aspectos podem ser avaliados com ajuda de modelos, mas suas respostas também exigem calibração e exemplos de erro.
+
+Quando avaliarmos uma skill de revisão com IA, será preciso informar qual modelo recebeu o texto, se a skill foi efetivamente descoberta ou se o prompt foi colado manualmente, quais ferramentas estavam disponíveis e qual material foi entregue. Caso contrário, uma melhoria poderá ser atribuída à skill quando talvez tenha vindo do modelo ou de uma referência adicional presente na conversa.
+
+A discussão vale também para economia de tokens. Executar primeiro verificações baratas pode reduzir o material que entregamos ao modelo, mas ainda não medimos essa economia em condições controladas. Precisaremos registrar tokens de entrada e saída e comparar com uma linha de base equivalente. **Um verificador local que não chama IA custa zero tokens de API naquela operação; isso não significa que todo o processo seja gratuito.** Tempo de desenvolvimento, execução, manutenção e falsos positivos também contam.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 12 — Um PASS que não significa aprovação**
+
+**O que testar.** Observar como um verificador determinístico encontra mudanças numéricas e por que uma revisão tecnicamente ruim ainda pode escapar de uma checagem limitada.
+
+**Como proceder.** Use o exemplo original e as duas propostas em `examples/avaliacao/`. Execute primeiro uma comparação que preserva os dados e depois a que altera uma tensão. Nenhum texto será sobrescrito.
+
+**Prompt que usaríamos hoje**
+
+> Revise o trecho fornecido preservando fatos, unidades, ressalvas e grau de certeza. Apresente o texto original e a proposta em separado. Liste as afirmações que exigem consulta ao esquema ou medição física. Não transforme “indicado no esquema” em “confirmado em bancada”. Se não houver fonte suficiente, registre a dúvida em vez de inventar a conclusão.
+
+**Verificador local**
+
+```sh
+python tools/editorial/avaliar_proposta.py \
+  examples/avaliacao/original.txt \
+  examples/avaliacao/proposta_segura.txt
+```
+
+Repita o comando com `proposta_tensao_errada.txt`. Depois tente proteger uma ressalva importante utilizando a opção `--protect "não houve medição física"`.
+
+**Por que funciona.** A ferramenta compara propriedades observáveis, em vez de tentar avaliar todo o texto por impressão. A regra sobre a ressalva precisa estar explicitada e a análise de significado continua necessária.
+
+**Como verificar.** A primeira comparação deve retornar `PASS_LIMITED`. A troca de `5V` por `12V` deve produzir `FAIL_GUARDRAIL`. Nenhum dos resultados permite publicar o capítulo. Confira os arquivos originais e o relatório antes de concluir.
+:::
+
+Podemos agora observar uma diferença importante entre uma habilidade de IA e uma ferramenta determinística. A skill contém o **método de revisão** e pode orientar um modelo a analisar relações e estilo. A ferramenta numérica cobre um **invariante específico**. O workflow pode exigir a ferramenta antes de entregar a proposta ao autor. Nenhuma das três precisa fingir que faz o trabalho completo das outras.
+
+## Livro, jogo e hardware: três resultados esperados
+
+No **livro**, a avaliação tem de respeitar o contrato editorial e a voz. Nosso teste final envolverá blocos editáveis, alterações justificadas e comparação entre versões. Podemos automatizar a identificação de números e a presença dos boxes, mas decidir se uma explicação ficou mais humana, mais envolvente e mais fiel ao autor continua sendo uma tarefa compartilhada com o leitor e com quem assina a obra.
+
+No **jogo**, uma skill de revisão precisará analisar também regras de jogabilidade e requisitos de execução. Trocar uma constante pode alterar a velocidade de um personagem; mudar uma comparação lógica pode impedir que uma fase termine. O avaliador mecânico de texto pode ajudar a descobrir uma alteração, mas os casos decisivos são builds executadas, testes funcionais e observação no emulador ou no equipamento. Não basta que o código pareça correto.
+
+No **hardware**, a exigência de evidência cresce. Um verificador pode detectar que uma pinagem escrita no texto mudou, mas não prova que a pinagem esteja correta no componente real. Um gerador de esquemas pode produzir um desenho legível, mas não comprova continuidade, temporização, alimentação ou comportamento de uma placa. As provas devem distinguir documentação histórica, esquema, simulação e medição, tal como já fazemos no trabalho do TK2000.
+
+Em qualquer desses contextos, a mesma skill poderá carregar princípios comuns: registrar a origem, não inventar fatos, trabalhar em cópias, mostrar o diff e pedir aprovação. O que muda são os **casos de avaliação** e os critérios de parada. Essa talvez seja a melhor definição prática de portabilidade que alcançamos: preservar o método sem fingir que os domínios são idênticos.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — A palavra que um contador não percebe**
+
+Escolha um texto curto em que uma única palavra possa modificar o grau de certeza. Pode ser um aviso de manutenção, uma instrução de cozinha, uma regra de jogo ou uma descrição de um circuito. Escreva duas versões mantendo os mesmos números, os mesmos nomes e as mesmas medidas, mas mudando cuidadosamente uma expressão como “talvez”, “pode”, “deve”, “não foi verificado” ou “foi confirmado”.
+
+Sem recorrer à IA, pergunte a outra pessoa se as duas frases autorizam a mesma conclusão. Em seguida, descubra que regra automática seria necessária para identificar a alteração e que conhecimento ainda faltaria para decidir qual versão está correta. Se não houver números no texto, melhor ainda: o que restou para o verificador mecânico medir?
+
+Anote uma situação em que o computador pode ajudar e outra em que seria imprudente dispensar julgamento humano. Sua resposta formará um caso novo para a bateria de avaliação de qualquer skill que você criar.
+:::
+
+## Uma biblioteca de erros que cresce junto com a obra
+
+Na nossa oficina, casos de falha não precisam desaparecer quando são resolvidos. O transbordamento de código que encontramos numa página de uma prévia anterior do livro continua registrado como um defeito de referência. Seu detector tem alcance limitado e não consegue garantir que toda página está correta. Ainda assim, aquele erro ensinou a criar um teste concreto. O objetivo da segunda passada visual será justamente ampliar a inspeção sem perder a linha de base original.
+
+Nos próximos capítulos, conectaremos essa pequena biblioteca de avaliações ao restante do fluxo: repositório versionado, permissões, adaptadores de ferramentas, registros de execução e publicação. A meta não será aumentar a quantidade de automações até ninguém saber quem fez o quê. Será construir uma cadeia em que possamos perguntar, a cada passo: **qual versão foi usada, que ferramenta executou, que prova apareceu e quem autorizou a próxima mudança?**

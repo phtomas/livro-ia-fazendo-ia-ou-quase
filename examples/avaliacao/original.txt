@@ -1,0 +1,1 @@
+O esquema indica uma linha de energia de +5V; não houve medição física.

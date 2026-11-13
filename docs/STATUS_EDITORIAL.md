@@ -87,3 +87,12 @@
 - Novo `agents/politica_orquestrador.py`: avaliação determinística de nomes de ações; nega operações desconhecidas e exige aprovação humana para publicar ou modificar. **Não executa a ação nem constitui agente autônomo.**
 - Testes cobrem interrupção induzida, retomada, mudança de fonte, reprovação estrutural e políticas. Os capítulos 1–8 e a Apresentação foram preservados byte a byte em comparação com a v0.8.
 - Defeito `EDITORIAL-PDF-059` da prova v0.6 preservado intencionalmente; nenhuma afirmação de PASS gráfico global. Quarto PDF final, aprovação autoral e ensaios em serviços externos continuam pendentes.
+
+
+## Rodada v1.0 — um ciclo supervisionado e a avaliação mecânica de revisões
+
+- Capítulos 11 e 12 redigidos, com boxes de prática e experimentos autônomos, ambos sujeitos à leitura e aprovação do autor depois da primeira passada.
+- O ciclo supervisionado recebe plano externo e chama adaptadores locais permitidos. **Não é prova de que um modelo escolheu ferramenta, nem um agente LLM autônomo instalado**.
+- A avaliação de propostas numéricas cobre apenas os tokens e trechos protegidos; `PASS_LIMITED` não confirma fatos nem voz.
+- Os erros não descritos que o autor identificou foram deliberadamente mantidos fora do conhecimento do processo para a revisão final; não presumir ausência de erros pelo PASS dos verificadores.
+- O PDF histórico com problema na página 59 não foi modificado.

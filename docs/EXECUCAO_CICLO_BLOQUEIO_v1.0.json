@@ -1,0 +1,44 @@
+{
+  "prototype": "ciclo_supervisionado",
+  "version": "0.1",
+  "goal": "Demonstrar que a tentativa de publicar fica bloqueada",
+  "source_of_proposal": "demonstracao_roteirizada",
+  "model_requested": null,
+  "model_reported": null,
+  "model_verified": false,
+  "uses_llm": false,
+  "status": "HALTED_POLICY",
+  "steps_requested": 3,
+  "steps_observed": [
+    {
+      "action": "CHECK_STRUCTURE",
+      "policy": "ALLOW_READ_ONLY",
+      "executed": true,
+      "status": "PASS",
+      "results": [
+        {
+          "tool": "verificar_boxes.py",
+          "return_code": 0,
+          "stdout_tail": "-quando-uma-skill-merece-confianca.qmd experimento 1: marcador explícito presente\nPASS chapters/12-quando-uma-skill-merece-confianca.qmd box 1: 6 marcadores estruturais presentes\nExperimentos do leitor encontrados: 12\nAVISO: BOX COM IA e EXPERIMENTO DO LEITOR são recursos didáticos DIFERENTES. PASS estrutural não comprova conteúdo nem diagramação.\n"
+        },
+        {
+          "tool": "verificar_estrutura.py",
+          "return_code": 0,
+          "stdout_tail": "PASS: 12 capítulos com numeração automática; apresentação, anexos e referências não numerados\nNOTA: checagem estrutural não substitui Quarto nem paginação.\n"
+        }
+      ],
+      "step": 1
+    },
+    {
+      "action": "PUBLISH",
+      "policy": "REQUIRE_HUMAN_APPROVAL",
+      "executed": false,
+      "status": "BLOCKED",
+      "reason": "política não permite execução; nenhuma aprovação local é aceita como prova de identidade",
+      "step": 2
+    }
+  ],
+  "changed_manuscript": false,
+  "published": false,
+  "approval_authentication": "not_implemented"
+}

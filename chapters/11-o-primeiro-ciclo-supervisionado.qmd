@@ -1,0 +1,104 @@
+# O primeiro ciclo supervisionado: do pedido à evidência
+
+## A hora em que as peças se encontram
+
+Até aqui fomos montando nossa oficina como quem prepara uma bancada de trabalho. Primeiro aprendemos a distinguir o que é uma instrução, uma skill e uma ferramenta. Depois guardamos o contrato editorial, escrevemos verificadores, construímos um workflow capaz de lembrar em que ponto havia parado e colocamos uma política na porta para impedir certas ações. As peças foram testadas individualmente. Faltava experimentar o que acontece quando precisam trabalhar juntas.
+
+Essa é uma hora perigosa para a vaidade. Poderíamos colocar uma caixa com o nome “agente editorial”, apontar para os scripts que já funcionam e anunciar a inauguração. A caixa ficaria bonita no diagrama. Mas um programa que executa três verificações na sequência ainda pode ser apenas um workflow. Para falar de agente com rigor, precisamos mostrar **de onde veio a escolha dos passos, o que foi de fato executado, como o resultado voltou para a próxima decisão e até onde havia autonomia**.
+
+Nossa primeira integração será deliberadamente modesta. Receberemos um plano de ações em JSON, consultaremos a política de permissões antes de cada passo e executaremos somente operações da nossa lista fechada. O controlador guardará um relatório. Quando aparecer uma ação proibida, desconhecida ou dependente de aprovação humana, ele interromperá a sequência. Não aceitará uma frase simpática no plano como prova de autorização.
+
+É importante dar o nome certo ao resultado. **Nesta versão, o planejamento é externo:** pode ter sido escrito pelo leitor ou sugerido por um modelo numa conversa. O programa não possui ainda um LLM conectado para escolher autonomamente cada próximo passo. Portanto, teremos um **ciclo supervisionado operacional**, não uma demonstração de um agente de IA autônomo completo. Essa distinção não diminui a experiência. Ela nos protege da tentação de dar um PASS a algo que ainda não testamos.
+
+## Uma ordem de serviço não é uma ordem para fazer qualquer coisa
+
+Imagine que recebemos o seguinte pedido: “Confira o estado do livro e me diga se ele está pronto”. A pergunta é curta, mas envolve várias possibilidades. Podemos ler os arquivos `.qmd`, executar verificadores, procurar referências ausentes, gerar uma prévia, identificar problemas de diagramação e perguntar ao autor se aprova o conteúdo. Publicar o livro, porém, não é uma consequência automática de terminar uma checagem.
+
+O primeiro erro seria transformar esse pedido em uma única função chamada `FAZER_TUDO`. O segundo seria entregar o texto inteiro diretamente ao terminal, esperando que ele decida quais comandos executar. Em ambos os casos perderíamos a diferença entre intenção, permissão e operação. Preferimos decompor a ordem de serviço em ações pequenas, cada qual com um contrato.
+
+Nosso protótipo reconhece ações como `READ_SOURCE`, `CHECK_STRUCTURE`, `PROPOSE_TEXT_DIFF` e `GENERATE_REPORT`. Elas têm adaptadores específicos: ler um arquivo de texto permitido; executar nossos dois verificadores estruturais; preparar uma comparação entre o original e uma proposta; registrar o relatório. O controlador **não interpreta nomes de ferramentas como comandos de sistema**. Uma palavra inventada no plano não ganha automaticamente um programa correspondente.
+
+A política do capítulo anterior continua independente. `CHECK_STRUCTURE` pode ser executada porque a política a reconhece como leitura e o controlador possui um adaptador para ela. `PROPOSE_TEXT_DIFF` pode preparar uma proposta, mas não substituir o texto canônico. `PUBLISH` continua exigindo aprovação; como ainda não implementamos uma interface de aprovação autenticada, o controlador bloqueia a operação. `ACCESS_SECRET` é negada. Não existe um parâmetro mágico `aprovado=true` capaz de vencer essas fronteiras.
+
+Observe como isso muda o diálogo com a IA. Em vez de pedir “faça o livro ficar pronto”, podemos solicitar um **plano de verificação**. O modelo sugere etapas; a política examina os nomes; as ferramentas aceitas operam; os resultados são registrados; o ser humano conserva as decisões de publicação. O modelo ainda precisa demonstrar sua qualidade como planejador. No laboratório de hoje, por segurança e reprodutibilidade, usaremos planos conhecidos.
+
+## O registro que separa proposta e acontecimento
+
+O arquivo `agents/ciclo_supervisionado.py` executa esse contrato mínimo. A entrada é um JSON de plano. O programa examina cada etapa e grava um segundo JSON, com a decisão de política, o estado de execução e a saída observável. Não sobrescreve capítulos. Os únicos arquivos que produz são relatórios no local indicado, fora do manuscrito ou dentro da pasta de saída `dist/`.
+
+No primeiro plano de exemplo, pedimos três operações: ler a Apresentação, conferir a estrutura e preparar o relatório. O resultado esperado é `PASS_LIMITED`, com as três etapas observadas. Na segunda demonstração, inserimos `PUBLISH` entre a conferência e o relatório. A política exige aprovação; o ciclo para ali. A etapa seguinte não acontece. O registro deve indicar `HALTED_POLICY`, e não “publicação concluída”.
+
+Essa experiência toca num detalhe que costuma desaparecer em apresentações de sistemas inteligentes. **O nome da ferramenta no plano não é evidência de execução.** Só o registro de uma chamada efetiva, associado ao resultado do adaptador, permite afirmar que aquela ferramenta operou. Se o plano mencionar uma ferramenta inexistente, o relatório precisa conservar essa tentativa como bloqueada. Se um verificador retornar erro, a sequência precisa parar e preservar o resultado de falha, em vez de seguir para uma conclusão otimista.
+
+Há outra diferença importante: o relatório possui campos para origem do plano, modelo solicitado e modelo efetivamente reportado. Nesta implementação, o modelo reportado é `null` e `uses_llm` é `false`. Não gastamos tokens de API para rodar uma checagem estrutural em Python. Se um dia conectarmos um modelo por uma API, teremos de capturar a identificação e o consumo que o provedor realmente devolver, e não preencher esses campos com o nome que desejávamos utilizar.
+
+Não devemos confundir a existência de um JSON de auditoria com confiança irrestrita nele. Um relatório só é evidência forte quando sabemos de onde veio, que código o produziu e em que contexto. Se outro programa puder alterar o arquivo sem deixar rastro, precisaremos de controles adicionais. O nosso protótipo não tem armazenamento transacional, assinatura digital, identidade autenticada de aprovadores ou isolamento de processos. Estamos testando **uma fronteira operacional pequena**, não substituindo a segurança de um sistema inteiro.
+
+## Um ensaio que falha exatamente onde deve
+
+Antes de dar ao sistema uma proposta com dez ferramentas, começamos com dois planos minúsculos. Um é seguro e simples. O outro contém uma ordem de publicação que não deve ser executada. A diferença é suficientemente clara para não depender de impressão subjetiva sobre a resposta do modelo.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 11 — Um plano pode pedir; só a política pode permitir**
+
+**O que testar.** Comprovar que o controlador distingue ações propostas de ações executadas e interrompe o ciclo diante de uma intervenção não autorizada.
+
+**Como proceder.** Na raiz do projeto Quarto, com Python instalado, execute os dois planos fornecidos em `examples/`. Os relatórios serão gravados em `dist/`. O manuscrito não será alterado.
+
+**Prompt que usaríamos hoje**
+
+> Proponha um plano para conferir a estrutura de um livro sem modificar seus arquivos. Utilize apenas os nomes READ_SOURCE, CHECK_STRUCTURE, PROPOSE_TEXT_DIFF, GENERATE_REPORT e PUBLISH. Para cada ação, explique qual resultado seria necessário antes do passo seguinte. Não diga que executou algo; entregue somente a proposta e sinalize qualquer etapa que dependa de aprovação humana.
+
+**Execução local, sem modelo**
+
+```sh
+python agents/ciclo_supervisionado.py \
+  --root . \
+  --plan examples/plano_supervisionado_leitura.json \
+  --report dist/leitura.json
+```
+
+Para testar o bloqueio, troque `plano_supervisionado_leitura.json` por `plano_supervisionado_bloqueio.json` e grave em `dist/bloqueio.json`. Nesse caso, o programa devolve um código de saída diferente de zero por uma razão **esperada**.
+
+**Por que funciona.** Um plano externo não recebe autoridade para escolher qualquer comando. O controlador consulta uma política separada e possui somente adaptadores explícitos para as operações permitidas.
+
+**Como verificar.** No primeiro relatório procure `PASS_LIMITED`, `changed_manuscript: false` e `published: false`. No segundo, confirme `HALTED_POLICY`, a interrupção em `PUBLISH` e a ausência de execução da etapa seguinte. Se houver alteração no manuscrito ou publicação, o teste falhou.
+:::
+
+A execução não precisa ser empolgante para ser instrutiva. Uma pequena lista de operações, acompanhada por campos verificáveis, vale mais que um vídeo de um agente “trabalhando sozinho” no qual ninguém sabe dizer quem abriu o arquivo, qual versão foi usada ou quem aprovou a saída. O entusiasmo pode esperar alguns segundos. Os dados precisam aparecer primeiro.
+
+## E quando o plano tenta passar pela porta dos fundos?
+
+Um modelo pode propor algo sensato e, na etapa seguinte, produzir parâmetros absurdos. Por isso nossa política não deve examinar somente o nome da ação. O adaptador de leitura também precisa restringir caminhos: nada de `../` para escapar da pasta do projeto, nada de links simbólicos que apontem para fora e nada de abrir arquivos secretos só porque foram mencionados no pedido. Nosso protótipo aceita extensões textuais conhecidas e estabelece limites de tamanho. Não é um sistema de isolamento completo, mas já impede alguns erros comuns do próprio exemplo.
+
+O adaptador de proposta de texto também trabalha sob restrições. Recebe um trecho original que deve aparecer **uma única vez** e um trecho substituto. Se a localização for ambígua, ele falha. Se puder gerar a comparação, devolve um *diff* sem regravar o documento. Não aceita “corrigir tudo” como licença para editar passagens não selecionadas. Esse comportamento é especialmente importante para o método de revisão em blocos que utilizaremos quando o manuscrito inteiro estiver pronto.
+
+Ainda há uma fronteira que não devemos romantizar. Um controlador em Python não impede, sozinho, que outro programa no mesmo computador modifique os arquivos. As permissões reais do sistema operacional, do repositório e do serviço remoto continuam valendo. Assim como o GitHub nos mostrou na prática, autorização precisa ser verificada no ponto onde a operação acontece. Uma política de alto nível é útil; uma credencial com poderes excessivos continua perigosa.
+
+Quando chegarmos à integração com uma IA de verdade, será necessário provar mais um requisito: **o modelo escolheu a ferramenta a partir de um resultado real e respeitou a resposta recebida**. Essa prova exigirá chamadas efetivas ao provedor ou ambiente escolhido, um registro das decisões e um conjunto de tarefas de avaliação. O exemplo atual não sustenta essa conclusão. Ele deixa a infraestrutura pronta para testá-la.
+
+## O mesmo ciclo, mas não o mesmo risco
+
+Na editoração do nosso livro, os passos iniciais são de baixo risco: ler um capítulo, verificar a presença de boxes e preparar uma proposta de correção. Publicar a edição no GitHub Pages é outra categoria de ação. A prévia pública pode ser produzida automaticamente após um commit autorizado, mas isso não significa que a edição impressa ou os fatos técnicos receberam aprovação do autor. Quando aplicarmos os componentes ao Manual Técnico do TK2000, essa distinção deverá ficar ainda mais rigorosa.
+
+Num jogo, o agente supervisionado poderia propor uma sequência de testes para um programa de TK90X ou MSX: conferir os fontes, compilar, executar no emulador e registrar o que ocorreu. O adaptador de compilação poderá ser automático, desde que a ferramenta e o ambiente sejam conhecidos. Mas uma compilação sem erro não prova que o jogo é divertido, nem mesmo que sua tela inicial funciona no equipamento real. O critério de parada deixa de ser “PDF pronto” e passa a ser “build executada e comportamento observado”.
+
+Em hardware, o ciclo inicial poderá consultar uma netlist, chamar ERC ou DRC e reunir uma lista de divergências. Não deverá energizar uma placa, mover um instrumento ou alterar um esquema aprovado sem o controle adequado. Os mesmos nomes de estados — proposto, permitido, executado, verificado — continuam úteis; o contrato técnico, as ferramentas e o risco precisam ser diferentes. O sistema que lê uma tabela sem causar dano não recebe por isso permissão para acionar uma bobina.
+
+É tentador imaginar que uma arquitetura genérica resolverá todos esses projetos. A arquitetura pode ser compartilhada; **os critérios de evidência não**. Uma figura editorial, uma animação de jogo e um esquema elétrico não são três versões da mesma tarefa, embora todas possam passar por um fluxo de revisão.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Quem realmente tomou a decisão?**
+
+Escolha uma atividade da sua rotina que outra pessoa poderia ajudar a executar. Pode ser organizar fotografias, corrigir um texto, testar uma aplicação ou conferir um pequeno circuito. Sem consultar uma IA, desenhe a fronteira entre **sugerir**, **executar** e **aprovar**. Qual etapa poderia acontecer sem pedir licença? Qual produziria um efeito que não deve ser repetido? Que prova você aceitaria de que o trabalho aconteceu?
+
+Agora imagine três resultados inesperados: uma entrada ausente, uma ferramenta que falha e uma solicitação de fazer algo fora do escopo. Decida onde a atividade deve parar em cada situação. Só depois compare seu desenho com o nosso controlador e identifique uma regra que faltou nele. Não precisamos que você concorde com a nossa lista: queremos que consiga justificá-la.
+:::
+
+## A peça seguinte não é outro agente
+
+Nosso ciclo supervisionado funciona como exercício de controle e auditoria, mas ainda depende da qualidade das propostas que recebe. Se uma IA sugerir uma revisão que soa melhor e modifica silenciosamente uma tensão de 5V para 12V, nenhum bloqueio de publicação substituirá a necessidade de perceber a mudança antes da aprovação.
+
+É por isso que a próxima peça será um **avaliador de propostas**. Não um árbitro que se autoproclama capaz de julgar tudo, e sim um conjunto de verificações com alcance declarado. Começaremos por invariantes modestos: números, unidades e expressões que não podem desaparecer. Depois examinaremos o que continua escapando a esses testes. A mesma disciplina que nos ajudou a controlar ações agora terá de ajudar a controlar conteúdo.
