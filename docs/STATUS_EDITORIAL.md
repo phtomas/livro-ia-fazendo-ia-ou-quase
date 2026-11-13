@@ -78,3 +78,12 @@
 - 13 testes unitários locais PASS. Verificação estrutural dos oito capítulos PASS. Essas evidências não aprovam voz, segurança total, paginação ou publicação.
 - Capítulos 1–6 não foram reescritos. A Apresentação segue a emenda v0.7.1. A falha `EDITORIAL-PDF-059` permanece registrada como defeito conhecido da prova v0.6, sem correção.
 - Quarto nativo no GitHub Pages deverá ser verificado depois do commit; prévia Pandoc local não é publicação final.
+
+
+## Rodada v0.9 — Capítulos 9–10 e coordenação com estado
+
+- Capítulos 9 e 10 redigidos em primeira passada: workflow com checkpoints, retomada, idempotência, política de permissões e papel do agente. Cada capítulo possui os dois recursos didáticos distintos e comparação livro/jogo/hardware; aprovação autoral ainda pendente.
+- Novo `workflows/fluxo_com_checkpoints.py`: só lê fontes e executa verificadores existentes; grava estado externo à árvore do projeto e bloqueia reutilização de checkpoints de fontes modificadas. **Não é processamento transacional concorrente ou execução de LLM.**
+- Novo `agents/politica_orquestrador.py`: avaliação determinística de nomes de ações; nega operações desconhecidas e exige aprovação humana para publicar ou modificar. **Não executa a ação nem constitui agente autônomo.**
+- Testes cobrem interrupção induzida, retomada, mudança de fonte, reprovação estrutural e políticas. Os capítulos 1–8 e a Apresentação foram preservados byte a byte em comparação com a v0.8.
+- Defeito `EDITORIAL-PDF-059` da prova v0.6 preservado intencionalmente; nenhuma afirmação de PASS gráfico global. Quarto PDF final, aprovação autoral e ensaios em serviços externos continuam pendentes.

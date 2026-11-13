@@ -112,3 +112,19 @@ A Apresentação passou a explicar ao leitor o Manual Técnico do TK2000 como ob
 - `tests/test_instalar_skill_local.py` testa comportamento local de transporte. PASS nesses testes não comprova ativação ou eficácia da skill em ChatGPT, Claude Code, Gemini CLI ou Codex. Ver `docs/PORTABILIDADE_SKILLS.md` e `docs/RELATORIO_DE_TESTES_v0.8.md`.
 - Fonte versionada: GitHub `main`. Espelho da pasta Quarto no Drive do autor em `Projetosia/Livro — IA fazendo IA (ou quase)/02_Manuscrito/Quarto_Fonte`. Prévia web pública renderizada pelo GitHub Actions e publicada no Pages se o build passar. **Não há sincronização automática bidirecional entre Drive e GitHub**.
 - O defeito `EDITORIAL-PDF-059` da prévia PDF v0.6 continua um caso conhecido preservado, sem correção nesta rodada. Provas locais de Pandoc não substituem Quarto nativo nem aprovação de publicação.
+
+## Rodada v0.9 — checkpoints e política de orquestração (Capítulos 9 e 10)
+
+A primeira passada passa a incluir dez capítulos. O Capítulo 9 ensina estados, idempotência e retomada usando o programa determinístico `workflows/fluxo_com_checkpoints.py`. O Capítulo 10 introduz a separação entre propostas de um modelo e a autorização da oficina, com `agents/politica_orquestrador.py`. **Nenhum dos dois é um agente autônomo, e nenhum publica ou altera fontes.**
+
+Os novos testes em `tests/test_fluxo_com_checkpoints.py` e `tests/test_politica_orquestrador.py` cobrem interrupção, retomada, bloqueio de fontes alteradas e política de permissão. O controlador trabalha com estado fora do projeto, sem credenciais e sem acesso a redes; a integração com GitHub/Drive permanece tarefa separada. Rodar `python -m unittest discover -s tests -p 'test_*.py' -v` e `python scripts/verificar_boxes.py`. O defeito da página 59 da baseline PDF v0.6 continua explicitamente aberto e não foi corrigido.
+
+Para executar laboratório sem modificar o manuscrito:
+
+```sh
+python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint --fail-at after-inventory
+python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint
+python agents/politica_orquestrador.py --action PUBLISH
+```
+
+O PDF Pandoc é prova de leitura, não miolo final. A prévia Quarto HTML é gerada pelo workflow em `.github/workflows/previa-quarto.yml` a cada commit em `main`, com publicação no GitHub Pages. O projeto Quarto fonte é espelhado para o Google Drive do autor (`Projetosia/.../Quarto_Fonte`), sem ligação automática entre Git e Drive.

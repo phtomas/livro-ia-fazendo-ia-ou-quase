@@ -1,0 +1,106 @@
+# O fluxo que sabe onde parou
+
+## O dia em que apertar de novo deixou de ser uma boa ideia
+
+Imagine que terminamos uma revisão e precisamos preparar o próximo pacote do livro. O procedimento parece simples: conferir a estrutura dos capítulos, gerar uma prévia, registrar o resultado e encaminhá-lo para aprovação. Não é uma tarefa intelectualmente misteriosa. O problema começa quando, entre uma etapa e outra, alguma coisa falha. Uma conexão cai. O processo é interrompido. O programa termina, mas não sabemos se chegou a escrever o relatório. Alguém volta no dia seguinte e pergunta se pode apertar o botão mais uma vez.
+
+Quando trabalhamos com uma única operação, recomeçar costuma ser inofensivo. Quando temos uma cadeia de operações, essa resposta pode virar armadilha. Se já copiamos um arquivo, uma nova cópia poderá ser redundante. Se já enviamos um aviso, poderemos enviar dois. Se já publicamos uma versão, poderemos substituí-la sem querer. Se uma correção foi aprovada ontem e a fonte mudou hoje, não podemos usar a aprovação antiga como se fosse prova da nova edição.
+
+Nosso livro encontrou uma versão modesta desse problema quando começamos a manter dois destinos: o GitHub e a pasta `Projetosia` do Google Drive. Ambos servem ao projeto, mas não se atualizam entre si por alguma mágica. Um commit pode existir sem que a pasta local do autor tenha recebido a atualização. Uma alteração no Drive pode ser sincronizada com o computador e ainda não ser um commit. Era preciso perguntar **qual versão foi conferida, quais operações ocorreram e o que está pendente**. Não precisávamos de um agente com discurso inspirador; precisávamos primeiro de um fluxo que pudesse responder a essas perguntas.
+
+Este capítulo acrescenta uma peça que faltava à nossa oficina: o **checkpoint**, um registro durável do ponto alcançado. Ele não substitui uma boa ferramenta nem uma boa instrução. Serve para impedir que o trabalho perca o rumo quando a conversa termina, o processo cai ou o operador muda.
+
+## Workflow não é só uma lista de tarefas
+
+No primeiro encontro com workflows, costumamos desenhar algumas caixas ligadas por setas. Uma caixa recebe o texto, outra verifica, uma terceira publica. Isso explica a sequência, mas ainda esconde as perguntas incômodas. E se uma verificação falhar? E se o arquivo for alterado depois da verificação? E se alguém repetir a execução? E se uma ferramenta disser “sucesso” mas o arquivo de destino não existir?
+
+Um workflow confiável precisa de pelo menos quatro coisas: **entradas identificadas**, **condições de avanço**, **resultados observáveis** e **estados de parada**. Uma etapa não termina simplesmente porque o programa retornou algo. Ela termina quando temos evidência suficiente para decidir se devemos continuar.
+
+No laboratório editorial, uma sequência pode começar por `INVENTORIED`: descobrimos quais fontes fazem parte do trabalho e registramos seus hashes. Se as verificações estruturais passarem, chegamos a `STRUCTURE_OK`. O resultado seguinte não é necessariamente `PUBLISHED`; em nosso caso é `WAITING_HUMAN`, porque a presença de títulos e boxes não prova que o texto representa a voz do autor. Um erro pode deixar o fluxo em `STRUCTURE_FAILED`, enquanto uma interrupção simulada nos permite observar `INTERRUPTED`.
+
+Os nomes não são importantes por serem escritos em inglês. Poderíamos usar português. O importante é que representem **estados diferentes**, com significado verificável. Não existe um único estado genérico chamado “deu ruim”. Quando a análise reprova, precisamos saber se o problema é a entrada, a execução, a ferramenta, a permissão ou um resultado técnico inconclusivo.
+
+Uma distinção também merece ficar explícita: **checkpoint é registro; não é garantia de transação distribuída**. Nosso protótipo salva informações em JSON e usa substituição atômica para atualizar o arquivo de estado. Isso é útil numa execução local controlada, mas não garante coordenação entre vários computadores simultâneos nem desfaz efeitos remotos já produzidos. Se um dia quisermos gerenciar publicações concorrentes ou cobrar serviços externos, precisaremos de mecanismos adicionais. Seria irresponsável vender um arquivo `state.json` como solução universal para sistemas distribuídos.
+
+## O recibo de cada etapa
+
+O que deve ser guardado num checkpoint? Comecemos pelo mínimo necessário para responder “posso continuar?”. A identidade da tarefa, o conjunto de arquivos considerados, o estado alcançado, os verificadores executados e as condições pendentes. No nosso caso, calculamos SHA-256 dos `.qmd`, da Apresentação e do `_quarto.yml`. Se algum desses arquivos mudar, o checkpoint anterior deixa de representar a fonte atual.
+
+Isso não significa que SHA-256 seja uma assinatura de autoria, um certificado de qualidade ou uma proteção completa contra uso malicioso. É uma impressão digital útil para conferir igualdade de bytes. Dois arquivos com o mesmo nome podem ter conteúdos diferentes; um arquivo com o mesmo hash da linha de base mantém os mesmos bytes. O hash, porém, não nos diz se a frase está correta, se a pessoa autorizou o conteúdo ou se o desenho do circuito está fiel ao esquema. O P1 do nosso método — honestidade acima de tudo — começa justamente na escolha correta das palavras para descrever a prova.
+
+Observe a diferença entre três informações possíveis. “O capítulo foi revisado” pode ser um relato humano que precisamos confirmar. “O verificador encontrou o box esperado” é uma observação específica de software. “O autor aprovou a revisão” é uma decisão, que não pode ser deduzida das duas anteriores. Se juntarmos tudo num campo `status: PASS`, a informação mais importante desaparece.
+
+Por isso nosso fluxo separa o resultado técnico da aprovação. O estado `WAITING_HUMAN` não é um defeito do sistema. É a forma correta de representar a fronteira que escolhemos não atravessar automaticamente.
+
+## A primeira retomada é provocada de propósito
+
+Vamos reproduzir o problema em pequena escala. O arquivo `workflows/fluxo_com_checkpoints.py`, que acompanha este capítulo no repositório, não conversa com um modelo de linguagem, não altera o manuscrito e não publica nada. Ele lê a fonte, cria um manifesto com hashes, chama nossos verificadores estruturais e grava o resultado em um diretório de estado escolhido fora da árvore do livro.
+
+Podemos fazer o teste em uma cópia de trabalho do projeto. A opção `--fail-at after-inventory` simula uma interrupção logo após o inventário. O processo termina com um código distinto de sucesso, mas preserva o checkpoint. Na execução seguinte, sem a injeção, ele compara a fonte atual com o manifesto salvo. Se os bytes não mudaram, continua as verificações. Se mudaram, bloqueia a retomada com aquele estado antigo. Não deve adivinhar qual versão o operador queria processar.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 9 — Um fluxo que se lembra do que comprovou**
+
+**O que testar.** Observar uma interrupção controlada, a retomada com fontes idênticas e o bloqueio quando a fonte muda depois do checkpoint.
+
+**Como proceder.** Use Python 3.11 ou superior numa cópia do repositório. Escolha um diretório temporário **fora** da pasta de fontes para os relatórios. Execute primeiro a simulação de falha. Depois, execute novamente sem `--fail-at`. Num segundo diretório de ensaio, altere um `.qmd` depois da interrupção e observe o bloqueio. Não use o manuscrito principal como bancada de edição.
+
+**Prompt que usaríamos hoje**
+
+> Explique os estados registrados pelo arquivo `state.json` a seguir e proponha quais evidências adicionais seriam necessárias antes da publicação. Não trate `STRUCTURE_OK` como aprovação do autor. Não altere os arquivos nem invente execuções que não aparecem no log.
+
+O comando determinístico para a primeira rodada é:
+
+```sh
+python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint --fail-at after-inventory
+python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint
+```
+
+**Por que funciona.** O programa associa o checkpoint a hashes das entradas e recusa reaproveitar uma verificação depois que a fonte mudou. O modelo, quando utilizado, entra apenas para interpretar o relatório e sugerir perguntas; não decide que uma execução aconteceu.
+
+**Como verificar.** A primeira execução deve terminar com código 4 e estado `INTERRUPTED`; a retomada sem alteração deve terminar com código 0 e estado `WAITING_HUMAN`. Se alterar uma fonte depois do checkpoint, o retorno esperado é 3 e o estado `BLOCKED`. O script não deve mudar nenhum `.qmd` nem conceder aprovação.
+:::
+
+Há um detalhe que merece atenção antes de copiar os comandos: uma linha de terminal não é um ritual mágico. Se o Python não estiver instalado ou se a pasta não contiver o projeto, o experimento não passou. Se você executou numa versão diferente do repositório, o resultado merece ser identificado como tal. Se as verificações estruturais apresentarem defeitos reais, o fluxo deve parar em vez de afirmar que a retomada funcionou. Estamos medindo um comportamento específico, não encenando uma vitória.
+
+Na nossa rodada de desenvolvimento, os testes incluíram uma interrupção induzida, uma retomada bem-sucedida, uma modificação de fonte que bloqueia o checkpoint anterior e uma reprovação estrutural que impede a aprovação. Os resultados ficam versionados em relatório. **Isso comprova o protótipo local testado; não comprova uma integração distribuída com Drive e GitHub nem um agente autônomo.**
+
+## Repetir é diferente de duplicar
+
+Retomar um workflow nos leva a uma palavra que parece ter sido criada para assustar quem só queria copiar arquivos: *idempotência*. A ideia é amigável. Uma operação idempotente pode ser executada mais de uma vez sem alterar o resultado final depois da primeira execução. Consultar um hash e verificar que ele coincide não modifica a fonte. Reproduzir uma transferência de dinheiro, por outro lado, pode executar a transferência duas vezes. Reenviar uma ordem a uma bobina de pinball não é necessariamente inofensivo. Nem tudo admite “tente de novo” como política padrão.
+
+A documentação de padrões de confiabilidade da Microsoft destaca que as novas tentativas precisam distinguir falhas transitórias de erros persistentes e que operações com efeitos colaterais exigem cuidados especiais de idempotência [@azureRetry2026; @azureIdempotent2026]. Não usaremos esses termos para complicar nossa oficina. Usaremos para impedir que um workflow que parece prestativo faça mais do que devia.
+
+Nosso controlador não executa ações externas e, portanto, consegue ser conservador. Se o estado final já é `WAITING_HUMAN` e os arquivos continuam idênticos, uma nova chamada não executa novamente as verificações. Ela devolve o estado existente. Isso evita retrabalho. Mas também impõe um limite: **um relatório que foi válido ontem não valida automaticamente o ambiente de hoje**. Dependências, versões de ferramentas e serviços remotos podem mudar sem que os arquivos `.qmd` mudem. Em uma aplicação de produção, o manifesto precisaria registrar também esses elementos.
+
+Mais adiante teremos outras situações em que repetir pode ser perigoso. Pense num agente que abre uma issue no GitHub e recebe um timeout depois de enviá-la. Ele não sabe, apenas pelo timeout, se a issue foi criada. Uma segunda tentativa cega pode produzir duas. O procedimento responsável consulta o resultado da primeira operação, usa chaves de idempotência quando disponíveis ou pede intervenção humana diante de um estado ambíguo. **Não sabemos** é um estado legítimo.
+
+## A mesma espinha, três oficinas diferentes
+
+No livro, os checkpoints protegem **capítulos, figuras, legendas e aprovações**. Uma falha de renderização pode pedir nova geração da prévia, mas nunca deve apagar a última versão aprovada. No nosso futuro teste com o Manual Técnico do TK2000, uma figura só poderá receber estado de “validada tecnicamente” se for rastreada ao esquema, à revisão de placa e à evidência pertinente. Uma bela imagem não pode herdar automaticamente esse estado.
+
+No jogo, o equivalente será proteger uma **build jogável**, com versão do código, assets e resultados de teste. Se um gerador de sprites falha, não queremos perder a última versão que abre e roda no emulador. Se alteramos o mecanismo de colisão, o PASS antigo da movimentação não comprova que a jogabilidade continua correta. Um checkpoint deve registrar que compilou, em qual emulador foi executado e que cenários foram observados. A mesma espinha do workflow permanece; o objeto da prova muda.
+
+No hardware, os limites ficam ainda mais importantes. Antes de mandar fabricar uma PCB, podemos registrar esquemático, netlist, ERC/DRC, revisão de componentes e autorização. Uma simulação digital favorável não substitui medição elétrica. E nunca deixaremos que um workflow reaplique automaticamente uma alteração em equipamento energizado apenas porque um teste lógico terminou com status verde. Quando a consequência física aumenta, aumenta também o rigor do checkpoint e a necessidade de aprovação.
+
+Essa é a descoberta que torna os três temas comparáveis. O fluxo não serve porque sabe o que é um parágrafo, um sprite ou um transistor. Ele serve porque sabe **identificar a entrada, executar verificações apropriadas, guardar o resultado e parar onde sua autoridade acaba**.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O botão que não deve ser apertado duas vezes**
+
+Pense em alguma tarefa da sua rotina que tenha duas ou mais etapas. Não precisa envolver computador: enviar documentos, fechar uma encomenda, atualizar uma planilha ou montar um circuito também serve. Imagine que a execução foi interrompida exatamente entre a penúltima e a última etapa.
+
+Sem pedir ajuda à IA, faça duas listas curtas: **o que você consegue provar que aconteceu** e **o que você apenas suspeita que aconteceu**. Em seguida, escolha uma operação que poderia ser repetida com segurança e outra que poderia produzir duplicação, perda ou dano. Que evidência permitiria retomar a tarefa? Onde seria necessário pedir autorização?
+
+Se quiser, compare sua resposta com a de outra pessoa que conheça o processo. O ponto não é acertar um nome técnico; é perceber quantas vezes tratamos uma suposição como checkpoint. Guarde sua conclusão: ela servirá de base para o capítulo seguinte.
+:::
+
+## O que falta para chamarmos isso de pronto
+
+O protótipo foi propositalmente mantido pequeno. Ainda não resolve concorrência entre processos; não possui banco transacional; não agenda tentativas com políticas de atraso; não envia notificações; não interage com provedores externos; não possui interface de aprovação autenticada. Não devemos esconder nada disso atrás de uma palavra como *orquestração*.
+
+Mas ele já nos deu algo valioso. Conseguimos parar no meio, continuar depois, distinguir fonte alterada de fonte intacta e manter a decisão humana explícita. Esse fluxo será uma das fundações de nosso futuro agente editorial. O agente não precisa reinventar essas garantias: deverá utilizá-las e respeitar suas respostas.
+
+O próximo passo não será dar um crachá de gerente ao modelo. Será decidir **quais escolhas ele pode propor, quais operações ele pode executar e quem tem o direito de dizer “publique”**. Porque, quando um fluxo começa a tomar decisões, precisamos falar sobre autoridade tanto quanto falamos sobre inteligência.

@@ -1,0 +1,111 @@
+# Quem deixa o agente decidir?
+
+## Um coordenador não recebe as chaves da oficina
+
+Agora temos uma skill de revisão autoral, ferramentas para copiar arquivos e inspecionar certos problemas de diagramação, além de um workflow que sabe onde parou. Já conseguimos testar partes do conjunto sem pedir a um modelo que invente respostas. Seria natural perguntar: não está na hora de colocar um agente para coordenar isso tudo?
+
+Está na hora de **projetar a coordenação**. Não é a mesma coisa que liberar todas as permissões.
+
+Pense em alguém que chega para ajudar numa oficina. Ele pode consultar os manuais, separar ferramentas, anotar peças faltantes e propor uma sequência de trabalho. Talvez consiga fazer boa parte disso sem interromper o responsável. Mas há decisões que dependem de autorização: alterar o esquema já aprovado, substituir componentes, energizar um equipamento em teste ou declarar que um produto está pronto para o cliente. A competência do ajudante não transfere automaticamente o direito de decidir essas coisas.
+
+Com agentes de IA acontece o mesmo. A possibilidade técnica de acessar um arquivo não equivale à autorização para modificá-lo. A capacidade de produzir um documento não equivale à autoridade para publicá-lo. E uma sugestão plausível de ligação elétrica não pode substituir a medição que ainda falta. Nosso método precisa deixar essas fronteiras visíveis, mesmo quando a plataforma oferece um botão tentador chamado “executar tudo”.
+
+O episódio da permissão negada no GitHub, que contamos anteriormente, ilustra uma diferença importante. A integração conseguia encontrar o repositório do livro, mas a instalação não havia sido autorizada a escrever nele. Recebemos um erro 403. O caminho correto foi inspecionar a autorização, incluir o repositório na lista permitida e repetir a operação. Não seria correto tratar a falha como um pedido para procurar credenciais escondidas ou contornar o controle de acesso. **Permissão não é obstáculo ao agente; é parte do projeto do agente.**
+
+## O que ele pode observar, propor e executar
+
+Vamos dividir as ações possíveis em três famílias. A primeira é a **observação**: ler o manuscrito, calcular hashes, executar um verificador e gerar um relatório. A segunda é a **proposta**: sugerir uma reescrita, preparar um diff, apontar uma figura a redesenhar. A terceira é a **intervenção**: substituir um trecho canônico, remover uma ressalva técnica ou publicar o livro. Essas ações não pertencem ao mesmo nível de risco.
+
+É possível conceder autonomia limitada às duas primeiras sem transformar a terceira em passe livre. Nosso agente editorial poderá, em uma etapa futura, escolher qual ferramenta de inspeção usar conforme a pendência identificada. Mas qualquer proposta que altere conteúdo aprovado deverá deixar um registro comparável. A decisão final do autor não será uma palavra escondida dentro do prompt: será um checkpoint que o sistema possa localizar e cuja ausência o impeça de prosseguir.
+
+Para tornar essa distinção concreta, criamos uma pequena política em Python, `agents/politica_orquestrador.py`. Ela recebe o nome de uma ação e devolve uma das decisões previstas: permitir leitura, permitir apenas proposta, exigir aprovação humana ou negar. A função não executa a ação. Se recebe `PUBLISH`, responde `REQUIRE_HUMAN_APPROVAL`. Se recebe `ACCESS_SECRET`, responde `DENY`. Uma ação desconhecida também é negada. É o comportamento esperado de uma política conservadora: aquilo que não foi autorizado explicitamente não se torna permitido por omissão.
+
+Essa peça **ainda não é um agente**. Não contém modelo de linguagem, não compreende uma solicitação em português nem escolhe ferramentas espontaneamente. Seu valor está no fato de ser determinística, testável e separada da inteligência que um dia fará as propostas. Podemos usá-la como primeira barreira antes de desenhar um ciclo mais autônomo, sem fingir que ela resolve todos os problemas de segurança.
+
+## A fronteira entre o modelo e o executor
+
+Um agente futuro poderá seguir um ciclo bastante simples: receber um objetivo, examinar o estado, propor um próximo passo, submeter a ação à política, acionar a ferramenta autorizada, observar o resultado e atualizar o checkpoint. Depois, se ainda houver trabalho permitido, escolhe o próximo passo. Se o resultado for ambíguo, faltarem dados ou surgir uma decisão reservada ao autor, para.
+
+O segredo não está no tamanho do diagrama, mas nas **interfaces**. A resposta de um modelo não deve ser executada como comando de sistema apenas porque contém uma sequência de caracteres parecida com instrução. Um pedido de ferramenta precisa ter nome conhecido, parâmetros validados e escopo definido. O executor precisa registrar que ferramenta rodou, que arquivos leu, que arquivos escreveu e que resultado devolveu. E a política precisa ser verificada antes de cada operação com efeito externo, não somente quando o agente inicia.
+
+Aqui precisamos evitar uma confusão adicional. Um modelo pode afirmar “usei o verificador de PDF” sem que tenhamos qualquer registro de execução. Isso é texto, não evidência. O que importa é um chamado real à ferramenta, com saída verificável. Da mesma forma, uma política que responde `ALLOW_READ_ONLY` não comprova que o aplicativo remoto respeitou a permissão. **O que foi autorizado, o que foi solicitado e o que realmente aconteceu são registros distintos.**
+
+Para um laboratório pequeno, o ciclo pode ser supervisionado. O agente propõe; uma função determinística avalia; o operador acompanha; o software executa quando o permitido é inequívoco. Em projetos maiores, frameworks de orquestração podem oferecer estado persistido, interrupções e retomadas. Essas facilidades precisam ser testadas, não presumidas. Não queremos começar o estudo de agentes reproduzindo toda a infraestrutura de uma plataforma moderna apenas para mostrar que conseguimos.
+
+## Uma política que sabe dizer não
+
+Há quem considere frustrante a resposta “exige aprovação humana”. Eu a considero uma das mais úteis que nosso sistema pode produzir. Ela revela onde termina a autonomia concedida. Se a ferramenta de revisão encontrar uma frase confusa, pode preparar uma proposta. Se uma ilustração de placa não coincidir com o esquemático, pode registrar a divergência. Mas retirar uma ressalva sobre eletrônica sem provas novas, alterar uma interpretação técnica ou publicar uma edição definitiva são ações reservadas ao responsável.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 10 — Antes de executar, perguntar quem autorizou**
+
+**O que testar.** Distinguir uma sugestão de agente de uma ação realmente autorizada e de uma ação efetivamente executada.
+
+**Como proceder.** Use o pequeno avaliador determinístico incluído no repositório. Execute primeiro uma operação de leitura e depois uma operação de publicação. Não é necessário conectar nenhuma conta nem fornecer credenciais.
+
+**Prompt que usaríamos hoje**
+
+> Receba o objetivo “preparar para publicação um capítulo do manual técnico” e proponha três próximos passos, sem executar nenhum. Para cada um, informe o nome da ação, a evidência necessária, o risco, a autorização exigida e a condição para interromper. Não suponha que a existência de um PDF demonstra aprovação editorial. Se a ação não estiver autorizada, não procure um caminho alternativo para executá-la.
+
+Para experimentar a política sem usar IA:
+
+```sh
+python agents/politica_orquestrador.py --action CHECK_STRUCTURE
+python agents/politica_orquestrador.py --action PUBLISH
+python agents/politica_orquestrador.py --action ACCESS_SECRET
+```
+
+**Por que funciona.** A política representa explicitamente as permissões mínimas da oficina e devolve decisões que podem ser testadas sem inferência. O modelo, se participar, apenas propõe o próximo passo; não altera as regras por redação persuasiva.
+
+**Como verificar.** `CHECK_STRUCTURE` devolve `ALLOW_READ_ONLY`; `PUBLISH` devolve `REQUIRE_HUMAN_APPROVAL`; `ACCESS_SECRET` devolve `DENY`. Todas as respostas devem declarar `is_executed: false`. Se o programa executar qualquer ação, ou se o modelo disser que publicou algo sem o respectivo resultado externo, o teste falhou.
+:::
+
+Observe o último critério com atenção. Não basta a política negar um acesso proibido se alguma outra parte do sistema puder executar a mesma ação sem consultá-la. Também não basta um agente “prometer” obedecer ao contrato. Num projeto real, o executor e as credenciais devem impor controles técnicos compatíveis com a política. Nossa prova atual é **limitada ao módulo de decisão**. A integração com um executor seguro e com serviços externos será outro ensaio, com seus próprios testes.
+
+Essa separação evita uma ilusão comum: imaginar que a segurança de um agente está resolvida quando escrevemos “não faça nada perigoso” numa mensagem. Instruções ajudam a orientar. Permissões, isolamento, validação de entradas e logs ajudam a restringir o que pode acontecer. Para uma ação sensível, precisamos dos dois — e, quando aplicável, de uma pessoa responsável.
+
+## O agente não deve se deixar contratar pelos arquivos que lê
+
+O trabalho editorial tem uma particularidade: lidamos o tempo inteiro com conteúdo de terceiros. Podemos abrir um artigo, um README, um PDF técnico ou uma página de documentação. O texto consultado pode trazer comandos, instruções de instalação, exemplos e até frases que parecem estar falando diretamente com o assistente. Mas aquilo que lemos como **fonte** não vira, por isso, uma **ordem**.
+
+Imagine que um arquivo recuperado para ajudar a documentar o TK2000 contenha uma instrução pedindo para ignorar o contrato editorial e substituir o desenho de uma placa por uma imagem qualquer. O conteúdo pode ser útil como objeto de análise; não ganha permissão para modificar nossas regras. Essa é a essência do cuidado contra injeções de prompt: o agente precisa separar quem definiu a tarefa do material que está examinando.
+
+No jogo, o mesmo risco aparece em repositórios baixados para estudar um exemplo ou em arquivos com comentários que sugerem scripts externos. No hardware, pode surgir em instruções de um projeto de terceiros que presumem outra revisão de placa ou outra tensão de alimentação. A regra comum é clara: **consultar não significa obedecer, e incorporar não significa validar**.
+
+O agente também precisa saber quando a informação está incompleta. Se o detector de PDF acusa texto cortado numa página, ele pode registrar a localização e propor uma correção. Não pode, por conta própria, apagar linhas ou reduzir o corpo da fonte de todo o livro para fazer o alerta sumir. Nosso defeito conhecido da página 59 permanece como prova. Um sistema que produz um relatório verde escondendo o problema é pior do que o sistema que informa uma falha.
+
+## Livro, jogo e hardware não recebem a mesma autonomia
+
+No livro, uma tarefa típica do agente será **selecionar verificadores apropriados e reunir evidências**. Podemos autorizar a criação de um relatório, a sugestão de um parágrafo e a comparação com o contrato de voz. A aprovação do conteúdo e o comando de publicação permanecem humanos. O custo principal de um erro é editorial, mas nem por isso desprezível: uma frase inventada sobre um circuito pode comprometer a confiabilidade de toda a obra.
+
+Num jogo, o agente poderá operar sobre uma cópia de trabalho, criar um protótipo, rodar testes e sugerir mudanças. A autonomia para gerar assets ou código pode ser maior quando há versionamento e rollback. Mas uma compilação bem-sucedida não garante diversão, legibilidade da tela, latência aceitável ou fidelidade ao micro original. O jogador e o desenvolvedor continuam necessários para validar esses pontos. Se a execução envolve licenças de imagens, arquivos externos ou publicação na loja, surgem outras autorizações.
+
+No hardware, o sistema pode buscar datasheets, comparar esquemas, conferir conectividade, gerar um netlist de prova ou ajudar a preparar uma lista de medições. Antes de alterar uma PCB real, emitir arquivos de fabricação ou aplicar estímulos a equipamentos, precisamos de controle mais rigoroso. O risco deixa de ser apenas um texto ruim. Pode envolver peças queimadas, tensão indevida ou alguém se machucando. Nenhum resultado de linguagem substitui revisão elétrica, procedimentos de segurança e ensaios físicos adequados.
+
+Essa gradação não transforma a criação de livros em tarefa sem risco, nem de jogos em tarefa completamente segura. Serve para nos lembrar que a **política é sensível ao domínio**. A ferramenta responsável por uma verificação textual não recebe automaticamente autoridade para comandar uma bancada. E o instrumento que mediu uma tensão não aprova sozinho o capítulo que explica a medição.
+
+## O teste que ainda não fizemos
+
+A pergunta natural, a esta altura, é por que não instalamos logo um grande agente editorial capaz de trabalhar sozinho. A resposta está na ordem dos nossos princípios. Ainda estamos formando as ferramentas e delimitando os contratos; nosso orquestrador está **desenhado**, mas não possui um ciclo autônomo com modelo, execução e aprovação integrados. A política agora existe como código testado; o workflow possui checkpoints locais. Falta conectá-los de modo seguro, demonstrar decisões sobre casos reais, lidar com falhas de permissão e medir se a autonomia reduz trabalho sem piorar a qualidade.
+
+Teremos oportunidade para isso ao longo do livro. O laboratório decisivo será a obra que apresentamos na abertura: o Manual Técnico do TK2000. Ele já existe, tem voz própria, fontes históricas, diagramas e pendências que não podem ser resolvidas por retórica. Quando nosso conjunto conseguir ajudar na edição sem perder capítulos, sem inventar evidências e sem ultrapassar as autorizações, teremos uma boa razão para comemorar. Até lá, a honestidade manda escrever **“ainda não comprovado”**.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Qual decisão você realmente delegaria?**
+
+Escolha uma tarefa que conheça bem e divida-a em cinco ações concretas. Para cada uma, decida se aceitaria que um programa a executasse automaticamente, se gostaria de receber apenas uma proposta ou se exigiria sua presença. Não use os exemplos do livro como gabarito: a graça está em descobrir a fronteira de confiança do seu próprio trabalho.
+
+Agora imagine que a ação mais arriscada falhou sem devolver confirmação. Você autorizaria uma segunda tentativa automática? Qual registro precisaria consultar primeiro? Se outra pessoa estivesse executando o processo em seu nome, sua resposta mudaria?
+
+Somente depois de escrever suas escolhas, peça a uma IA para questionar seus critérios. Ela identificou alguma autorização ausente, uma operação repetível perigosa ou um controle desnecessariamente rígido? Você não precisa concordar com a resposta. O resultado do experimento é seu **quadro de decisões**, não a obediência ao palpite do modelo.
+:::
+
+## O próximo passo tem nome: integração
+
+Agora começamos a ter componentes que um agente poderá utilizar: contrato, skill, verificadores, instalador, checkpoints e política de autorização. Eles ainda não se comportam como um organismo único, e isso não é defeito a esconder. É a fotografia honesta da oficina enquanto é construída.
+
+Na etapa seguinte, precisaremos conectar entradas, ferramentas e decisões a uma execução completa, com rastreamento de cada chamada. Quando uma tarefa for interrompida, a pergunta não será apenas “o que a IA quer fazer agora?”, mas “o que já foi provado, que autorização ainda vale e qual é o menor passo seguro?”. Um agente que sabe responder a essas três perguntas estará mais perto de merecer nossa confiança do que aquele que simplesmente produz relatórios mais bonitos.
+
+E, se chegarmos ao fim sem precisar de um agente tão complexo quanto imaginávamos no começo? Melhor ainda. Simplicidade é força.

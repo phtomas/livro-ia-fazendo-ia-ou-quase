@@ -53,3 +53,15 @@ O detector de PDF **retorna código 1** quando encontra erro, e o workflow tamb�
 | Matriz de compatibilidade | `docs/PORTABILIDADE_SKILLS.md` | Documentação de caminhos e condições consultadas em 13/11/2026 | Portabilidade futura em qualquer versão; execução cruzada |
 
 **Regra:** não confundir integridade dos arquivos com eficácia da habilidade. `PASS` local não preenche campos de ensaio de host.
+
+
+## Atualização v0.9 — orquestração com fronteiras explícitas
+
+| Peça | Caminho | Comprovado | Não comprovado |
+|---|---|---|---|
+| Workflow com checkpoint | `workflows/fluxo_com_checkpoints.py` | Inventário SHA-256, injeção de falha, retomada, bloqueio por alteração e gate de estrutura em testes locais | Conexão com Drive/GitHub, transações distribuídas, concorrência |
+| Política determinística | `agents/politica_orquestrador.py` | Retorno de ações permitidas / bloqueadas nos testes unitários | Enforcement em executor externo, acesso a LLM, autorização autenticada |
+| Agente editorial | `agents/orquestrador-editorial.md` | Arquitetura descrita | Loop autônomo completo, uso de modelos, aprovação real |
+| Capítulos 9–10 | `chapters/09-*`, `chapters/10-*` | Texto e marcadores didáticos | Revisão autoral, avaliação didática com leitores |
+
+**Atenção:** checkpoint vinculado a hashes dos fontes `.qmd`, `index.qmd` e `_quarto.yml`; ainda não monitora alterações em versões de verificadores nem dependências externas. A política limita apenas uma decisão de demonstração, não a execução de ferramentas.

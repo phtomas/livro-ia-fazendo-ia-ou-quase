@@ -27,6 +27,8 @@ book:
     - chapters/06-a-voz-que-a-ferramenta-nao-deve-apagar.qmd
     - chapters/07-tres-portas-para-a-mesma-oficina.qmd
     - chapters/08-uma-skill-que-pode-viajar.qmd
+    - chapters/09-o-fluxo-que-sabe-onde-parou.qmd
+    - chapters/10-quem-deixa-o-agente-decidir.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

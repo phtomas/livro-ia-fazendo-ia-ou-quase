@@ -42,3 +42,9 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - **Capítulo 7:** esquema de três camadas: contrato independente → adaptadores de ambiente → execuções e evidências; evitar logotipos como se fossem equivalência técnica.
 - **Capítulo 8:** diagrama de estados `PACKAGED → TRANSPORTED → DISCOVERED → ACTIVATED → EFFECTIVE`, com gates independentes e caminho de falha. Esta figura poderá usar o próprio log do instalador como caso real.
 - Não atribuir a esses desenhos resultados não testados. Manter a geração das figuras na segunda passada editorial, conforme decisão do autor.
+
+
+## Propostas v0.9 — ainda sem produção de figuras
+
+- **Capítulo 9:** máquina de estados `INVENTORIED → STRUCTURE_OK → WAITING_HUMAN`, com ramos `INTERRUPTED`, `STRUCTURE_FAILED` e `BLOCKED`. Desenhar a partir do código testado, e não de resultados inventados.
+- **Capítulo 10:** separar visualmente **modelo (propõe)**, **política (autoriza)**, **executor (faz)**, **prova (registra)** e **humano (aprova)**. Nenhum diagrama pode insinuar que o agente autônomo já está operando.
