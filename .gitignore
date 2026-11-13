@@ -1,0 +1,19 @@
+# Gerados pela renderizacao, nao sao fonte canonica
+_book/
+.quarto/
+_preview/
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Arquivos locais e segredos
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
