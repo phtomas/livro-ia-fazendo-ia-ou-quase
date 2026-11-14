@@ -1,0 +1,52 @@
+{
+  "ferramenta": "auditar_paginacao_pdf.py",
+  "arquivo": "/mnt/data/IA_fazendo_IA_Capitulos_1_a_21_v1.4.pdf",
+  "sha256": "c758421dac37a4815f84170ebabb72c4f26595b72eceeca72c5a80bfe365660f",
+  "paginas": 265,
+  "limite_caracteres": 450,
+  "candidatos": [
+    {
+      "pagina_fisica": 113,
+      "pagina_seguinte": 114,
+      "caracteres": 190,
+      "amostra": "cuidadoso num labirinto de automações. A oficina deve conti- nuar simples o bastante para que uma pessoa consiga entender o que acabou de acontecer, inclusive q",
+      "classe": "PAGINA_FINAL_CURTA",
+      "estado": "SUSPEITA_REQUER_INSPECAO_VISUAL"
+    },
+    {
+      "pagina_fisica": 186,
+      "pagina_seguinte": 187,
+      "caracteres": 360,
+      "amostra": "adotar outra biblioteca. Até lá, simplicidade não é pobreza ar- quitetural: é uma maneira de conservar visíveis as decisões que realmente importam. No próximo c",
+      "classe": "PAGINA_FINAL_CURTA",
+      "estado": "SUSPEITA_REQUER_INSPECAO_VISUAL"
+    },
+    {
+      "pagina_fisica": 198,
+      "pagina_seguinte": 199,
+      "caracteres": 196,
+      "amostra": "os medidores. Agora precisamos usá-los sem confundir uma coluna preenchida com conhecimento suficiente. Medir é a forma mais prática de continuar humilde diante",
+      "classe": "PAGINA_FINAL_CURTA",
+      "estado": "SUSPEITA_REQUER_INSPECAO_VISUAL"
+    },
+    {
+      "pagina_fisica": 211,
+      "pagina_seguinte": 212,
+      "caracteres": 379,
+      "amostra": "Mas é a que nos permite entregar o manuscrito a uma pessoa real sem obrigá-la a confiar em nossa empolgação. O objetivo nunca foi retirar o autor do processo. F",
+      "classe": "PAGINA_FINAL_CURTA",
+      "estado": "SUSPEITA_REQUER_INSPECAO_VISUAL"
+    },
+    {
+      "pagina_fisica": 233,
+      "pagina_seguinte": 234,
+      "caracteres": 145,
+      "amostra": "o assunto do próximo capítulo — e mais uma oportunidade de re- sistir à tentação de declarar vencedor um experimento que ainda não foi executado.",
+      "classe": "PAGINA_FINAL_CURTA",
+      "estado": "SUSPEITA_REQUER_INSPECAO_VISUAL"
+    }
+  ],
+  "total_candidatos": 5,
+  "status": "REVISAR",
+  "restricao": "Contagem de caracteres e detecção da próxima abertura de capítulo; não identifica todas as viúvas/órfãs, legendas soltas, sobreposições ou erros de fonte."
+}

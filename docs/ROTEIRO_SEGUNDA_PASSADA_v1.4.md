@@ -1,6 +1,6 @@
 # Primeira passada encerrada — protocolo da segunda passada
 
-**Estado:** PLANEJADO; nenhuma revisão autoral de blocos concluída.
+**Estado:** EM EXECUÇÃO; auditoria inicial realizada, Bloco A gerado; nenhuma revisão autoral de bloco foi ainda aprovada.
 
 ## Congelamento do texto integral
 
@@ -38,3 +38,8 @@ Somente depois das correções de texto, selecionar diagramas/figuras necessári
 O *Manual Técnico do TK2000* já estava sendo preparado antes deste livro. Sua editoração será o teste final externo, **ainda não iniciado**. Congelar revisão, respeitar direitos sobre imagens e esquemas e manter cada pendência técnica visível até evidência ou decisão consciente do autor.
 
 **PASS de primeira redação** significa 21 fontes presentes; **não significa que a obra esteja revisada, aprovada, ilustrada ou publicada como edição final**.
+
+
+## Início da segunda passada — auditoria v1.4
+
+A auditoria automática e visual dirigida encontrou cinco páginas finais de capítulos excessivamente curtas (113, 186, 198, 211, 233); os nove transbordamentos de código já conhecidos continuam FAIL. O relatório detalhado é `docs/AUDITORIA_EDITORIAL_SEGUNDA_PASSADA_v1.4.md`, com JSON em `docs/AUDITORIA_PAGINACAO_v1.4.json`. O Bloco A foi gerado em DOCX editável para revisão humana. Nenhuma correção do manuscrito canônico foi aplicada.
