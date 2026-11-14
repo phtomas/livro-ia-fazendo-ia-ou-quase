@@ -21,6 +21,9 @@ CAPS={
     'E':[f'chapters/{n:02d}-' for n in range(17,22)],
     'F':['appendices/10-principios.qmd','appendices/glossario.qmd','references.qmd']
 }
+# Mantém a numeração GLOBAL mesmo quando o DOCX contém apenas um bloco.
+# A: capítulos 1–4; B: 5–8; C: 9–12; D: 13–16; E: 17–21.
+NUMBER_OFFSETS={'A':0,'B':4,'C':8,'D':12,'E':16,'F':0}
 
 def fontes(root:Path,bloco:str)->list[Path]:
     result=[]
@@ -62,6 +65,34 @@ def referencia_docx(dest:Path)->None:
     footer.style=n
     d.save(dest)
 
+def ajustar_numeracao_word(dest:Path,bloco:str)->None:
+    """Corrige o limite do Pandoc DOCX: --number-offset é ignorado pelo writer DOCX.
+
+    Não edita títulos do manuscrito QMD; atualiza somente números de estilo
+    SectionNumber nos headings do Word para manter 5.1, 5.2... no bloco B.
+    """
+    import re
+    from docx import Document
+    offset=NUMBER_OFFSETS[bloco]
+    if not offset or bloco=='F':return
+    d=Document(dest)
+    changed=0
+    for para in d.paragraphs:
+        if not para.style.name.startswith('Heading'):continue
+        if not para.runs:continue
+        run=para.runs[0]
+        # Pandoc escreve w:rStyle=SectionNumber mesmo quando o estilo não
+        # consta em styles.xml; python-docx retorna Default Paragraph Font.
+        style_tag=run._r.rPr.rStyle if run._r.rPr is not None else None
+        if style_tag is None or style_tag.val!='SectionNumber':
+            continue
+        match=re.fullmatch(r'(\d+)(\.\d+(?:\.\d+)*)?',run.text.strip())
+        if not match:continue
+        run.text=str(int(match.group(1))+offset)+(match.group(2) or '')
+        changed+=1
+    if not changed:raise RuntimeError('DOCX sem numeração reconhecida: Pandoc mudou o formato')
+    d.save(dest)
+
 def main()->int:
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('bloco',choices=list(CAPS))
@@ -81,11 +112,13 @@ def main()->int:
     referencia_docx(ref)
     cmd=['pandoc',*[str(x) for x in src],'-f','markdown+fenced_divs+raw_tex','-t','docx','-s',
          '--number-sections','--top-level-division=chapter',
+         '--number-offset='+str(NUMBER_OFFSETS[args.bloco]),
          '--citeproc','--bibliography=references.bib','--csl=estilo-referencias.csl','--resource-path=.',
          '--lua-filter=filters/docx_blocos.lua']
     if args.bloco!='F':cmd+=['--lua-filter=filters/docx_sem_referencias.lua']
     cmd+=['--reference-doc='+str(ref),'-o',str(out)]
     subprocess.run(cmd,cwd=ROOT,check=True)
+    ajustar_numeracao_word(out,args.bloco)
     print('DOCX gerado:',out)
     return 0
 
