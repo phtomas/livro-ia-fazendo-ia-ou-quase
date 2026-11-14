@@ -1,0 +1,85 @@
+{
+  "tool": "replay_minijogo.py",
+  "rules_version": "1.0",
+  "status": "PASS_SIMULATION",
+  "input_sha256": "5689ae0c4c0fba7b4e7a97a1101b3d483fd9e1d31392c12ec945861ff1980faf",
+  "expected": {
+    "screen": "playing",
+    "x": 2,
+    "lives": 3,
+    "score": 100,
+    "star_collected": true
+  },
+  "final_state": {
+    "screen": "playing",
+    "x": 2,
+    "lives": 3,
+    "score": 100,
+    "star_collected": true,
+    "ticks": 5
+  },
+  "differences": {},
+  "history": [
+    {
+      "step": 1,
+      "action": "start",
+      "state": {
+        "screen": "playing",
+        "x": 0,
+        "lives": 3,
+        "score": 0,
+        "star_collected": false,
+        "ticks": 1
+      }
+    },
+    {
+      "step": 2,
+      "action": "right",
+      "state": {
+        "screen": "playing",
+        "x": 1,
+        "lives": 3,
+        "score": 0,
+        "star_collected": false,
+        "ticks": 2
+      }
+    },
+    {
+      "step": 3,
+      "action": "right",
+      "state": {
+        "screen": "playing",
+        "x": 2,
+        "lives": 3,
+        "score": 0,
+        "star_collected": false,
+        "ticks": 3
+      }
+    },
+    {
+      "step": 4,
+      "action": "collect",
+      "state": {
+        "screen": "playing",
+        "x": 2,
+        "lives": 3,
+        "score": 100,
+        "star_collected": true,
+        "ticks": 4
+      }
+    },
+    {
+      "step": 5,
+      "action": "collect",
+      "state": {
+        "screen": "playing",
+        "x": 2,
+        "lives": 3,
+        "score": 100,
+        "star_collected": true,
+        "ticks": 5
+      }
+    }
+  ],
+  "limits": "Aprova somente esta máquina de estados Python; não é ROM, nem teste em emulador ou máquina física"
+}

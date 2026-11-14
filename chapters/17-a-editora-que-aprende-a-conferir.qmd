@@ -1,0 +1,122 @@
+# A editora que aprende a conferir
+
+## Um livro não fica pronto quando acaba a escrita
+
+Se chegamos até aqui, já possuímos uma oficina bastante diferente daquela do início. Há um manuscrito escrito em arquivos Quarto, um repositório que conserva suas versões, uma pasta sincronizada no Google Drive, uma prévia publicada automaticamente, uma skill de revisão autoral, verificadores, relatórios e um controlador que sabe interromper uma ação. Seria tentador reunir tudo isso e anunciar que construímos uma editora de IA. Bastaria acrescentar à página um carimbo elegante: **EDIÇÃO CONCLUÍDA**.
+
+O problema é que continuamos encontrando pequenas falhas no nosso próprio livro. Algumas linhas de código ultrapassaram quadros no PDF. Houve páginas cuja composição não correspondeu à intenção editorial. Nosso autor identificou outras ocorrências e resolveu, por enquanto, não revelar quais são. É uma ótima maneira de colocar a oficina à prova: impedir que uma lista de defeitos conhecidos seja confundida com um exame independente. Um verificador que só encontra aquilo que lhe foi contado ainda tem muito a aprender.
+
+Já vimos que um software pode passar em dezenas de testes enquanto o documento produzido por ele continua com erros. Isso não diminui a importância dos testes. Dá a eles a responsabilidade certa. Quando o nosso script encontra um arquivo de imagem ausente, ele pode afirmar que aquele caminho não existe na pasta examinada. Quando confere uma linha de código com mais caracteres do que o limite adotado, pode registrar uma **suspeita de transbordamento**. Não pode concluir, sem examinar a página renderizada, que o texto foi cortado. E a imagem que cabe perfeitamente na margem ainda pode retratar um circuito completamente errado.
+
+O que queremos construir, portanto, não é uma máquina capaz de carimbar um livro. É uma oficina que separe **redação, revisão, editoração, conferência e aprovação**, tornando cada etapa observável. A obra poderá melhorar com o tempo; a obrigação de demonstrar o que mudou não desaparece com a facilidade de gerar outra versão. É aqui que a ideia de um livro que se escreve e se reescreve começa a assumir um compromisso mais exigente.
+
+## A primeira página de cada revisão é a linha de base
+
+Um editor cuidadoso precisa saber qual texto recebeu. Nós também. Se a ferramenta lê a versão do GitHub e o autor revisa uma cópia mais recente no Google Drive, qualquer sugestão de substituição pode apagar um trabalho legítimo. É por isso que começamos identificando o documento por seu caminho, versão, hash e origem. O commit registra o estado de trabalho; o hash permite comparar os bytes; nenhum dos dois informa, isoladamente, se a redação é boa.
+
+A segunda pergunta é mais sutil: **o que foi autorizado a mudar?** Na primeira passada deste livro, estamos acrescentando capítulos sem reescrever os anteriores. Na revisão final, faremos o movimento inverso: dividiremos a obra em blocos editáveis e cada bloco passará pela leitura do autor. A proposta da IA deverá se limitar ao trecho escolhido, salvo autorização para corrigir uma referência cruzada fora dele. A integração exigirá comparação antes e depois e nova renderização do conjunto.
+
+Uma regra editorial solta numa conversa não basta para esse trabalho. Guardamos o contrato em arquivo, escrevemos exemplos e vinculamos cada exigência a um tipo de prova. Preservar títulos e numeração é verificável por estrutura. Evitar que uma citação desapareça exige comparar referências. Manter a voz narrativa requer exemplos aprovados e julgamento do autor. A maneira correta de tratar uma dúvida sobre a PAL do TK2000 não pode ser resumida a “escreva com confiança”: precisamos conservar a origem da informação e a indicação de que a equivalência ainda não foi confirmada.
+
+O nosso **Manual Técnico do TK2000** será o grande teste dessa disciplina. Ele já existia antes deste livro, tem conteúdo histórico e técnico próprio, figuras a melhorar e perguntas de engenharia que não pretendemos responder por imaginação. É a diferença entre reformar a própria bancada e aceitar o aparelho de outra pessoa para reparar. Quando o manual entrar em nossa oficina, começará com uma fotografia documental de seu estado, não com uma reescrita improvisada.
+
+## Os cinco trabalhos que não devemos misturar
+
+A **pesquisa** encontra fontes e identifica sua procedência. A **redação** cria explicações compreensíveis, com voz adequada ao leitor. A **revisão** procura problemas de consistência, precisão e apresentação e propõe mudanças. A **editoração** transforma o conteúdo em páginas, estilos, boxes, ilustrações, tabelas e formatos de entrega. A **validação** verifica se o resultado respeitou os contratos e se chegou ao estado de aprovação necessário. Uma mesma pessoa — ou uma mesma IA — pode ajudar em todas as etapas, mas isso não significa que elas sejam uma operação só.
+
+Na prática, existe um motivo muito simples para separá-las. Um modelo chamado para revisar a clareza de um parágrafo não deveria alterar o número de um pino. Um programa chamado para gerar PDF não deveria retirar uma ressalva técnica porque ela ocupou três linhas a mais. Uma ferramenta de bibliografia não deveria inventar data de acesso para uma fonte que ainda não consultamos. E o agente que prepara um commit não deve publicar uma obra inteira apenas porque recebeu uma resposta dizendo “pode seguir”.
+
+Podemos montar um fluxo inicial sem pretender que ele já seja uma editora autônoma. Primeiro congelamos a entrada; depois inspecionamos a estrutura e os recursos; se houver material a revisar, pedimos à IA propostas com diferenças explícitas; validamos os aspectos mecânicos; produzimos uma prévia; examinamos páginas; e submetemos a decisão ao autor. Uma falha deve interromper ou devolver o trabalho à etapa pertinente. **Não é preciso dar o mesmo privilégio a todas as peças da oficina.**
+
+A solução também não exige dez agentes logo de saída. Um script que confere os arquivos deve continuar sendo um script. A IA fica com aquilo que precisa de interpretação: explicar uma sequência difícil, comparar narrativas, propor uma melhor transição, apontar um possível mal-entendido. Seu poder de persuasão precisa ser acompanhado pelo de uma ferramenta que mostre de onde vieram os fatos e de um editor humano disposto a dizer não.
+
+## O Quarto nos ajuda porque não é dono do texto
+
+Escolhemos o Quarto para manter o manuscrito em arquivos relativamente simples e produzir diferentes formatos a partir da mesma fonte. Os arquivos `.qmd` guardam capítulos; `_quarto.yml` organiza a obra; referências, estilos e filtros determinam como parte do conteúdo será apresentada. Em livros, a numeração e as referências cruzadas podem ser calculadas pelo sistema, inclusive entre capítulos [@quartobookstructure2026; @quartobookcrossrefs2026]. Isso nos poupa a tarefa de renumerar tudo quando inserimos uma seção.
+
+Essa conveniência cria, naturalmente, novas exigências. O arquivo `.qmd` pode existir, mas não estar relacionado no sumário. Uma imagem pode estar citada e ter desaparecido da pasta. Uma referência cruzada pode apontar para um identificador removido. Uma legenda pode cair sozinha numa página, e um bloco de código pode ultrapassar a área útil apesar de estar perfeitamente legível no arquivo-fonte. Daí a importância de não confundir **integridade da fonte** com **qualidade da renderização**.
+
+O GitHub Actions já compila a versão web deste livro após nossos commits e disponibiliza uma prévia navegável. Isso é uma prova de que, naquele ambiente, o processo de renderização HTML executou. Não é prova de que a mesma composição esteja correta em PDF ou EPUB. A experiência com o Manual TK90X nos ensinou o custo de descobrir tarde demais que a partir de certo capítulo as fontes mudaram, as figuras invadiram margens e uma legenda ficou abandonada no topo de uma página. Queremos que os novos verificadores encontrem essas condições antes da publicação; e, quando não conseguirem, que tenham a honestidade de declarar seu alcance.
+
+## Nosso novo fiscal de arquivos-fonte
+
+Nesta etapa acrescentamos `tools/editorial/auditar_fontes_quarto.py`. Ele percorre os `.qmd` do livro e procura situações simples: imagem ou link local cujo arquivo não existe, identificadores duplicados de figuras e seções, imagens sem descrição e linhas muito compridas dentro de blocos de código. Não pede a um modelo que interprete o sistema de arquivos. Recebe uma pasta, lê texto e registra ocorrências em JSON.
+
+Uma linha longa merece destaque porque nosso próprio PDF já mostrou esse defeito. O novo fiscal consegue dizer, por exemplo, que um comando de muitas letras merece inspeção. Mas o tamanho em caracteres não equivale à largura impressa: fontes, recuo, escala e composição podem produzir resultados distintos. Por isso **uma linha suspeita recebe WARNING, não a sentença de que a página está cortada**. O verificador geométrico de PDF, que desenvolvemos anteriormente, continua sendo uma segunda camada — também limitada. Ao comparar os dois relatórios, podemos procurar coincidências sem converter correlação em certeza.
+
+Outra precaução: expressões Markdown podem conter links dentro de blocos de código que são apenas exemplos. Nosso fiscal não os trata como recursos reais. Também se recusa a aceitar uma referência que saia da raiz do projeto por um caminho relativo. Esses critérios são testes do programa; não significam que todas as formas da linguagem Quarto já estejam contempladas. A documentação oficial inclui referências entre capítulos e outros tipos de identificadores que uma implementação definitiva precisará analisar com maior profundidade [@quartobookcrossrefs2026].
+
+O comando é curto:
+
+```sh
+python tools/editorial/auditar_fontes_quarto.py . --output dist/fontes.json
+```
+
+O relatório pode terminar com `PASS_LIMITED` e conter avisos. Esse resultado quer dizer que não foram encontrados **erros nas categorias implementadas**. Não quer dizer que o livro está completo, bonito ou correto. Os testes unitários incluem cenários deliberadamente defeituosos, pois um detector que somente passa diante de arquivos bons é difícil de avaliar.
+
+## Quando a figura é a parte mais importante da frase
+
+Em muitos livros, uma ilustração apenas ajuda o leitor a descansar os olhos. Em nossos manuais, ela pode carregar a explicação principal. Um diagrama de blocos do TK2000 precisa mostrar a relação entre CPU, memória, vídeo, entrada e saída. Uma figura de diagnóstico do TK90X deve preservar os sinais, revisões e condições de medição. Uma imagem com aparência de circuito, mas conectividade inventada, não é uma ilustração técnica aceitável.
+
+Isso implica separar a criação visual da validação técnica. Podemos usar ferramentas de desenho, editores vetoriais e até IA para propor uma apresentação mais clara. Mas uma figura aprovada precisa ser comparada à fonte documental correta, com identificação da revisão, e possuir tamanho e resolução legíveis no formato impresso. Não podemos transformar uma reconstrução de esquema em fotografia histórica, nem uma simulação em oscilograma medido. O trabalho gráfico ganhará sua passada específica depois de terminarmos a redação completa. Adiar o desenho não significa esquecer a necessidade dele: temos um plano de figuras associado aos capítulos e aos testes que cada uma deverá satisfazer.
+
+Também precisamos pensar nas legendas. Elas têm função editorial, mas podem ser parte da prova: “sinal observado” é diferente de “forma de onda esperada”; “circuito original” é diferente de “recriação baseada em documentação”. Uma legenda esquecida numa página pode quebrar a leitura. Uma legenda imprecisa pode quebrar a engenharia. Verificar a primeira é tarefa de editoração; a segunda exige conhecimento técnico e origem confiável.
+
+## O mesmo fluxo pode servir a uma fase de jogo ou a uma placa?
+
+No **livro**, a unidade de revisão é um trecho, figura, capítulo ou bloco editorial. A preservação da voz, das referências e da numeração convive com o teste de paginação. Um erro pode ser um número alterado, uma citação sem origem, um parágrafo incoerente ou um elemento que escapou da página.
+
+No **jogo**, a fonte inclui código, mapas, sprites, sons e regras. O equivalente a uma legenda correta pode ser a descrição de uma fase; o equivalente a uma referência preservada é um recurso que não desaparece do pacote. Mas precisamos também executar o jogo, observar controles, testar colisão e medir se a fase pode ser vencida. Um título uniforme e uma compilação limpa não provam jogabilidade.
+
+No **hardware**, o documento pode ser um esquemático, netlist, lista de componentes ou procedimento de bancada. Integridade de referências e inventário de arquivos ajudam muito, porém não substituem ERC/DRC, conferência de pinagem, comparação com a revisão física e medição. Uma ferramenta editorial que percebe um desenho ausente faz um serviço útil; não está autorizada a concluir que o circuito funciona.
+
+A estrutura comum é a mesma: **entrada identificada → proposta limitada → validação apropriada ao domínio → evidências → decisão humana**. O que muda é a natureza do resultado e o custo de estar errado. A oficina deve tornar essas diferenças claras em vez de tratar todos os arquivos como páginas de texto.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 17 — Auditar a fonte antes da página**
+
+**O que testar.** Descobrir se os arquivos Quarto contêm recursos ausentes ou códigos que merecem inspeção, sem escrever uma única linha no manuscrito.
+
+**Como proceder.** Execute a ferramenta de auditoria na raiz do projeto e abra o relatório JSON. Se houver avisos de código longo, compare-os com as páginas do PDF. Não conclua que um aviso corresponde a corte sem inspeção. Depois, apresente a uma IA somente o relatório e o contrato editorial, pedindo uma proposta de priorização, não uma edição automática.
+
+**Prompt que usaríamos hoje**
+
+> Receba este relatório de auditoria de fontes Quarto. Classifique cada item pelo tipo de evidência disponível e proponha qual verificação adicional é necessária. Não declare que uma linha longa invadiu a margem sem prova no PDF; não trate PASS_LIMITED como aprovação editorial; não altere os arquivos. Destaque o que precisa de leitura do autor e o que pode ser conferido por um script.
+
+**Comando local**
+
+```sh
+python tools/editorial/auditar_fontes_quarto.py . \
+  --output dist/fontes.json
+```
+
+**Por que funciona.** O programa executa inspeções determinísticas e conserva as ocorrências em formato legível por outras ferramentas, enquanto a IA fica restrita à interpretação e à sugestão de próximos passos.
+
+**Como verificar.** Os testes da ferramenta devem encontrar um recurso ausente numa amostra intencionalmente defeituosa e detectar uma linha longa sem falsamente classificar o PDF como cortado. Confirme que o `.qmd` original permaneceu igual, por hash. Nenhuma mensagem da IA deve ser usada como prova de editoração aprovada.
+:::
+
+## A revisão por blocos ainda será nossa maior disciplina
+
+O autor decidiu fazer a revisão completa quando esta primeira redação estiver terminada. Então entregaremos a obra em blocos editáveis, como fizemos com o Manual Técnico do TK90X. Cada bloco terá uma versão, diferenças explícitas, pendências e uma prova de leitura. A última palavra sobre voz, humor, clareza e fidelidade continuará sendo dele. Depois da aprovação, as alterações voltarão à fonte Quarto, e a integração exigirá testes sobre o conjunto completo.
+
+Isso impede uma armadilha comum: pedir à IA para reescrever tudo a cada correção. Um livro pode ficar mais uniforme e, ao mesmo tempo, perder o que o tornava interessante. Não queremos vinte capítulos com a mesma introdução, os mesmos avisos e o mesmo fechamento. A voz do autor pede consistência, mas também variação de ritmo. A ferramenta que trata todo trecho como uma planilha dificilmente perceberá essa diferença sozinha.
+
+Quando revisarmos o manual TK2000, será preciso ainda mais cuidado. Ele reúne fontes históricas, reinterpretações e pendências técnicas. Seu texto pode ser melhorado sem atribuir uma certeza inexistente a qualquer delas. O sucesso do laboratório final será documentado com comparações e aprovações; não será um prêmio concedido à nossa oficina por ela ter produzido seu próprio relatório.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O erro que a máquina não foi avisada para procurar**
+
+Escolha duas páginas de um material seu e anote, **sem consultar a IA**, três aspectos que tornam a leitura boa ou ruim. Procure deliberadamente pelo menos um problema que não seja de ortografia nem de tamanho de linha. Pode ser uma transição confusa, uma figura que contradiz o texto ou uma informação cuja origem não está clara.
+
+Agora execute a conferência mecânica que tiver disponível. Compare suas observações com o relatório. Quais problemas coincidiram? Quais categorias sequer poderiam ter sido detectadas pela ferramenta? Só depois peça a uma IA que proponha uma forma de ampliar os testes, sem lhe contar previamente quais erros você anotou. Guarde as duas listas separadas: o que você viu e o que o sistema detectou.
+
+A descoberta não é obter cem por cento de acertos num material escolhido para favorecer a ferramenta. É identificar **a fronteira daquilo que foi realmente examinado**. E, se uma falha importante passou despercebida, transformar essa ocorrência em caso de regressão sem esconder que antes o programa não sabia encontrá-la.
+:::
+
+## Uma editora que sabe responder “ainda não”
+
+Ao fim deste laboratório, temos mais um instrumento, não uma editora autônoma concluída. Um conjunto de scripts consegue conferir partes do manuscrito, o GitHub consegue publicar a prévia web, e uma IA consegue colaborar na interpretação. Ainda faltam a revisão autoral por blocos, a segunda passada visual, a validação de todos os formatos e a demonstração completa no Manual Técnico do TK2000.
+
+Essa resposta talvez pareça menos espetacular do que o anúncio de um agente capaz de publicar vinte livros em um clique. Mas é a que nos permite entregar o manuscrito a uma pessoa real sem obrigá-la a confiar em nossa empolgação. O objetivo nunca foi retirar o autor do processo. Foi dar a ele uma oficina que conserve as decisões, mostre as dúvidas e facilite o trabalho que só ele pode aprovar. **Uma editora boa não elimina a revisão: ela faz com que revisar seja possível, compreensível e seguro.**

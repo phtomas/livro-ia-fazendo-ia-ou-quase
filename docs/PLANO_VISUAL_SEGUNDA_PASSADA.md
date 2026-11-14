@@ -69,3 +69,9 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - **Capítulo 15:** quadro comparativo das cinco famílias, com faixas de estado `DOCUMENTADO → PROPOSTO → TESTADO`, sem estrelas nem nota fictícia.
 - **Capítulo 16:** arquitetura da medição — tarefa identificada → registro de execução → tokens relatados → tarifa datada → estimativa e gate humano; usar somente casos sintéticos rotulados até obter logs reais.
 - **Falhas de PDF:** preservar fixtures existentes e acrescentar inspeção ampla quando abrirmos a segunda passada, sem pressupor quais erros o autor observou.
+
+## Segunda passada — sugestões decorrentes da v1.3
+
+- Capítulo 17: diagrama **manuscrito → auditoria mecânica → proposta editorial → prova PDF → autor → integração**, incluindo retorno ao relatório de falhas; sem declarar edição automática já implementada.
+- Capítulo 18: máquina de estados do microjogo com estados MENU, PLAYING e GAME_OVER; distinguir modelo Python, executável no emulador e jogo físico.
+- Evitar imagens de máquinas reais sem fonte/revisão confirmada; a arte dos jogos e desenhos técnicos requerem credenciais e origem apropriadas.

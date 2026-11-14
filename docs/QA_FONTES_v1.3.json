@@ -1,0 +1,24 @@
+{
+  "tool": "auditar_fontes_quarto.py",
+  "status": "PASS_LIMITED",
+  "root": "/mnt/data/IA_fazendo_IA_Quarto_v1.3",
+  "file_count": 21,
+  "issues": [
+    {
+      "code": "LONG_CODE_LINE",
+      "severity": "WARNING",
+      "file": "chapters/09-o-fluxo-que-sabe-onde-parou.qmd",
+      "line": 57,
+      "length": 97,
+      "max_chars": 94
+    }
+  ],
+  "errors": 0,
+  "warnings": 1,
+  "changes_manuscript": false,
+  "limits": [
+    "Regex limitada; não interpreta toda a sintaxe Quarto/Markdown",
+    "Linha longa não comprova transbordamento na página",
+    "PASS_LIMITED não aprova voz, imagem, referências externas nem PDF"
+  ]
+}

@@ -33,3 +33,18 @@ jobs:
             --runs examples/metricas/execucoes_sinteticas.jsonl \
             --rates examples/metricas/tarifas_ficticias.json \
             --output dist/metricas-ci.json
+      - name: Auditar fontes Quarto (escopo limitado)
+        run: |
+          python tools/editorial/auditar_fontes_quarto.py . --output dist/qa-fontes-ci.json
+      - name: Reproduzir jogo com teste positivo e falha esperada
+        run: |
+          python tools/jogos/replay_minijogo.py examples/jogos/cenario_vitoria.json --output dist/jogo-pass-ci.json
+          set +e
+          python tools/jogos/replay_minijogo.py examples/jogos/cenario_regressao.json --output dist/jogo-fail-ci.json
+          codigo=$?
+          set -e
+          if [ "$codigo" -ne 2 ]; then
+            echo "FAIL: roteiro negativo deveria retornar 2, retornou $codigo"
+            exit 1
+          fi
+          echo "PASS: roteiro negativo produziu FAIL_REPLAY esperado"

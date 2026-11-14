@@ -115,3 +115,11 @@
 - Laboratório sintético e ferramenta de resumo de execuções com entrada JSONL; sem API de modelos, sem preços reais e sem detecção independente da identidade do modelo.
 - As falhas de PDF detectadas anteriormente e as falhas que o autor deliberadamente não descreveu continuam pendentes e não serão corrigidas por adivinhação.
 - Verificar testes e renderização antes de afirmar PASS desta rodada.
+
+## Rodada v1.3 — laboratórios práticos de livro e jogo
+
+- Capítulo 17 em primeira passada: processo editorial real e auditor de fontes Quarto (links/imagens locais, identificadores duplicados, avisos de código longo). Ferramenta somente leitura e escopo limitado: não valida legibilidade em PDF, qualidade de voz ou precisão de figuras técnicas.
+- Capítulo 18 em primeira passada: máquina de estados didática de jogo, replay de entradas, pontuação e estados; testes em Python **não** equivalem a execução TK90X/MSX, ROM, emulador ou máquina física.
+- Ambos mantêm boxes de IA e experimentos independentes, e exemplos de adaptação livro-jogo-hardware.
+- Falhas de layout conhecidas e outras não reveladas pelo autor permanecem abertas. Não alterar retroativamente os capítulos anteriores.
+- Primeira passada: 18 de 21 capítulos. Revisão em blocos e prova final com Manual TK2000 ainda pendentes.

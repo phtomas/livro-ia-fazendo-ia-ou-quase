@@ -98,3 +98,13 @@ A regra continua: um teste executado prova a operação e o critério testado, n
 | Ferramenta de registros | `tools/observabilidade/resumir_execucoes.py` | TESTES LOCAIS A CONFERIR | Cobrança real, chamada de IA ou origem autêntica do log |
 | Dados sintéticos | `examples/metricas/` | FICTÍCIOS por definição | Modelo usado em serviços reais |
 | Capítulos 15–16 | `chapters/15-*`, `chapters/16-*` | PRIMEIRA PASSADA | Aprovação autoral e gráfica |
+
+## Atualização v1.3 — fonte editorial e regra de jogo
+
+| Componente | Prova que pode fornecer | Prova que NÃO pode fornecer |
+| --- | --- | --- |
+| `tools/editorial/auditar_fontes_quarto.py` | Recursos locais ausentes, IDs duplicados, suspeitas de código longo | Página cortada, imagem eletricamente fiel, voz aprovada |
+| `tools/jogos/replay_minijogo.py` | Transições de um modelo Python, replay contra expectativa, falha intencional | ROM real, emulação MSX/TK90X, diversão ou desempenho |
+| `examples/jogos/` | Cenários identificados positivo/negativo | Cobertura integral de qualquer jogo retrô |
+
+A auditoria editorial pode retornar PASS_LIMITED com warnings: não converter para PASS de livro. A execução de um jogo-modelo tampouco comprova a implementação em hardware.

@@ -35,6 +35,8 @@ book:
     - chapters/14-duas-copias-uma-historia.qmd
     - chapters/15-os-frameworks-nao-decidem-por-nos.qmd
     - chapters/16-medindo-a-oficina.qmd
+    - chapters/17-a-editora-que-aprende-a-conferir.qmd
+    - chapters/18-um-jogo-nao-e-jogavel-so-porque-compila.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

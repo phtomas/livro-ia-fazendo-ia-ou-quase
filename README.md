@@ -159,3 +159,12 @@ python tools/observabilidade/resumir_execucoes.py --runs examples/metricas/execu
 ```
 
 O Drive do autor é um espelho de trabalho e o GitHub é o histórico versionado. A publicação no Pages continua sujeita ao workflow e à confirmação de resultado. Problemas de layout e as ocorrências editoriais deliberadamente não reveladas pelo autor permanecem em aberto para a segunda passada.
+
+## Rodada v1.3 — Laboratórios de editoração e jogos
+
+- Capítulo 17: `chapters/17-a-editora-que-aprende-a-conferir.qmd`, com auditoria determinística e limitada de recursos, referências e código longo via `tools/editorial/auditar_fontes_quarto.py`.
+- Capítulo 18: `chapters/18-um-jogo-nao-e-jogavel-so-porque-compila.qmd`, com simulação de estado e replay testável em `tools/jogos/replay_minijogo.py`; NÃO é um jogo TK90X/MSX, nem ensaio de emulador.
+- Ambos contêm box de uso da IA e experimento independente do leitor, com comparações entre livro, jogo e hardware.
+- A primeira passada permanece inacabada (18/21 capítulos). Os capítulos anteriores e apresentação não foram reescritos.
+- Avisos de código longo não provam corte geométrico no PDF. Layout, voz e aprovação autoral continuam gates diferentes.
+- O autor está deliberadamente guardando defeitos editoriais adicionais sem revelá-los. Não adivinhar nem corrigir o conteúdo anterior às cegas.

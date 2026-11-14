@@ -1,0 +1,124 @@
+# Um jogo não é jogável só porque compila
+
+## Da página impressa para uma tela de poucos pixels
+
+Quando começamos a trabalhar com jogos para máquinas antigas, o primeiro encanto costuma aparecer cedo. Um personagem finalmente se move. Uma tela ganha cores. Um som curto lembra a infância. E a IA, que há pouco estava revisando capítulos, já oferece sprites, código, inimigos, fases e uma história completa. Seria fácil declarar que o jogo está pronto porque conseguimos executar alguma coisa na tela. É o equivalente, no universo dos jogos, a confundir um PDF gerado com um livro revisado.
+
+Nos projetos de TK90X e MSX, essa diferença tem consequência imediata. O programa pode carregar, desenhar um personagem e ainda assim não responder direito aos controles. Uma fase pode parecer bonita e ser impossível de terminar. Uma adaptação pode usar uma instrução que não existe no dialeto esperado, funcionar apenas numa configuração do emulador ou depender de recursos que a máquina real não oferece. O sucesso de uma tela não prova o sucesso do jogo. **É preciso observar o comportamento ao longo do tempo.**
+
+Em *IA fazendo jogos — TK90X & MSX*, nossa experiência incluiu personagens, regras, limitações de memória, testes e a aprendizagem de trabalhar com IA sem esconder as tentativas fracassadas. Projetos como *Angels & Demons* e *João e o Pé de Feijão* ajudam a lembrar por que a diversão não aparece automaticamente quando o código deixa de produzir mensagens de erro. O desenvolvimento de um jogo envolve a pessoa que joga, não apenas a pessoa que compila.
+
+Agora queremos reaproveitar a oficina deste livro para um laboratório de jogos, sem obrigar o leitor a possuir um computador de quarenta anos. Começaremos com uma pequena máquina de estados em Python, capaz de reproduzir uma sequência de ações e comparar o resultado observado com uma expectativa. Ela não é um emulador, não é um jogo acabado e não demonstra compatibilidade com TK90X ou MSX. É uma camada de prova: **o coração de um teste que poderemos levar a um jogo de verdade**.
+
+## Antes do código, precisamos de regras que possam falhar
+
+Suponha um pequeno jogo em que o personagem começa na posição zero, move-se por cinco posições numeradas de zero a quatro, possui três vidas e pode recolher uma estrela na posição dois. A estrela vale cem pontos e só pode ser recolhida uma vez. Uma colisão tira uma vida; depois da terceira, aparece a condição de fim de jogo. Não é uma proposta de jogo comercial, mas um cenário suficientemente pequeno para discutir controle, estado, pontuação e regressão.
+
+Escrevemos as regras dessa maneira porque frases como “a pontuação deve funcionar” não dizem o que verificar. O que acontece se o jogador tentar coletar a mesma estrela duas vezes? O personagem pode sair da tela? Uma colisão depois do fim do jogo pode deixar as vidas negativas? O botão de reiniciar devolve as três vidas ou preserva o estado anterior? Cada uma dessas perguntas pode gerar um teste independente.
+
+O roteiro básico é simples: iniciar, andar para a direita duas vezes e recolher a estrela. O resultado esperado é `x=2`, `score=100`, três vidas e a estrela marcada como recolhida. Repetir a ação de coleta não deve acrescentar outros cem pontos. Podemos introduzir deliberadamente um erro na expectativa — pedir duzentos pontos — e verificar se o programa rejeita o roteiro. Aqui não estamos pedindo à IA que decida se o jogo ficou divertido. Estamos comprovando uma regra lógica sob entradas definidas.
+
+O exemplo se chama `replay_minijogo.py` e acompanha os arquivos de demonstração em `examples/jogos/`. Ele lê JSON, aplica ações uma após a outra, registra o estado e compara os campos esperados. O teste produz `PASS_SIMULATION` quando as expectativas conferem e `FAIL_REPLAY` quando há divergência. A saída guarda o hash do arquivo de entrada, a versão das regras e uma lista de transições. Não depende de API nem de tokenização: o trabalho é determinístico.
+
+## Reproduzir é mais útil do que repetir a história de memória
+
+Nosso primeiro roteiro contém estas ações:
+
+```json
+{
+  "rules_version": "1.0",
+  "actions": ["start", "right", "right", "collect", "collect"],
+  "expect": {"x": 2, "score": 100, "lives": 3}
+}
+```
+
+O arquivo real de exemplo inclui outros campos de estado, mas a ideia principal já aparece. A última ação `collect` é intencional. Se uma alteração futura permitir pontuar duas vezes, o mesmo roteiro deverá denunciá-la. Uma segunda entrada, também incluída, exige `score=200` de propósito. Ela é um caso de falha que deve continuar falhando. **Um teste negativo que passa por engano é uma notícia ruim, não uma vitória inesperada.**
+
+Essa maneira de pensar se aproxima dos testes de regressão usados no livro. Preservamos o defeito conhecido de uma página para ver se o detector consegue reconhecê-lo. Preservamos também roteiros de jogo capazes de revelar comportamentos proibidos. A diferença é o domínio: no livro, estamos preocupados com fontes, páginas e voz. No jogo, examinamos regras, estado, movimento, colisão, pontuação e sequência de entradas. A arquitetura da prova é parecida; o que constitui um resultado correto muda inteiramente.
+
+Na execução, um jogador pode agir em ordens que ninguém imaginou. Isso torna os roteiros valiosos, mas não suficientes. Eles capturam cenários conhecidos; não cobrem todas as combinações possíveis. Precisaremos observar partidas reais, testar a latência dos comandos, verificar situações de borda e reconhecer quando o teste foi executado apenas numa abstração distante do produto final.
+
+## A IA pode desenhar o personagem. Não pode atestar a colisão por entusiasmo
+
+A IA é útil para discutir mecânicas, sugerir mapas, organizar tabelas de animação e explicar algoritmos. Pode produzir uma proposta de sprite, um esboço de rotina de colisão ou o texto de uma tela inicial. Seu papel mais perigoso começa quando transforma essas propostas em resultados supostamente medidos. Dizer “a rotina é otimizada para o Z80” sem montar, executar e medir é publicidade de uma hipótese. Dizer “a colisão funciona em todas as fases” depois de testar apenas uma posição é exagero.
+
+Nos micros retrô há ainda o problema da identidade do hardware. TK90X e MSX não são máquinas equivalentes só porque pertencem à mesma época ou usam processadores da família Z80. Organização de vídeo, periféricos, convenções e ambiente de software precisam ser tratados de acordo com a plataforma concreta. Uma rotina desenhada para um sistema não ganha automaticamente compatibilidade no outro. O primeiro passo de um porte é identificar exatamente o que pode ser reaproveitado: regras, mapas, arte, música, algoritmos ou código específico.
+
+Por isso o laboratório começará separando **modelo de regras**, **implementação na plataforma** e **execução observada**. Nossa máquina de estados Python representa somente a primeira camada. Um programa Z80 ou BASIC que tente implementar as mesmas regras precisará ser comparado com ela. A observação em emulador exigirá outro tipo de evidência: ROM ou arquivo carregado, configuração da máquina, versão do emulador, sequência de comandos e capturas ou registros adequados.
+
+Um emulador pode ajudar muito, desde que não seja usado como selo mágico. No caso do MSX, o openMSX possui documentação para comandos de console, scripts Tcl e controle externo, recursos que podem servir à automação de cenários quando houver uma implementação real a testar [@openmsxconsole2026]. O nosso exemplo atual **não abriu o openMSX**; portanto, não podemos atribuir-lhe um PASS de emulação. Também não podemos deduzir comportamento numa placa física a partir de um teste que nunca chegou ao hardware.
+
+## Uma fase boa precisa ser possível, compreensível e agradável
+
+Existe uma parte que escapa ao simples teste de estado. Uma fase pode ser logicamente vencível e ainda ser desagradável. O comando pode responder com atraso, o salto pode parecer injusto, a tela pode esconder um obstáculo e o jogador pode não entender o que precisa fazer. Esses problemas exigem observação de uso, julgamento e, idealmente, pessoas diferentes jogando. A ferramenta pode registrar quantas tentativas uma pessoa fez; não deve concluir apenas por esse número se ela se divertiu.
+
+No livro, um texto pode estar correto e ser enfadonho. No jogo, uma regra pode estar correta e ser tediosa. No hardware, um circuito pode passar no DRC e continuar difícil de testar ou manter. Essa é uma boa lembrança de que **qualidade não é sinônimo de ausência de erro detectável**. As ferramentas eliminam trabalhos repetitivos e tornam problemas visíveis. O julgamento sobre a experiência final continua exigindo alguém que conheça o propósito do projeto.
+
+No caso de jogos inspirados por histórias, há também cuidado com os elementos artísticos. Reaproveitar uma mecânica não significa poder reproduzir personagens, músicas e imagens protegidas sem licença. Nosso princípio de não reinventar a roda traz a obrigação de reconhecer as fontes, as contribuições e os direitos envolvidos. Para aprender uma técnica, podemos construir um cenário próprio, pequeno, sem depender do conteúdo alheio. É o que fazemos com a estrela desta experiência.
+
+## Testar o que mudou, não reconstruir tudo a cada comando
+
+Uma tarefa ideal para nossa oficina seria comparar duas versões de uma fase. O código anterior é identificado por commit e hash. A nova proposta altera, por exemplo, o tempo de movimento de um inimigo. Antes de executar a alteração, registramos o objetivo e os testes que devem continuar passando. Depois compilamos, reproduzimos os roteiros existentes, examinamos o comportamento novo e pedimos uma decisão humana. Se a IA sugerir uma transformação adicional, essa proposta entra como outra mudança, não como autorização genérica para modificar o projeto inteiro.
+
+As ferramentas de cópia, comparação e checkpoints que já construímos podem ajudar nessa cadeia. O Git conserva as diferenças de código e de arquivos de configuração. Nosso comparador indica quando duas pastas divergiram. O controlador bloqueia operações fora da política. O medidor de tarefas registra custo e duração quando disponíveis. Nada disso converte uma compilação em prova de jogabilidade; apenas torna mais difícil perder de vista o que fizemos.
+
+Em jogos retrô, o tamanho do programa, a representação de imagens, o uso da RAM e a temporização importam muito. Mas devemos resistir à tentação de publicar um número de ciclos, um limite de memória ou uma taxa de quadros que não medimos na configuração exata. Quando um experimento real for feito no TK90X ou no MSX, documentaremos seus arquivos e suas condições. Até lá, este capítulo apresenta uma metodologia e um núcleo de teste local — **não uma execução que ainda não aconteceu**.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 18 — Um jogo que pode reprovar**
+
+**O que testar.** Reproduzir uma sequência de comandos num modelo de regras e conferir se o detector distingue um resultado válido de uma regressão intencional.
+
+**Como proceder.** Execute o roteiro positivo e depois o roteiro negativo do diretório `examples/jogos/`. Compare os relatórios gerados. O primeiro deve registrar cem pontos; o segundo deve denunciar que duzentos pontos eram uma expectativa incorreta. Só então peça a uma IA que proponha casos de borda adicionais.
+
+**Prompt que usaríamos hoje**
+
+> Examine as regras e os relatórios deste microjogo didático. Proponha cinco roteiros de regressão independentes para testar limites de movimento, coleta repetida, perda de vidas, fim de jogo e reinício. Identifique as expectativas de cada caso e indique quais podem ser provadas pelo simulador Python. Não declare que TK90X, MSX ou openMSX foram executados, porque o ensaio atual não inclui nenhum deles.
+
+**Comandos locais**
+
+```sh
+python tools/jogos/replay_minijogo.py \
+  examples/jogos/cenario_vitoria.json \
+  --output dist/jogo_pass.json
+python tools/jogos/replay_minijogo.py \
+  examples/jogos/cenario_regressao.json \
+  --output dist/jogo_fail.json
+```
+
+**Por que funciona.** O estado muda de maneira determinística, e a expectativa é comparada com o resultado efetivo do simulador. A segunda chamada deve sinalizar falha; por isso seu código de saída diferente de zero é parte da prova.
+
+**Como verificar.** Inspecione `score`, `star_collected`, `differences`, `rules_version` e `input_sha256`. Confira que o relatório negativo acusa a diferença na pontuação. Anote que essa prova pertence somente ao simulador: jogo compilado, emulado e jogado permanecem estados não testados.
+:::
+
+## Do modelo para um computador real
+
+Se decidirmos levar esse microjogo a uma máquina de verdade, o próximo passo será escolher o alvo. No TK90X, teremos de definir a linguagem e a organização concreta do programa, respeitando a memória e as características de vídeo e entrada daquele modelo. No MSX, precisaremos escolher a configuração de referência, o formato de distribuição e o ambiente de teste. Em ambos, a nossa sequência de ações precisa ser traduzida para controles observáveis, e os estados do programa devem ser conferidos com instrumentos adequados.
+
+A palavra *adequados* é importante. Nem toda plataforma oferece o mesmo meio de observar memória e entradas. Pode ser necessário gravar vídeo, consultar memória do emulador, expor um modo de diagnóstico no próprio jogo ou escrever scripts de controle. Podemos adicionar um modo de teste que registra eventos, desde que ele não transforme a versão distribuída num programa diferente daquele que o leitor jogará. Sempre que houver instrumentos internos, precisaremos registrar quais foram incluídos e como poderiam influenciar o comportamento.
+
+O teste em hardware físico, se fizer parte do projeto, será uma etapa à parte. Uma falha que só aparece num computador real pode revelar diferenças de temporização, interfaces ou periféricos. Uma reprodução no emulador é evidência útil; não é garantia universal. Nosso método deve ser capaz de guardar as duas observações sem apagar uma porque a outra parece mais conveniente.
+
+## Livro, jogo e hardware: o mesmo contrato em roupas diferentes
+
+No **livro**, podemos exigir que um capítulo conserve suas referências, mantenha a voz, respeite a numeração e produza uma página legível. No **jogo**, exigimos que uma mecânica responda a entradas, conserve invariantes, produza estados válidos e sobreviva a uma sessão real de jogo. No **hardware**, exigimos conexão coerente com o esquemático, integridade da netlist e, quando a conclusão depender de comportamento físico, medidas apropriadas em bancada.
+
+As três oficinas se beneficiam de uma linha de base congelada, de testes que falham quando devem falhar, de relatórios com versão e de uma pessoa autorizada a decidir. Mas cada uma possui uma diferença inegociável: **o resultado final não pode ser reduzido ao que o automatizador sabe medir**. Um texto precisa ser lido. Um jogo precisa ser jogado. Uma placa precisa ser examinada e, quando for o caso, energizada e medida com segurança.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Um jogo impossível de perder é realmente um jogo?**
+
+Desenhe, numa folha, uma fase muito pequena: no máximo cinco posições, um objetivo e um obstáculo. Antes de escrever qualquer código, estabeleça três regras e uma condição inequívoca de vitória. Peça a outra pessoa para tentar encontrar uma sequência de ações que faça sua fase se comportar de maneira inesperada. Não revele as regras escondidas que você imaginou; observe o que ela deduz da descrição.
+
+Registre as sequências encontradas. Separe **erro de regra** (por exemplo, marcar pontos duas vezes) de **problema de experiência** (por exemplo, não entender onde fica o objetivo). Só então escolha um dos erros de regra e o transforme num roteiro para o simulador, preservando o caso negativo. Ao final, apresente o contrato e o roteiro a uma IA e peça uma crítica, sem deixar que ela substitua a observação da pessoa que jogou.
+
+A conclusão do experimento deve responder: o que o teste automático conseguiu provar, o que a pessoa percebeu e o que ainda precisaria ser executado numa implementação real? Se essas três respostas forem diferentes, o experimento cumpriu sua função.
+:::
+
+## A próxima placa da oficina
+
+Uma história de jogo em poucas linhas de Python pode parecer distante do trabalho de um livro de centenas de páginas. A distância é menor do que parece. Em ambos os casos, estamos tentando não perder o estado, não atribuir evidências inexistentes e não aceitar mudanças que destruam algo já aprovado. Um roteiro de teste e uma página com correções controladas são parentes próximos: ambos conservam as condições em que uma afirmação pode ser verificada.
+
+No capítulo seguinte deixaremos o mundo da tela para voltar aos fios, às placas, aos esquemas e à bancada. Ali, a tolerância para conclusões inventadas deverá ser ainda menor. O ganho dos laboratórios anteriores estará em reconhecer que nenhum arquivo de saída, por mais bem formatado, substitui a observação relevante. **O bom jogo não nasce do número de linhas geradas; o bom método nasce da capacidade de demonstrar o que essas linhas fizeram.**
