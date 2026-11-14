@@ -1,0 +1,18 @@
+{
+  "afirmacoes": [
+    {
+      "id": "EXEMPLO-FISICO",
+      "texto": "Pretensão hipotética de medição nunca realizada",
+      "revisao": "SIM-1",
+      "nivel": "fisico",
+      "evidencias": [
+        {
+          "tipo": "documento",
+          "arquivo": "referencia_didatica.txt",
+          "sha256": "28bed65b031c074f88d8626f87ff82c21b6cc33ede3a3495a4b484d9f818d2a5",
+          "revisao": "SIM-1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+# O livro vivo sem perder a memória
+
+## O livro que muda não pode fingir que nunca errou
+
+Se você acompanhou nossa caminhada desde a Apresentação, já percebeu que esta obra teve uma vida um tanto movimentada. Enquanto escrevíamos sobre contratos editoriais, precisávamos de contratos editoriais. Quando explicamos permissões, encontramos uma permissão negada no GitHub. Ao ensinar a diferença entre execução e intenção, construímos ferramentas que primeiro falharam e depois passaram nos testes. Em outra página, um bloco de código ultrapassou o retângulo que deveria contê-lo. O leitor talvez se pergunte se estamos deliberadamente transformando uma revisão em demonstração. A resposta é menos confortável e mais útil: **não podemos ensinar uma oficina que trabalha com provas escondendo os defeitos da nossa própria oficina**.
+
+O livro já tem uma fonte canônica em Quarto, guardada no GitHub, e um espelho editável no Google Drive do autor. Há versões de leitura em HTML, EPUB e PDF, além de relatórios, ferramentas e um histórico de commits. Isso nos permite atualizar a obra e manter os passos anteriores identificáveis. Mas é preciso uma distinção final: um livro *vivo* não é um livro que se altera sozinho sem que ninguém saiba. É uma obra cujo processo de mudança permanece compreensível, **com autoria, versionamento, aprovações e limites claros**.
+
+A versão online pode ser recompilada em minutos. A edição impressa já entregue a um leitor não muda com um push no GitHub. Um EPUB que alguém baixou ontem não se transforma espontaneamente no arquivo de hoje. E uma correção técnica não passa a valer para um equipamento apenas porque o PDF foi regenerado. A capacidade de publicar versões rapidamente aumenta a necessidade de dizer ao leitor **qual versão está lendo**.
+
+## Uma única fonte, diversas formas de leitura
+
+O Quarto organiza a fonte em capítulos e permite gerar publicações em diferentes formatos [@quartobookstructure2026]. Em nossa oficina, os arquivos `.qmd` representam os textos editáveis; `_quarto.yml` define o projeto; scripts e filtros cuidam de verificações e de elementos visuais específicos. A mesma redação pode alimentar HTML, EPUB e PDF, mas os resultados não são intercambiáveis. O HTML oferece navegação e links; o EPUB enfrenta os limites do dispositivo e do tamanho de letra escolhido pelo leitor; o PDF precisa respeitar margens físicas, quebras, legendas e o formato da impressão.
+
+A experiência mostrou que **a mesma fonte pode passar em um formato e falhar noutro**. Nosso GitHub Actions tem conseguido renderizar o HTML e publicar o site. Isso não demonstra automaticamente que a versão PDF está pronta. Os transbordamentos de código continuaram sendo detectados nas provas de leitura, mesmo quando a compilação terminava com código de saída zero. As palavras *compilou* e *publicável* não são sinônimas. Por isso mantemos verificações separadas e registramos problemas que ainda não sabemos resolver automaticamente.
+
+Há também um detalhe operacional importante. O Google Drive para computador sincroniza a pasta de trabalho do autor, mas não cria commits no GitHub. Uma mudança local não ganha histórico Git apenas porque foi salva no Drive. Nosso processo atual espelha as revisões e confere o conteúdo antes de substituir arquivos; depois o GitHub produz uma prévia publicada. A ferramenta de comparação identifica divergências, mas não decide sozinha que versão deve prevalecer. Se o autor editar um capítulo no seu computador enquanto outra revisão é preparada, o correto será interromper a sincronização e avaliar o conflito.
+
+## Uma edição começa antes do arquivo final
+
+Para fechar a primeira passada deste livro, criamos um inventariador de versão: `tools/publicacao/inventariar_edicao.py`. Ele lê a configuração Quarto, identifica os capítulos registrados, calcula hashes SHA-256 dos arquivos relevantes e produz um manifesto reproduzível. O relatório informa quantos capítulos foram encontrados, a versão declarada e os recursos que estão presentes. Ele não modifica o manuscrito nem publica coisa alguma.
+
+Por que construir outro instrumento se o Git já possui histórico? Porque o commit é excelente para registrar uma mudança, mas o pacote enviado para impressão pode incluir fontes, bibliografia, imagens e artefatos gerados em momentos diferentes. O inventário permite conferir se estamos falando do mesmo conjunto de arquivos e se o número de capítulos corresponde ao que o projeto declara. É um documento complementar ao Git, não um substituto.
+
+Nosso contrato distingue três níveis de decisão. **Fonte íntegra:** os arquivos esperados existem e possuem identidade registrável. **Prévia gerada:** a ferramenta de renderização produziu arquivos que podem ser examinados. **Edição aprovada:** o autor revisou conteúdo, figuras, bibliografia e provas gráficas e autorizou uma versão identificada. A primeira condição pode ser inspecionada automaticamente. A segunda depende de execução e conferência. A terceira exige responsabilidade editorial humana.
+
+É precisamente aqui que o título do livro ganha sua última nuance. Uma IA pode escrever um texto sobre a própria operação, gerar scripts que auditam seu trabalho e sugerir uma segunda edição. Mas ela não deve declarar sozinha que o autor aprovou tudo, que o leitor compreendeu cada explicação ou que o teste final com o TK2000 foi concluído. O *quase* não diminui a colaboração; impede que ela ocupe indevidamente o lugar de quem responde pela obra.
+
+## O que já provamos e o que ainda falta
+
+Durante a primeira passada, estabelecemos contratos, publicamos capítulos no GitHub, executamos testes de ferramentas e acumulamos relatórios. Demonstramos cópia íntegra de arquivos, validação de metadados de skills, checkpoints, política de permissão, um controlador supervisionado limitado, comparação de árvores, medição sintética de custos, auditoria de fontes Quarto e replay didático de regras de jogo. O que esses ensaios têm em comum é a possibilidade de reproduzir saídas a partir de entradas identificadas.
+
+Também acumulamos pendências. Há uma skill criada, mas sua efetividade em diferentes ambientes ainda precisa ser avaliada. Um controlador recebe planos, mas não toma decisões com um modelo próprio. Não provamos um jogo completo no emulador nem executamos um circuito real no KiCad e na bancada dentro destes exemplos. Não medimos custos de APIs comerciais com o laboratório sintético. E o acabamento gráfico deste manuscrito continua em aberto. **Seria uma conclusão tecnicamente falsa encerrar o livro apagando essa lista**.
+
+A primeira passada termina com a redação dos vinte e um capítulos, não com o encerramento da pesquisa nem com a autorização para publicar uma edição final. A etapa seguinte foi combinada desde cedo: o texto integral será dividido em blocos editáveis, como fizemos com o *Manual Técnico do TK90X*. O autor poderá revisar trechos completos, ajustar a voz, corrigir erros, questionar afirmações e pedir mudanças. Cada bloco deverá voltar à fonte canônica acompanhado de um registro das alterações e dos testes. O livro ficará melhor porque a revisão será exercida sobre um todo, não porque a IA fará desaparecer as incertezas.
+
+Depois virá uma segunda passada com figuras. Não desejamos imagens decorativas de robôs ao lado de textos que continuem difíceis. Queremos diagramas que mostrem estados, fronteiras de permissão e relações entre ferramentas; fluxogramas que esclareçam decisões; gráficos derivados de dados reais; e exemplos de página boa e página ruim. Cada figura terá origem, função didática, legenda e verificação de legibilidade. A primeira passada prioriza a voz e a progressão das ideias. A segunda fará a linguagem visual trabalhar a favor delas.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 21 — Congelar sem encerrar**
+
+**O que testar.** Gere um manifesto de uma edição candidata. Confira que ele lista os capítulos e seus hashes, mas não se apresenta como autorização de publicação.
+
+**Como proceder.** Execute a ferramenta na raiz do projeto Quarto com um destino de relatório fora das fontes. Guarde o arquivo ao lado dos demais relatórios de auditoria. Se modificar intencionalmente um capítulo numa cópia temporária, gere novo manifesto e compare os hashes.
+
+**Prompt que usaríamos hoje**
+
+> Este é o manifesto de uma edição candidata, gerado automaticamente. Prepare uma lista objetiva de verificações finais para HTML, EPUB e PDF. Distinga integridade da fonte, qualidade editorial e aprovação humana. Não conclua que o livro está pronto apenas porque os hashes existem ou porque a publicação automática terminou. Identifique o que precisa de leitura e inspeção visual.
+
+**Comando local**
+
+```sh
+python tools/publicacao/inventariar_edicao.py . \
+  --output dist/manifesto_primeira_passada.json
+```
+
+**Por que funciona.** O inventariador usa os nomes esperados pelo Quarto e os hashes reais dos arquivos, gerando uma impressão digital reproduzível sem conceder aprovação editorial.
+
+**Como verificar.** Confirme o total de capítulos, os nomes dos arquivos, o campo `approval` com estado `PENDENTE_AUTOR` e o hash do manifesto. Ele não deve declarar PASS de diagramação, de fontes históricas ou de bancada. Se um arquivo desaparecer da fonte, a ferramenta deve sinalizar o problema em vez de produzir um inventário tranquilizador.
+:::
+
+## Publicar uma prévia sem prometer um livro acabado
+
+Nosso repositório público permite acompanhar o desenvolvimento. A cada commit, o GitHub Actions executa verificações estruturais e compila uma prévia HTML, disponível no endereço do projeto. A documentação do Quarto descreve a publicação por GitHub Pages como uma possibilidade de integração contínua [@quartopages2026]. A decisão editorial, contudo, permanece separada da automação: **publicar uma prévia de leitura é diferente de liberar um livro para venda**.
+
+Para a edição impressa, precisaremos escolher uma versão congelada, completar os elementos editoriais, revisar bibliografia, aprovar capa e contracapa, conferir margens e resolução de figuras e validar todo o miolo nas especificações da gráfica. Para uma edição digital, haverá outras verificações: navegação, links, quebras de capítulo, tabelas que caibam em telas pequenas e conteúdo que continue legível quando o leitor muda a tipografia. Não faz sentido exigir uma imagem de tamanho fixo num EPUB como se estivéssemos imprimindo papel. Também não faz sentido aceitar um PDF com código cortado porque a versão HTML parece bonita.
+
+Há uma responsabilidade adicional quando o livro é técnico: **cada referência deve permanecer verificável no tempo**. Um endereço pode mudar; uma biblioteca pode atualizar sua API; um datasheet pode receber uma revisão. Nosso objetivo não é congelar a tecnologia, mas identificar a data da consulta e, quando necessário, apontar o documento exato. Quando corrigirmos uma informação relevante, a nota de versão explicará o que mudou e por quê. Quem estiver seguindo uma edição anterior não deverá adivinhar a diferença.
+
+## O teste que nos espera fora destas páginas
+
+A prova final foi escolhida porque este livro, sozinho, seria um laboratório conveniente demais. Ele está sendo escrito com as ferramentas que aprendemos a usar; seria fácil projetar os critérios para os nossos próprios exemplos e declarar vitória. O *Manual Técnico do TK2000* apresenta outra situação. Trata-se de uma obra já em produção, com conteúdo histórico, referências, esquemas, pendências técnicas e escolhas editoriais que não nasceram aqui. É por isso que a escolhemos como nosso segundo campo de provas.
+
+No teste, a oficina deverá começar pela linha de base do manual: identificar a versão, os capítulos, figuras, fontes e pendências. Depois aplicar auditoria de texto e de arquivos sem destruir originais; preparar propostas de harmonização da voz e do tom; melhorar ilustrações comparando-as com evidências; separar fatos técnicos de hipóteses; gerar documentos editáveis para revisão; e produzir provas de publicação. Os agentes poderão ajudar a escolher tarefas, mas só receberão autonomia que tenha sido justificada por testes anteriores. Cada etapa terá uma condição de parada e uma pessoa capaz de dizer "não".
+
+Não afirmamos que essa prova foi feita. Ela começará **depois que este livro passar pela revisão e pelas verificações necessárias**, conforme a versão que o autor decidir adotar como base. O resultado poderá mostrar que algumas ferramentas precisam ser refeitas. Será um resultado valioso, porque a intenção não é construir uma demonstração imune a críticas; é construir um método que sobreviva a elas.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Qual versão da sua ideia merece continuar existindo?**
+
+Escolha algo seu que já mudou mais de uma vez: uma receita, uma apresentação, uma planilha ou uma história. Reúna duas versões e, antes de usar IA, escreva uma pequena nota de versão entre elas. Separe alterações de conteúdo, correções de erro e mudanças apenas visuais. Qual diferença seria importante para alguém que usou a versão anterior?
+
+Agora imagine que o arquivo mais recente esteja corrompido ou que você discorde de uma alteração feita por outra pessoa. Quais provas precisaria ter guardado para recuperar o trabalho? Que mudanças poderia aceitar automaticamente, e quais exigiriam perguntar ao autor? Tente responder sem usar termos de software: descreva o processo como se explicasse a alguém que nunca abriu o Git.
+
+Somente depois, se quiser, peça a uma IA que proponha um formato para seu histórico de mudanças. Compare o formato com as necessidades que você identificou. O objetivo não é produzir a lista mais longa. É conseguir dizer, diante de duas versões diferentes, **o que mudou, quem decidiu e por que ainda podemos confiar no que ficou**.
+:::
+
+## O que vem depois do ponto final
+
+No fim, este livro continua sendo uma parceria: a inteligência artificial propõe, escreve, pesquisa, executa tarefas autorizadas e ajuda a criar instrumentos; o autor escolhe, mede, corrige, assume a responsabilidade e aprende com os resultados. O leitor participa quando reproduz um experimento, encontra um erro nosso e constrói um procedimento melhor. A oficina só vale a pena se o conhecimento permanecer utilizável fora da conversa que o produziu.
+
+O título talvez nunca fique inteiramente resolvido. *IA fazendo IA — ou quase* é uma provocação, não uma disputa sobre quem trabalhou mais. A IA pode ajudar a fabricar as próprias ferramentas, mas precisa de critérios humanos e de provas independentes para que essa fabricação faça sentido. Não sabemos se o próximo ambiente será mais simples ou mais poderoso. Sabemos o que pretendemos levar conosco: contratos claros, liberdade de duvidar e a disciplina de verificar.
+
+E, se alguma dessas ferramentas reprovar quando enfrentarmos o TK2000, já teremos uma resposta pronta — não para encerrar a discussão, mas para abrir a próxima bancada: **isole, meça, corrija, documente. Depois, e só depois, diga que funcionou.**

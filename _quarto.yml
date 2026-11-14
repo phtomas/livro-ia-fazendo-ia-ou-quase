@@ -37,6 +37,9 @@ book:
     - chapters/16-medindo-a-oficina.qmd
     - chapters/17-a-editora-que-aprende-a-conferir.qmd
     - chapters/18-um-jogo-nao-e-jogavel-so-porque-compila.qmd
+    - chapters/19-a-placa-nao-leu-nosso-relatorio.qmd
+    - chapters/20-o-mesmo-metodo-tres-portas.qmd
+    - chapters/21-o-livro-vivo-sem-perder-a-memoria.qmd
     - appendices/10-principios.qmd
     - appendices/glossario.qmd
     - references.qmd

@@ -108,3 +108,14 @@ A regra continua: um teste executado prova a operação e o critério testado, n
 | `examples/jogos/` | Cenários identificados positivo/negativo | Cobertura integral de qualquer jogo retrô |
 
 A auditoria editorial pode retornar PASS_LIMITED com warnings: não converter para PASS de livro. A execução de um jogo-modelo tampouco comprova a implementação em hardware.
+
+## Marco v1.4 — novos artefatos (primeira passada completa)
+
+| Artefato | Caminho | Comprovado | Não comprovado |
+| --- | --- | --- | --- |
+| Fiscal de proveniência | `tools/hardware/verificar_evidencias.py` | Contrato de evidências, hash, revisão e testes sintéticos | Verdade elétrica, KiCad, medições físicas |
+| Pré-voo de adaptador | `tools/portabilidade/auditar_adaptador.py` | Perfis fictícios com estados compatível, bloqueado e indeterminado | Execução em ChatGPT/Claude/Gemini |
+| Inventariador da edição | `tools/publicacao/inventariar_edicao.py` | Listagem dos arquivos Quarto, hashes e impressão digital reproduzível | Avaliação humana ou qualidade de impressão |
+| Primeira redação | `chapters/01-*` a `chapters/21-*` | Texto presente e contrato dos boxes inspecionado | Revisão autoral, segunda passada visual, publicação final |
+
+**Importante:** o livro alvo TK2000 não é parte de execução desta rodada. O guia de revisão está em `docs/ROTEIRO_SEGUNDA_PASSADA_v1.4.md`.

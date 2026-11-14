@@ -2,7 +2,7 @@
 
 - Apresentação: rascunho v0.2 revisado para revisão do autor.
 - Capítulo 1: rascunho v0.2 revisado para revisão do autor.
-- **Estado atual:** Capítulos 1–8 redigidos em primeira passada; capítulos 9–21 ainda previstos no projeto editorial. Revisão autoral integral pendente.
+- **Estado atual:** Capítulos 1–21 redigidos em primeira passada. Revisão autoral integral pendente.
 - As notas abaixo documentam estados históricos sucessivos e não substituem o estado atual.
 - Ainda sem avaliações formais de fidelidade da voz ou validação da paginação.
 - Quarto não está instalado neste ambiente, logo ainda não foi possível validar renderização nativa.
@@ -123,3 +123,12 @@
 - Ambos mantêm boxes de IA e experimentos independentes, e exemplos de adaptação livro-jogo-hardware.
 - Falhas de layout conhecidas e outras não reveladas pelo autor permanecem abertas. Não alterar retroativamente os capítulos anteriores.
 - Primeira passada: 18 de 21 capítulos. Revisão em blocos e prova final com Manual TK2000 ainda pendentes.
+
+## Marco v1.4 — primeira passada completa, aprovação pendente
+
+- O livro contém **21 capítulos redigidos**, Apresentação e anexos. O processo de revisão autoral por blocos **ainda não começou**.
+- Capítulos 19–21 acrescentados sem reescrever a Apresentação ou os capítulos 1–18. Cada novo capítulo contém um box NA PRÁTICA COM A IA e um EXPERIMENTO DO LEITOR.
+- Três novas ferramentas locais: `tools/hardware/verificar_evidencias.py`, `tools/portabilidade/auditar_adaptador.py` e `tools/publicacao/inventariar_edicao.py`, com testes de resultado positivo e negativo. Nenhuma aciona API comercial nem publica documentos.
+- As fontes do TK2000 e qualquer placa física **não foram alteradas nem ensaiadas**; esse projeto será a prova externa futura.
+- Passar nos testes de software **não** é aprovação de diagramação, voz, fontes técnicas ou impressão. O autor relatou pequenas falhas não descritas, preservadas para os testes cegos da segunda passada.
+- A versão online é prévia de desenvolvimento, não versão final autorizada para KDP/UICLAP.

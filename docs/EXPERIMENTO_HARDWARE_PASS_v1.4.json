@@ -1,0 +1,16 @@
+{
+  "ferramenta": "verificar_evidencias",
+  "status": "PASS_RASTREABILIDADE",
+  "erros": 0,
+  "afirmacoes": [
+    {
+      "id": "EXEMPLO-DOC",
+      "nivel": "documental",
+      "erros": [],
+      "tipos_confirmados": [
+        "documento"
+      ]
+    }
+  ],
+  "aviso": "A validação dos arquivos e hashes NÃO valida as conclusões técnicas nem substitui medições."
+}

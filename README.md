@@ -168,3 +168,13 @@ O Drive do autor é um espelho de trabalho e o GitHub é o histórico versionado
 - A primeira passada permanece inacabada (18/21 capítulos). Os capítulos anteriores e apresentação não foram reescritos.
 - Avisos de código longo não provam corte geométrico no PDF. Layout, voz e aprovação autoral continuam gates diferentes.
 - O autor está deliberadamente guardando defeitos editoriais adicionais sem revelá-los. Não adivinhar nem corrigir o conteúdo anterior às cegas.
+
+## Marco v1.4 — primeira passada dos 21 capítulos concluída
+
+- Capítulos novos: 19 `A placa não leu nosso relatório`, 20 `O mesmo método atravessa três portas?` e 21 `O livro vivo sem perder a memória`.
+- **Primeira redação 21/21**. A aprovação editorial pelo autor permanece **PENDENTE**. A prova final TK2000 ainda **NÃO FOI EXECUTADA**.
+- Laboratórios adicionais: fiscal de evidências (proveniência, sem medição); pré-voo de capacidades declaradas (sem executar plataformas); inventário SHA-256 da fonte (sem aprovar publicação).
+- Casos didáticos em `examples/hardware/` e `examples/portabilidade/` são **fictícios**. Não representam execução de KiCad, revisão por Claude/Gemini/ChatGPT ou diagnóstico em placa.
+- Revisão por blocos editáveis: `docs/PLANO_REVISAO_POR_BLOCOS.md`; plano de segunda passada e provas: `docs/ROTEIRO_SEGUNDA_PASSADA_v1.4.md`.
+- As falhas editoriais relatadas pelo autor mas não identificadas devem permanecer como **pendências cegas**; não alegar que foram encontradas ou corrigidas sem evidência.
+- Os testes estruturais, os ensaios de código e a prévia Quarto HTML são verificações separadas das inspeções de PDF e EPUB, ainda não aprovadas.

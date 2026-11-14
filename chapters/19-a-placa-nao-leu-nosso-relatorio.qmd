@@ -1,0 +1,98 @@
+# A placa não leu nosso relatório
+
+## Quando o erro deixa de ser apenas uma página ruim
+
+Há uma diferença incômoda entre errar a quebra de uma legenda e errar a conexão de um circuito. O primeiro defeito pode transformar a leitura num exercício de paciência; o segundo pode impedir uma máquina de funcionar ou, em condições desfavoráveis, causar dano. Ambos merecem atenção. Mas não merecem exatamente o mesmo procedimento, nem autorizam a mesma conclusão. Se o capítulo anterior nos ensinou a distinguir um jogo que compila de um jogo que funciona, este nos obriga a distinguir **um projeto eletrônico que passa pelos verificadores de um circuito que foi comprovado na bancada**.
+
+A promessa de usar IA para desenhar esquemas e placas é irresistível. Podemos descrever um circuito, pedir uma lista de componentes, gerar uma netlist, posicionar peças e até preparar documentação para fabricação. Cada uma dessas tarefas tem valor. O problema começa quando uma representação atraente passa a ser tratada como evidência de que os pinos estão corretos, as linhas de energia suportam a carga e a temporização foi respeitada. Não há desenho suficientemente bonito para transformar suposição em medição.
+
+Nossa oficina já conhecia essa fronteira muito antes deste livro. Nas experiências com o TK90X, a FabULA e as placas de pinball, um sinal só fazia sentido quando sabíamos **de onde vinha, aonde ia, que componente o dirigia e qual era a condição do ensaio**. Uma placa CPLD que parecia funcionar numa configuração podia falhar em outra. Uma ROM comentada não era automaticamente uma ROM verificada na máquina. Um resultado em simulador não substituía a leitura do osciloscópio. Agora vamos transportar essas lições para um processo assistido por IA, sem pedir que ela finja ter segurado uma ponta de prova que ninguém conectou.
+
+## O que uma IA pode propor sem ocupar o lugar do projetista
+
+Vamos organizar uma tarefa simples. Queremos documentar uma pequena interface entre um microcomputador e um circuito de controle. Primeiro recebemos requisitos: nível elétrico, sinais, alimentação, quantidade de entradas e saídas, comportamento esperado e restrições mecânicas. Depois escolhemos referências — esquemas originais, datasheets, documentação da revisão e, se necessário, fotografias próprias. Só então surge uma primeira proposta de circuito. A IA pode ajudar a localizar datasheets, comparar alternativas, escrever perguntas para a revisão e explicar por que uma conexão merece cuidado. Mas **não pode atribuir a si uma conferência física que ainda não ocorreu**.
+
+Uma proposta tecnicamente responsável deve carregar a sua própria etiqueta. *Hipótese:* supomos que determinada linha possa acionar uma entrada. *Referência:* o fabricante especifica um limiar ou a documentação mostra o pino. *Verificação documental:* alguém comparou a conexão com a revisão correta do circuito. *Simulação:* um modelo computacional produziu certo comportamento sob parâmetros determinados. *Ensaio físico:* alguém mediu um exemplar, numa condição registrada. As etiquetas não são enfeites; são diferentes caminhos de evidência.
+
+Há outro detalhe que se perde quando chamamos tudo de "hardware": um mesmo sinal pode aparecer em revisões diferentes de uma placa com outra numeração, outra lógica de seleção ou até outro componente. Uma imagem retirada de um manual histórico precisa trazer o modelo e a revisão a que se refere. O erro não está apenas em desenhar um fio no lugar errado. Está em não perceber que **o desenho pertence a outra placa**.
+
+## KiCad, ERC, DRC e o significado de passar
+
+O KiCad oferece editores de esquemático e PCB, ferramentas de verificação e uma interface de linha de comando. Na documentação oficial, `kicad-cli sch erc` produz um relatório de verificação de regras elétricas e `kicad-cli pcb drc` verifica regras da placa; também há exportação de netlists e outros documentos de fabricação [@kicadcli2026]. Isso oferece um caminho concreto para automatizar ensaios repetíveis: o sistema pode receber um arquivo de projeto, executar o comando compatível com a versão instalada, guardar o relatório original e registrar seu código de saída.
+
+Mas devemos evitar um salto lógico. **ERC não sabe se entendemos corretamente a intenção do circuito**. Uma ligação eletricamente plausível pode estar conectada ao pino errado. DRC não certifica que escolhemos a pegada correta, que o componente físico corresponde ao símbolo ou que uma placa será fácil de montar e manter. Ambos são verificadores fundamentais, cada um dentro de seu contrato. As violações assinaladas, as exclusões configuradas e a versão do projeto precisam acompanhar o PASS.
+
+Não executamos KiCad neste laboratório. Não há um esquemático real deste capítulo que tenha sido submetido ao ERC, nem uma PCB submetida ao DRC. Os comandos a seguir são **roteiro para um projeto do leitor**, não transcrição de uma execução nossa:
+
+```sh
+kicad-cli --version
+kicad-cli sch erc -o resultados/erc.rpt placa.kicad_sch
+kicad-cli pcb drc -o resultados/drc.rpt placa.kicad_pcb
+```
+
+Os nomes de arquivo são ilustrativos. Antes de usar, confira as opções de sua versão em `--help`, a existência dos projetos, a pasta de saída e a política de exclusões. Se a interface devolver erro, registre o erro. Se o relatório não existir, não o invente. Se o projeto tiver regras próprias, documente-as. A ferramenta não deve transformar um relatório ausente num parecer tranquilizador.
+
+## Um fiscal de proveniência, não um engenheiro eletrônico artificial
+
+Construímos uma pequena ferramenta própria para este capítulo: `tools/hardware/verificar_evidencias.py`. Ela lê um manifesto local em JSON, confere o formato mínimo das afirmações e dos documentos citados, calcula hashes SHA-256 das evidências, verifica a revisão indicada e distingue uma afirmação *documental* de uma afirmação *física*. Para aceitar uma reivindicação marcada como física, exige ao menos um registro de ensaio ou medição associado à mesma revisão. Uma reivindicação marcada como documental exige fonte identificada e íntegra.
+
+Essa validação é deliberadamente humilde. Um arquivo chamado `medicao.txt` pode conter uma anotação errada; o hash apenas prova que é o mesmo arquivo que cadastramos. Uma fotografia pode ser autêntica e mostrar a placa errada. Uma planilha pode conter valores medidos com instrumento inadequado. A ferramenta consegue dizer **"a trilha de evidências está completa segundo o contrato"**, não **"esta tensão está correta"**. Essa última conclusão depende da análise técnica e, quando for o caso, de medidas confiáveis.
+
+O manifesto didático traz dois casos. O primeiro é uma afirmação sobre a identificação documental de um sinal, ligada a uma fonte sintética em texto. O segundo tenta promover uma observação de papel à condição de medição física sem anexar prova de bancada. Nosso fiscal deve aceitar a rastreabilidade do primeiro e rejeitar a pretensão do segundo. Os exemplos não representam ligações reais do TK90X, do TK2000 ou de uma máquina de pinball; os nomes e as referências foram inventados para verificar o comportamento da ferramenta.
+
+A experiência nos dá um critério melhor para criar agentes de hardware: **antes de deixar uma IA editar um esquemático, precisamos demonstrar que nossas verificações conseguem bloquear uma declaração técnica sem prova suficiente**. Depois podemos acrescentar adaptadores reais para KiCad e para instrumentos, mas cada autorização terá alcance explícito e cada instrumento exigirá uma configuração reproduzível. O agente não ganha controle da bancada apenas porque foi capaz de resumir um datasheet.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 19 — Um circuito que exige origem para cada afirmação**
+
+**O que testar.** Execute o fiscal sobre os dois manifestos didáticos em `examples/hardware/`. Um deve ter a rastreabilidade aceita; o outro deve ser recusado por tentar declarar evidência física que não apresenta.
+
+**Como proceder.** Examine os arquivos citados e depois execute o fiscal em modo somente leitura. Não altere os arquivos de exemplo antes do primeiro ensaio. Registre os códigos de saída e compare o campo `status` dos relatórios.
+
+**Prompt que usaríamos hoje**
+
+> Vou fornecer um manifesto de afirmações de hardware e a saída de um verificador determinístico. Separe o que é origem documental, o que é hipótese e o que depende de medição física. Não crie valores elétricos, não atribua revisões não identificadas e não afirme que o KiCad ou uma placa foram executados. Proponha um plano de bancada para o que permanecer sem prova.
+
+**Comandos locais**
+
+```sh
+python tools/hardware/verificar_evidencias.py \
+  examples/hardware/manifesto_documental.json
+python tools/hardware/verificar_evidencias.py \
+  examples/hardware/manifesto_sem_medicao.json
+```
+
+**Por que funciona.** O fiscal verifica evidências identificadas, tipo de prova, revisão e hashes, e reprova a ausência de um registro exigido; não verifica o circuito físico.
+
+**Como verificar.** O primeiro ensaio deve devolver `PASS_RASTREABILIDADE`; o segundo, `FAIL_EVIDENCIA`. O código de saída do segundo deve ser diferente de zero. Nenhum dos dois significa que um circuito real foi aprovado. Se um resultado diferir, guarde o arquivo, a versão da ferramenta e o erro antes de pedir uma correção.
+:::
+
+## O mesmo método, consequências distintas
+
+No **livro**, nossa afirmação pode ser "esta imagem pertence ao capítulo certo". As evidências serão o arquivo, a legenda, a licença e a revisão visual. No **jogo**, talvez precisemos provar que uma sprite pertence ao conjunto de arte aprovado e que um estado previsto foi reproduzido. No **hardware**, a cadeia precisa acrescentar pinos, revisão da placa, especificações elétricas e, quando a alegação for de comportamento físico, medições ou ensaios. A estrutura do manifesto continua parecida; **o tipo de prova muda**.
+
+Uma ferramenta que encontra a palavra "tensão" numa frase não prova que alguém verificou o nível de tensão. Um agente que consegue executar um DRC não tem, automaticamente, autorização para encaminhar arquivos Gerber a uma fábrica. Da mesma forma, o fato de possuirmos uma netlist não dá permissão para alterar discretamente um capítulo de diagnóstico. Nosso controlador de políticas continua separando operações de leitura, propostas, modificações e publicação. A autonomia, se vier, será acrescentada passo a passo e justificada pela melhoria demonstrada no resultado.
+
+Também há o caso das imagens. Uma ilustração técnica pode ser redesenhada para ficar mais legível sem alterar o que mostra. Mas, para chamá-la de representação fiel, precisamos confrontar cada relação relevante com a fonte certa. Um belo desenho de uma placa, feito por IA, pode servir como figura conceitual; não deve receber a legenda de "placa real, revisão confirmada" sem prova. No laboratório final com o *Manual Técnico do TK2000*, essa disciplina será decisiva: o livro já possui fontes, histórico e pendências. Não vamos substituí-las por imagens convincentes e eletricamente imaginárias.
+
+## Experimentar antes de confiar no fiscal
+
+Nosso exemplo não exige comprar nada. Isso é deliberado: queremos que o leitor compreenda a diferença entre a existência de um arquivo, a integridade do arquivo e a verdade da afirmação. Essas três coisas podem coincidir, mas não são sinônimos. A próxima versão da ferramenta poderá ler relatórios reais de KiCad, conferir netlists ou produzir uma fila para revisão. Só teremos direito de dizer que o fez quando mostrarmos a execução e os arquivos correspondentes.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — O que provaria uma placa que não está na sua bancada?**
+
+Escolha uma afirmação técnica que você encontrou em algum manual, revista ou discussão pública. Pode ser sobre o pino de um conector, a tensão de alimentação de um componente ou o comportamento de um circuito integrado. Escreva exatamente o que a fonte afirma e anote a revisão do equipamento, se houver. Sem pedir ajuda à IA no primeiro momento, classifique a afirmação como hipótese, descrição documental, simulação ou observação física.
+
+Agora desenhe uma cadeia de evidências: de onde veio a informação, como você verificaria a fonte, que partes poderia confrontar sem ligar nada e o que dependeria de instrumento. Proponha uma *pergunta que, se respondida negativamente, invalidaria sua conclusão*. Somente depois peça a uma IA que critique a cadeia, exigindo que ela aponte ausências, e não que complete as lacunas com suposições.
+
+Compare seu julgamento inicial com a crítica. Que parte da conclusão ficou mais forte? Qual continuou sem prova? Se você não tiver acesso ao equipamento, uma resposta responsável poderá ser simplesmente "ainda não foi medido". Isso não é um fracasso do experimento; é sua conclusão mais importante.
+:::
+
+## Uma ponte para a prova definitiva
+
+Quando chegarmos ao manual do TK2000, teremos de lidar com textos históricos, esquemas, possíveis revisões de hardware, fotografias, diagnósticos e ilustrações. Nosso desafio não será produzir páginas cada vez mais rapidamente. Será **impedir que a velocidade crie fatos que não existiam**. Os controles de origem, as revisões por blocos, os hashes, as ferramentas de PDF e os gates de aprovação foram construídos para esse encontro.
+
+Antes de levá-los a uma obra alheia a este livro, porém, falta fazer algo que ainda não provamos: comparar a mesma tarefa em ambientes de IA diferentes e medir o que é transferível. A ferramenta é nossa, mas o lugar em que ela é chamada pode mudar. É o assunto do próximo capítulo — e mais uma oportunidade de resistir à tentação de declarar vencedor um experimento que ainda não foi executado.

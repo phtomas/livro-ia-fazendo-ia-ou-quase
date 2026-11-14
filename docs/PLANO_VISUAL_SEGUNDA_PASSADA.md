@@ -75,3 +75,10 @@ Arquivos SVG rastreáveis em `figures/` e código-fonte em `figures/src/` (Merma
 - Capítulo 17: diagrama **manuscrito → auditoria mecânica → proposta editorial → prova PDF → autor → integração**, incluindo retorno ao relatório de falhas; sem declarar edição automática já implementada.
 - Capítulo 18: máquina de estados do microjogo com estados MENU, PLAYING e GAME_OVER; distinguir modelo Python, executável no emulador e jogo físico.
 - Evitar imagens de máquinas reais sem fonte/revisão confirmada; a arte dos jogos e desenhos técnicos requerem credenciais e origem apropriadas.
+
+## Propostas pós-primeira passada (Capítulos 19–21)
+
+- **19 — Hardware:** escada de evidências `fonte → revisão de circuito → ERC/DRC → teste físico`, deixando claro que etapas não se substituem. Não desenhar pinagem real sem fonte conferida.
+- **20 — Portabilidade:** diagrama `contrato comum → adaptadores → permissões/recursos → execuções reais → provas`, sem logotipos usados como prova de equivalência.
+- **21 — Livro vivo:** árvore de uma mesma fonte `.qmd` saindo para HTML/EPUB/PDF, com três gates independentes e retorno de defeitos para a revisão.
+- Priorizar formatos vetoriais editáveis (SVG e fonte DOT/Mermaid), legendas pt-BR e revisão em escala de 16 × 23 cm e telas menores.

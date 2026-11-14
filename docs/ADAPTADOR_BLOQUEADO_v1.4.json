@@ -1,0 +1,9 @@
+{
+  "status": "BLOQUEADO_POR_CAPACIDADE",
+  "ambiente_declarado": "cenario-ficticio-adaptador_sem_execucao",
+  "recursos_ausentes": [
+    "run_local_checks"
+  ],
+  "recursos_desconhecidos": [],
+  "limite": "Compatibilidade declarada não demonstra instalação, execução, autorização ou qualidade real."
+}

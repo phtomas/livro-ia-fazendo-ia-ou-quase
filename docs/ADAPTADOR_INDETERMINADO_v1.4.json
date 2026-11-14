@@ -1,0 +1,9 @@
+{
+  "status": "INDETERMINADO",
+  "ambiente_declarado": "cenario-ficticio-adaptador_desconhecido",
+  "recursos_ausentes": [],
+  "recursos_desconhecidos": [
+    "run_local_checks"
+  ],
+  "limite": "Compatibilidade declarada não demonstra instalação, execução, autorização ou qualidade real."
+}

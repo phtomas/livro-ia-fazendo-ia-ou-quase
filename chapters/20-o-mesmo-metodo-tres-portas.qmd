@@ -1,0 +1,95 @@
+# O mesmo método atravessa três portas?
+
+## Portabilidade não é mudar o nome na capa
+
+No começo deste livro, percorremos três ambientes conhecidos de IA e descobrimos que a pergunta mais útil não era qual deles possuía o botão mais bonito. Era outra: **o que acontece com nosso contrato de trabalho quando trocamos o lugar onde ele será executado?** Depois de quase vinte capítulos, já não estamos levando apenas uma instrução escrita. Temos arquivos Quarto, ferramentas Python, uma skill de revisão autoral, testes, modelos de relatório, regras de aprovação e um repositório com histórico. A oficina ficou grande o bastante para que a palavra *portabilidade* mereça uma prova, não uma promessa.
+
+Podemos tentar usar a mesma skill em ChatGPT, Claude ou Gemini. Mas a existência de um arquivo `SKILL.md` não significa que ele será descoberto da mesma maneira, nem que o ambiente terá Python, acesso ao Drive ou permissão para fazer commits. Um dos nossos experimentos mais instrutivos foi justamente a negativa do GitHub: a integração conhecia o repositório, mas não estava autorizada a escrever nele. A ferramenta podia existir e estar perfeitamente documentada; a operação continuava bloqueada. Não havia má vontade do modelo, apenas uma fronteira de autorização.
+
+O caminho responsável, portanto, tem duas etapas. Primeiro comparamos **o contrato mínimo** que qualquer execução precisa obedecer. Depois testamos **o adaptador real** que conecta esse contrato a uma plataforma. Só a segunda etapa prova execução em determinado ambiente. Não vamos reduzir uma demonstração local de Python a um benchmark entre modelos que nem foram chamados.
+
+## O contrato viaja; as permissões têm endereço
+
+Imagine que peçamos a revisão de uma página do *Manual Técnico do TK2000*. O contrato comum exige receber um trecho delimitado, uma fonte canônica, exemplos aprovados da voz do autor e restrições técnicas. A revisão deverá apresentar diferenças, preservar valores, citar dúvidas e parar antes de substituir o arquivo. Isso pode ser descrito independentemente de plataforma. Porém, quando saímos do papel, cada ambiente impõe perguntas específicas.
+
+Em **ChatGPT**, precisaremos confirmar se estamos numa conversa, num recurso de trabalho com arquivos ou num ambiente de desenvolvimento com ferramentas disponíveis. Uma integração ao Google Drive não equivale a um terminal local. A ferramenta que pode consultar um documento não possui necessariamente permissão para editar arquivos nem para publicar no GitHub.
+
+Em **Claude**, precisamos separar o uso de projetos e textos da execução em ambientes capazes de acessar diretórios e chamar ferramentas. Uma skill disponível em um ambiente compatível não está automaticamente instalada em todos os demais produtos da mesma família. Um modelo pode compreender uma instrução copiada sem ter acesso ao script que ela menciona.
+
+Em **Gemini**, também devemos distinguir a conversa, a API e ferramentas de desenvolvimento que podem oferecer mecanismos de contexto, skills e comandos. O caminho de descoberta precisa ser validado na instalação concreta. Mesmo que o contrato seja idêntico, devemos conferir as versões e os recursos de cada execução. A matriz que criamos na primeira parte do livro ajuda a organizar essas dúvidas, mas não as responde por adivinhação.
+
+A regra não é perseguir igualdade absoluta entre plataformas. É preservar os **invariantes** do nosso método: rastrear a fonte, executar somente com permissão adequada, não confundir resultado gerado com resultado aprovado e guardar a evidência. Se uma plataforma não oferecer um recurso necessário, o experimento deverá registrar a ausência e propor um procedimento alternativo, sem esconder o desvio.
+
+## Um laboratório neutro antes dos testes reais
+
+Para preparar comparações justas, incluímos `tools/portabilidade/auditar_adaptador.py`. O programa lê um contrato JSON com capacidades obrigatórias e um perfil de ambiente fornecido pelo operador. Ele verifica se há descrição suficiente para atender ao contrato: leitura de arquivos, execução de verificadores locais, possibilidade de elaborar um diff e ponto de aprovação humana. Se um perfil negar qualquer uma dessas capacidades, o verificador informa `BLOQUEADO_POR_CAPACIDADE`. Se não soubermos se ela existe, a informação permanece `DESCONHECIDA`.
+
+Esses perfis **não são documentos oficiais das plataformas** e não comprovam os recursos que cada produto oferece. São cenários fictícios para testar nosso raciocínio: uma execução hipotética com as capacidades declaradas, outra que não pode chamar verificadores locais e outra com informações incompletas. A ferramenta não acessa APIs externas, não inicia modelos e não instala skills. Ela é um filtro de pré-voo, útil justamente porque pode reprovar um plano antes que gastemos tokens ou alteremos arquivos.
+
+O primeiro perfil positivo deve demonstrar apenas **compatibilidade declarada** com o contrato, nunca eficácia real. O segundo deve ser bloqueado por uma capacidade ausente. O terceiro deve produzir um estado de incerteza. Esses resultados são diferentes: uma ausência documentada permite planejar outra estratégia; uma informação desconhecida exige investigação. Confundir as duas categorias faria nossa oficina parecer mais segura do que é.
+
+## A comparação que ainda não fizemos
+
+Quando realizarmos a prova entre ambientes, precisaremos fixar uma tarefa curta, três cópias equivalentes da entrada e os mesmos critérios de julgamento. O exemplo pode ser a revisão de um parágrafo de manual em que existam valores técnicos protegidos. Antes de cada execução, registraremos a versão de ferramenta, a capacidade de ler o trecho e os limites de escrita. Durante o ensaio, registraremos o modelo solicitado e, quando a plataforma informar, o modelo efetivamente usado. Depois mediremos diferenças de texto, erros introduzidos, tempo, tokens disponíveis e custo segundo tarifa identificada.
+
+O teste precisa distinguir pelo menos quatro situações: o contrato foi lido; uma ferramenta foi chamada; a proposta respeitou as restrições; o autor aprovou a mudança. Uma saída boa de aparência não basta para aprovar a última etapa. Tampouco um custo baixo é vitória se a saída alterou um valor elétrico. Compararemos **custo por tarefa útil aprovada**, não apenas custo por mil tokens ou rapidez de resposta.
+
+Há uma armadilha comum na pesquisa de modelos: pedir a três IAs para se avaliarem mutuamente e considerar o consenso suficiente. O resultado pode trazer ideias, mas ainda será um julgamento produzido por modelos. Precisamos de critérios externos: arquivos de referência, regras determinísticas, testes negativos conhecidos e aprovação humana. Se quisermos usar um avaliador baseado em IA, teremos de identificar seus erros e medir sua concordância com decisões previamente revisadas. A avaliação não ganha autonomia editorial só porque ganhou outro nome.
+
+::: {.na-pratica-com-ia}
+**NA PRÁTICA COM A IA**
+
+**Experiência 20 — Três perfis, um contrato, três respostas possíveis**
+
+**O que testar.** Rode o pré-voo de portabilidade com três perfis sintéticos. Verifique que a ferramenta distingue capacidade declarada, recurso ausente e informação desconhecida.
+
+**Como proceder.** Abra a pasta `examples/portabilidade/` e examine `contrato_revisao.json` e os perfis `adaptador_completo.json`, `adaptador_sem_execucao.json` e `adaptador_desconhecido.json`. Não os interprete como uma ficha técnica real de ChatGPT, Claude ou Gemini: são dados didáticos inventados.
+
+**Prompt que usaríamos hoje**
+
+> Estes relatórios foram gerados por uma ferramenta local sobre perfis fictícios. Explique quais operações posso planejar em cada cenário, quais dependem de autorização humana e quais continuam desconhecidas. Proponha um protocolo reproduzível para comparar três ambientes reais sem pressupor que uma skill instalada em um deles será ativada nos outros. Não apresente os perfis fictícios como resultados de benchmark.
+
+**Comandos locais**
+
+```sh
+cd examples/portabilidade
+python ../../tools/portabilidade/auditar_adaptador.py \
+  contrato_revisao.json adaptador_completo.json
+python ../../tools/portabilidade/auditar_adaptador.py \
+  contrato_revisao.json adaptador_sem_execucao.json
+```
+
+**Por que funciona.** O comparador considera somente capacidades declaradas e trata ausência e desconhecimento como estados diferentes, sem ligar-se a produtos externos.
+
+**Como verificar.** O primeiro relatório deve mostrar `COMPATIVEL_DECLARADO`; o segundo deve mostrar `BLOQUEADO_POR_CAPACIDADE` e sair com código diferente de zero. Execute também o terceiro cenário e confira `INDETERMINADO`. Nenhum relatório representa um teste efetivo de uma plataforma comercial.
+:::
+
+## A diferença aparece nos três tipos de projeto
+
+No **livro**, o objeto de comparação pode ser uma revisão de voz, preservação de fontes, criação de referências e montagem de uma prova. A execução exige acesso ao bloco de texto, histórico de alterações e possibilidade de manter o documento anterior intacto. No **jogo**, o ambiente precisa conseguir compilar ou chamar um emulador, reproduzir entradas e capturar resultado. Uma plataforma incapaz de executar o jogo talvez ainda seja excelente para criar personagens ou comentar código, mas não ganhará um PASS de jogabilidade. No **hardware**, a integração precisa obter arquivos de esquemático e PCB, eventualmente acionar KiCad e processar resultados de ERC/DRC; mesmo isso não a habilita a declarar medições físicas inexistentes.
+
+O mesmo contrato pode ser **mais forte** num ambiente do que em outro porque temos ferramentas diferentes, mas deve continuar honesto. Um assistente sem acesso a medições pode ajudar a preparar a bancada. Não deve alegar ter visto a onda no osciloscópio. Um ambiente sem permissão para publicar pode gerar uma proposta de commit. Não deve fingir que o commit já entrou no repositório. E um processo que publica automaticamente deve continuar separado daquele que decide se uma obra está aprovada.
+
+Esse último ponto aparece dentro do próprio projeto deste livro. O GitHub Actions gera uma versão de leitura online a cada atualização do `main`. Isso é uma operação de publicação **técnica da prévia**, não um certificado de que cada frase está correta ou de que o PDF está pronto para impressão. A IA pode colaborar com a criação dos capítulos, mas os avisos de fonte, cortes de código e erros editoriais apontados pelo autor ainda estão na fila. O site vivo não transforma uma primeira passada em edição definitiva.
+
+## Não reinventar a roda também significa saber quando sair dela
+
+Há muito trabalho excelente nas bibliotecas e ferramentas atuais. Se um SDK de agentes ou um workflow pronto resolver nosso problema com segurança, não precisamos escrever outro apenas para ilustrar o nome deste livro. Entretanto, usar uma ferramenta de terceiros sem compreender sua política de estado, suas permissões e suas dependências pode custar mais do que manter nosso controlador simples. O critério é o mesmo do início: use a solução menor que satisfaça a necessidade e prove o resultado relevante.
+
+Nosso fiscal de adaptadores tem menos recursos do que qualquer framework sério. Isso é intencional: ele não tenta orquestrar modelos, realizar chamadas externas ou administrar credenciais. Sua função é evitar que uma falta de capacidade seja descoberta tarde demais, depois de uma alteração de arquivo ou de uma cobrança inesperada. Quando um ensaio real exigir um adaptador mais completo, poderemos acrescentá-lo mantendo o contrato e os testes existentes.
+
+::: {.experimento-do-leitor}
+**EXPERIMENTO DO LEITOR — Uma habilidade ainda funciona quando a oficina muda de sala?**
+
+Escolha uma tarefa cotidiana que você já realiza com ajuda de IA: resumir um documento, organizar fotografias ou revisar um texto. Escreva seu objetivo e três condições que não podem ser violadas. Depois imagine que perdeu acesso ao ambiente em que costuma trabalhar. Quais recursos você precisa levar para executar a tarefa em outro lugar? Quais são arquivos, quais são permissões e quais são decisões humanas?
+
+Sem consultar IA na primeira rodada, desenhe três cenários: um com todas as capacidades, outro sem acesso aos arquivos e um terceiro com autorização apenas para leitura. Para cada cenário, identifique o que pode ser concluído, o que depende de adaptação e o que deve ser bloqueado. Só depois apresente os cenários a assistentes diferentes, se tiver acesso a eles, e peça uma proposta de procedimento. **Não compare uma resposta imaginada com um teste realmente executado**.
+
+Seu resultado não precisa declarar um vencedor. Deve explicar quais garantias sobreviveram à mudança de ambiente, quais dependem de instalação ou permissão e que prova adicional você exigiria antes de aceitar a tarefa como concluída.
+:::
+
+## O próximo destino não é mais uma ferramenta
+
+Passamos por conversas, skills, programas, checkpoints, agentes supervisionados, custos, livros, jogos e circuitos. O ponto comum não é uma linguagem de programação nem um fornecedor. É a possibilidade de trabalhar com autonomia progressiva, responsabilidade identificável e evidências que resistem à troca de plataforma. Se amanhã um dos ambientes desaparecer ou mudar de nome, queremos perder uma integração, não perder o método inteiro.
+
+Falta fechar o círculo: publicar um livro que possa mudar sem apagar o passado e sem apresentar cada alteração como se a edição impressa tivesse sido magicamente atualizada. Vamos, portanto, tratar o próprio livro como um artefato versionado, com revisões, limites e uma próxima etapa muito humana: a leitura crítica do autor. Antes da prova final com o manual do TK2000, nossa oficina ainda precisa demonstrar que sabe manter a própria casa em ordem.

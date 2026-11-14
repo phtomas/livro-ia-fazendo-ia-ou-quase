@@ -1,0 +1,18 @@
+{
+  "ferramenta": "verificar_evidencias",
+  "status": "FAIL_EVIDENCIA",
+  "erros": 1,
+  "afirmacoes": [
+    {
+      "id": "EXEMPLO-FISICO",
+      "nivel": "fisico",
+      "erros": [
+        "falta_prova_fisica"
+      ],
+      "tipos_confirmados": [
+        "documento"
+      ]
+    }
+  ],
+  "aviso": "A validação dos arquivos e hashes NÃO valida as conclusões técnicas nem substitui medições."
+}
