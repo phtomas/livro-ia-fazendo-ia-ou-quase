@@ -1,0 +1,59 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 14 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 14 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 14<br>ROTEIRO DO LEITOR</span><div><h1>Duas cópias, uma história: GitHub, Drive e a confiança entre elas</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 14<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 14 — Duas versões sem vencedor
+automático</strong></p>
+<p><strong>O que testar.</strong> Usar uma linha de base para
+identificar mudanças em duas árvores e interromper uma atualização
+ambígua antes que conteúdo seja perdido.</p>
+<p><strong>Como proceder.</strong> Prepare duas cópias de um projeto
+pequeno e registre uma linha de base antes de fazer alterações.
+Modifique um arquivo apenas na pasta que representa o Drive e outro de
+modo diferente nas duas pastas. Execute o comparador do capítulo
+anterior sem nenhuma operação de cópia ou sobrescrita.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Receba o relatório de comparação de duas árvores e a linha de base da
+revisão. Classifique diferenças como mudanças de um único lado ou
+conflitos, apresente os arquivos que exigem decisão humana e sugira uma
+ordem de investigação. Não presuma que a cópia mais recente ou o GitHub
+está sempre correto. Não altere arquivos, faça merge nem publique nada
+sem aprovação explícita.</p>
+</blockquote>
+<p><strong>Comandos locais</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/sync/conferir_espelhos.py <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--canon</span> pasta_git <span class="at">--snapshot</span> baseline.json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/sync/conferir_espelhos.py <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--canon</span> pasta_git <span class="at">--espelho</span> pasta_drive <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--baseline</span> baseline.json <span class="at">--report</span> diferencas.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> A linha de base permite distinguir
+uma alteração unilateral de duas alterações incompatíveis. O relatório
+explicita o limite da informação; a decisão de qual texto aceitar
+permanece fora da ferramenta.</p>
+<p><strong>Como verificar.</strong> Confirme que o conflito produz
+<code>RECONCILIACAO_PENDENTE</code> e que os conteúdos das duas pastas
+continuam intactos. Leia o relatório JSON e compare manualmente o
+arquivo em conflito. O programa não deve enviar nada ao GitHub, ao Drive
+nem ao Pages.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Você conseguiria reconstruir a
+história?</strong></p>
+<p>Sem pedir orientação à IA, escolha um pequeno conjunto de três
+arquivos pessoais. Salve uma linha de base, faça uma mudança numa cópia
+e outra mudança conflitante numa segunda cópia. Antes de rodar qualquer
+ferramenta, escreva sua previsão do estado de cada arquivo: igual,
+alterado de um lado ou conflito.</p>
+<p>Compare sua previsão com o resultado do comparador. Depois tente
+reconstruir, somente com os hashes, <em>por que</em> cada arquivo foi
+alterado. Você provavelmente perceberá que os hashes identificam
+conteúdos, mas não intenções. Anote quais informações adicionais seriam
+necessárias — uma mensagem de commit, um comentário de revisão, uma
+conversa com quem editou, um teste executado — e formule uma regra que
+impediria a perda da sua melhor versão.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

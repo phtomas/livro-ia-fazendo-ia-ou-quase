@@ -1,0 +1,83 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 12 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 12 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 12<br>ROTEIRO DO LEITOR</span><div><h1>Quando uma skill merece confiança</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 12<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><div data-custom-style="Body Text">
+<p><strong>NA PRÁTICA COM A IA</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Experiência 12 — Um PASS que não significa
+aprovação</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>O que testar.</strong> Observar como um verificador
+determinístico encontra mudanças numéricas e por que uma revisão
+tecnicamente ruim ainda pode escapar de uma checagem limitada.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como proceder.</strong> Use o exemplo original e as duas
+propostas em examples/avaliacao/. Execute primeiro uma comparação que
+preserva os dados e depois a que altera uma tensão. Nenhum texto será
+sobrescrito.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Prompt que usaríamos hoje</strong></p>
+</div>
+<p>Revise o trecho fornecido preservando fatos, unidades, ressalvas e
+grau de certeza. Apresente o texto original e a proposta em separado.
+Liste as afirmações que exigem consulta ao esquema ou medição física.
+Não transforme “indicado no esquema” em “confirmado em bancada”. Se não
+houver fonte suficiente, registre a dúvida em vez de inventar a
+conclusão.</p>
+<p><strong>Verificador local</strong></p>
+<div data-custom-style="Source Code">
+<pre><code>python tools/editorial/avaliar_proposta.py \
+  examples/avaliacao/original.txt \
+  examples/avaliacao/proposta_segura.txt</code></pre>
+</div>
+<p>Repita o comando com proposta_tensao_errada.txt. Depois tente
+proteger uma ressalva importante utilizando a opção --protect "não houve
+medição física".</p>
+<div data-custom-style="Body Text">
+<p><strong>Por que funciona.</strong> A ferramenta compara propriedades
+observáveis, em vez de tentar avaliar todo o texto por impressão. A
+regra sobre a ressalva precisa estar explicitada e a análise de
+significado continua necessária.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como verificar.</strong> A primeira comparação deve retornar
+PASS_LIMITED. A troca de 5V por 12V deve produzir FAIL_GUARDRAIL. Nenhum
+dos resultados permite publicar o capítulo. Confira os arquivos
+originais e o relatório antes de concluir.</p>
+</div>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><div data-custom-style="Body Text">
+<p><strong>EXPERIMENTO DO LEITOR — A palavra que um contador não
+percebe</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p>Escolha um texto curto em que uma única palavra possa modificar o
+grau de certeza. Pode ser um aviso de manutenção, uma instrução de
+cozinha, uma regra de jogo ou uma descrição de um circuito. Escreva duas
+versões mantendo os mesmos números, os mesmos nomes e as mesmas medidas,
+mas mudando cuidadosamente uma expressão como “talvez”, “pode”, “deve”,
+“não foi verificado” ou “foi confirmado”.</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Sem recorrer à IA, pergunte a outra pessoa se as duas frases
+autorizam a mesma conclusão. Em seguida, descubra que regra automática
+seria necessária para identificar a alteração e que conhecimento ainda
+faltaria para decidir qual versão está correta. Se não houver números no
+texto, melhor ainda: o que restou para o verificador mecânico medir?</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Anote uma situação em que o computador pode ajudar e outra em que
+seria imprudente dispensar julgamento humano. Sua resposta formará um
+caso novo para a bateria de avaliação de qualquer skill que você
+criar.</p>
+</div>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

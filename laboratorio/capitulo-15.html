@@ -1,0 +1,56 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 15 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 15 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 15<br>ROTEIRO DO LEITOR</span><div><h1>Os frameworks não decidem por nós</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 15<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 15 — O framework precisa provar seu
+valor</strong></p>
+<p><strong>O que testar.</strong> Fazer um assistente propor a
+arquitetura mínima para o fluxo editorial, mas impedir que confunda
+lista de capacidades documentadas com recursos efetivamente
+ensaiados.</p>
+<p><strong>Como proceder.</strong> Leia
+<code>docs/CONTRATO_AVALIACAO_FRAMEWORKS.md</code>. Escolha um cenário
+pequeno: inventariar um capítulo, conferir os boxes, comparar a proposta
+de revisão e interromper antes da publicação. Peça duas arquiteturas,
+uma com nosso Python local e outra com um framework candidato. Exija uma
+matriz de diferenças e de provas ainda necessárias.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Compare nosso workflow Python com uma implementação candidata em
+LangGraph, CrewAI, Microsoft Agent Framework, OpenAI Agents SDK ou
+Google ADK. Preserve o contrato de permissões e a entrada identificada
+por hash. Não afirme que executou a nova plataforma. Liste versões,
+dependências, pontos de falha e testes necessários. Mantenha a
+autorização humana fora do controle do modelo e indique quais ações
+permanecem somente simuladas.</p>
+</blockquote>
+<p><strong>Por que funciona.</strong> O mesmo contrato fixa o que deve
+permanecer correto; a comparação separa infraestrutura útil de
+abstrações que apenas mudam nomes. Ela ainda não demonstra
+desempenho.</p>
+<p><strong>Como verificar.</strong> Rejeite toda proposta que não tenha
+saída verificável, que trate documentação como execução ou que permita
+publicar sem aprovação. Marque cada item como <code>DOCUMENTADO</code>,
+<code>PROPOSTO</code>, <code>TESTADO</code> ou <code>NÃO TESTADO</code>;
+não preencha um estado pelo outro.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Quando a complexidade
+ajuda?</strong></p>
+<p>Sem consultar uma IA, desenhe numa folha o menor fluxo que permite
+concluir uma tarefa sua. Pode ser revisar uma receita, organizar um
+pequeno acervo, preparar um programa ou reparar um equipamento. Marque
+cada decisão que realmente depende de interpretação humana e cada ação
+que uma função simples executaria sem dúvida.</p>
+<p>Agora acrescente uma falha: o arquivo muda depois da leitura, a
+conexão cai ou a pessoa responsável recusa uma alteração. O que precisou
+mudar no desenho? Você precisa de um grafo, de uma fila, de um
+checkpoint, de um simples <code>if</code> ou apenas de uma instrução
+melhor? Escreva primeiro sua escolha e seu critério de prova. Só então
+mostre os dois desenhos a uma IA e peça uma crítica. Compare as razões
+dela com as suas, sem trocar evidência por entusiasmo.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>
