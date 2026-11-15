@@ -1,0 +1,64 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 19 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 19 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 19<br>ROTEIRO DO LEITOR</span><div><h1>A placa não leu nosso relatório</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 19<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 19 — Um circuito que exige origem para cada
+afirmação</strong></p>
+<p><strong>O que testar.</strong> Execute o fiscal sobre os dois
+manifestos didáticos em <code>examples/hardware/</code>. Um deve ter a
+rastreabilidade aceita; o outro deve ser recusado por tentar declarar
+evidência física que não apresenta.</p>
+<p><strong>Como proceder.</strong> Examine os arquivos citados e depois
+execute o fiscal em modo somente leitura. Não altere os arquivos de
+exemplo antes do primeiro ensaio. Registre os códigos de saída e compare
+o campo <code>status</code> dos relatórios.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Vou fornecer um manifesto de afirmações de hardware e a saída de um
+verificador determinístico. Separe o que é origem documental, o que é
+hipótese e o que depende de medição física. Não crie valores elétricos,
+não atribua revisões não identificadas e não afirme que o KiCad ou uma
+placa foram executados. Proponha um plano de bancada para o que
+permanecer sem prova.</p>
+</blockquote>
+<p><strong>Comandos locais</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/hardware/verificar_evidencias.py <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  examples/hardware/manifesto_documental.json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/hardware/verificar_evidencias.py <span class="dt">\</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  examples/hardware/manifesto_sem_medicao.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> O fiscal verifica evidências
+identificadas, tipo de prova, revisão e hashes, e reprova a ausência de
+um registro exigido; não verifica o circuito físico.</p>
+<p><strong>Como verificar.</strong> O primeiro ensaio deve devolver
+<code>PASS_RASTREABILIDADE</code>; o segundo,
+<code>FAIL_EVIDENCIA</code>. O código de saída do segundo deve ser
+diferente de zero. Nenhum dos dois significa que um circuito real foi
+aprovado. Se um resultado diferir, guarde o arquivo, a versão da
+ferramenta e o erro antes de pedir uma correção.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — O que provaria uma placa que não está
+na sua bancada?</strong></p>
+<p>Escolha uma afirmação técnica que você encontrou em algum manual,
+revista ou discussão pública. Pode ser sobre o pino de um conector, a
+tensão de alimentação de um componente ou o comportamento de um circuito
+integrado. Escreva exatamente o que a fonte afirma e anote a revisão do
+equipamento, se houver. Sem pedir ajuda à IA no primeiro momento,
+classifique a afirmação como hipótese, descrição documental, simulação
+ou observação física.</p>
+<p>Agora desenhe uma cadeia de evidências: de onde veio a informação,
+como você verificaria a fonte, que partes poderia confrontar sem ligar
+nada e o que dependeria de instrumento. Proponha uma <em>pergunta que,
+se respondida negativamente, invalidaria sua conclusão</em>. Somente
+depois peça a uma IA que critique a cadeia, exigindo que ela aponte
+ausências, e não que complete as lacunas com suposições.</p>
+<p>Compare seu julgamento inicial com a crítica. Que parte da conclusão
+ficou mais forte? Qual continuou sem prova? Se você não tiver acesso ao
+equipamento, uma resposta responsável poderá ser simplesmente “ainda não
+foi medido”. Isso não é um fracasso do experimento; é sua conclusão mais
+importante.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

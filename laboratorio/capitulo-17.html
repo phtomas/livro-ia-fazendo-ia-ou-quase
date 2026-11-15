@@ -1,0 +1,62 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 17 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 17 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 17<br>ROTEIRO DO LEITOR</span><div><h1>A editora que aprende a conferir</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 17<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 17 — Auditar a fonte antes da página</strong></p>
+<p><strong>O que testar.</strong> Descobrir se os arquivos Quarto contêm
+recursos ausentes ou códigos que merecem inspeção, sem escrever uma
+única linha no manuscrito.</p>
+<p><strong>Como proceder.</strong> Execute a ferramenta de auditoria na
+raiz do projeto e abra o relatório JSON. Se houver avisos de código
+longo, compare-os com as páginas do PDF. Não conclua que um aviso
+corresponde a corte sem inspeção. Depois, apresente a uma IA somente o
+relatório e o contrato editorial, pedindo uma proposta de priorização,
+não uma edição automática.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Receba este relatório de auditoria de fontes Quarto. Classifique cada
+item pelo tipo de evidência disponível e proponha qual verificação
+adicional é necessária. Não declare que uma linha longa invadiu a margem
+sem prova no PDF; não trate PASS_LIMITED como aprovação editorial; não
+altere os arquivos. Destaque o que precisa de leitura do autor e o que
+pode ser conferido por um script.</p>
+</blockquote>
+<p><strong>Comando local</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/editorial/auditar_fontes_quarto.py . <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> dist/fontes.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> O programa executa inspeções
+determinísticas e conserva as ocorrências em formato legível por outras
+ferramentas, enquanto a IA fica restrita à interpretação e à sugestão de
+próximos passos.</p>
+<p><strong>Como verificar.</strong> Os testes da ferramenta devem
+encontrar um recurso ausente numa amostra intencionalmente defeituosa e
+detectar uma linha longa sem falsamente classificar o PDF como cortado.
+Confirme que o <code>.qmd</code> original permaneceu igual, por hash.
+Nenhuma mensagem da IA deve ser usada como prova de editoração
+aprovada.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — O erro que a máquina não foi avisada
+para procurar</strong></p>
+<p>Escolha duas páginas de um material seu e anote, <strong>sem
+consultar a IA</strong>, três aspectos que tornam a leitura boa ou ruim.
+Procure deliberadamente pelo menos um problema que não seja de
+ortografia nem de tamanho de linha. Pode ser uma transição confusa, uma
+figura que contradiz o texto ou uma informação cuja origem não está
+clara.</p>
+<p>Agora execute a conferência mecânica que tiver disponível. Compare
+suas observações com o relatório. Quais problemas coincidiram? Quais
+categorias sequer poderiam ter sido detectadas pela ferramenta? Só
+depois peça a uma IA que proponha uma forma de ampliar os testes, sem
+lhe contar previamente quais erros você anotou. Guarde as duas listas
+separadas: o que você viu e o que o sistema detectou.</p>
+<p>A descoberta não é obter cem por cento de acertos num material
+escolhido para favorecer a ferramenta. É identificar <strong>a fronteira
+daquilo que foi realmente examinado</strong>. E, se uma falha importante
+passou despercebida, transformar essa ocorrência em caso de regressão
+sem esconder que antes o programa não sabia encontrá-la.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

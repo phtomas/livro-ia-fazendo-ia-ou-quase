@@ -1,0 +1,65 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 18 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 18 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 18<br>ROTEIRO DO LEITOR</span><div><h1>Um jogo não é jogável só porque compila</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 18<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 18 — Um jogo que pode reprovar</strong></p>
+<p><strong>O que testar.</strong> Reproduzir uma sequência de comandos
+num modelo de regras e conferir se o detector distingue um resultado
+válido de uma regressão intencional.</p>
+<p><strong>Como proceder.</strong> Execute o roteiro positivo e depois o
+roteiro negativo do diretório <code>examples/jogos/</code>. Compare os
+relatórios gerados. O primeiro deve registrar cem pontos; o segundo deve
+denunciar que duzentos pontos eram uma expectativa incorreta. Só então
+peça a uma IA que proponha casos de borda adicionais.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Examine as regras e os relatórios deste microjogo didático. Proponha
+cinco roteiros de regressão independentes para testar limites de
+movimento, coleta repetida, perda de vidas, fim de jogo e reinício.
+Identifique as expectativas de cada caso e indique quais podem ser
+provadas pelo simulador Python. Não declare que TK90X, MSX ou openMSX
+foram executados, porque o ensaio atual não inclui nenhum deles.</p>
+</blockquote>
+<p><strong>Comandos locais</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/jogos/replay_minijogo.py <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  examples/jogos/cenario_vitoria.json <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> dist/jogo_pass.json</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/jogos/replay_minijogo.py <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  examples/jogos/cenario_regressao.json <span class="dt">\</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> dist/jogo_fail.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> O estado muda de maneira
+determinística, e a expectativa é comparada com o resultado efetivo do
+simulador. A segunda chamada deve sinalizar falha; por isso seu código
+de saída diferente de zero é parte da prova.</p>
+<p><strong>Como verificar.</strong> Inspecione <code>score</code>,
+<code>star_collected</code>, <code>differences</code>,
+<code>rules_version</code> e <code>input_sha256</code>. Confira que o
+relatório negativo acusa a diferença na pontuação. Anote que essa prova
+pertence somente ao simulador: jogo compilado, emulado e jogado
+permanecem estados não testados.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Um jogo impossível de perder é
+realmente um jogo?</strong></p>
+<p>Desenhe, numa folha, uma fase muito pequena: no máximo cinco
+posições, um objetivo e um obstáculo. Antes de escrever qualquer código,
+estabeleça três regras e uma condição inequívoca de vitória. Peça a
+outra pessoa para tentar encontrar uma sequência de ações que faça sua
+fase se comportar de maneira inesperada. Não revele as regras escondidas
+que você imaginou; observe o que ela deduz da descrição.</p>
+<p>Registre as sequências encontradas. Separe <strong>erro de
+regra</strong> (por exemplo, marcar pontos duas vezes) de
+<strong>problema de experiência</strong> (por exemplo, não entender onde
+fica o objetivo). Só então escolha um dos erros de regra e o transforme
+num roteiro para o simulador, preservando o caso negativo. Ao final,
+apresente o contrato e o roteiro a uma IA e peça uma crítica, sem deixar
+que ela substitua a observação da pessoa que jogou.</p>
+<p>A conclusão do experimento deve responder: o que o teste automático
+conseguiu provar, o que a pessoa percebeu e o que ainda precisaria ser
+executado numa implementação real? Se essas três respostas forem
+diferentes, o experimento cumpriu sua função.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

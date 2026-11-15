@@ -1,0 +1,60 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 21 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 21 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 21<br>ROTEIRO DO LEITOR</span><div><h1>O livro vivo sem perder a memória</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 21<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 21 — Congelar sem encerrar</strong></p>
+<p><strong>O que testar.</strong> Gere um manifesto de uma edição
+candidata. Confira que ele lista os capítulos e seus hashes, mas não se
+apresenta como autorização de publicação.</p>
+<p><strong>Como proceder.</strong> Execute a ferramenta na raiz do
+projeto Quarto com um destino de relatório fora das fontes. Guarde o
+arquivo ao lado dos demais relatórios de auditoria. Se modificar
+intencionalmente um capítulo numa cópia temporária, gere novo manifesto
+e compare os hashes.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Este é o manifesto de uma edição candidata, gerado automaticamente.
+Prepare uma lista objetiva de verificações finais para HTML, EPUB e PDF.
+Distinga integridade da fonte, qualidade editorial e aprovação humana.
+Não conclua que o livro está pronto apenas porque os hashes existem ou
+porque a publicação automática terminou. Identifique o que precisa de
+leitura e inspeção visual.</p>
+</blockquote>
+<p><strong>Comando local</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> tools/publicacao/inventariar_edicao.py . <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> dist/manifesto_primeira_passada.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> O inventariador usa os nomes
+esperados pelo Quarto e os hashes reais dos arquivos, gerando uma
+impressão digital reproduzível sem conceder aprovação editorial.</p>
+<p><strong>Como verificar.</strong> Confirme o total de capítulos, os
+nomes dos arquivos, o campo <code>approval</code> com estado
+<code>PENDENTE_AUTOR</code> e o hash do manifesto. Ele não deve declarar
+PASS de diagramação, de fontes históricas ou de bancada. Se um arquivo
+desaparecer da fonte, a ferramenta deve sinalizar o problema em vez de
+produzir um inventário tranquilizador.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Qual versão da sua ideia merece
+continuar existindo?</strong></p>
+<p>Escolha algo seu que já mudou mais de uma vez: uma receita, uma
+apresentação, uma planilha ou uma história. Reúna duas versões e, antes
+de usar IA, escreva uma pequena nota de versão entre elas. Separe
+alterações de conteúdo, correções de erro e mudanças apenas visuais.
+Qual diferença seria importante para alguém que usou a versão
+anterior?</p>
+<p>Agora imagine que o arquivo mais recente esteja corrompido ou que
+você discorde de uma alteração feita por outra pessoa. Quais provas
+precisaria ter guardado para recuperar o trabalho? Que mudanças poderia
+aceitar automaticamente, e quais exigiriam perguntar ao autor? Tente
+responder sem usar termos de software: descreva o processo como se
+explicasse a alguém que nunca abriu o Git.</p>
+<p>Somente depois, se quiser, peça a uma IA que proponha um formato para
+seu histórico de mudanças. Compare o formato com as necessidades que
+você identificou. O objetivo não é produzir a lista mais longa. É
+conseguir dizer, diante de duas versões diferentes, <strong>o que mudou,
+quem decidiu e por que ainda podemos confiar no que ficou</strong>.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

@@ -1,0 +1,69 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 20 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 20 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 20<br>ROTEIRO DO LEITOR</span><div><h1>O mesmo método atravessa três portas?</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 20<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência 20 — Três perfis, um contrato, três respostas
+possíveis</strong></p>
+<p><strong>O que testar.</strong> Rode o pré-voo de portabilidade com
+três perfis sintéticos. Verifique que a ferramenta distingue capacidade
+declarada, recurso ausente e informação desconhecida.</p>
+<p><strong>Como proceder.</strong> Abra a pasta
+<code>examples/portabilidade/</code> e examine
+<code>contrato_revisao.json</code> e os perfis
+<code>adaptador_completo.json</code>,
+<code>adaptador_sem_execucao.json</code> e
+<code>adaptador_desconhecido.json</code>. Não os interprete como uma
+ficha técnica real de ChatGPT, Claude ou Gemini: são dados didáticos
+inventados.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<blockquote>
+<p>Estes relatórios foram gerados por uma ferramenta local sobre perfis
+fictícios. Explique quais operações posso planejar em cada cenário,
+quais dependem de autorização humana e quais continuam desconhecidas.
+Proponha um protocolo reproduzível para comparar três ambientes reais
+sem pressupor que uma skill instalada em um deles será ativada nos
+outros. Não apresente os perfis fictícios como resultados de
+benchmark.</p>
+</blockquote>
+<p><strong>Comandos locais</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> examples/portabilidade</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ../../tools/portabilidade/auditar_adaptador.py <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  contrato_revisao.json adaptador_completo.json</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ../../tools/portabilidade/auditar_adaptador.py <span class="dt">\</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  contrato_revisao.json adaptador_sem_execucao.json</span></code></pre></div>
+<p><strong>Por que funciona.</strong> O comparador considera somente
+capacidades declaradas e trata ausência e desconhecimento como estados
+diferentes, sem ligar-se a produtos externos.</p>
+<p><strong>Como verificar.</strong> O primeiro relatório deve mostrar
+<code>COMPATIVEL_DECLARADO</code>; o segundo deve mostrar
+<code>BLOQUEADO_POR_CAPACIDADE</code> e sair com código diferente de
+zero. Execute também o terceiro cenário e confira
+<code>INDETERMINADO</code>. Nenhum relatório representa um teste efetivo
+de uma plataforma comercial.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Uma habilidade ainda funciona quando
+a oficina muda de sala?</strong></p>
+<p>Escolha uma tarefa cotidiana que você já realiza com ajuda de IA:
+resumir um documento, organizar fotografias ou revisar um texto. Escreva
+seu objetivo e três condições que não podem ser violadas. Depois imagine
+que perdeu acesso ao ambiente em que costuma trabalhar. Quais recursos
+você precisa levar para executar a tarefa em outro lugar? Quais são
+arquivos, quais são permissões e quais são decisões humanas?</p>
+<p>Sem consultar IA na primeira rodada, desenhe três cenários: um com
+todas as capacidades, outro sem acesso aos arquivos e um terceiro com
+autorização apenas para leitura. Para cada cenário, identifique o que
+pode ser concluído, o que depende de adaptação e o que deve ser
+bloqueado. Só depois apresente os cenários a assistentes diferentes, se
+tiver acesso a eles, e peça uma proposta de procedimento. <strong>Não
+compare uma resposta imaginada com um teste realmente
+executado</strong>.</p>
+<p>Seu resultado não precisa declarar um vencedor. Deve explicar quais
+garantias sobreviveram à mudança de ambiente, quais dependem de
+instalação ou permissão e que prova adicional você exigiria antes de
+aceitar a tarefa como concluída.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>
