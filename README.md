@@ -2,7 +2,7 @@
 
 **Portal público do leitor · José Albuquerque**
 
-O manuscrito completo está preservado em um repositório **privado**. Aqui ficam apenas sumário, documentação complementar, experimentos, scripts fictícios e notas de compatibilidade.
+O manuscrito completo está preservado em um repositório **privado**. Aqui ficam apenas sumário, documentação complementar, experimentos, scripts fictícios e notas de compatibilidade. Os 21 roteiros estão disponíveis, com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo).
 
 - [Abrir portal (GitHub Pages)](index.html)
 - [Sumário](SUMARIO.md)
