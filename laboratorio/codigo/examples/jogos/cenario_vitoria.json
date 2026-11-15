@@ -1,0 +1,6 @@
+{
+  "rules_version": "1.0",
+  "scenario": "coletar estrela em x=2 sem perder vidas",
+  "actions": ["start", "right", "right", "collect", "collect"],
+  "expect": {"screen": "playing", "x": 2, "lives": 3, "score": 100, "star_collected": true}
+}

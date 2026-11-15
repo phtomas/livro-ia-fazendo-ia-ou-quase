@@ -1,0 +1,6 @@
+{
+  "rules_version": "1.0",
+  "scenario": "falha intencional de expectativa: pontuação duplicada",
+  "actions": ["start", "right", "right", "collect", "collect"],
+  "expect": {"screen": "playing", "x": 2, "lives": 3, "score": 200, "star_collected": true}
+}
