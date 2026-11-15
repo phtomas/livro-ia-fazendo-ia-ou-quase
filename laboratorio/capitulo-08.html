@@ -1,0 +1,62 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 8 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 8 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 08<br>ROTEIRO DO LEITOR</span><div><h1>Uma skill que pode viajar sem perder o endereço</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 08<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — Pedir uma skill pequena, verificável e com
+limites</strong></p>
+<p><strong>O que testar.</strong> Observar se um assistente consegue
+transformar um procedimento recorrente em proposta de skill sem inventar
+poderes, permissões ou compatibilidade.</p>
+<p><strong>Como proceder.</strong> Escolha uma tarefa textual que você
+já faz repetidamente. Entregue à IA o objetivo, um exemplo aprovado e o
+resultado esperado. Não forneça credenciais nem conceda acesso de
+escrita. Comece apenas com SKILL.md e, se necessário, um pequeno arquivo
+de referências.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Quero empacotar o seguinte procedimento recorrente numa Agent Skill.
+Proponha uma pasta com SKILL.md, usando metadados name e description, e
+referências auxiliares apenas quando necessárias. Descreva quando a
+skill deve e não deve ser usada, suas entradas obrigatórias, etapas,
+saídas e critérios de parada. Não inclua senhas, APIs imaginárias,
+comandos destrutivos nem recursos que o ambiente não disponibiliza. O
+resultado deve ser uma PROPOSTA; não declare que a skill foi instalada
+ou executada. Separe os testes de estrutura, transporte e comportamento.
+Procedimento: [explique aqui a tarefa]. Exemplo aprovado: [cole
+aqui].</p>
+<p><strong>Por que funciona.</strong> O pedido limita o escopo, define a
+estrutura mínima e torna explícito o que continua sem verificação. Ele
+reduz o risco de receber uma pasta cheia de arquivos que ninguém sabe
+avaliar. Não garante que a skill seja correta: o modelo ainda pode
+propor regras inadequadas.</p>
+<p><strong>Como verificar.</strong> Leia o SKILL.md proposto e tente
+responder, sem adivinhações: quando ele será chamado, o que pode
+alterar, que dados exige e como sabemos que terminou. Em seguida use um
+verificador local ou uma inspeção manual para conferir os metadados.
+Execute a instalação somente em diretório temporário e verifique hashes;
+testar descoberta num ambiente real será um passo distinto.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — O caso que não merece sua
+skill</strong></p>
+<p>Você escreveu ou escolheu uma skill para resolver um problema
+recorrente. Agora invente três tarefas próximas desse problema, mas não
+idênticas. Em uma delas, a skill deveria ajudar. Em outra, deveria pedir
+informações antes de avançar. Na terceira, deveria <strong>recusar-se a
+agir ou encaminhar a decisão ao responsável</strong>, por falta de
+competência, dados ou autorização.</p>
+<p>Antes de consultar qualquer IA, justifique suas classificações. Onde
+está a fronteira entre um procedimento útil e uma intromissão? O que
+muda se o documento é seu, de uma equipe ou de um terceiro? E se a
+operação é reversível? Se tiver acesso a um ambiente de teste, apresente
+os três casos sem arquivos valiosos e observe o comportamento; caso
+contrário, compare sua expectativa com as próprias instruções da
+skill.</p>
+<p>Não procure uma taxa de acerto numa amostra tão pequena. Procure uma
+condição que você não havia documentado. Quando encontrá-la, decida se
+deve alterar a skill, melhorar o enunciado da tarefa ou reconhecer que o
+problema não deveria ser delegado.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

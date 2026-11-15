@@ -1,0 +1,80 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 9 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 9 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 09<br>ROTEIRO DO LEITOR</span><div><h1>O fluxo que sabe onde parou</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 09<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><div data-custom-style="Body Text">
+<p><strong>NA PRÁTICA COM A IA</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Experiência 9 — Um fluxo que se lembra do que
+comprovou</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>O que testar.</strong> Observar uma interrupção controlada, a
+retomada com fontes idênticas e o bloqueio quando a fonte muda depois do
+checkpoint.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como proceder.</strong> Use Python 3.11 ou superior numa
+cópia do repositório. Escolha um diretório temporário
+<strong>fora</strong> da pasta de fontes para os relatórios. Execute
+primeiro a simulação de falha. Depois, execute novamente sem --fail-at.
+Num segundo diretório de ensaio, altere um .qmd depois da interrupção e
+observe o bloqueio. Não use o manuscrito principal como bancada de
+edição.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Prompt que usaríamos hoje</strong></p>
+</div>
+<p>Explique os estados registrados pelo arquivo state.json a seguir e
+proponha quais evidências adicionais seriam necessárias antes da
+publicação. Não trate STRUCTURE_OK como aprovação do autor. Não altere
+os arquivos nem invente execuções que não aparecem no log.</p>
+<p>O comando determinístico para a primeira rodada é:</p>
+<div data-custom-style="Source Code">
+<pre><code>python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint --fail-at after-inventory
+python workflows/fluxo_com_checkpoints.py . --work ../ensaio-checkpoint</code></pre>
+</div>
+<p><strong>Por que funciona.</strong> O programa associa o checkpoint a
+hashes das entradas e recusa reaproveitar uma verificação depois que a
+fonte mudou. O modelo, quando utilizado, entra apenas para interpretar o
+relatório e sugerir perguntas; não decide que uma execução
+aconteceu.</p>
+<div data-custom-style="Body Text">
+<p><strong>Como verificar.</strong> A primeira execução deve terminar
+com código 4 e estado INTERRUPTED; a retomada sem alteração deve
+terminar com código 0 e estado WAITING_HUMAN. Se alterar uma fonte
+depois do checkpoint, o retorno esperado é 3 e o estado BLOCKED. O
+script não deve mudar nenhum .qmd nem conceder aprovação.</p>
+</div>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><div data-custom-style="Body Text">
+<p><strong>EXPERIMENTO DO LEITOR — O botão que não deve ser apertado
+duas vezes</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p>Pense em alguma tarefa da sua rotina que tenha duas ou mais etapas.
+Não precisa envolver computador: enviar documentos, fechar uma
+encomenda, atualizar uma planilha ou montar um circuito também serve.
+Imagine que a execução foi interrompida exatamente entre a penúltima e a
+última etapa.</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Sem pedir ajuda à IA, faça duas listas curtas: <strong>o que você
+consegue provar que aconteceu</strong> e <strong>o que você apenas
+suspeita que aconteceu</strong>. Em seguida, escolha uma operação que
+poderia ser repetida com segurança e outra que poderia produzir
+duplicação, perda ou dano. Que evidência permitiria retomar a tarefa?
+Onde seria necessário pedir autorização?</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Se quiser, compare sua resposta com a de outra pessoa que conheça o
+processo. O ponto não é acertar um nome técnico; é perceber quantas
+vezes tratamos uma suposição como checkpoint. Guarde sua conclusão: ela
+servirá de base para o capítulo seguinte.</p>
+</div>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

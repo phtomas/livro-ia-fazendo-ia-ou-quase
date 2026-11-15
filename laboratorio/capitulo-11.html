@@ -1,0 +1,81 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 11 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 11 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 11<br>ROTEIRO DO LEITOR</span><div><h1>O primeiro ciclo supervisionado: do pedido à evidência</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 11<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><div data-custom-style="Body Text">
+<p><strong>NA PRÁTICA COM A IA</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Experiência 11 — Um plano pode pedir; só a política pode
+permitir</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>O que testar.</strong> Comprovar que o controlador distingue
+ações propostas de ações executadas e interrompe o ciclo diante de uma
+intervenção não autorizada.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como proceder.</strong> Na raiz do projeto Quarto, com Python
+instalado, execute os dois planos fornecidos em examples/. Os relatórios
+serão gravados em dist/. O manuscrito não será alterado.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Prompt que usaríamos hoje</strong></p>
+</div>
+<p>Proponha um plano para conferir a estrutura de um livro sem modificar
+seus arquivos. Utilize apenas os nomes READ_SOURCE, CHECK_STRUCTURE,
+PROPOSE_TEXT_DIFF, GENERATE_REPORT e PUBLISH. Para cada ação, explique
+qual resultado seria necessário antes do passo seguinte. Não diga que
+executou algo; entregue somente a proposta e sinalize qualquer etapa que
+dependa de aprovação humana.</p>
+<p><strong>Execução local, sem modelo</strong></p>
+<div data-custom-style="Source Code">
+<pre><code>python agents/ciclo_supervisionado.py \
+  --root . \
+  --plan examples/plano_supervisionado_leitura.json \
+  --report dist/leitura.json</code></pre>
+</div>
+<p>Para testar o bloqueio, troque plano_supervisionado_leitura.json por
+plano_supervisionado_bloqueio.json e grave em dist/bloqueio.json. Nesse
+caso, o programa devolve um código de saída diferente de zero por uma
+razão <strong>esperada</strong>.</p>
+<div data-custom-style="Body Text">
+<p><strong>Por que funciona.</strong> Um plano externo não recebe
+autoridade para escolher qualquer comando. O controlador consulta uma
+política separada e possui somente adaptadores explícitos para as
+operações permitidas.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como verificar.</strong> No primeiro relatório procure
+PASS_LIMITED, changed_manuscript: false e published: false. No segundo,
+confirme HALTED_POLICY, a interrupção em PUBLISH e a ausência de
+execução da etapa seguinte. Se houver alteração no manuscrito ou
+publicação, o teste falhou.</p>
+</div>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><div data-custom-style="Body Text">
+<p><strong>EXPERIMENTO DO LEITOR — Quem realmente tomou a
+decisão?</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p>Escolha uma atividade da sua rotina que outra pessoa poderia ajudar a
+executar. Pode ser organizar fotografias, corrigir um texto, testar uma
+aplicação ou conferir um pequeno circuito. Sem consultar uma IA, desenhe
+a fronteira entre <strong>sugerir</strong>, <strong>executar</strong> e
+<strong>aprovar</strong>. Qual etapa poderia acontecer sem pedir
+licença? Qual produziria um efeito que não deve ser repetido? Que prova
+você aceitaria de que o trabalho aconteceu?</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Agora imagine três resultados inesperados: uma entrada ausente, uma
+ferramenta que falha e uma solicitação de fazer algo fora do escopo.
+Decida onde a atividade deve parar em cada situação. Só depois compare
+seu desenho com o nosso controlador e identifique uma regra que faltou
+nele. Não precisamos que você concorde com a nossa lista: queremos que
+consiga justificá-la.</p>
+</div>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

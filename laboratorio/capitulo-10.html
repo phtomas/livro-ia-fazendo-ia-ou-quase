@@ -1,0 +1,80 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 10 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 10 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 10<br>ROTEIRO DO LEITOR</span><div><h1>Quem deixa o agente decidir?</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 10<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><div data-custom-style="Body Text">
+<p><strong>NA PRÁTICA COM A IA</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Experiência 10 — Antes de executar, perguntar quem
+autorizou</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>O que testar.</strong> Distinguir uma sugestão de agente de
+uma ação realmente autorizada e de uma ação efetivamente executada.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Como proceder.</strong> Use o pequeno avaliador
+determinístico incluído no repositório. Execute primeiro uma operação de
+leitura e depois uma operação de publicação. Não é necessário conectar
+nenhuma conta nem fornecer credenciais.</p>
+</div>
+<div data-custom-style="Body Text">
+<p><strong>Prompt que usaríamos hoje</strong></p>
+</div>
+<p>Receba o objetivo “preparar para publicação um capítulo do manual
+técnico” e proponha três próximos passos, sem executar nenhum. Para cada
+um, informe o nome da ação, a evidência necessária, o risco, a
+autorização exigida e a condição para interromper. Não suponha que a
+existência de um PDF demonstra aprovação editorial. Se a ação não
+estiver autorizada, não procure um caminho alternativo para
+executá-la.</p>
+<p>Para experimentar a política sem usar IA:</p>
+<div data-custom-style="Source Code">
+<pre><code>python agents/politica_orquestrador.py --action CHECK_STRUCTURE
+python agents/politica_orquestrador.py --action PUBLISH
+python agents/politica_orquestrador.py --action ACCESS_SECRET</code></pre>
+</div>
+<p><strong>Por que funciona.</strong> A política representa
+explicitamente as permissões mínimas da oficina e devolve decisões que
+podem ser testadas sem inferência. O modelo, se participar, apenas
+propõe o próximo passo; não altera as regras por redação persuasiva.</p>
+<div data-custom-style="Body Text">
+<p><strong>Como verificar.</strong> CHECK_STRUCTURE devolve
+ALLOW_READ_ONLY; PUBLISH devolve REQUIRE_HUMAN_APPROVAL; ACCESS_SECRET
+devolve DENY. Todas as respostas devem declarar is_executed: false. Se o
+programa executar qualquer ação, ou se o modelo disser que publicou algo
+sem o respectivo resultado externo, o teste falhou.</p>
+</div>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><div data-custom-style="Body Text">
+<p><strong>EXPERIMENTO DO LEITOR — Qual decisão você realmente
+delegaria?</strong></p>
+</div>
+<div data-custom-style="Body Text">
+<p>Escolha uma tarefa que conheça bem e divida-a em cinco ações
+concretas. Para cada uma, decida se aceitaria que um programa a
+executasse automaticamente, se gostaria de receber apenas uma proposta
+ou se exigiria sua presença. Não use os exemplos do livro como gabarito:
+a graça está em descobrir a fronteira de confiança do seu próprio
+trabalho.</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Agora imagine que a ação mais arriscada falhou sem devolver
+confirmação. Você autorizaria uma segunda tentativa automática? Qual
+registro precisaria consultar primeiro? Se outra pessoa estivesse
+executando o processo em seu nome, sua resposta mudaria?</p>
+</div>
+<div data-custom-style="Body Text">
+<p>Somente depois de escrever suas escolhas, peça a uma IA para
+questionar seus critérios. Ela identificou alguma autorização ausente,
+uma operação repetível perigosa ou um controle desnecessariamente
+rígido? Você não precisa concordar com a resposta. O resultado do
+experimento é seu <strong>quadro de decisões</strong>, não a obediência
+ao palpite do modelo.</p>
+</div>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>
