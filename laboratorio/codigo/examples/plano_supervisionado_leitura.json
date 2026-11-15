@@ -1,0 +1,9 @@
+{
+  "goal": "Conferir a estrutura do livro sem editar nem publicar",
+  "source": "demonstracao_roteirizada",
+  "steps": [
+    {"action": "READ_SOURCE", "path": "index.qmd"},
+    {"action": "CHECK_STRUCTURE"},
+    {"action": "GENERATE_REPORT"}
+  ]
+}
