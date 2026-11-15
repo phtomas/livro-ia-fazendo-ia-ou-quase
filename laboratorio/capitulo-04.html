@@ -1,0 +1,60 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 4 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 4 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 04<br>ROTEIRO DO LEITOR</span><div><h1>Quando criar um agente — e quando deixar a ferramenta em paz</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 04<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — O trabalho que não precisa de tokens de
+IA</strong></p>
+<p><strong>O que testar.</strong> Reproduzir uma cópia de arquivos com
+conferência de integridade, sem enviar arquivos para um modelo de
+linguagem.</p>
+<p><strong>Como proceder.</strong> Crie uma pasta de testes vazia.
+Execute o script abaixo com Python 3; ele cria uma origem, copia dois
+arquivos para outra pasta e confere o conteúdo por SHA-256. Não executa
+exclusões e não utiliza a rede.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Se você quiser pedir ajuda a uma IA para compreender o exemplo,
+explique: “Leia este script Python sem executá-lo. Descreva as entradas,
+as saídas, os riscos de sobrescrita e as evidências que permitem afirmar
+que a cópia funcionou. Não proponha um agente para realizar a
+transferência, a menos que exista uma necessidade demonstrada de decisão
+dinâmica.” O código, porém, pode funcionar sem fazer essa pergunta à
+IA.</p>
+</section><section class="exercicio"><h2>Prática com a IA — 2</h2><p><strong>Por que funciona.</strong> A tarefa tem entradas,
+transformação e verificação definidos por código. O TemporaryDirectory
+impede que o exercício utilize acidentalmente seus diretórios de
+trabalho e remove os arquivos de teste ao final. Não há chamada a LLM no
+script.</p>
+<p><strong>Como verificar.</strong> Execute o programa e confira a
+mensagem. Em seguida, remova <em>apenas no exemplo</em>, uma das linhas
+de copy2 ou altere o conteúdo de uma cópia para ver o que as
+verificações detectam. O código tem de parar com erro ou deixar de
+declarar PASS se a condição for violada. <strong>O PASS aqui pertence à
+execução no seu computador</strong>, não a uma suposta execução feita
+pelos autores para todas as máquinas.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Qual é a menor solução
+confiável?</strong></p>
+<p>Escolha três tarefas de sua rotina. Uma deve ser repetitiva e
+objetiva; outra deve exigir interpretação; a terceira deve ter algum
+risco se executada de forma errada. Não precisam envolver programação:
+organizar notas, revisar uma mensagem e enviar um arquivo já são
+exemplos suficientes.</p>
+<p>Sem consultar a IA, descreva como resolveria cada uma manualmente.
+Depois imagine o que mudaria com uma ferramenta simples, uma conversa,
+um workflow e um agente. Em qual abordagem você consegue explicar melhor
+o que será feito? Em qual delas a operação pode ser conferida? Qual é
+mais fácil de desfazer?</p>
+<p>Tente implementar <strong>somente a opção mais simples</strong> que
+pareça suficiente, ou simule o procedimento por escrito se não tiver as
+ferramentas. Anote uma dificuldade concreta que realmente encontrou. Só
+então pergunte se um degrau adicional resolveria essa dificuldade.</p>
+<p>Há um resultado que merece ser aceito de antemão: talvez você
+descubra que <strong>não precisa de IA alguma naquela tarefa</strong>.
+Isso não é fracasso do experimento. É a descoberta que queremos permitir
+que você faça por conta própria.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

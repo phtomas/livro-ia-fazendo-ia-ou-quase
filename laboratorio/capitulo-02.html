@@ -1,0 +1,56 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 2 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 2 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 02<br>ROTEIRO DO LEITOR</span><div><h1>Dar nome às peças antes de montar a máquina</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 02<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — Desmontar uma tarefa antes de dar nome à
+solução</strong></p>
+<p><strong>O que testar.</strong> Descobrir se uma tarefa realmente
+exige agente, skill, tool, workflow ou apenas um bom pedido.</p>
+<p><strong>Como proceder.</strong> Escolha uma atividade que se repete:
+organizar notas, revisar uma página, conferir uma planilha ou copiar
+arquivos. Descreva primeiro o resultado esperado e o que não pode ser
+alterado. Não autorize nenhuma ação externa nesta rodada.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Quero resolver a tarefa abaixo usando a solução mais simples que seja
+confiável. Primeiro separe o que depende de julgamento humano, o que
+pode ser feito por um programa determinístico, o que exige interpretação
+de linguagem e o que requer acesso a ferramentas ou serviços. Depois
+proponha três alternativas crescentes: sem modelo de IA, com IA
+assistida e com agente. Para cada uma, informe requisitos, permissões,
+custos a medir, falhas possíveis e critério de aceitação. Não implemente
+nem execute nada; apresente apenas o plano para minha avaliação. Tarefa:
+[DESCREVA AQUI].</p>
+<p><strong>Por que funciona.</strong> A comparação impede que o nome da
+solução seja escolhido antes de conhecermos o problema. Também torna
+visíveis operações que podem ser verificadas sem gerar texto novo a cada
+vez.</p>
+<p><strong>Como verificar.</strong> Confira se a alternativa mínima
+resolve os requisitos e preserva seus limites. Uma proposta mais
+sofisticada só merece avançar se trouxer uma vantagem que possa ser
+testada. Se o sistema disser que precisa de um agente apenas porque a
+tarefa “usa IA”, ainda não respondeu à pergunta.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Cinco tarefas, cinco
+escolhas</strong></p>
+<p>Olhe para suas atividades de uma semana e escolha cinco tarefas
+pequenas. Não procure exemplos na internet; use algo que você realmente
+fez ou gostaria de fazer. Para cada uma, escreva qual é o resultado
+observável que indicaria conclusão e quem teria autoridade para
+aprová-lo.</p>
+<p>Antes de pedir opinião a qualquer IA, responda por conta própria:
+qual parte depende de julgamento? Qual parte seria repetida exatamente
+do mesmo jeito? Em que etapa uma permissão poderia causar dano? E o que
+aconteceria se a ferramenta errasse em silêncio?</p>
+<p>Agora imagine duas versões do processo: uma feita apenas com recursos
+comuns do computador e outra com a participação de IA. Você pode
+experimentar ambas, se forem seguras. Compare não só velocidade, mas a
+facilidade de perceber o erro, repetir a tarefa e explicar a decisão.
+<strong>Não existe obrigação de a opção com IA vencer.</strong> A
+descoberta que importa é reconhecer quais problemas merecem essa
+ferramenta.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

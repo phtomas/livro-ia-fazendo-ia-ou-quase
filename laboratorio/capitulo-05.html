@@ -1,0 +1,61 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 5 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 5 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 05<br>ROTEIRO DO LEITOR</span><div><h1>Provar, medir e proteger antes de escalar</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 05<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — Transformar “funcionou” numa afirmação
+verificável</strong></p>
+<p><strong>O que testar.</strong> Preparar uma matriz de critérios para
+uma tarefa editorial sem permitir que a IA invente resultados.</p>
+<p><strong>Como proceder.</strong> Escolha um documento de teste e
+descreva uma revisão pequena. Não forneça senhas nem documentos
+privados. Nesta rodada a IA deverá somente propor verificações: nada de
+alterar o arquivo real.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Quero verificar a qualidade de uma revisão editorial. Construa uma
+matriz com: requisito, forma de observar, ferramenta ou pessoa
+responsável, resultado esperado e estado inicial NÃO VERIFICADO. Inclua
+preservação do texto aprovado, títulos e seções numerados, figuras
+dentro das margens, legendas ligadas às imagens, boxes “NA PRÁTICA COM A
+IA”, experimentos do leitor e links válidos. Para cada linha, indique se
+a evidência é automática, visual ou exige julgamento humano. Não altere
+arquivos e não preencha nenhum PASS antes de receber uma evidência real.
+Em caso de erro ou falta de acesso, registre a limitação e proponha a
+menor ação segura seguinte.</p>
+<p><strong>Por que funciona.</strong> O critério de aprovação passa a
+existir antes do resultado. Isso reduz a tentação de chamar de sucesso a
+parte que o agente conseguiu observar, ignorando aquilo que ficou fora
+de seu alcance.</p>
+<p><strong>Como verificar.</strong> Inspecione a matriz. Há itens que
+poderiam ser medidos com um programa, mas foram atribuídos a um modelo?
+Há afirmações que dependem do autor, mas receberam PASS automático?
+Todos os estados começam como NÃO VERIFICADO? Se a resposta for
+negativa, ajuste o contrato antes de permitir execução.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — O que significa “deu certo” para
+você?</strong></p>
+<p>Escolha uma atividade que já tenha concluído recentemente: uma
+planilha, uma pequena instalação, uma cópia de fotografias ou um texto
+revisado. Sem pedir ajuda à IA, escreva a frase que normalmente usaria
+para anunciar seu sucesso. Depois liste quais observações sustentam essa
+frase.</p>
+<p>Agora imagine que outra pessoa precisasse repetir a tarefa sem
+conhecer sua rotina. Quais evidências você deveria entregar? Um arquivo
+no destino? Uma fotografia? Uma comparação entre versões? Um registro de
+execução? É possível que você descubra que <strong>tinha razões para
+confiar</strong>, mas ainda não tinha uma prova que outra pessoa pudesse
+conferir.</p>
+<p>Escolha então uma operação da lista e tente produzir sua evidência
+mais simples. Anote quanto tempo levou e se o esforço pareceu
+proporcional ao risco. Não é obrigatório que tudo termine em PASS.
+Talvez a conclusão seja que você precisaria de outra ferramenta, outra
+medição ou uma nova tentativa.</p>
+<p>Depois, se quiser, convide outra pessoa a examinar apenas o registro,
+sem explicar o que aconteceu oralmente. Onde ela encontrou dúvidas? Esse
+intervalo entre <strong>aquilo que sabemos</strong> e <strong>aquilo que
+conseguimos demonstrar</strong> é o principal objeto do exercício.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

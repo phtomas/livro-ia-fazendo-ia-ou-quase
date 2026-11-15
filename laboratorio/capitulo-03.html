@@ -1,0 +1,61 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 3 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 3 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 03<br>ROTEIRO DO LEITOR</span><div><h1>Por dentro de um agente: quem decide, quem faz e quem responde</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 03<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — Projetar um agente que sabe quando pedir
+ajuda</strong></p>
+<p><strong>O que testar.</strong> Transformar uma tarefa ambígua num
+contrato executável e auditável, sem conceder autonomia
+desnecessária.</p>
+<p><strong>Como proceder.</strong> Escolha um documento próprio ou um
+conjunto de arquivos de teste, sem informações privadas. Apresente a
+tarefa como uma simulação: a IA não deverá executar ferramentas nem
+alterar arquivos. Primeiro avaliaremos somente a qualidade do
+contrato.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Quero projetar um agente de revisão documental, mas ainda não
+autorizei nenhuma execução. Defina: objetivo; entradas e fontes
+permitidas; operações determinísticas que devem ser ferramentas; tarefas
+que exigem interpretação de linguagem; permissões de leitura e escrita;
+formato do estado; evidências de cada etapa; condições de parada;
+situações que exigem aprovação humana; e critérios para declarar PASS,
+PARTIAL ou NO-GO. Inclua um exemplo de falha por permissão negada e
+mostre como o agente deve reagir sem tentar contornar o bloqueio. Não
+invente resultados de testes nem afirme ter acessado meus arquivos. Se
+uma etapa for simples demais para justificar um modelo, proponha
+executá-la por código comum.</p>
+<p><strong>Por que funciona.</strong> O contrato separa decisões do
+modelo, operações das ferramentas e autoridade humana. É mais fácil
+avaliar os riscos antes de instalar programas ou liberar credenciais do
+que descobrir depois que a automação recebeu poderes demais.</p>
+<p><strong>Como verificar.</strong> Leia o contrato como se fosse o
+responsável pela segurança do projeto. É possível identificar quem
+autoriza publicação e exclusão? O agente tem limite de tentativas? As
+evidências são observáveis? Há algum item que diz apenas “verificar” sem
+informar como? Se houver, o contrato ainda está incompleto.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — O momento em que você diria
+“pare”</strong></p>
+<p>Pense numa tarefa que você confiaria a outra pessoa: organizar
+fotografias, revisar uma carta, preparar arquivos para impressão ou
+conferir uma lista de compras. Escolha algo simples o suficiente para
+imaginar o processo inteiro.</p>
+<p>Anote três situações: uma em que você deixaria essa pessoa decidir
+sozinha; outra em que aceitaria uma proposta, mas gostaria de conferir
+antes; e uma terceira em que exigiria sua autorização
+<strong>antes</strong> de qualquer ação. Depois pergunte a si mesmo por
+que colocou cada situação nessa categoria. O risco depende do preço, do
+esforço para desfazer, de quem seria afetado ou de outro motivo?</p>
+<p>Agora transporte suas respostas para um agente hipotético. Ele
+precisaria de todas as permissões desde o início? Poderia trabalhar
+primeiro numa cópia? O que lhe permitiria comprovar o resultado? Você
+pode repetir o exercício com um amigo e comparar as fronteiras
+escolhidas. <strong>O objetivo não é adivinhar a política correta, mas
+descobrir qual responsabilidade você está disposto a delegar e por
+quê.</strong></p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>

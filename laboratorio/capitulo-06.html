@@ -1,0 +1,63 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Capítulo 6 · Laboratório IA fazendo IA</title><meta name="description" content="Roteiros de experimentação e instruções complementares do capítulo 6 do livro IA fazendo IA — ou quase."><link rel="stylesheet" href="../styles.css"><style>.exercicio{border-top:2px solid #a74731;padding-top:17px;margin-top:32px}.exercicio h2{font-family:Georgia,serif}.exercicio blockquote{padding:8px 18px;background:#eee8dc;border-left:3px solid #9f6954;margin:18px 0}.exercicio pre{white-space:pre-wrap;overflow-wrap:anywhere}.exercicio code{overflow-wrap:anywhere}.checklist{padding:14px;border:1px solid #c5c0b3;background:#f9f5eb}.exercicio p{margin-bottom:12px}</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<header class="pagehead"><div class="shell"><span class="label">CAPÍTULO 06<br>ROTEIRO DO LEITOR</span><div><h1>A voz que a ferramenta não deve apagar</h1><p>Experimente, registre o que realmente aconteceu e compare com os critérios do livro. Este material é complementar, não o texto integral do capítulo.</p></div></div></header>
+<main class="shell content"><aside class="sidebar mono">CADERNO 06<br><br>Revisão editorial: 15/11/2026.<br>Execução específica por plataforma: NÃO VERIFICADA.</aside><article class="prose">
+<h2>Antes de iniciar</h2><ol><li>Separe um caso pequeno, fictício e descartável, sem conteúdo pessoal ou credenciais.</li><li>Se o roteiro exigir arquivos, crie a pasta <code>laboratorio-ia</code> com <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li><li>Registre a data, as versões das ferramentas e o resultado que espera observar.</li><li>Leia o procedimento inteiro antes de executar qualquer comando. Nunca conceda permissões não necessárias.</li></ol>
+<section class="exercicio"><h2>Prática com a IA — 1</h2><p><strong>NA PRÁTICA COM A IA</strong></p>
+<p><strong>Experiência — Construindo uma regra de voz que possa ser
+auditada</strong></p>
+<p><strong>O que testar.</strong> Investigar se a IA consegue
+identificar preferências recorrentes de escrita sem transformá-las
+automaticamente em leis e sem alterar fatos técnicos.</p>
+<p><strong>Como proceder.</strong> Escolha dois trechos de sua autoria
+que você considera bons e uma terceira passagem que gostaria de revisar.
+Remova dados pessoais e segredos. Faça o pedido em uma sessão nova;
+nesta rodada, não autorize escrita em nenhum arquivo original.</p>
+<p><strong>Prompt que usaríamos hoje</strong></p>
+<p>Você receberá dois textos de referência escritos por mim e um
+terceiro texto para avaliação. Primeiro, identifique até cinco decisões
+narrativas ou didáticas recorrentes nos exemplos, citando passagens que
+as sustentem. Separe <strong>observação</strong>,
+<strong>hipótese</strong> e <strong>regra ainda não aprovada</strong>.
+Não imite erros acidentais nem invente preferências. Em seguida,
+proponha apenas mudanças de clareza e coesão no terceiro texto,
+preservando fatos, valores, fontes e meu ponto de vista. Mostre um
+comparativo antes/depois e explique o motivo de cada mudança
+significativa. Não altere arquivos. Qualquer mudança de conteúdo técnico
+deve ser indicada como dúvida para decisão humana, não aplicada
+automaticamente.</p>
+<p><strong>Por que funciona.</strong> Os exemplos ancoram a análise num
+material concreto, o limite de cinco observações evita listas genéricas
+e o comparativo deixa visível aquilo que o modelo pretende mudar. Nada
+disso garante fidelidade; cria um modo mais fácil de detectar quando ela
+foi perdida.</p>
+<p><strong>Como verificar.</strong> Confira se cada regra sugerida
+aparece de fato nos textos de referência. Leia as versões lado a lado.
+Marque o que melhorou, o que mudou de sentido e o que permanece
+discutível. Uma regra só entra no perfil canônico depois de aprovação do
+autor e de uma nova experiência em outro trecho.</p>
+</section>
+<section class="exercicio"><h2>Experimento do leitor</h2><p><strong>EXPERIMENTO DO LEITOR — Quando uma melhoria apaga a
+identidade</strong></p>
+<p>Pense numa explicação que você gosta de dar. Pode ser sobre uma
+máquina, uma regra de jogo, uma receita, uma ferramenta que utiliza no
+trabalho. Escreva um parágrafo como contaria a alguém curioso que está
+sentado ao seu lado.</p>
+<p>Agora prepare, <strong>sem usar IA</strong>, uma segunda versão mais
+impessoal, como se fosse um aviso burocrático. Tente conservar os mesmos
+fatos. Peça a duas pessoas que leiam os textos sem dizer qual você
+prefere. Qual delas lhes ensinou melhor? Qual pareceu mais confiável?
+Elas chegaram à mesma conclusão?</p>
+<p>Observe as razões, não apenas os votos. Talvez a versão formal tenha
+servido melhor a uma instrução de segurança; talvez a versão conversada
+tenha explicado melhor o funcionamento. Tente descobrir <strong>que
+função cada voz cumpriu</strong>, em vez de declarar que uma delas é
+universalmente superior.</p>
+<p>Por fim, imagine transportar o mesmo conteúdo para um manual técnico,
+para as instruções de um jogo e para a documentação de uma placa. O que
+você conservaria? O que precisaria mudar? Registre suas respostas antes
+de pedir opinião a qualquer modelo.</p>
+</section>
+<h2>Conferência e registro</h2><div class="checklist"><p><strong>Como saber o que aconteceu?</strong> Guarde as entradas de teste, a saída observada, a data e, quando houver, a versão do aplicativo e o código de retorno.</p><p><strong>PASS</strong> somente quando o critério proposto for observado. Use <strong>PARTIAL</strong> quando apenas parte funcionar, <strong>FAIL</strong> quando o teste demonstrar problema e <strong>NÃO VERIFICADO</strong> quando não houver execução suficiente.</p><p>Uma resposta de IA sobre o que deveria acontecer não comprova que uma instalação, publicação ou medição aconteceu.</p></div>
+<p><a href="../SUMARIO.html">Voltar ao sumário</a> · <a href="../ATUALIZACOES_E_ERRATAS.html">Ver alterações das plataformas</a> · <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio">Ver arquivos públicos de laboratório</a></p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Roteiros abertos; cada execução precisa de prova.</span></div></footer></body></html>
