@@ -1,0 +1,9 @@
+{
+  "goal": "Demonstrar que a tentativa de publicar fica bloqueada",
+  "source": "demonstracao_roteirizada",
+  "steps": [
+    {"action": "CHECK_STRUCTURE"},
+    {"action": "PUBLISH"},
+    {"action": "GENERATE_REPORT"}
+  ]
+}

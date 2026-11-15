@@ -1,0 +1,9 @@
+{
+  "capacidades_obrigatorias": [
+    "read_files",
+    "run_local_checks",
+    "produce_diff",
+    "human_approval_gate"
+  ],
+  "aviso": "Perfis sintéticos, não representam produtos reais."
+}

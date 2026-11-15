@@ -1,0 +1,9 @@
+{
+  "nome": "cenario-ficticio-adaptador_completo",
+  "capacidades": {
+    "read_files": true,
+    "run_local_checks": true,
+    "produce_diff": true,
+    "human_approval_gate": true
+  }
+}
