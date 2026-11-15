@@ -1,0 +1,74 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Estudo de caso público e sanitizado do método de agentes e auditoria aplicado ao TK2000."><title>Estudo de caso TK2000 · IA fazendo IA</title><link rel="stylesheet" href="../styles.css"><style>main article{max-width:820px}main table{border-collapse:collapse;width:100%;margin:22px 0}main td,main th{border-bottom:1px solid #c5c0b3;padding:8px;text-align:left;vertical-align:top}main h2{margin:34px 0 14px;font-family:Georgia,serif;font-size:1.75rem}main code{overflow-wrap:anywhere}main blockquote{border-left:3px solid #a74731;padding-left:18px}.aside{font-family:Consolas,monospace;font-size:.8rem;color:#656b64}main li{margin-bottom:10px}@media(max-width:620px){main table{font-size:.83rem}}</style></head><body><header class="mast"><div class="shell"><a class="logo" href="../index.html"><span class="mark">IA.</span><span class="name">Caderno do leitor</span></a><nav class="nav" aria-label="Navegação"><a href="../index.html">Início</a><a href="../SUMARIO.html">Capítulos</a><a href="../laboratorio/README.html">Laboratório</a><a href="../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header><main class="shell" style="padding-top:42px;padding-bottom:65px"><article><h1>Estudo de caso do capítulo 21 — O método diante de um manual técnico</h1>
+<p><strong>Material complementar de <em>IA fazendo IA — ou quase</em> · José Albuquerque · 15/11/2026</strong></p>
+<p><strong>Resultado geral: <code>PARTIAL</code>.</strong> Esta página apresenta resultados agregados, metodologia e limites. Não distribui o manual utilizado, relatórios privados, dados pessoais, credenciais ou caminhos de trabalho.</p>
+<h2>O que foi investigado</h2>
+<p>Uma cópia autorizada de um bloco do Manual Técnico do TK2000 foi submetida a duas abordagens: um workflow com sequência pré-determinada e um agente supervisionado que selecionou verificações conforme os resultados intermediários. Uma política independente impediu publicação não autorizada. O original foi preservado.</p>
+<h2>O que foi observado</h2>
+<table>
+<thead>
+<tr>
+  <th>Verificação</th>
+  <th>Resultado do ensaio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Títulos reais dos capítulos presentes na cópia</td>
+  <td>4</td>
+</tr>
+<tr>
+  <td>Cabeçalhos candidatos, incluindo índice e subseções</td>
+  <td>74</td>
+</tr>
+<tr>
+  <td>Figuras e legendas estruturais</td>
+  <td>9 figuras, 9 legendas</td>
+</tr>
+<tr>
+  <td>Tabelas</td>
+  <td>7</td>
+</tr>
+<tr>
+  <td>Estado da auditoria estrutural</td>
+  <td><code>PASS_LIMITED</code></td>
+</tr>
+<tr>
+  <td>Decisões de escolha de ferramenta registradas</td>
+  <td>6</td>
+</tr>
+<tr>
+  <td>Propostas textuais, sujeitas à revisão</td>
+  <td>3</td>
+</tr>
+<tr>
+  <td>Sinalizações editoriais adicionais</td>
+  <td>2</td>
+</tr>
+<tr>
+  <td>Tentativa de publicação</td>
+  <td><code>BLOCKED</code></td>
+</tr>
+<tr>
+  <td>Alteração no original</td>
+  <td>Não</td>
+</tr>
+</tbody>
+</table>
+<p>As contagens estruturais não demonstram, por si, que a diagramação esteja correta. A análise visual de uma prova de 47 páginas identificou: uma legenda de estilo diferente, uma figura separada de sua legenda e duas tabelas com continuação sem cabeçalhos repetidos.</p>
+<p>O relatório preliminar da etapa visual ainda registrava aprovação humana pendente. O relato posterior de encerramento informa autorização e correções <strong>somente numa cópia candidata</strong>. Esses registros correspondem a momentos diferentes; não constituem autorização para modificar o documento original.</p>
+<p>A campanha foi encerrada para esta edição, sem promover o resultado <code>PARTIAL</code> a <code>PASS</code>. A identidade nativa do modelo, os tokens, custos, a verificação editorial independente completa e a correção dos circuitos eletrônicos <strong>não foram comprovados por este ensaio</strong>.</p>
+<h2>Experimento para reproduzir com seus próprios arquivos</h2>
+<ol>
+<li>Crie um ambiente descartável chamado <code>laboratorio-ia</code>, com as subpastas <code>entrada</code>, <code>saida</code> e <code>evidencias</code>.</li>
+<li>Use uma cópia de um documento fictício, sem informações privadas. Registre sua versão e um hash SHA-256 antes da avaliação.</li>
+<li>Defina uma auditoria determinística: contagem de títulos, figuras, legendas e tabelas. Guarde a saída bruta.</li>
+<li>Repita com um agente autorizado somente a ler, escolher verificadores e <strong>propor</strong> diferenças. Grave qual ferramenta foi escolhida e por quê, antes de executá-la.</li>
+<li>Execute uma prova visual em PDF ou imagem. Compare os achados estruturais e os visuais.</li>
+<li>Peça ao autor que classifique as propostas como aceitas, rejeitadas ou não verificadas. Não aplique nenhuma alteração sem autorização.</li>
+<li>Compare os hashes de antes e depois e publique apenas um relatório sanitizado, sem o documento analisado.</li>
+</ol>
+<p>O <a href="../laboratorio/capitulo-21.html">laboratório do capítulo 21</a> reúne exercícios complementares. Para praticar uma comparação determinística de arquivos, consulte também o <a href="../scripts/comparar_arquivos.py">script público do capítulo 13</a>.</p>
+<h2>O que este caso ensina</h2>
+<p>O workflow é uma boa escolha para verificações repetíveis. Um agente pode acrescentar interpretação e seleção adaptativa de ferramentas, mas suas decisões ainda precisam de evidência e revisão. Uma auditoria estrutural não substitui a prova visual; uma proposta aprovada em cópia não é permissão para modificar o original.</p>
+<p><strong>A conclusão vale além da retrocomputação:</strong> o mesmo cuidado se aplica a manuais, relatórios, documentos profissionais, software e projetos de pesquisa.</p>
+</article></main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Material público complementar. O manuscrito integral não é distribuído aqui.</span></div></footer></body></html>
