@@ -29,4 +29,4 @@ O diagrama usa apenas nomes descritivos de tecnologias, sem reproduzir seus logo
 - [LangGraph — conceitos](https://docs.langchain.com/oss/python/langgraph/overview)
 - [OWASP — riscos para aplicações LLM](https://genai.owasp.org/)
 
-Publicado como **material complementar**, independente do manuscrito privado. Conceitos e compatibilidades devem ser reavaliados conforme versões de plataformas.
+Publicado como **material complementar** para leitura e estudo. Conceitos e compatibilidades devem ser reavaliados conforme versões de plataformas.
