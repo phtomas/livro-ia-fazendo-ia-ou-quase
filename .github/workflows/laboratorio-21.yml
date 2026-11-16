@@ -1,0 +1,24 @@
+name: Laboratorio - 21 capitulos
+on:
+  push:
+    branches: [laboratorio-21-capitulos-20261116]
+  pull_request:
+    paths:
+      - 'laboratorio/kit-do-leitor/**'
+      - 'laboratorio/codigo/**'
+      - '.github/workflows/laboratorio-21.yml'
+permissions:
+  contents: read
+jobs:
+  testes-offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verificar sintaxe
+        run: python -m compileall -q laboratorio/kit-do-leitor laboratorio/codigo
+      - name: Testes offline com dados ficticios
+        run: python -m unittest discover -s laboratorio/kit-do-leitor/testes -p 'test_*.py' -v

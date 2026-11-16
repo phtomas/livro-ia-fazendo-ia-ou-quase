@@ -1,0 +1,31 @@
+{
+  "nome": "comparador_didatico",
+  "versao": "0.1",
+  "entrada": {
+    "origem": "pasta_ficticia",
+    "espelho": "pasta_ficticia"
+  },
+  "operacoes_permitidas": [
+    "LER",
+    "CALCULAR_SHA256",
+    "PRODUZIR_RELATORIO"
+  ],
+  "operacoes_proibidas": [
+    "APAGAR",
+    "SOBRESCREVER",
+    "PUBLICAR",
+    "ACESSAR_REDE"
+  ],
+  "resultado": {
+    "estado_inicial": "NAO_VERIFICADO",
+    "evidencias": [
+      "hashes",
+      "codigo_de_saida",
+      "relatorio_json"
+    ]
+  },
+  "limitacoes": [
+    "hashes nao determinam autor ou cronologia",
+    "aprovacao humana necessaria"
+  ]
+}
