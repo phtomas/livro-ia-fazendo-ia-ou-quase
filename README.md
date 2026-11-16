@@ -10,6 +10,7 @@ O manuscrito completo está preservado em um repositório **privado**. Aqui fica
 - [Experimento demonstrativo do capítulo 13](laboratorio/capitulo-13.md)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.md)
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
+- [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)
 
 > Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.
 
