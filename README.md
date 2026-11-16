@@ -2,7 +2,7 @@
 
 **Portal público do leitor · José Albuquerque**
 
-O manuscrito completo está preservado em um repositório **privado**. Aqui ficam apenas sumário, documentação complementar, experimentos, scripts fictícios e notas de compatibilidade. Os 21 roteiros estão disponíveis, com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo).
+Este portal reúne sumário, documentação complementar, experimentos, exemplos e notas de compatibilidade. Os 21 roteiros estão disponíveis, com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo).
 
 - [Abrir portal (GitHub Pages)](index.html)
 - [Sumário](SUMARIO.md)
@@ -15,4 +15,4 @@ O manuscrito completo está preservado em um repositório **privado**. Aqui fica
 
 > Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.
 
-**Atenção:** sempre use dados fictícios, não exponha tokens e confira requisitos e versões. Não copie conteúdo do repositório privado para cá.
+**Atenção:** sempre use dados fictícios, não exponha tokens e confira requisitos e versões. Publique apenas conteúdo autorizado e não exponha informações sensíveis.
