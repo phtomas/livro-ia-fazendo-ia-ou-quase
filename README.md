@@ -8,6 +8,7 @@ O manuscrito completo está preservado em um repositório **privado**. Aqui fica
 - [Sumário](SUMARIO.md)
 - [Laboratório](laboratorio/README.md)
 - [Experimento demonstrativo do capítulo 13](laboratorio/capitulo-13.md)
+- [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.md)
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
 - [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)
