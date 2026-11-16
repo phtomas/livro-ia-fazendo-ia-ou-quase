@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1760" viewBox="0 0 1200 1760" role="img" aria-labelledby="title desc"><title id="title">Arquitetura funcional de um agente de IA</title><desc id="desc">Fluxo editorial original com objetivo, orquestração, modelo, planejamento e estado; ciclo de execução; recursos opcionais de ferramentas, memória e RAG; testes, revisão humana e implantação.</desc><defs><marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#167a83"/></marker><filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#10344b" flood-opacity=".09"/></filter></defs>
+<rect x="0" y="0" width="1200" height="1760" rx="0" fill="#f6fafc" stroke="#f6fafc" stroke-width="2"/>
+<rect x="0" y="0" width="1200" height="13" fill="#167a83"/>
+<text x="62" y="79" font-family="Arial,Helvetica,sans-serif" font-size="49" font-weight="780" fill="#0c3044" text-anchor="start">ARQUITETURA FUNCIONAL</text>
+<text x="62" y="130" font-family="Arial,Helvetica,sans-serif" font-size="49" font-weight="780" fill="#0c3044" text-anchor="start">DE UM AGENTE DE IA</text>
+<text x="64" y="173" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="400" fill="#4b6877" text-anchor="start">Do objetivo humano à execução controlada e verificável</text>
+<rect x="65" y="206" width="1070" height="120" rx="23" fill="#e6f4f0" stroke="#9ed0c3" stroke-width="2"/>
+<circle cx="112" cy="244" r="23" fill="#187e75"/><text x="112" y="252" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="154" y="249" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="770" fill="#103c42" text-anchor="start">OBJETIVO E CRITÉRIOS</text>
+<text x="157" y="283" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" fill="#3d5b70" text-anchor="start">Qual tarefa? Quais dados? Que ações são permitidas? Como medir o resultado?</text>
+<path d="M600 329 L600 364" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="65" y="369" width="1070" height="330" rx="24" fill="#e9f2fa" stroke="#b9d4e9" stroke-width="2"/>
+<circle cx="111" cy="413" r="23" fill="#2b6ba5"/><text x="111" y="421" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="153" y="421" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="780" fill="#133c61" text-anchor="start">ORQUESTRAÇÃO E CONTROLE</text>
+<text x="154" y="451" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="400" fill="#41627c" text-anchor="start">Coordena as etapas, as decisões, as ferramentas e o estado da tarefa.</text>
+<rect x="92" y="479" width="312" height="173" rx="18" fill="#ffffff" stroke="#b5d0e5" stroke-width="2"/>
+<text x="110" y="514" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="760" fill="#1b5582" text-anchor="start">MODELO DE LINGUAGEM</text>
+<text x="110" y="548" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">Interpreta instruções e</text><text x="110" y="572" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">produz respostas ou</text><text x="110" y="596" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">propostas de ação.</text>
+<text x="110" y="635" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="550" fill="#607b90" text-anchor="start">Ex.: GPT, Claude, Gemini</text>
+<rect x="444" y="479" width="312" height="173" rx="18" fill="#ffffff" stroke="#b5d0e5" stroke-width="2"/>
+<text x="462" y="514" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="760" fill="#1b5582" text-anchor="start">PLANO DE EXECUÇÃO</text>
+<text x="462" y="548" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">Decompõe a tarefa,</text><text x="462" y="572" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">seleciona estratégias e</text><text x="462" y="596" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">define o próximo passo.</text>
+<text x="462" y="635" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="550" fill="#607b90" text-anchor="start">Ex.: ReAct, planejar e executar</text>
+<rect x="796" y="479" width="312" height="173" rx="18" fill="#ffffff" stroke="#b5d0e5" stroke-width="2"/>
+<text x="814" y="514" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="760" fill="#1b5582" text-anchor="start">ESTADO E POLÍTICAS</text>
+<text x="814" y="548" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">Registra progresso,</text><text x="814" y="572" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">aplica limites, permissões</text><text x="814" y="596" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#385a75" text-anchor="start">e critérios de parada.</text>
+<text x="814" y="635" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="550" fill="#607b90" text-anchor="start">Agente ≠ apenas um LLM</text>
+<text x="88" y="680" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#526e83" text-anchor="start">Possíveis runtimes: LangGraph, CrewAI, SDKs de agentes; não são peças obrigatórias.</text>
+<path d="M600 702 L600 744" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="65" y="748" width="1070" height="275" rx="24" fill="#fdfefe" stroke="#bcd3da" stroke-width="2"/>
+<circle cx="110" cy="788" r="23" fill="#167a83"/><text x="110" y="796" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="152" y="796" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="780" fill="#124a59" text-anchor="start">CICLO DE EXECUÇÃO</text>
+<text x="153" y="828" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="400" fill="#446779" text-anchor="start">Pode repetir, interromper, pedir autorização ou concluir.</text>
+<rect x="88" y="867" width="233" height="112" rx="17" fill="#e8f6f5" stroke="#afd5d0" stroke-width="2"/>
+<text x="204.5" y="899" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="780" fill="#17636a" text-anchor="middle">OBSERVAR</text>
+<text x="204.5" y="929" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">Ler contexto e</text>
+<text x="204.5" y="953" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">resultado anterior</text>
+<path d="M324 918 L355 918" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="364" y="867" width="233" height="112" rx="17" fill="#e8f6f5" stroke="#afd5d0" stroke-width="2"/>
+<text x="480.5" y="899" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="780" fill="#17636a" text-anchor="middle">DECIDIR</text>
+<text x="480.5" y="929" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">Escolher o</text>
+<text x="480.5" y="953" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">próximo passo</text>
+<path d="M600 918 L631 918" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="640" y="867" width="233" height="112" rx="17" fill="#e8f6f5" stroke="#afd5d0" stroke-width="2"/>
+<text x="756.5" y="899" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="780" fill="#17636a" text-anchor="middle">AGIR</text>
+<text x="756.5" y="929" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">Chamar ferramenta</text>
+<text x="756.5" y="953" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">ou responder</text>
+<path d="M876 918 L907 918" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="916" y="867" width="233" height="112" rx="17" fill="#fef2df" stroke="#dfbc87" stroke-width="2"/>
+<text x="1032.5" y="899" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="780" fill="#845915" text-anchor="middle">VERIFICAR</text>
+<text x="1032.5" y="929" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">Comparar saída</text>
+<text x="1032.5" y="953" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="450" fill="#435c70" text-anchor="middle">com critérios</text>
+<path d="M1044 982 L1044 1004 L204 1004 L204 981" fill="none" stroke="#167a83" stroke-width="3" stroke-dasharray="7 9"/>
+<text x="625" y="1001" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#486a74" text-anchor="middle">realimentação · nova iteração, se necessária</text>
+<path d="M600 1027 L600 1064" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<text x="80" y="1093" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="770" fill="#1e5869" text-anchor="start">RECURSOS ACIONADOS CONFORME A NECESSIDADE</text>
+<rect x="67" y="1112" width="335" height="195" rx="18" fill="#eaf4fc" stroke="#b1d2e8" stroke-width="2"/>
+<text x="86" y="1150" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="790" fill="#204c5b" text-anchor="start">FERRAMENTAS E INTERFACES</text>
+<text x="86" y="1185" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">APIs, execução de código,</text><text x="86" y="1211" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">consultas e automações.</text>
+<path d="M84 1237 H382" stroke="#b1d2e8" stroke-width="2"/>
+<text x="86" y="1263" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">MCP conecta ferramentas/dados;</text><text x="86" y="1284" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">A2A conecta agentes entre si.</text>
+<rect x="432" y="1112" width="335" height="195" rx="18" fill="#edf2ff" stroke="#bfceee" stroke-width="2"/>
+<text x="451" y="1150" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="790" fill="#204c5b" text-anchor="start">MEMÓRIA E ESTADO</text>
+<text x="451" y="1185" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">Contexto de trabalho e</text><text x="451" y="1211" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">registros persistentes.</text>
+<path d="M449 1237 H747" stroke="#bfceee" stroke-width="2"/>
+<text x="451" y="1263" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">Redis/PostgreSQL podem armazenar</text><text x="451" y="1284" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">estado; não são memórias em si.</text>
+<rect x="797" y="1112" width="335" height="195" rx="18" fill="#f0f5e7" stroke="#d2dcb3" stroke-width="2"/>
+<text x="816" y="1150" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="790" fill="#204c5b" text-anchor="start">CONHECIMENTO · RAG</text>
+<text x="816" y="1185" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">Busca de fontes externas</text><text x="816" y="1211" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#426072" text-anchor="start">relevantes para responder.</text>
+<path d="M814 1237 H1112" stroke="#d2dcb3" stroke-width="2"/>
+<text x="816" y="1263" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">Indexação, recuperação e citações;</text><text x="816" y="1284" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="500" fill="#516d78" text-anchor="start">banco vetorial é opcional.</text>
+<text x="600" y="1341" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" fill="#5a7180" text-anchor="middle">Recursos opcionais; a arquitetura mínima pode funcionar sem memória persistente ou RAG.</text>
+<path d="M600 1350 L600 1380" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="66" y="1385" width="1069" height="165" rx="22" fill="#fff7e8" stroke="#dfc38e" stroke-width="2"/>
+<circle cx="109" cy="1428" r="23" fill="#bf831c"/><text x="109" y="1436" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="151" y="1435" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="770" fill="#6c4a14" text-anchor="start">SEGURANÇA, AVALIAÇÃO E OBSERVABILIDADE</text>
+<rect x="97" y="1462" width="226" height="65" rx="12" fill="#fffefd" stroke="#ead9b7" stroke-width="2"/>
+<text x="210" y="1488" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="750" fill="#775415" text-anchor="middle">PERMISSÕES</text>
+<text x="210" y="1514" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="420" fill="#765f37" text-anchor="middle">Acesso mínimo</text>
+<rect x="357" y="1462" width="226" height="65" rx="12" fill="#fffefd" stroke="#ead9b7" stroke-width="2"/>
+<text x="470" y="1488" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="750" fill="#775415" text-anchor="middle">REVISÃO HUMANA</text>
+<text x="470" y="1514" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="420" fill="#765f37" text-anchor="middle">Ações sensíveis</text>
+<rect x="617" y="1462" width="226" height="65" rx="12" fill="#fffefd" stroke="#ead9b7" stroke-width="2"/>
+<text x="730" y="1488" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="750" fill="#775415" text-anchor="middle">TESTES / EVALS</text>
+<text x="730" y="1514" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="420" fill="#765f37" text-anchor="middle">Qualidade e risco</text>
+<rect x="877" y="1462" width="226" height="65" rx="12" fill="#fffefd" stroke="#ead9b7" stroke-width="2"/>
+<text x="990" y="1488" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="750" fill="#775415" text-anchor="middle">LOGS E MÉTRICAS</text>
+<text x="990" y="1514" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="420" fill="#765f37" text-anchor="middle">Custo e rastreio</text>
+<path d="M600 1554 L600 1590" fill="none" stroke="#167a83" stroke-width="4" marker-end="url(#arrow)" stroke-linecap="round"/>
+<rect x="66" y="1594" width="1069" height="105" rx="22" fill="#e4f4ee" stroke="#a9d3c6" stroke-width="2"/>
+<circle cx="109" cy="1632" r="23" fill="#218a6e"/><text x="109" y="1640" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">5</text>
+<text x="150" y="1637" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="750" fill="#185f52" text-anchor="start">IMPLANTAÇÃO E ACOMPANHAMENTO</text>
+<text x="151" y="1670" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" fill="#476c65" text-anchor="start">Local ou nuvem; contêineres, serviços gerenciados, monitoramento e melhorias.</text>
+<text x="599" y="1726" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="400" fill="#526979" text-anchor="middle">Diagrama original de apoio ao livro · José Albuquerque · referência temática: Denis Panjuta (@denis-panjuta)</text>
+</svg>
