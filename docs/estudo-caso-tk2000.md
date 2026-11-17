@@ -2,7 +2,7 @@
 
 **Material complementar de _IA fazendo IA — ou quase_ · José Albuquerque · 15/11/2026**
 
-**Resultado geral: `PARTIAL`.** Esta página apresenta resultados agregados, metodologia e limites. Não distribui o manual utilizado, relatórios privados, dados pessoais, credenciais ou caminhos de trabalho.
+**Resultado geral: `PARTIAL`.** Esta página apresenta resultados agregados, metodologia e limites do experimento.
 
 ## O que foi investigado
 
@@ -25,7 +25,7 @@ Uma cópia autorizada de um bloco do Manual Técnico do TK2000 foi submetida a d
 
 As contagens estruturais não demonstram, por si, que a diagramação esteja correta. A análise visual de uma prova de 47 páginas identificou: uma legenda de estilo diferente, uma figura separada de sua legenda e duas tabelas com continuação sem cabeçalhos repetidos.
 
-O relatório preliminar da etapa visual ainda registrava aprovação humana pendente. O relato posterior de encerramento informa autorização e correções **somente numa cópia candidata**. Esses registros correspondem a momentos diferentes; não constituem autorização para modificar o documento original.
+As correções avaliadas permaneceram numa cópia de trabalho. Esse resultado não equivale a uma verificação integral do documento.
 
 A campanha foi encerrada para esta edição, sem promover o resultado `PARTIAL` a `PASS`. A identidade nativa do modelo, os tokens, custos, a verificação editorial independente completa e a correção dos circuitos eletrônicos **não foram comprovados por este ensaio**.
 
