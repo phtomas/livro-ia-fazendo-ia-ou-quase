@@ -2,12 +2,13 @@
 
 **Portal público do leitor · José Albuquerque**
 
-Este portal reúne sumário, documentação complementar, experimentos, exemplos e notas de compatibilidade. Os 21 roteiros estão disponíveis, com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo).
+Este portal reúne sumário, documentação complementar, experimentos, exemplos e notas de compatibilidade. Os 21 laboratórios estão no [catálogo do leitor](laboratorio/README.html), com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo) e [kit por capítulo](laboratorio/kit-do-leitor/README.md).
 
 - [Abrir portal (GitHub Pages)](index.html)
 - [Sumário](SUMARIO.md)
-- [Laboratório](laboratorio/README.md)
-- [Experimento demonstrativo do capítulo 13](laboratorio/capitulo-13.md)
+- [Laboratório Vivo — 21 capítulos](laboratorio/README.html)
+- [Kit do leitor — código e modelos](laboratorio/kit-do-leitor/README.md)
+- [Capítulo 13: comparar arquivos](laboratorio/capitulo-13.html)
 - [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.md)
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
