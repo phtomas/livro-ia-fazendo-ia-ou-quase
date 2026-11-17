@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="1160" viewBox="0 0 1420 1160" role="img" aria-labelledby="ttl desc"><title id="ttl">Chamada de ferramentas com e sem LangGraph</title><desc id="desc">Dois caminhos possíveis para o mesmo objetivo. Sem framework, a aplicação roteia e executa as ferramentas. Com LangGraph, ToolNode executa e tools_condition decide o encaminhamento. Em ambos, o modelo sugere a chamada e o programa controla a execução.</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#127e87"/></marker></defs>
+<rect x="0" y="0" width="1420" height="1160" rx="0" fill="#f8fafc" stroke="#f8fafc" stroke-width="2"/>
+<rect width="1420" height="12" fill="#177a89"/>
+<text x="55" y="78" text-anchor="start" font-size="58" font-family="Arial,Helvetica,sans-serif" font-weight="800" fill="#102b46">TOOL CALLING</text>
+<text x="55" y="125" text-anchor="start" font-size="34" font-family="Arial,Helvetica,sans-serif" font-weight="750" fill="#1e4c6c">FERRAMENTAS COM OU SEM LANGGRAPH</text>
+<text x="55" y="163" text-anchor="start" font-size="23" font-family="Arial,Helvetica,sans-serif" font-weight="400" fill="#526b7d">O modelo solicita. O programa executa. A saída precisa ser conferida.</text>
+<rect x="48" y="193" width="1325" height="66" rx="15" fill="#e9f6ef" stroke="#b0dbc6" stroke-width="2"/>
+<text x="710" y="236" text-anchor="middle" font-size="24" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#106748">Uma SKILL orienta procedimentos; uma TOOL executa uma ação; LangGraph organiza o fluxo.</text>
+<rect x="48" y="286" width="1325" height="282" rx="21" fill="#e7f2ff" stroke="#176fba" stroke-width="2"/>
+<rect x="68" y="302" width="184" height="45" rx="14" fill="#176fba" stroke="#176fba" stroke-width="2"/>
+<text x="160" y="333" text-anchor="middle" font-size="23" font-family="Arial,Helvetica,sans-serif" font-weight="750" fill="#fff">CAMINHO A</text>
+<text x="273" y="333" text-anchor="start" font-size="22" font-family="Arial,Helvetica,sans-serif" font-weight="550" fill="#234760">SEM LANGGRAPH · código Python / SDK / runtime</text>
+<rect x="72" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="166" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">Pedido</text>
+<text x="166" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">10 + 20</text>
+<path d="M260 430 L283 430" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="286" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="380" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">LLM</text>
+<text x="380" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">solicita somar</text>
+<path d="M474 430 L497 430" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="500" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="594" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">Aplicação</text>
+<text x="594" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">valida e autoriza</text>
+<path d="M688 430 L711 430" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="714" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="808" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">Tool</text>
+<text x="808" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">somar(10,20)</text>
+<path d="M902 430 L925 430" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="928" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="1022" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">Aplicação</text>
+<text x="1022" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">retorna 30</text>
+<path d="M1116 430 L1139 430" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="1142" y="377" width="187" height="104" rx="14" fill="#fff" stroke="#176fba" stroke-width="2"/>
+<text x="1236" y="418" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#176fba">LLM</text>
+<text x="1236" y="447" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">responde 30</text>
+<text x="96" y="527" text-anchor="start" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#425d71">O loop de execução pertence à aplicação: sem grafo e sem automatismos mágicos.</text>
+<rect x="48" y="605" width="1325" height="282" rx="21" fill="#f2eafc" stroke="#8b4bc8" stroke-width="2"/>
+<rect x="68" y="621" width="184" height="45" rx="14" fill="#8b4bc8" stroke="#8b4bc8" stroke-width="2"/>
+<text x="160" y="652" text-anchor="middle" font-size="23" font-family="Arial,Helvetica,sans-serif" font-weight="750" fill="#fff">CAMINHO B</text>
+<text x="273" y="652" text-anchor="start" font-size="22" font-family="Arial,Helvetica,sans-serif" font-weight="550" fill="#234760">COM LANGGRAPH · roteamento no grafo</text>
+<rect x="72" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="166" y="737" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">Pedido</text>
+<text x="166" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">10 + 20</text>
+<path d="M260 749 L283 749" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="286" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="380" y="737" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">LLM + bind_tools</text>
+<text x="380" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">solicita somar</text>
+<path d="M474 749 L497 749" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="500" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="594" y="737" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">tools_condition</text>
+<text x="594" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">há chamada?</text>
+<path d="M688 749 L711 749" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="714" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="808" y="737" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">ToolNode</text>
+<text x="808" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">executa somar</text>
+<path d="M902 749 L925 749" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="928" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="1022" y="737" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">LLM</text>
+<text x="1022" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">recebe ToolMessage</text>
+<path d="M1116 749 L1139 749" fill="none" stroke="#127e87" stroke-width="3.5" marker-end="url(#arrow)"/>
+<rect x="1142" y="696" width="187" height="104" rx="14" fill="#fff" stroke="#8b4bc8" stroke-width="2"/>
+<text x="1236" y="737" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#8b4bc8">Resposta</text>
+<text x="1236" y="766" text-anchor="middle" font-size="17" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#34566a">30 (conferir)</text>
+<text x="96" y="846" text-anchor="start" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="500" fill="#425d71">Se não houver chamada, o fluxo encerra. Se houver, ToolNode executa e retorna ao LLM.</text>
+<rect x="48" y="913" width="1325" height="189" rx="22" fill="#fff9e8" stroke="#e5c88f" stroke-width="2"/>
+<text x="80" y="957" text-anchor="start" font-size="25" font-family="Arial,Helvetica,sans-serif" font-weight="800" fill="#855b19">REGRAS QUE VALORIZAM AS DUAS OPÇÕES</text>
+<text x="88" y="1004" text-anchor="start" font-size="22" font-family="Arial,Helvetica,sans-serif" font-weight="530" fill="#715934">1. bind_tools() informa nome, descrição e esquema; não executa a função sozinho.</text>
+<text x="88" y="1039" text-anchor="start" font-size="22" font-family="Arial,Helvetica,sans-serif" font-weight="530" fill="#715934">2. ToolNode executa chamadas; tools_condition encaminha; nenhum deles valida o resultado por você.</text>
+<text x="88" y="1074" text-anchor="start" font-size="22" font-family="Arial,Helvetica,sans-serif" font-weight="530" fill="#715934">3. Ações externas: validar argumentos, permissões e confirmar efeitos antes de dizer que funcionou.</text>
+<text x="710" y="1140" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="450" fill="#627a8b">IA fazendo IA — ou quase · Fluxo conceitual para consulta e estudo</text>
+</svg>
