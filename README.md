@@ -7,6 +7,8 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Abrir portal (GitHub Pages)](index.html)
 - [Sumário](SUMARIO.md)
 - [Laboratório Vivo — 21 capítulos](laboratorio/README.html)
+- [Evidências e limites dos testes](laboratorio/EVIDENCIAS.html)
+- [Compatibilidade entre comandos do livro e do site](laboratorio/COMPATIBILIDADE.html)
 - [Kit do leitor — código e modelos](laboratorio/kit-do-leitor/README.md)
 - [Capítulo 13: comparar arquivos](laboratorio/capitulo-13.html)
 - [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)

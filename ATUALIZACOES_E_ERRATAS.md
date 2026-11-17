@@ -9,6 +9,9 @@ Início: 14/11/2026. Este é um registro vivo. **ERRATA** corrige um erro de edi
 | ATU-003 | Tutorial | Utilizar pastas fictícias `laboratorio-ia/entrada`, `saida` e `evidencias`, nunca o caminho pessoal do autor. | Convenção documentada |
 | ATU-004 | QR Codes | Links estáveis por capítulo, com guias e evidência antes da impressão. | Em implantação |
 
-Para relatar um erro, informe edição, capítulo, seção, comportamento observado e passos de reprodução, sem inserir dados pessoais.
-
 | ATU-005 | Laboratório | Integração dos 21 exercícios ao catálogo da Pages; 14 ensaios Python locais, 7 investigações e modelos públicos. | Publicado em 16/11/2026; testes reais em plataformas dependem de ensaio separado |
+| ATU-006 | Compatibilidade | Comandos dos capítulos 9–21 citam caminhos da fonte Quarto do livro; no kit público execute `python laboratorio/kit-do-leitor/executar.py --capitulo N --saida ../ensaio-N`. O exemplo automatizado usa dados fictícios e não substitui o teste sobre a obra. | Corrigido no site; nota editorial para futuras tiragens |
+| ATU-007 | Evidências | Registro de teste automatizado offline com indicação de suite, data, repositório e limitações; testes em ChatGPT/Claude/Gemini permanecem separados. | Evidência limitada publicada; validação interplataforma pendente |
+| ATU-008 | Aparência | Revisão visual com grafite, azul profundo e ciano; sem alterar o texto do manuscrito. | Publicação de site |
+
+Para relatar um erro, informe edição, capítulo, seção, comportamento observado e passos de reprodução, sem inserir dados pessoais.
