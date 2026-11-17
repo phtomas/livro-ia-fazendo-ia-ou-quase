@@ -1,6 +1,6 @@
 # Kit do leitor — os 21 capítulos
 
-**IA fazendo IA — ou quase**, José Albuquerque. Complemento público; o texto integral do livro permanece privado.
+**IA fazendo IA — ou quase**, José Albuquerque. Material de apoio aos exercícios do livro.
 
 Este pacote reúne os 21 roteiros do livro, os scripts já publicados, a skill de revisão autoral, modelos de contratos, um executor local offline e testes de regressão. Nenhum teste chama um modelo de IA. O leitor pode trabalhar em Windows, Linux ou macOS com Python 3.11 ou posterior, sem instalar Git.
 
@@ -19,9 +19,9 @@ python laboratorio/kit-do-leitor/executar.py --todos --saida ../minha-bancada-21
 python -m unittest discover -s laboratorio/kit-do-leitor/testes -p 'test_*.py' -v
 ```
 
-**Segurança:** `--saida` precisa apontar para um diretório novo **fora** do repositório. O programa se recusa a sobrescrever resultados existentes. Para repetir, escolha outra pasta. Os dados usados pelo executor são fictícios. Nunca rode os testes diretamente no manuscrito.
+**Segurança:** `--saida` precisa apontar para um diretório novo **fora** do repositório. O programa se recusa a sobrescrever resultados existentes. Para repetir, escolha outra pasta. Os dados usados pelo executor são fictícios. Execute os testes somente com os arquivos fictícios fornecidos ou cópias descartáveis.
 
-## Estados e fronteiras da prova
+## Como interpretar os resultados
 
 - `NAO_VERIFICADO`: ficha criada; experiência humana ou numa plataforma ainda não foi comprovada.
 - `PASS_LIMITED`: comandos locais produziram os códigos esperados; o escopo é restrito ao cenário sintético.
@@ -67,4 +67,4 @@ python -m unittest discover -s laboratorio/kit-do-leitor/testes -p 'test_*.py' -
 
 Instalar uma skill em diretório temporário não prova que um modelo a reconheceu. Ensaios reais de ChatGPT, Claude e Gemini devem registrar fornecedor, modelo, data, modalidade de acesso, permissões, entradas, saídas e versões, preservando a distinção entre observado e suposto.
 
-**Regra editorial:** nada é 'funcionou' sem prova. Este kit é complementar ao livro; o leitor conserva responsabilidade pelas próprias decisões.
+**Regra do laboratório:** nada é 'funcionou' sem prova. O leitor deve conferir os resultados de seus próprios ensaios.
