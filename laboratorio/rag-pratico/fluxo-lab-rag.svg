@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 570" role="img" aria-label="Fluxo do laboratório RAG, indexação à esquerda, consulta à direita e validações transversais">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#196e7f"/></marker></defs>
+<rect x="0" y="0" width="1150" height="570" rx="18" fill="#fbfcfd"/>
+<text x="45" y="53" font-size="27" font-weight="800" fill="#153047" font-family="Arial">LAB-RAG-01 · Dois caminhos verificáveis</text>
+<text x="45" y="84" font-size="17" fill="#567082" font-family="Arial">Índice local primeiro. Embeddings e geração por LLM são extensões opcionais.</text>
+<text x="45" y="133" font-size="21" font-weight="700" fill="#106964" font-family="Arial">A · PREPARAR DOCUMENTOS</text>
+<text x="45" y="320" font-size="21" font-weight="700" fill="#234f91" font-family="Arial">B · CONSULTAR E RESPONDER</text>
+<rect x="45" y="155" width="205" height="113" rx="16" fill="#e8f3f2" stroke="#bbced7" stroke-width="1.6"/>
+<text x="147.5" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Documentos fictícios</text>
+<text x="147.5" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">TXT / MD / PDF textual</text>
+<rect x="292" y="155" width="205" height="113" rx="16" fill="#e8f3f2" stroke="#bbced7" stroke-width="1.6"/>
+<text x="394.5" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Normalizar e dividir</text>
+<text x="394.5" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">trechos + identificação</text>
+<rect x="540" y="155" width="205" height="113" rx="16" fill="#e8f3f2" stroke="#bbced7" stroke-width="1.6"/>
+<text x="642.5" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">SQLite FTS5</text>
+<text x="642.5" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">índice de busca lexical</text>
+<rect x="793" y="155" width="306" height="113" rx="16" fill="#e6f1ff" stroke="#bbced7" stroke-width="1.6"/>
+<text x="946" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Opcional: embeddings</text>
+<text x="946" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">Ollama + pesquisa por vetor</text>
+<path d="M252 210 L290 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M499 210 L538 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M748 210 L788 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="45" y="341" width="200" height="113" rx="16" fill="#eff3ff" stroke="#bbced7" stroke-width="1.6"/>
+<text x="145" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Pergunta</text>
+<text x="145" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">consulta do leitor</text>
+<rect x="282" y="341" width="200" height="113" rx="16" fill="#eff3ff" stroke="#bbced7" stroke-width="1.6"/>
+<text x="382" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Recuperar trechos</text>
+<text x="382" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">BM25 ou vetorial</text>
+<rect x="520" y="341" width="200" height="113" rx="16" fill="#eff3ff" stroke="#bbced7" stroke-width="1.6"/>
+<text x="620" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Montar o contexto</text>
+<text x="620" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">fontes + instruções</text>
+<rect x="757" y="341" width="196" height="113" rx="16" fill="#eff3ff" stroke="#bbced7" stroke-width="1.6"/>
+<text x="855" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">LLM local</text>
+<text x="855" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">Ollama (opcional)</text>
+<rect x="987" y="341" width="127" height="113" rx="16" fill="#e5f5e8" stroke="#bbced7" stroke-width="1.6"/>
+<text x="1050.5" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Saída</text>
+<text x="1050.5" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">+ fontes</text>
+<path d="M248 394 L280 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M485 394 L517 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M723 394 L754 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M956 394 L985 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M640 272 L640 305 L381 305 L381 338" fill="none" stroke="#196e7f" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#a)"/>
+<rect x="55" y="494" width="1044" height="46" rx="12" fill="#fff3df" stroke="#e1cda7"/><text x="577" y="524" text-anchor="middle" font-size="17" fill="#74531d" font-family="Arial">GATES: 7 testes automatizados · Hit@2 nos exemplos · sem fonte → abstenção · resposta do LLM não é prova factual</text>
+</svg>
