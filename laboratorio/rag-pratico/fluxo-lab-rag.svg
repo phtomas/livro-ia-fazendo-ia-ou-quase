@@ -15,11 +15,11 @@
 <text x="642.5" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">SQLite FTS5</text>
 <text x="642.5" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">índice de busca lexical</text>
 <rect x="793" y="155" width="306" height="113" rx="16" fill="#e6f1ff" stroke="#bbced7" stroke-width="1.6"/>
-<text x="946" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Opcional: embeddings</text>
-<text x="946" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">Ollama + pesquisa por vetor</text>
+<text x="946" y="183" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Alternativa: vetores</text>
+<text x="946" y="209" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">embeddings + similaridade</text>
 <path d="M252 210 L290 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
 <path d="M499 210 L538 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
-<path d="M748 210 L788 210" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
+
 <rect x="45" y="341" width="200" height="113" rx="16" fill="#eff3ff" stroke="#bbced7" stroke-width="1.6"/>
 <text x="145" y="369" text-anchor="middle" font-size="17" font-weight="700" fill="#132f46" font-family="Arial">Pergunta</text>
 <text x="145" y="395" text-anchor="middle" font-size="14" fill="#426375" font-family="Arial">consulta do leitor</text>
