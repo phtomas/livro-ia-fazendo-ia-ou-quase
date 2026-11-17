@@ -1,0 +1,529 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2550" viewBox="0 0 1600 2550" role="img" aria-label="Guia rápido de Grandes Modelos de Linguagem: 120 conceitos divididos em quatro áreas">
+<rect width="1600" height="2550" fill="#fafafa"/>
+<rect x="46" y="34" width="1508" height="162" rx="36" fill="#fff" stroke="#dedfe6"/>
+<rect x="385" y="114" width="830" height="63" rx="31" fill="#ede5ff"/>
+<text x="800" y="97" font-size="54" fill="#0c1f40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Guia Rápido de Grandes Modelos de Linguagem</text>
+<text x="800" y="155" font-size="30" fill="#453b79" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">120 conceitos essenciais, termos e técnicas</text>
+<rect x="35" y="230" width="351" height="1850" rx="28" fill="#edf5ff" stroke="#98c8f7" stroke-width="3"/>
+<rect x="36" y="230" width="349" height="113" rx="27" fill="#2b72c5"/>
+<text x="210.5" y="270" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Fundamentos de LLMs</text>
+<text x="210.5" y="304" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">e conceitos centrais</text>
+<rect x="45" y="350" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="358" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="384" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">1</text>
+<text x="104" y="384" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">O que é um LLM</text>
+<rect x="45" y="404" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="412" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="438" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">2</text>
+<text x="104" y="438" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Evolução dos LLMs</text>
+<rect x="45" y="458" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="466" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="492" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">3</text>
+<text x="104" y="492" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelo fundacional</text>
+<rect x="45" y="512" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="520" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="546" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">4</text>
+<text x="104" y="546" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Pré-treinamento</text>
+<rect x="45" y="566" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="574" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="600" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">5</text>
+<text x="104" y="600" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ajuste fino</text>
+<rect x="45" y="620" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="628" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="654" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">6</text>
+<text x="104" y="654" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ajuste por instrução</text>
+<rect x="45" y="674" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="682" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="708" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">7</text>
+<text x="104" y="708" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aprendizado por transferência</text>
+<rect x="45" y="728" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="736" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="762" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">8</text>
+<text x="104" y="762" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aprendizado zero-shot</text>
+<rect x="45" y="782" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="790" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="816" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">9</text>
+<text x="104" y="816" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aprendizado few-shot</text>
+<rect x="45" y="836" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="844" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="870" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">10</text>
+<text x="104" y="870" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aprendizado em contexto</text>
+<rect x="45" y="890" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="898" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="924" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">11</text>
+<text x="104" y="924" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Habilidades emergentes</text>
+<rect x="45" y="944" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="952" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="978" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">12</text>
+<text x="104" y="978" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Parâmetros (pesos)</text>
+<rect x="45" y="998" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1006" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1032" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">13</text>
+<text x="104" y="1032" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Tamanho do modelo (B, M, T)</text>
+<rect x="45" y="1052" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1060" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1086" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">14</text>
+<text x="104" y="1086" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Token</text>
+<rect x="45" y="1106" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1114" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1140" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">15</text>
+<text x="104" y="1140" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Tokenização</text>
+<rect x="45" y="1160" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1168" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1194" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">16</text>
+<text x="104" y="1194" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Vocabulário</text>
+<rect x="45" y="1214" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1222" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1248" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">17</text>
+<text x="104" y="1248" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Janela de contexto</text>
+<rect x="45" y="1268" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1276" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1302" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">18</text>
+<text x="104" y="1302" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Embeddings</text>
+<rect x="45" y="1322" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1330" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1356" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">19</text>
+<text x="104" y="1356" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Estados ocultos</text>
+<rect x="45" y="1376" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1384" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1410" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">20</text>
+<text x="104" y="1410" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Mecanismo de atenção</text>
+<rect x="45" y="1430" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1438" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1464" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">21</text>
+<text x="104" y="1464" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Autoatenção</text>
+<rect x="45" y="1484" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1492" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1518" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">22</text>
+<text x="104" y="1518" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Atenção multi-head</text>
+<rect x="45" y="1538" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1546" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1572" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">23</text>
+<text x="104" y="1572" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Arquitetura Transformer</text>
+<rect x="45" y="1592" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1600" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1626" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">24</text>
+<text x="104" y="1626" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Codificador vs decodificador</text>
+<rect x="45" y="1646" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1654" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1680" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">25</text>
+<text x="104" y="1680" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelo somente decodificador</text>
+<rect x="45" y="1700" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1708" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1734" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">26</text>
+<text x="104" y="1734" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelo encoder-decoder</text>
+<rect x="45" y="1754" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1762" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1788" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">27</text>
+<text x="104" y="1788" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelo autorregressivo</text>
+<rect x="45" y="1808" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1816" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1842" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">28</text>
+<text x="104" y="1828" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelagem de linguagem</text>
+<text x="104" y="1850" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">mascarada</text>
+<rect x="45" y="1862" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1870" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1896" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">29</text>
+<text x="104" y="1896" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Predição do próximo token</text>
+<rect x="45" y="1916" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#98c8f7" stroke-opacity=".45"/>
+<rect x="51" y="1924" width="43" height="36" rx="16" fill="#2b72c5" fill-opacity=".2"/>
+<text x="72" y="1950" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">30</text>
+<text x="104" y="1950" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Perplexidade</text>
+<rect x="428" y="230" width="351" height="1850" rx="28" fill="#effaf0" stroke="#9fdbb0" stroke-width="3"/>
+<rect x="429" y="230" width="349" height="113" rx="27" fill="#269950"/>
+<text x="603.5" y="270" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Treinamento, otimização</text>
+<text x="603.5" y="304" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">e adaptação</text>
+<rect x="438" y="350" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="358" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="384" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">1</text>
+<text x="497" y="384" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Conjunto de treinamento</text>
+<rect x="438" y="404" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="412" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="438" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">2</text>
+<text x="497" y="438" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Curadoria de dados</text>
+<rect x="438" y="458" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="466" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="492" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">3</text>
+<text x="497" y="492" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Pré-processamento de dados</text>
+<rect x="438" y="512" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="520" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="546" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">4</text>
+<text x="497" y="546" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aumento de dados</text>
+<rect x="438" y="566" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="574" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="600" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">5</text>
+<text x="497" y="600" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Objetivo de treinamento (loss)</text>
+<rect x="438" y="620" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="628" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="654" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">6</text>
+<text x="497" y="654" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Perda de entropia cruzada</text>
+<rect x="438" y="674" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="682" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="708" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">7</text>
+<text x="497" y="708" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Otimização</text>
+<rect x="438" y="728" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="736" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="762" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">8</text>
+<text x="497" y="762" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Descida do gradiente</text>
+<rect x="438" y="782" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="790" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="816" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">9</text>
+<text x="497" y="816" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Otimizador Adam</text>
+<rect x="438" y="836" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="844" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="870" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">10</text>
+<text x="497" y="870" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Taxa de aprendizado</text>
+<rect x="438" y="890" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="898" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="924" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">11</text>
+<text x="497" y="924" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Tamanho do lote (batch)</text>
+<rect x="438" y="944" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="952" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="978" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">12</text>
+<text x="497" y="978" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Época</text>
+<rect x="438" y="998" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1006" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1032" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">13</text>
+<text x="497" y="1032" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Regularização</text>
+<rect x="438" y="1052" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1060" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1086" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">14</text>
+<text x="497" y="1086" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Dropout</text>
+<rect x="438" y="1106" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1114" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1140" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">15</text>
+<text x="497" y="1140" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Decaimento de pesos</text>
+<rect x="438" y="1160" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1168" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1194" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">16</text>
+<text x="497" y="1194" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Parada antecipada</text>
+<rect x="438" y="1214" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1222" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1248" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">17</text>
+<text x="497" y="1248" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Checkpointing</text>
+<rect x="438" y="1268" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1276" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1302" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">18</text>
+<text x="497" y="1302" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Compressão de modelo</text>
+<rect x="438" y="1322" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1330" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1356" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">19</text>
+<text x="497" y="1356" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Quantização</text>
+<rect x="438" y="1376" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1384" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1410" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">20</text>
+<text x="497" y="1410" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Poda (pruning)</text>
+<rect x="438" y="1430" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1438" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1464" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">21</text>
+<text x="497" y="1464" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Destilação (professor–aluno)</text>
+<rect x="438" y="1484" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1492" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1518" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">22</text>
+<text x="497" y="1518" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">LoRA</text>
+<rect x="438" y="1538" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1546" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1572" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">23</text>
+<text x="497" y="1572" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">QLoRA</text>
+<rect x="438" y="1592" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1600" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1626" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">24</text>
+<text x="497" y="1626" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ajuste eficiente de parâmetros</text>
+<rect x="438" y="1646" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1654" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1680" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">25</text>
+<text x="497" y="1680" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ajuste fino completo</text>
+<rect x="438" y="1700" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1708" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1734" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">26</text>
+<text x="497" y="1734" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Adaptação de domínio</text>
+<rect x="438" y="1754" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1762" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1788" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">27</text>
+<text x="497" y="1788" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Pré-treinamento continuado</text>
+<rect x="438" y="1808" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1816" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1842" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">28</text>
+<text x="497" y="1842" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ajuste fino multitarefa</text>
+<rect x="438" y="1862" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1870" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1896" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">29</text>
+<text x="497" y="1896" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">RLHF</text>
+<rect x="438" y="1916" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#9fdbb0" stroke-opacity=".45"/>
+<rect x="444" y="1924" width="43" height="36" rx="16" fill="#269950" fill-opacity=".2"/>
+<text x="465" y="1950" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">30</text>
+<text x="497" y="1950" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">DPO</text>
+<rect x="821" y="230" width="351" height="1850" rx="28" fill="#fff9e7" stroke="#e8ca74" stroke-width="3"/>
+<rect x="822" y="230" width="349" height="113" rx="27" fill="#d59c08"/>
+<text x="996.5" y="270" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Inferência, prompting</text>
+<text x="996.5" y="304" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">e avaliação</text>
+<rect x="831" y="350" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="358" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="384" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">1</text>
+<text x="890" y="384" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Inferência</text>
+<rect x="831" y="404" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="412" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="438" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">2</text>
+<text x="890" y="438" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompt</text>
+<rect x="831" y="458" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="466" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="492" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">3</text>
+<text x="890" y="492" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Engenharia de prompt</text>
+<rect x="831" y="512" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="520" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="546" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">4</text>
+<text x="890" y="546" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompting por papel</text>
+<rect x="831" y="566" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="574" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="600" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">5</text>
+<text x="890" y="600" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompting por instrução</text>
+<rect x="831" y="620" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="628" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="654" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">6</text>
+<text x="890" y="654" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompting zero-shot</text>
+<rect x="831" y="674" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="682" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="708" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">7</text>
+<text x="890" y="708" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompting few-shot</text>
+<rect x="831" y="728" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="736" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="762" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">8</text>
+<text x="890" y="762" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Cadeia de pensamento (CoT)</text>
+<rect x="831" y="782" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="790" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="816" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">9</text>
+<text x="890" y="816" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Autoconsistência</text>
+<rect x="831" y="836" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="844" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="870" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">10</text>
+<text x="890" y="870" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Árvore de pensamentos (ToT)</text>
+<rect x="831" y="890" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="898" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="924" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">11</text>
+<text x="890" y="924" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">ReAct (raciocinar + agir)</text>
+<rect x="831" y="944" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="952" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="978" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">12</text>
+<text x="890" y="978" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Prompt de sistema vs usuário</text>
+<rect x="831" y="998" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1006" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1032" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">13</text>
+<text x="890" y="1032" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelo de prompt (template)</text>
+<rect x="831" y="1052" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1060" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1086" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">14</text>
+<text x="890" y="1086" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Controle de formato da saída</text>
+<rect x="831" y="1106" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1114" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1140" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">15</text>
+<text x="890" y="1140" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Temperatura</text>
+<rect x="831" y="1160" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1168" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1194" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">16</text>
+<text x="890" y="1194" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Amostragem top-k</text>
+<rect x="831" y="1214" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1222" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1248" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">17</text>
+<text x="890" y="1248" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Amostragem top-p (núcleo)</text>
+<rect x="831" y="1268" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1276" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1302" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">18</text>
+<text x="890" y="1302" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Decodificação gulosa</text>
+<rect x="831" y="1322" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1330" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1356" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">19</text>
+<text x="890" y="1356" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Busca em feixe (beam search)</text>
+<rect x="831" y="1376" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1384" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1410" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">20</text>
+<text x="890" y="1410" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Penalidade de repetição</text>
+<rect x="831" y="1430" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1438" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1464" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">21</text>
+<text x="890" y="1464" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Sequências de parada</text>
+<rect x="831" y="1484" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1492" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1518" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">22</text>
+<text x="890" y="1518" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Saída em JSON</text>
+<rect x="831" y="1538" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1546" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1572" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">23</text>
+<text x="890" y="1572" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Chamada de função</text>
+<rect x="831" y="1592" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1600" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1626" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">24</text>
+<text x="890" y="1626" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Saída estruturada</text>
+<rect x="831" y="1646" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1654" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1680" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">25</text>
+<text x="890" y="1680" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Métricas de avaliação</text>
+<rect x="831" y="1700" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1708" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1734" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">26</text>
+<text x="890" y="1734" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">BLEU</text>
+<rect x="831" y="1754" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1762" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1788" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">27</text>
+<text x="890" y="1788" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">ROUGE</text>
+<rect x="831" y="1808" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1816" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1842" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">28</text>
+<text x="890" y="1842" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">METEOR</text>
+<rect x="831" y="1862" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1870" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1896" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">29</text>
+<text x="890" y="1896" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">BERTScore</text>
+<rect x="831" y="1916" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#e8ca74" stroke-opacity=".45"/>
+<rect x="837" y="1924" width="43" height="36" rx="16" fill="#d59c08" fill-opacity=".2"/>
+<text x="858" y="1950" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">30</text>
+<text x="890" y="1950" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Avaliação humana</text>
+<rect x="1214" y="230" width="351" height="1850" rx="28" fill="#fff0f6" stroke="#efafd1" stroke-width="3"/>
+<rect x="1215" y="230" width="349" height="113" rx="27" fill="#c94480"/>
+<text x="1389.5" y="270" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Aplicações, segurança</text>
+<text x="1389.5" y="304" font-size="25" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">e ecossistema</text>
+<rect x="1224" y="350" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="358" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="384" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">1</text>
+<text x="1283" y="384" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Geração de texto</text>
+<rect x="1224" y="404" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="412" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="438" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">2</text>
+<text x="1283" y="438" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Sumarização</text>
+<rect x="1224" y="458" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="466" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="492" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">3</text>
+<text x="1283" y="492" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Perguntas e respostas (QA)</text>
+<rect x="1224" y="512" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="520" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="546" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">4</text>
+<text x="1283" y="546" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Extração de informação</text>
+<rect x="1224" y="566" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="574" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="600" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">5</text>
+<text x="1283" y="600" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Classificação de texto</text>
+<rect x="1224" y="620" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="628" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="654" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">6</text>
+<text x="1283" y="654" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Análise de sentimento</text>
+<rect x="1224" y="674" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="682" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="708" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">7</text>
+<text x="1283" y="708" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Tradução</text>
+<rect x="1224" y="728" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="736" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="762" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">8</text>
+<text x="1283" y="762" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Paráfrase</text>
+<rect x="1224" y="782" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="790" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="816" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">9</text>
+<text x="1283" y="816" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Geração de código</text>
+<rect x="1224" y="836" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="844" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="870" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">10</text>
+<text x="1283" y="870" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Explicação de código</text>
+<rect x="1224" y="890" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="898" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="924" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">11</text>
+<text x="1283" y="924" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Análise de dados com LLMs</text>
+<rect x="1224" y="944" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="952" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="978" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">12</text>
+<text x="1283" y="978" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Agentes de IA</text>
+<rect x="1224" y="998" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1006" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1032" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">13</text>
+<text x="1283" y="1032" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Ferramentas e APIs</text>
+<rect x="1224" y="1052" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1060" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1086" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">14</text>
+<text x="1283" y="1072" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Geração aumentada por</text>
+<text x="1283" y="1094" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">recuperação (RAG)</text>
+<rect x="1224" y="1106" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1114" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1140" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">15</text>
+<text x="1283" y="1140" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Banco de dados vetorial</text>
+<rect x="1224" y="1160" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1168" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1194" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">16</text>
+<text x="1283" y="1180" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Busca semântica por</text>
+<text x="1283" y="1202" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">embeddings</text>
+<rect x="1224" y="1214" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1222" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1248" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">17</text>
+<text x="1283" y="1234" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Integração com bases de</text>
+<text x="1283" y="1256" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">conhecimento</text>
+<rect x="1224" y="1268" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1276" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1302" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">18</text>
+<text x="1283" y="1302" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">LLMs multimodais</text>
+<rect x="1224" y="1322" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1330" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1356" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">19</text>
+<text x="1283" y="1356" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Orquestração de LLMs</text>
+<rect x="1224" y="1376" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1384" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1410" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">20</text>
+<text x="1283" y="1410" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Fluxos de trabalho com LLMs</text>
+<rect x="1224" y="1430" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1438" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1464" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">21</text>
+<text x="1283" y="1464" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Guardrails e segurança</text>
+<rect x="1224" y="1484" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1492" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1518" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">22</text>
+<text x="1283" y="1518" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Moderação de conteúdo</text>
+<rect x="1224" y="1538" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1546" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1572" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">23</text>
+<text x="1283" y="1572" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Alucinação e mitigação</text>
+<rect x="1224" y="1592" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1600" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1626" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">24</text>
+<text x="1283" y="1626" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Viés e equidade</text>
+<rect x="1224" y="1646" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1654" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1680" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">25</text>
+<text x="1283" y="1666" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Privacidade e segurança de</text>
+<text x="1283" y="1688" font-size="18" fill="#152a40" font-weight="500" text-anchor="start" font-family="Arial,Helvetica,sans-serif">dados</text>
+<rect x="1224" y="1700" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1708" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1734" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">26</text>
+<text x="1283" y="1734" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">IA responsável</text>
+<rect x="1224" y="1754" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1762" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1788" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">27</text>
+<text x="1283" y="1788" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Avaliação e benchmarks</text>
+<rect x="1224" y="1808" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1816" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1842" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">28</text>
+<text x="1283" y="1842" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelos de pesos abertos</text>
+<rect x="1224" y="1862" width="331" height="51" rx="15" fill="#fff" fill-opacity=".81" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1870" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1896" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">29</text>
+<text x="1283" y="1896" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Modelos proprietários</text>
+<rect x="1224" y="1916" width="331" height="51" rx="15" fill="#fff" fill-opacity=".95" stroke="#efafd1" stroke-opacity=".45"/>
+<rect x="1230" y="1924" width="43" height="36" rx="16" fill="#c94480" fill-opacity=".2"/>
+<text x="1251" y="1950" font-size="22" fill="#152a40" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">30</text>
+<text x="1283" y="1950" font-size="21" fill="#152a40" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Implantação e escalabilidade</text>
+<rect x="36" y="2122" width="1528" height="340" rx="28" fill="#fff" stroke="#d6d6e4" stroke-width="3"/>
+<text x="800" y="2178" font-size="36" fill="#413984" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">As quatro áreas de estudo</text>
+<rect x="50" y="2210" width="355" height="139" rx="18" fill="#edf5ff" stroke="#98c8f7" stroke-width="2"/>
+<text x="70" y="2246" font-size="22" fill="#2b72c5" font-weight="bold" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Fundamentos</text>
+<text x="70" y="2284" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Como os modelos representam texto,</text>
+<text x="70" y="2314" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">processam contexto e aprendem padrões.</text>
+<rect x="435" y="2210" width="355" height="139" rx="18" fill="#effaf0" stroke="#9fdbb0" stroke-width="2"/>
+<text x="455" y="2246" font-size="22" fill="#269950" font-weight="bold" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Treinamento</text>
+<text x="455" y="2284" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Como os parâmetros são otimizados</text>
+<text x="455" y="2314" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">e os modelos são adaptados.</text>
+<rect x="820" y="2210" width="355" height="139" rx="18" fill="#fff9e7" stroke="#e8ca74" stroke-width="2"/>
+<text x="840" y="2246" font-size="22" fill="#d59c08" font-weight="bold" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Inferência</text>
+<text x="840" y="2284" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Como solicitar, gerar, controlar</text>
+<text x="840" y="2314" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">e avaliar respostas.</text>
+<rect x="1205" y="2210" width="355" height="139" rx="18" fill="#fff0f6" stroke="#efafd1" stroke-width="2"/>
+<text x="1225" y="2246" font-size="22" fill="#c94480" font-weight="bold" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Aplicações</text>
+<text x="1225" y="2284" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">Como aplicar LLMs com segurança,</text>
+<text x="1225" y="2314" font-size="18" fill="#263a4a" font-weight="normal" text-anchor="start" font-family="Arial,Helvetica,sans-serif">ferramentas e recuperação de dados.</text>
+<text x="800" y="2398" font-size="24" fill="#162c46" font-weight="bold" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Não é necessário decorar os 120 termos.</text>
+<text x="800" y="2432" font-size="21" fill="#455568" font-weight="normal" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Entenda o que cada conceito significa, por que importa e quando é útil.</text>
+<text x="800" y="2515" font-size="20" fill="#6f7682" font-weight="normal" text-anchor="middle" font-family="Arial,Helvetica,sans-serif">Guia de consulta · IA fazendo IA — ou quase</text>
+</svg>
