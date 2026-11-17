@@ -10,3 +10,5 @@ Início: 14/11/2026. Este é um registro vivo. **ERRATA** corrige um erro de edi
 | ATU-004 | QR Codes | Links estáveis por capítulo, com guias e evidência antes da impressão. | Em implantação |
 
 Para relatar um erro, informe edição, capítulo, seção, comportamento observado e passos de reprodução, sem inserir dados pessoais.
+
+| ATU-005 | Laboratório | Integração dos 21 exercícios ao catálogo da Pages; 14 ensaios Python locais, 7 investigações e modelos públicos. | Publicado em 16/11/2026; testes reais em plataformas dependem de ensaio separado |
