@@ -1,6 +1,6 @@
 # Referências e uso responsável
 
-Esta página publica **texto reescrito e figuras novas**. Não reproduz as capturas de origem incerta. A coincidência temática com materiais públicos não constitui licença para copiar artes de terceiros. A identificação do autor das capturas não foi demonstrada, portanto não atribuímos autoria a pessoa ou instituição não confirmada.
+As referências a seguir ajudam a aprofundar os conceitos apresentados no guia.
 
 ## Fontes consultadas para a revisão conceitual
 
@@ -13,10 +13,6 @@ Esta página publica **texto reescrito e figuras novas**. Não reproduz as captu
 - OWASP, [Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/).
 - Liu et al. (2023), [Lost in the Middle](https://arxiv.org/abs/2307.03172).
 
-## Avisos editoriais
+## Nota técnica
 
-1. Os SVGs deste complemento são diagramas próprios, desenvolvidos especificamente para esta publicação com assistência de IA. São **representações didáticas**, não medições ou especificações arquiteturais exatas.
-2. A autoria das imagens de referência enviadas para análise não foi identificada. Nenhuma delas é publicada aqui.
-3. A edição disponibilizada para consulta contém texto e diagramas preparados para esta publicação.
-4. Não há autorização explícita nesta página para reproduzir o conteúdo inteiro em outras obras; solicitações de reutilização devem ser encaminhadas ao titular da obra.
-5. Não confunda o suplemento com a versão revisada ou fechada do livro impresso.
+Os diagramas são esquemas didáticos para facilitar a compreensão de conceitos. Eles não substituem medições, especificações técnicas ou avaliações de modelos.
