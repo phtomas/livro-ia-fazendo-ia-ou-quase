@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+estado/
+*.sqlite
+*.sqlite-*
+*.log
+saida/
