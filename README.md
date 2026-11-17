@@ -13,6 +13,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Kit do leitor — código e modelos](laboratorio/kit-do-leitor/README.md)
 - [Capítulo 13: comparar arquivos](laboratorio/capitulo-13.html)
 - [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)
+- [Tool Calling — com e sem LangGraph](complementos/tool-calling-com-ou-sem-langgraph/index.html)
 - [8 abordagens de modelos e sistemas para agentes](complementos/modelos-e-sistemas-para-agentes/index.html)
 - [Guia rápido — 120 conceitos de LLMs](complementos/llm-120-conceitos/index.html)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.md)
