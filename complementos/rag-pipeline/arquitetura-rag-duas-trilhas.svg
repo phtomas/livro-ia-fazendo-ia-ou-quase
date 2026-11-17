@@ -80,5 +80,5 @@
 <rect x="47" y="1152" width="1506" height="92" rx="18" fill="#fff7e5" stroke="#e2d4b4" stroke-width="2"/>
 <text x="72" y="1189" text-anchor="start" font-family="Arial,Helvetica,sans-serif" font-weight="760" font-size="22" fill="#815a19">TRÊS CUIDADOS IMPORTANTES</text>
 <text x="72" y="1220" text-anchor="start" font-family="Arial,Helvetica,sans-serif" font-weight="490" font-size="20" fill="#7a6238">BM25 = busca lexical  ·  HyDE = preparação da consulta (não reranking)  ·  RAG ≠ banco vetorial obrigatório</text>
-<text x="800" y="1279" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="410" font-size="18" fill="#5c7079">Diagrama conceitual original · José Albuquerque · referência temática atribuída: Jothi Moorthy</text>
+<text x="800" y="1279" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="410" font-size="18" fill="#5c7079">RAG · preparação, recuperação e resposta · IA fazendo IA — ou quase</text>
 </svg>
