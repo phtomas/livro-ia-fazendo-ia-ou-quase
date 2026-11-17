@@ -291,5 +291,3 @@ Teste casos representativos e adversariais, tarefas de segurança, respostas de 
 ---
 
 Fontes técnicas: Vaswani et al. (2017); FlashAttention (Dao et al., 2022); Hugging Face PEFT e Transformers; DPO (Rafailov et al., 2023); documentação OpenAI (Structured Outputs, Prompt Caching, avaliações); OWASP LLM Top 10; Liu et al. (Lost in the Middle).
-
-**Créditos editoriais:** seleção, tradução, revisão e novos diagramas para o complemento de José Albuquerque, com assistência de IA. Não há licença aberta específica declarada nesta pasta; consulte o responsável antes de redistribuir.
