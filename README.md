@@ -16,6 +16,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
 - [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)
 - [Arquitetura de um pipeline RAG — diagrama revisado](complementos/rag-pipeline/index.html)
+- [LAB-RAG-01 — laboratório prático com código e testes](laboratorio/rag-pratico/index.html)
 
 > Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.
 
