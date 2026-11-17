@@ -40,5 +40,5 @@
 <path d="M723 394 L754 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
 <path d="M956 394 L985 394" fill="none" stroke="#196e7f" stroke-width="2.5" marker-end="url(#a)"/>
 <path d="M640 272 L640 305 L381 305 L381 338" fill="none" stroke="#196e7f" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#a)"/>
-<rect x="55" y="494" width="1044" height="46" rx="12" fill="#fff3df" stroke="#e1cda7"/><text x="577" y="524" text-anchor="middle" font-size="17" fill="#74531d" font-family="Arial">GATES: 7 testes automatizados · Hit@2 nos exemplos · sem fonte → abstenção · resposta do LLM não é prova factual</text>
+<rect x="55" y="494" width="1044" height="46" rx="12" fill="#fff3df" stroke="#e1cda7"/><text x="577" y="524" text-anchor="middle" font-size="17" fill="#74531d" font-family="Arial">CONFIRA: testes locais · fontes recuperadas · ausência de evidência · resposta comparada ao documento</text>
 </svg>
