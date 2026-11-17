@@ -4,26 +4,13 @@
 
 [Iniciar o laboratório visual](index.html) · [Fluxograma vetorial](fluxo-lab-rag.svg) · [Código Python](rag_lab.py) · [Testes](testes/test_lab.py)
 
-## Objetivo e critérios
+## O que você vai construir
 
-Demonstrar **duas fases separadas** de um sistema RAG:
+Um RAG simples com duas fases:
+- **Preparação dos documentos:** carregar arquivos de teste, extrair texto, dividir em trechos identificados e criar um índice de busca.
+- **Consulta:** receber uma pergunta, recuperar trechos, montar o contexto com as fontes e, opcionalmente, gerar a resposta usando um modelo local.
 
-- **Preparar conhecimento:** carregar arquivos fictícios → extrair texto → dividir em trechos com origem → construir índice recuperável.
-- **Responder:** receber pergunta → recuperar trechos → montar contexto com identificadores de fontes → gerar resposta pelo LLM local (opcional).
-
-**PASS limitado** exige: sete testes automatizados verdes; indexação de três documentos sintéticos; 3/3 perguntas de referência recuperando a fonte esperada em `top-k=2`; e montagem do prompt verificável. **Não significa** precisão geral do sistema nem que um LLM real foi testado.
-
-## Auditoria do exemplo de origem
-
-O roteiro visual recebido tinha boas ideias, mas não era confiável para execução direta:
-1. Misturava versões e caminhos de importação de LangChain; bibliotecas dependem de integrações e versões específicas.
-2. Dependia de OpenAI, Chroma e chave de API mesmo para ensinar um índice mínimo.
-3. Não separava teste de recuperação de teste de geração.
-4. Não testava casos sem documentos pertinentes, identificadores de fontes nem autorização de acesso.
-5. Não tinha dados sintéticos, asserts reproduzíveis ou relatório.
-6. Pressupunha que RAG exige embeddings/banco vetorial. **Não exige.**
-
-**Decisão:** SQLite FTS5 + BM25 para o núcleo sem dependências; API Ollama opcional para vetores e geração. A busca vetorial demonstrativa calcula similaridade em Python; **não foi projetada para grandes coleções**.
+A implementação principal utiliza SQLite FTS5/BM25, sem dependências externas. Opcionalmente, o Ollama permite experimentar embeddings e geração de texto. A busca vetorial deste exercício percorre os vetores em Python e é adequada a pequenas coleções.
 
 ## Requisitos
 
@@ -35,7 +22,7 @@ O roteiro visual recebido tinha boas ideias, mas não era confiável para execu�
 
 > No Windows use o Terminal ou PowerShell. Se `python` não funcionar, substitua por `py -3`. Os comandos abaixo pressupõem a pasta `laboratorio/rag-pratico` do projeto já extraído.
 
-## Passada 1 — recuperação local, sem IA
+## Parte 1 — recuperação local, sem IA
 
 ### 1. Teste o programa (sem instalar pacotes)
 
@@ -78,7 +65,7 @@ python rag_lab.py answer --question "Qual sensor foi marcado para substituição
 
 **Esperado:** `estado: PREVIEW`, mensagens de sistema/usuário, marcador `[F1]` e `modelo_executado: false`.
 
-## Passada 2 — geração com IA local (opcional)
+## Parte 2 — geração com IA local (opcional)
 
 Instale e inicie o [Ollama](https://ollama.com/download), então:
 
@@ -89,7 +76,7 @@ python rag_lab.py answer --question "Qual sensor foi marcado para substituição
 
 **Critério de aprovação manual:** a resposta cita corretamente **S2**, faz referência ao documento de inventário e não inventa resultados adicionais. O estado `GERADO_SEM_VERIFICACAO_FACTUAL` indica apenas que houve geração, **não** que a resposta foi confirmada.
 
-## Passada 3 — embeddings locais (opcional)
+## Parte 3 — embeddings locais (opcional)
 
 ```powershell
 ollama pull nomic-embed-text
@@ -112,20 +99,19 @@ Para usar Linux ou macOS, use os mesmos argumentos com `python3` no lugar de `py
 
 O leitor pode acrescentar `.txt`, `.md` ou `.pdf` textual à pasta `dados`, mas deve **começar somente com dados fictícios**. PDFs escaneados precisam de OCR, não incorporado.
 
-## Gates de verificação
+## Como conferir os resultados
 
-| Gate | Verificação | Estado documentado |
-|---|---|---|
-| G1 | Importação e execução do núcleo Python | PASS — ensaio local |
-| G2 | Criação do índice a partir de 3 documentos sintéticos | PASS — ensaio local |
-| G3 | Hit@2 para 3 perguntas sintéticas | PASS 3/3 — ensaio local |
-| G4 | 7 testes automatizados | PASS 7/7 — ensaio local |
-| G5 | Montagem do prompt e fontes | PASS — ensaio local |
-| G6 | Comunicação embedding/chat com resposta simulada | PASS — mock; não é prova de serviço |
-| G7 | Ollama real com modelo baixado, hardware e medição | **NOT_RUN — exige execução do leitor** |
-| G8 | Qualidade factual, privacidade, escalabilidade, segurança e benchmark | **NOT_RUN — fora do escopo da prova mínima** |
+| Experimento | Resultado esperado |
+|---|---|
+| Testes automatizados | `Ran 7 tests` e `OK` |
+| Preparação do índice | 3 arquivos e 3 trechos |
+| Recuperação lexical | O inventário aparece na pergunta sobre o sensor S2 |
+| Teste de recuperação | `hit_at_k: 1.0` nas três perguntas de exemplo |
+| Prévia do prompt | `PREVIEW`, marcador `[F1]` e sem chamar o modelo |
+| Geração opcional no Ollama | Conferir manualmente se a resposta identifica S2 e cita a fonte |
+| Busca vetorial opcional | Comparar os trechos encontrados com a busca lexical |
 
-### Limitações explícitas
+### Cuidados de uso
 
 - A busca BM25 usa união de termos, não um entendimento semântico. Correspondência de palavras pode retornar um trecho **irrelevante**. A ausência de hits provoca abstenção automática; um hit fraco não garante evidência suficiente.
 - O prompt instrui a não obedecer a trechos maliciosos, mas **isso não é uma defesa infalível contra prompt injection**.
@@ -135,12 +121,10 @@ O leitor pode acrescentar `.txt`, `.md` ou `.pdf` textual à pasta `dados`, mas 
 - Não inclui reranker, busca híbrida, HyDE, avaliação automática do texto do LLM, interface web nem implantação em produção.
 - Operações externas estão limitadas ao Ollama por URL configurável; para o ensaio utilize o endereço padrão de loopback.
 
-## Fontes técnicas
+## Documentação de apoio
 
 - [SQLite FTS5 e BM25](https://www.sqlite.org/fts5.html)
 - [Ollama API: embeddings](https://docs.ollama.com/api/embed)
 - [Ollama API: chat](https://docs.ollama.com/api/chat)
 - [PyPDF](https://pypdf.readthedocs.io/en/stable/)
 - [Documentação de integração do LangChain](https://docs.langchain.com/oss/python/integrations/providers/overview)
-
-**Referência visual externa:** material com assinatura *m-softtech*. O laboratório, o fluxograma e o código foram elaborados em formato próprio, sem copiar os comandos ou a arte original. O crédito é referência temática, não declaração de licença ou endosso.
