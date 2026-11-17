@@ -1,0 +1,2 @@
+DOCUMENTO FICTÍCIO — Plano de testes
+O projeto Laboratório Lume exige uma linha de base antes de aceitar mudanças. Todo resultado deve incluir a identificação do caso, a entrada usada, a saída obtida e o critério de aprovação. Um teste que falhe deve ser registrado como falha, e não omitido.
