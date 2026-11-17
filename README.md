@@ -5,6 +5,7 @@
 Este portal reúne sumário, documentação complementar, experimentos, exemplos e notas de compatibilidade. Os 21 laboratórios estão no [catálogo do leitor](laboratorio/README.html), com scripts e dados fictícios em [laboratorio/codigo](laboratorio/codigo) e [kit por capítulo](laboratorio/kit-do-leitor/README.md).
 
 - [Abrir portal (GitHub Pages)](index.html)
+- [Videoteca — episódios por módulo](videos/index.html)
 - [Sumário](SUMARIO.md)
 - [Laboratório Vivo — 21 capítulos](laboratorio/README.html)
 - [Evidências e limites dos testes](laboratorio/EVIDENCIAS.html)
