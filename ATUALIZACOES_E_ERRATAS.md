@@ -14,4 +14,6 @@ Início: 14/11/2026. Este é um registro vivo. **ERRATA** corrige um erro de edi
 | ATU-007 | Evidências | Registro de teste automatizado offline com indicação de suite, data, repositório e limitações; testes em ChatGPT/Claude/Gemini permanecem separados. | Evidência limitada publicada; validação interplataforma pendente |
 | ATU-008 | Aparência | Revisão visual com grafite, azul profundo e ciano; sem alterar o texto do manuscrito. | Publicação de site |
 
+| ATU-009 | Navegação | Menu de cinco seções unificado nas páginas principais, 21 capítulos e complementos; verificação automatizada de regressão de links e aba ativa. | Correção publicada; comportamento visual em navegador sujeito a revisão |
+
 Para relatar um erro, informe edição, capítulo, seção, comportamento observado e passos de reprodução, sem inserir dados pessoais.
