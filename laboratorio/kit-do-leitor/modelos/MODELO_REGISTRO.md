@@ -13,4 +13,4 @@ Falha observada ou limitação:
 Estado: NÃO VERIFICADO / PASS_LIMITED / PARTIAL / FAIL / NO-GO
 Aprovação humana (se aplicável): NÃO CONCEDIDA
 
-Não publique relatórios que contenham dados sensíveis ou caminhos privados.
+Remova dados sensíveis e identificadores pessoais antes de compartilhar relatórios.
