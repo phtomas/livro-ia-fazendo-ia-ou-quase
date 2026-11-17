@@ -1,0 +1,14 @@
+[
+  {
+    "pergunta": "Qual sensor foi marcado para substituição preventiva?",
+    "fonte_esperada": "02-inventario.txt"
+  },
+  {
+    "pergunta": "O que é necessário para aceitar mudanças na linha de base do projeto Lume?",
+    "fonte_esperada": "01-metodo-de-teste.txt"
+  },
+  {
+    "pergunta": "Quem autoriza uma execução que altera configurações?",
+    "fonte_esperada": "03-seguranca.txt"
+  }
+]
