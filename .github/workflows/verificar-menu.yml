@@ -5,11 +5,15 @@ on:
     paths:
       - "**/*.html"
       - "scripts/verificar_navegacao.py"
+      - "scripts/verificar_legibilidade.py"
+      - "styles.css"
       - ".github/workflows/verificar-menu.yml"
   pull_request:
     paths:
       - "**/*.html"
       - "scripts/verificar_navegacao.py"
+      - "scripts/verificar_legibilidade.py"
+      - "styles.css"
       - ".github/workflows/verificar-menu.yml"
 permissions:
   contents: read
@@ -24,3 +28,5 @@ jobs:
           python-version: "3.11"
       - name: Navegacao consistente em todas as paginas
         run: python scripts/verificar_navegacao.py
+      - name: Contraste WCAG e legibilidade das chamadas
+        run: python scripts/verificar_legibilidade.py

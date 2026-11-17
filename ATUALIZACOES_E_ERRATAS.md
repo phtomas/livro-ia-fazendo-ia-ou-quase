@@ -16,4 +16,6 @@ Início: 14/11/2026. Este é um registro vivo. **ERRATA** corrige um erro de edi
 
 | ATU-009 | Navegação | Menu de cinco seções unificado nas páginas principais, 21 capítulos e complementos; verificação automatizada de regressão de links e aba ativa. | Correção publicada; comportamento visual em navegador sujeito a revisão |
 
+| ATU-010 | Acessibilidade | Contraste e tamanho dos rótulos laterais, avisos e metadados revisados; escala de fonte 16–19 px e reorganização da coluna lateral em larguras médias. Testes de cores WCAG AA e legibilidade executados automaticamente, inspeção visual permanece complementar. | Correção de CSS e verificador reproduzível |
+
 Para relatar um erro, informe edição, capítulo, seção, comportamento observado e passos de reprodução, sem inserir dados pessoais.
