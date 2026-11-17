@@ -4,6 +4,8 @@
 
 Este pacote reúne os 21 roteiros do livro, os scripts já publicados, a skill de revisão autoral, modelos de contratos, um executor local offline e testes de regressão. Nenhum teste chama um modelo de IA. O leitor pode trabalhar em Windows, Linux ou macOS com Python 3.11 ou posterior, sem instalar Git.
 
+> Para começar, prefira o [guia de execução corrigido](../COMPATIBILIDADE.html). Para conhecer os resultados verificados, consulte [evidências e limites](../EVIDENCIAS.html).
+
 ## Como obter
 
 Abra o repositório público no GitHub, selecione **Code > Download ZIP**, extraia em uma pasta local e abra um terminal nessa pasta. Não é necessário criar conta, usar token nem instalar Git. Leia sempre o código antes de executá-lo.

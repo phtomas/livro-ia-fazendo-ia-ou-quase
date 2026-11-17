@@ -69,3 +69,58 @@ pre{background:#e8dfd0;border:1px solid var(--rule);padding:17px 19px;white-spac
 .lab-index li{grid-template-columns:52px 1fr 124px}.lab-index p{font-size:.86rem;color:var(--soft);margin:7px 0 0}.lab-index .status{font-size:.7rem}
 .lab-bridge{margin:32px 0;border:1px solid var(--rule);border-left:5px solid var(--red);background:var(--shade);padding:23px 27px}.lab-bridge h2{font-size:1.9rem;margin:8px 0 13px}.lab-bridge .lab-kicker{font:700 .78rem Consolas,monospace;color:var(--red)}.lab-bridge pre{white-space:pre-wrap;overflow-wrap:anywhere}.lab-links{display:flex;flex-wrap:wrap;gap:12px 23px;margin:14px 0}.lab-links a{font-weight:700}
 @media(max-width:650px){.lab-index li{grid-template-columns:33px 1fr}.lab-index .status{grid-column:2}.lab-bridge{padding:16px}}
+
+/* 16/11/2026 · Nova linguagem visual editorial. */
+:root{--paper:#f3f7fb;--ink:#17263a;--soft:#53667b;--rule:#d2deeb;--red:#087d9e;--shade:#e7f1f8;--navy:#101e35;--navy2:#193655;--cyan:#41c4dd;--white:#fff}
+body{background:var(--paper);color:var(--ink)}
+a:hover{color:#006e8d}
+a:focus-visible{outline-color:#087d9e}
+header.mast{background:var(--navy);color:#edf6fd;border-bottom:1px solid #33516a;box-shadow:0 5px 24px rgba(6,27,53,.08)}
+.mast .shell{min-height:83px}
+.logo .mark{color:var(--cyan);font-family:Consolas,monospace;border:1px solid #416984;border-radius:10px;padding:2px 10px;line-height:1.4}
+.logo .name{font-weight:650}
+.nav a{color:#d3e2f2}
+.nav a:hover,.nav a[aria-current=page]{color:var(--cyan)}
+.nav a[aria-current=page]{border-bottom-color:var(--cyan)}
+.hero{background:radial-gradient(ellipse at 85% 12%,#255573 0,transparent 45%),linear-gradient(125deg,#101e35,#152e4b 68%,#19334c);color:#f7fbff;border-bottom:0}
+.hero .shell{padding-top:76px;padding-bottom:82px}
+.front{border-top-color:#53718b}
+.front h1{letter-spacing:-.057em}
+.front h1 em{color:var(--cyan)}
+.sidehero{border-top-color:var(--cyan)}
+.sidehero .large{color:#5fd5e8}
+.hero .label,.hero .micro,.hero .eyebrow,.hero .mono{color:#bfd2e5}
+.herofoot{border-top-color:#52677f}
+.herofoot strong{color:#fff}
+.band{background:transparent}
+.band:nth-of-type(even){background:#f9fbfe}
+.headrow h2,.pagehead h1{letter-spacing:-.047em}
+.pagehead{background:linear-gradient(120deg,#e6f1fa,#f8fbfe);border-bottom:1px solid #ceddec}
+.pagehead p{color:#445d75}
+.sidecall,.sidebar{border-top-color:var(--red)}
+.lines li,.index li{transition:background .2s ease;padding-left:12px;padding-right:12px}
+.lines li:hover,.index li:hover{background:#e6f2fa}
+.lines a,.index a{color:#1b3653}
+.number,.lines .number,.index .number{color:var(--red)}
+.notice{background:#e8f3fa;border-radius:8px;padding:17px 20px;border:1px solid #c3dce9}
+.lab-bridge{background:#e7f4fa;border:1px solid #bad9e8;border-left:5px solid #087d9e;border-radius:11px}
+code{background:#dceaf3;color:#163c59;border-radius:4px}
+pre{background:#17273d;color:#e5f6ff;border:1px solid #2e4a65;border-radius:11px;box-shadow:0 7px 18px rgba(5,26,50,.09)}
+pre code{color:inherit}
+.quote{background:linear-gradient(125deg,#14324c,#0f2439);color:#f5fbff}
+.quote .label{color:#9ebfd0}
+.quote em{color:#62d4e7}
+footer{background:#0d1b2f;color:#f0f7ff}
+footer .micro{color:#bacddd}
+.link{border-bottom-color:var(--red)}
+.pagehead .label{color:#087d9e}
+.lab-index li{border-radius:5px}
+.overview-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 32px}
+.overview-item{background:#fff;border:1px solid #cfdfed;padding:17px 19px;border-radius:12px;box-shadow:0 6px 22px rgba(12,38,67,.05)}
+.overview-item strong{display:block;font:normal 2rem/1.1 Georgia,serif;color:#126e91}
+.overview-item span{display:block;color:#51677b;font-size:.84rem;margin-top:6px}
+.home-action{display:inline-flex;align-items:center;background:#18b5cf;color:#08283d!important;padding:12px 19px;border-radius:8px;text-decoration:none;font-weight:750;margin:8px 12px 8px 0;box-shadow:0 5px 15px rgba(13,181,207,.16)}
+.home-action:hover{background:#64d8e8;color:#071f30!important}
+.secondary-action{display:inline-block;padding:10px 12px;text-decoration:none;border-bottom:2px solid var(--cyan);font-weight:650}
+.status-proof{font-weight:700;color:#087d9e}
+@media(max-width:650px){.overview-strip{grid-template-columns:1fr}.hero .shell{padding-top:34px;padding-bottom:47px}.lines li,.index li{padding-left:5px;padding-right:5px}}
