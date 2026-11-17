@@ -18,7 +18,7 @@ from urllib.request import Request, urlopen
 
 DEFAULT_DB = Path('estado/rag.sqlite')
 DEFAULT_MODEL = 'llama3.2:3b'
-DEFAULT_EMBEDDING_MODEL = 'nomic-embed-text-v2-moe'
+DEFAULT_EMBEDDING_MODEL = 'nomic-embed-text'
 DEFAULT_OLLAMA = 'http://127.0.0.1:11434'
 STOP = frozenset('a as o os de do da dos das e em um uma uns umas que qual quais como para por no na nos nas com sobre se seu sua aos ao eh é explique diga me'.split())
 
