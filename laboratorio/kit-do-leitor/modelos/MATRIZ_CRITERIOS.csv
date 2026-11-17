@@ -1,0 +1,6 @@
+criterio,tipo,metodo,evidencia,estado_inicial
+Preservacao dos fatos,humano,comparacao com original,trechos citados,NAO_VERIFICADO
+Integridade do arquivo,automatico,SHA256,digest verificado,NAO_VERIFICADO
+Caixas didaticas,automatico_e_humano,estrutura e leitura,relatorio e inspecao,NAO_VERIFICADO
+Margens e figuras,visual,conferencia por pagina,registro visual,NAO_VERIFICADO
+Autorizacao de publicacao,humano,registro explicito,aprovacao identificada,NAO_VERIFICADO
