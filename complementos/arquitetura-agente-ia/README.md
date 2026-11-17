@@ -4,7 +4,7 @@
 
 [Ver o diagrama SVG original](arquitetura-funcional-agente-ia.svg) · [Abrir a página de leitura](index.html) · [Voltar ao portal](../../index.html)
 
-Esta ilustração apresenta uma **interpretação editorial independente**, organizada em cinco blocos: (1) objetivo e critérios de sucesso; (2) orquestração, LLM, planejamento, estado e políticas; (3) ciclo observar–decidir–agir–verificar; (4) recursos opcionais; (5) segurança, avaliação, implantação e acompanhamento.
+O diagrama apresenta uma **arquitetura conceitual de referência**, organizada em cinco blocos: (1) objetivo e critérios de sucesso; (2) orquestração, LLM, planejamento, estado e políticas; (3) ciclo observar–decidir–agir–verificar; (4) recursos opcionais; (5) segurança, avaliação, implantação e acompanhamento.
 
 ## Distinções que merecem atenção
 
@@ -15,12 +15,6 @@ Esta ilustração apresenta uma **interpretação editorial independente**, orga
 - **LangGraph, CrewAI e SDKs** são opções de implementação, não camadas obrigatórias.
 - **Observabilidade, avaliações, limites de ferramentas e revisão humana** atravessam a solução; não devem ocorrer somente após o ciclo de execução.
 - O fluxo ilustrado é **didático, não uma especificação universal**. Um agente pode não ter RAG, memória persistente, planejamento explícito nem ferramentas.
-
-## Créditos e direitos
-
-**Ilustração:** composição conceitual nova, criada para José Albuquerque, com auxílio de IA, em formato SVG vetorial editável. **Referência temática informada na imagem enviada:** Denis Panjuta (@denis-panjuta), cuja arte exibia o título “AI Agent Architecture”. Essa referência é um crédito de inspiração; não implica coautoria, autorização de reprodução, endosso ou uma licença de uso da obra alheia. O desenho anterior não foi anexado nem copiado para este diretório.
-
-O diagrama usa apenas nomes descritivos de tecnologias, sem reproduzir seus logotipos. Marcas citadas pertencem aos respectivos titulares.
 
 ## Referências para aprofundamento
 
