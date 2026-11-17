@@ -1,0 +1,2 @@
+DOCUMENTO FICTÍCIO — Inventário
+A bancada fictícia Aurora utiliza três sensores de temperatura identificados como S1, S2 e S3. O sensor S2 foi marcado para substituição preventiva. O sensor S3 está reservado para calibração. Não há medições reais neste conjunto de dados.
