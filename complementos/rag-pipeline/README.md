@@ -36,12 +36,6 @@ Complemento técnico visual do livro **IA fazendo IA — ou quase**, de José Al
 - **Avaliação e guardrails:** controles aplicáveis ao processo inteiro, não simplesmente uma etapa posterior à geração.
 - **Fontes:** citar documentos não garante, por si só, que a interpretação esteja correta; é preciso conferir os trechos e as permissões.
 
-## Auditoria conceitual
-
-Versão: revisão inicial — 16/11/2026. **Status: diagrama aprovado como representação didática do fluxo genérico**, não como arquitetura de referência para um produto específico. As etapas dependem do cenário, dos requisitos de privacidade e das tecnologias disponíveis.
-
-A arte de referência enviada indicava **Jothi Moorthy**. O diagrama desta página é uma composição conceitual nova, em português, com SVG próprio e sem reproduzir os logotipos e a disposição da arte recebida. O crédito é uma **referência temática atribuída**, não uma afirmação de licença ou endosso.
-
 ## Fontes de apoio técnico
 
 - [Microsoft — conceitos de RAG e recuperação](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
