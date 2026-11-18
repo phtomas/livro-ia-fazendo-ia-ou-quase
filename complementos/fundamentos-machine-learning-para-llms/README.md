@@ -10,6 +10,30 @@ Este guia preserva as ideias fundamentais do aprendizado de máquina e mostra co
 
 **Percurso recomendado:** [Panorama IA/ML/DL/LLM](../panorama-ia-ml-dl-genai-llm-rag-agentes/index.html) → este caderno → [40 perguntas essenciais sobre LLMs](../llm-40-perguntas/index.html) → [120 conceitos](../llm-120-conceitos/index.html) → [ecossistema de ferramentas](../stack-llm-ia-generativa-2026/index.html).
 
+## Antes de começar: fórmulas sem susto
+
+Este caderno foi escrito para dois públicos: quem quer compreender **a ideia** e quem deseja ir até a **notação matemática**. Você pode aprender muito sem dominar álgebra. Em cada passagem matemática, damos primeiro uma tradução em português e um exemplo.
+
+**Imagine uma bancada:** medimos a temperatura e a corrente de um equipamento; comparamos essas medições com experiências anteriores; estimamos o risco de falha; depois verificamos se acertamos. Aprendizado de máquina sistematiza esse raciocínio. Uma fórmula é só uma maneira curta de registrar relações.
+
+### Mini-dicionário para decifrar os símbolos
+
+| Símbolo | Leia assim | Significado no contexto |
+|---|---|---|
+| **X** | xis | Entradas, como temperatura e corrente |
+| **y** | ípsilon | Resultado real, usado como referência |
+| **ŷ** | ípsilon com chapéu | Resultado **previsto**; o chapéu indica que é estimativa |
+| **f** | éfe | Regra matemática que transforma entradas em previsão |
+| **θ** | teta | Ajustes internos que o modelo aprende, como pesos |
+| **b₀** | bê zero | Valor de partida de uma reta |
+| **b₁** | bê um | Quanto a previsão muda quando a entrada aumenta uma unidade |
+| **∇** | nabla | Gradiente: indica como o erro varia quando mudamos os ajustes |
+| **L** | éle | Função de perda: maneira matemática de medir o erro |
+| **Σ** | sigma | Somatório: significa somar vários termos |
+| **×** | vezes | Multiplicação |
+
+**Atalho útil:** ao ver **θ**, pense em *ajustes*. Ao ver **∇**, pense em *orientação para corrigir*. Ao ver **ŷ**, pense em *previsão, não verdade comprovada*.
+
 ## 1. A árvore de conceitos — e seus limites
 
 | Conceito | Definição operacional | Nota |
@@ -25,7 +49,7 @@ A relação **IA ⊃ ML ⊃ DL** é útil, mas as demais categorias **não** for
 
 ## 2. O ciclo básico de um modelo
 
-\`\`\`text
+```text
 Problema → dados autorizados → preparação → treino → validação
                                       ↓
                               modelo ajustado
@@ -33,9 +57,19 @@ Problema → dados autorizados → preparação → treino → validação
                            inferência em novos casos
                                       ↓
                              medição e monitoramento
-\`\`\`
+```
 
-Em aprendizado supervisionado, o modelo estima **ŷ = fθ(X)**, onde **X** são entradas, **y** é o alvo conhecido, **θ** são parâmetros e **ŷ** é a previsão. O treinamento procura parâmetros que reduzam uma função de perda. Os dados de teste não devem participar da escolha dos parâmetros nem dos hiperparâmetros.
+**Em palavras:** juntamos informações, fazemos uma previsão e, quando temos o resultado real, verificamos o erro. Imagine que uma leitura de temperatura e de corrente resulte numa estimativa hipotética de 30% de risco de falha.
+
+**A escrita matemática da mesma ideia:** **ŷ = fθ(X)**.
+
+- **X** (xis) são os dados que entram.
+- **f** (éfe) é o conjunto de operações que transforma dados em previsão.
+- **θ** (teta) são os ajustes aprendidos pelo modelo.
+- **ŷ** (ípsilon com chapéu) é a previsão calculada.
+- **y**, sem chapéu, seria o valor real que usamos para comparar.
+
+O treinamento altera θ para diminuir a diferença entre previsão e realidade, medida por uma **função de perda**. Os exemplos de teste devem ficar separados para que a avaliação não seja uma prova cujo gabarito o modelo já viu.
 
 - **Feature:** variável de entrada, como o consumo de corrente de uma placa.
 - **Target / label:** resultado esperado, como defeito presente ou ausente.
@@ -59,7 +93,13 @@ O PDF-base apresenta explicitamente as **quatro primeiras** modalidades. A quint
 
 ## 4. Algoritmos clássicos e quando usá-los
 
-**Regressão** prevê um número; uma relação linear simples pode ser escrita como **ŷ = b₀ + b₁x**. **Classificação** prevê uma categoria; a regressão logística, apesar do nome, é um classificador probabilístico. **Clustering**, como K-Means, agrupa observações por similaridade sem alvo rotulado.
+**Regressão** prevê um **número**, como o consumo de energia. **Classificação** prevê uma **categoria**, como “normal” ou “falha”. **Clustering** (agrupamento), como K-Means, reúne exemplos semelhantes sem precisar conhecer antecipadamente seus rótulos.
+
+**Exemplo de conta simples:** uma regra inventada começa em 2 horas de autonomia e acrescenta meia hora a cada unidade de capacidade. Com 4 unidades, calculamos **2 + (0,5 × 4) = 4 horas**.
+
+**Agora a fórmula:** **ŷ = b₀ + b₁x**. Leia: *previsão = valor de partida + (taxa de mudança × entrada)*. No exemplo, **b₀ = 2**, **b₁ = 0,5**, **x = 4**, logo **ŷ = 4**. A notação apenas resume uma conta familiar.
+
+**Regressão logística**, apesar do nome, é normalmente usada para classificação probabilística.
 
 Árvores de decisão, Random Forest, KNN, SVM e Naive Bayes ilustram hipóteses indutivas diferentes. Servem para estudar generalização, comparar baselines e resolver muitos problemas tabulares, mas **não** são os blocos característicos de um Transformer.
 
@@ -67,12 +107,12 @@ Uma abordagem complexa só merece ser adotada se demonstrar ganho relevante sobr
 
 ## 5. A ponte técnica para LLMs
 
-\`\`\`text
+```text
 Texto → tokenização → IDs de tokens → vetores (embeddings)
          → blocos Transformer / atenção (conforme a arquitetura)
          → probabilidades do próximo token
          → decodificação → próximo token → repetir
-\`\`\`
+```
 
 Esse fluxo resume **geração autorregressiva**, não todas as arquiteturas de linguagem. As peças essenciais são:
 
@@ -101,11 +141,17 @@ RLHF, DPO e outras abordagens podem aparecer em diferentes pipelines de pós-tre
 
 ## 7. Otimização, regularização e generalização
 
-Uma atualização didática por gradiente é:
+**Primeiro, a ideia sem símbolos:** quando o modelo erra, modificamos um pouco seus ajustes internos para tentar reduzir o erro. A **taxa de aprendizado** diz o tamanho do passo. O **gradiente** orienta como o erro varia quando mexemos nesses ajustes.
 
-\`\`\`text
+**Para quem quiser ver a fórmula**, uma atualização simplificada por gradiente é:
+
+```text
 θ_novo = θ_atual − taxa_de_aprendizado × ∇L(θ_atual)
-\`\`\`
+```
+
+**Lendo a fórmula:** **θ** (teta) significa *ajustes do modelo*; **∇** (nabla) indica o *gradiente*; **L** é a função de perda, nossa medida de erro; o sinal de menos indica o passo na direção oposta ao gradiente.
+
+**Exemplo resolvido:** suponha um único ajuste com valor **4**, taxa **0,1** e gradiente **2**. A nova regulagem será **4 − (0,1 × 2) = 3,8**. Não é preciso decorar o símbolo para entender a correção. Redes reais têm muitos parâmetros e otimizadores mais elaborados.
 
 A taxa de aprendizado controla o tamanho da atualização. Regularização reduz certos tipos de complexidade ou instabilidade do modelo. **Overfitting** é excesso de ajuste ao conjunto de treino; **underfitting** é a incapacidade de captar os padrões relevantes. O objetivo é generalizar para casos ainda não vistos.
 
@@ -119,6 +165,13 @@ Para regressão, use medidas como **MAE**, **MSE**, **RMSE** e **R²**, conforme
 
 **Exemplo original e hipotético:** em 2.000 inspeções, ocorreram 40 falhas reais. O classificador detectou 25, deixou passar 15 e emitiu 25 falsos alertas. Portanto:
 
+**Antes da tabela: o que significam as siglas?**
+
+- **TP (verdadeiro positivo):** avisou sobre falha e a falha existia.
+- **FP (falso positivo):** avisou sobre falha, mas era falso alarme.
+- **FN (falso negativo):** não avisou, embora houvesse falha.
+- **TN (verdadeiro negativo):** não avisou e de fato não havia falha.
+
 | Medida | Valor |
 |---|---:|
 | TP / FP / FN / TN | 25 / 25 / 15 / 1.935 |
@@ -127,20 +180,33 @@ Para regressão, use medidas como **MAE**, **MSE**, **RMSE** e **R²**, conforme
 | Recall | 25 / (25 + 15) = **62,5%** |
 | F1 | **55,6%**, aproximadamente |
 
-A acurácia de 98% esconde que 15 das 40 falhas foram perdidas e metade dos alertas era falsa. Escolha um limiar considerando riscos e custos reais, não uma métrica isolada.
+**Traduzindo as métricas:**
+
+- **Acurácia:** em quantos de todos os 2.000 casos acertamos? Aqui foram 1.960: **98%**.
+- **Precisão:** dos 50 alertas, quantos eram verdadeiros? Foram 25: **50%**.
+- **Recall (sensibilidade):** das 40 falhas reais, quantas encontramos? Foram 25: **62,5%**.
+- **F1:** é uma média harmônica que equilibra precisão e recall, não a porcentagem geral de acertos. A conta é **2 × precisão × recall ÷ (precisão + recall)**. Com 0,50 e 0,625, dá aproximadamente **0,556**, ou **55,6%**.
+
+Apesar dos 98% de acurácia, 15 das 40 falhas foram perdidas e metade dos avisos era falsa. Uma métrica isolada não basta: precisamos pensar no custo de cada erro.
 
 **Para LLMs:** avalie correção da tarefa, fidelidade a fontes, robustez, taxa de erro, segurança, custo, latência e efeitos externos verificados. Resposta convincente e benchmark alto não substituem evidências de execução.
 
 ## 9. Reprodutibilidade e ciclo de vida
 
-\`\`\`text
+```text
 Definição → dados → preparação → baseline → treinamento → validação
        → aprovação → implantação → monitoramento → correção/retirada
-\`\`\`
+```
 
 Versione código, dados de referência e configurações; monitore qualidade, deriva dos dados, latência, segurança e impacto. **Data drift** muda a distribuição das entradas; **concept drift** muda a relação entrada–alvo. São fenômenos distintos.
 
 Para sistemas que acionam ferramentas, registre entrada, versão, comando, resultado esperado, resultado observado e evidência. Use permissões mínimas e confirmação de estado em cada operação externa.
+
+## Uma maneira simples de continuar lendo
+
+Quando surgir uma fórmula, não interrompa a leitura para decorar símbolos. Pergunte: **o que entra? O que sai? Como sabemos se acertou?** Se conseguir responder, você já entendeu o fundamento. A álgebra detalhada pode vir depois.
+
+Para leitores avançados, os exemplos são simplificações conscientes, não substitutos de definições formais, testes e hipóteses de cada método.
 
 ## 10. Roteiro de estudo do leitor
 
