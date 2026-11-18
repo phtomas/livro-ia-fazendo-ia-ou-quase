@@ -45,7 +45,7 @@ Este caderno foi escrito para dois públicos: quem quer compreender **a ideia** 
 | IA generativa | Família de métodos que geram texto, imagem, áudio e outros conteúdos | Não se limita a LLM |
 | RAG / agente | Padrões para construir aplicações que usam modelos e/ou ferramentas | Não são novas subclasses obrigatórias de ML |
 
-A relação **IA ⊃ ML ⊃ DL** é útil, mas as demais categorias **não** formam uma cadeia linear. Aplicações podem dispensar LLM, RAG, frameworks e agentes quando uma ferramenta determinística basta.
+A relação **IA ⊃ ML ⊃ DL** é útil (**⊃** significa *contém*: IA engloba ML, que engloba DL), mas as demais categorias **não** formam uma cadeia linear. Aplicações podem dispensar LLM, RAG, frameworks e agentes quando uma ferramenta determinística basta.
 
 ## 2. O ciclo básico de um modelo
 
