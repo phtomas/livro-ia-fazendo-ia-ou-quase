@@ -1,0 +1,43 @@
+/* Leitura documental: edição acessível e estática do acervo.
+   Conteúdos em Markdown permanecem como fonte técnica. */
+.reader-page{max-width:1160px;margin:0 auto;padding:0 22px 80px}
+.reader-intro{padding:44px 0 30px;border-bottom:1px solid #c5c0b3}
+.reader-intro .reader-kicker{font:700 .82rem/1.5 Consolas,monospace;text-transform:uppercase;letter-spacing:.075em;color:#8b3d2a}
+.reader-intro h1{max-width:900px;font:400 clamp(2.2rem,4.8vw,3.9rem)/1.13 Georgia,serif;letter-spacing:-.032em;margin:13px 0 17px}
+.reader-intro p{max-width:820px;font-size:1.14rem;line-height:1.7;color:#46534c}
+.reader-actions{display:flex;gap:12px 22px;flex-wrap:wrap;margin:20px 0 0}
+.reader-actions a{font-size:.95rem;font-weight:700;color:#803926;text-underline-offset:4px}
+.reader-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;margin-top:28px;align-items:start}
+.reader-sidebar{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto}
+.reader-sidebar h2{font:700 .81rem Consolas,monospace;letter-spacing:.08em;color:#8b3d2a;text-transform:uppercase;margin:0 0 12px}
+.reader-sidebar ol{list-style:none;padding:0;margin:0}
+.reader-sidebar li{border-top:1px solid #c5c0b3}
+.reader-sidebar a{text-decoration:none;display:block;font-size:.91rem;line-height:1.38;padding:9px 7px}
+.reader-sidebar a:hover,.reader-sidebar a:focus-visible{background:#ebe6dc;color:#803926}
+.reader-body{max-width:820px;min-width:0;font-size:1.08rem;line-height:1.8;overflow-wrap:break-word}
+.reader-body h2,.reader-body h3,.reader-body h4{scroll-margin-top:30px;color:#25312d}
+.reader-body h2{font:400 clamp(1.65rem,3vw,2.3rem)/1.25 Georgia,serif;border-top:1px solid #c5c0b3;padding-top:34px;margin:38px 0 20px}
+.reader-body h3{font:600 1.35rem/1.35 Georgia,serif;margin:28px 0 14px}
+.reader-body p{margin:0 0 1.25em}
+.reader-body strong{font-weight:750}
+.reader-body ul,.reader-body ol{margin:10px 0 25px;padding-left:1.4em}
+.reader-body li{padding-left:.25em;margin:8px 0}
+.reader-body li::marker{color:#954634}
+.reader-body a{color:#843c2a;text-underline-offset:4px}
+.reader-body code{font:500 .91em Consolas,monospace;background:#edece5;padding:.09em .18em;border-radius:3px;overflow-wrap:anywhere}
+.reader-code{margin:22px 0;border:1px solid #becfc6;border-radius:8px;background:#edf3ef;overflow:hidden}
+.reader-code .cap{padding:8px 14px;background:#dbe8df;font:700 .77rem Consolas,monospace;color:#32574b}
+.reader-code pre{margin:0;padding:17px;overflow-x:auto;max-width:100%;font:500 .92rem/1.65 Consolas,monospace;white-space:pre}
+.reader-code pre code{background:none;padding:0;overflow-wrap:normal}
+.reader-table{margin:22px 0;overflow-x:auto;max-width:100%;border:1px solid #c5c0b3;border-radius:8px;background:#fff}
+.reader-table table{width:100%;min-width:470px;border-collapse:collapse;font-size:.94rem;line-height:1.55}
+.reader-table th,.reader-table td{text-align:left;vertical-align:top;padding:11px 13px;border-bottom:1px solid #e2dfd6}
+.reader-table th{background:#e5ebe6;color:#273e33}
+.reader-table tr:nth-child(even){background:#f8f8f4}
+.reader-table tr:last-child td{border-bottom:0}
+.reader-body blockquote{border-left:4px solid #9d4a35;background:#ece6dc;margin:20px 0;padding:16px 21px}
+.reader-notice{background:#ece6da;border-left:4px solid #9d4a35;padding:16px 20px;margin:25px 0;font-size:.96rem;line-height:1.6}
+.reader-foot{margin-top:45px;padding-top:20px;border-top:1px solid #c5c0b3;font-size:.92rem;color:#47524e}
+@media(max-width:850px){.reader-layout{display:block}.reader-sidebar{position:static;max-height:none;border:1px solid #c5c0b3;border-radius:8px;padding:15px;margin-bottom:27px}.reader-sidebar ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}}
+@media(max-width:550px){.reader-page{padding:0 17px 55px}.reader-intro{padding-top:29px}.reader-intro h1{font-size:2.2rem}.reader-body{font-size:1.025rem;line-height:1.75}.reader-sidebar ol{display:block}.reader-table{margin-left:-6px;margin-right:-6px}.reader-code{margin-left:-6px;margin-right:-6px}}
+@media print{.mast,.reader-sidebar,.reader-actions{display:none!important}.reader-page{max-width:none}.reader-layout{display:block}.reader-body{max-width:none}.reader-code,.reader-table,blockquote{break-inside:avoid}}
