@@ -14,6 +14,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Capítulo 13: comparar arquivos](laboratorio/capitulo-13.html)
 - [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)
 - [As 9 camadas de LLMs e IA generativa — mapa e análise em português](complementos/stack-llm-ia-generativa-2026/index.html)
+- [Fundamentos de Machine Learning — das bases clássicas às LLMs](complementos/fundamentos-machine-learning-para-llms/index.html)
 - [Panorama: IA, ML, DL, IA generativa, LLMs, RAG e agentes](complementos/panorama-ia-ml-dl-genai-llm-rag-agentes/index.html)
 - [Tool Calling — com e sem LangGraph](complementos/tool-calling-com-ou-sem-langgraph/index.html)
 - [8 abordagens de modelos e sistemas para agentes](complementos/modelos-e-sistemas-para-agentes/index.html)
