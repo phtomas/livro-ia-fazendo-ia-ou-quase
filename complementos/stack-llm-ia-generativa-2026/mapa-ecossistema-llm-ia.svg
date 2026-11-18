@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1790" viewBox="0 0 1400 1790" role="img" aria-labelledby="titulo descricao"><title id="titulo">As nove camadas do ecossistema de LLMs e IA generativa, 2026</title><desc id="descricao">Diagrama original em português com nove categorias, exemplos de ferramentas e observações de método.</desc>
+<rect width="1400" height="1790" fill="#f4f0e7"/><rect x="0" y="0" width="1400" height="22" fill="#1b5258"/><circle cx="103" cy="105" r="45" fill="#c45b39"/><text x="103" y="118" text-anchor="middle" font-family="Arial" font-weight="800" font-size="40" fill="#fff">IA</text><text x="173" y="87" font-size="51" font-family="Georgia,serif" fill="#183f43">As 9 camadas do ecossistema</text><text x="173" y="148" font-size="55" font-family="Georgia,serif" fill="#ae492f">de LLMs e IA generativa</text><text x="174" y="188" font-size="22" font-family="Arial" fill="#53615e">Panorama de 2026 • Exemplos, não uma lista de compras ou etapas obrigatórias</text><line x1="57" y1="210" x2="1342" y2="210" stroke="#a9aaa0" stroke-width="2"/>
+<rect x="58" y="232" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="232" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="232" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="289" r="24" fill="#d46b45"/><text x="95" y="296" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">1</text>
+<text x="134" y="281" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Modelos de</tspan><tspan x="134" dy="31">linguagem (LLMs)</tspan></text>
+<text x="408" y="265" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Geram e interpretam texto e,</tspan><tspan x="408" dy="23">conforme o modelo, outras</tspan><tspan x="408" dy="23">modalidades.</tspan></text>
+<line x1="686" y1="250" x2="686" y2="330" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="267" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">GPT · Gemini / Gemma · Llama · Phi · Claude ·</tspan><tspan x="710" dy="30">DeepSeek · Qwen · Mistral · Nova</tspan></text>
+<rect x="58" y="361" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="361" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="361" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="418" r="24" fill="#d46b45"/><text x="95" y="425" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">2</text>
+<text x="134" y="410" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Frameworks de</tspan><tspan x="134" dy="31">aplicação</tspan></text>
+<text x="408" y="394" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Ajudam a integrar modelos,</tspan><tspan x="408" dy="23">fontes, ferramentas e fluxos.</tspan></text>
+<line x1="686" y1="379" x2="686" y2="459" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="396" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">LangChain · LlamaIndex · Haystack · txtai</tspan></text>
+<rect x="58" y="490" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="490" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="490" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="547" r="24" fill="#d46b45"/><text x="95" y="554" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">3</text>
+<text x="134" y="539" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Bancos e</tspan><tspan x="134" dy="31">busca vetorial</tspan></text>
+<text x="408" y="523" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Guardam vetores e permitem</tspan><tspan x="408" dy="23">recuperar itens similares.</tspan></text>
+<line x1="686" y1="508" x2="686" y2="588" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="525" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Chroma · Pinecone · Qdrant · Milvus · Weaviate ·</tspan><tspan x="710" dy="30">PostgreSQL + pgvector · Cassandra · OpenSearch</tspan></text>
+<rect x="58" y="619" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="619" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="619" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="676" r="24" fill="#d46b45"/><text x="95" y="683" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">4</text>
+<text x="134" y="668" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Extração de</tspan><tspan x="134" dy="31">dados</tspan></text>
+<text x="408" y="652" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Coletam, interpretam e</tspan><tspan x="408" dy="23">estruturam conteúdo de</tspan><tspan x="408" dy="23">fontes.</tspan></text>
+<line x1="686" y1="637" x2="686" y2="717" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="654" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Crawl4AI · Firecrawl · ScrapeGraphAI · Docling ·</tspan><tspan x="710" dy="30">MegaParse · LlamaParse · ExtractThinker</tspan></text>
+<rect x="58" y="748" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="748" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="748" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="805" r="24" fill="#d46b45"/><text x="95" y="812" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">5</text>
+<text x="134" y="797" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Plataformas e</tspan><tspan x="134" dy="31">inferência</tspan></text>
+<text x="408" y="781" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Disponibilizam modelos,</tspan><tspan x="408" dy="23">execução local ou hospedada.</tspan></text>
+<line x1="686" y1="766" x2="686" y2="846" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="783" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Hugging Face · Ollama · Groq · Together AI</tspan></text>
+<rect x="58" y="877" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="877" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="877" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="934" r="24" fill="#d46b45"/><text x="95" y="941" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">6</text>
+<text x="134" y="926" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Embeddings</tspan><tspan x="134" dy="31">de texto</tspan></text>
+<text x="408" y="910" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Convertem conteúdo em</tspan><tspan x="408" dy="23">representações numéricas.</tspan></text>
+<line x1="686" y1="895" x2="686" y2="975" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="912" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Nomic · Sentence Transformers · OpenAI · Voyage</tspan><tspan x="710" dy="30">AI · Google · Cohere</tspan></text>
+<rect x="58" y="1006" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="1006" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="1006" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="1063" r="24" fill="#d46b45"/><text x="95" y="1070" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">7</text>
+<text x="134" y="1071" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Avaliação</tspan></text>
+<text x="408" y="1039" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Testam qualidade, relevância,</tspan><tspan x="408" dy="23">segurança e regressões.</tspan></text>
+<line x1="686" y1="1024" x2="686" y2="1104" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="1041" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Giskard · Ragas · DeepEval · Promptfoo · TruLens</tspan></text>
+<rect x="58" y="1135" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="1135" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="1135" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="1192" r="24" fill="#d46b45"/><text x="95" y="1199" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">8</text>
+<text x="134" y="1184" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Observabilidade</tspan><tspan x="134" dy="31">e monitoramento</tspan></text>
+<text x="408" y="1168" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Registram chamadas, custos,</tspan><tspan x="408" dy="23">latência e falhas.</tspan></text>
+<line x1="686" y1="1153" x2="686" y2="1233" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="1170" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">Langfuse · LangSmith · Arize Phoenix · Helicone</tspan></text>
+<rect x="58" y="1264" width="1284" height="116" rx="17" fill="#fff" stroke="#d4d3c9" stroke-width="2"/>
+<rect x="58" y="1264" width="329" height="116" rx="17" fill="#184c53"/><rect x="379" y="1264" width="8" height="116" fill="#bf5c3e"/>
+<circle cx="95" cy="1321" r="24" fill="#d46b45"/><text x="95" y="1328" text-anchor="middle" font-size="24" font-weight="700" font-family="Arial" fill="#fff">9</text>
+<text x="134" y="1313" fill="#fff" font-family="Arial" font-size="25" font-weight="700"><tspan x="134" dy="0">Frameworks</tspan><tspan x="134" dy="31">de agentes</tspan></text>
+<text x="408" y="1297" fill="#354b49" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400"><tspan x="408" dy="0">Orquestram decisões, estados,</tspan><tspan x="408" dy="23">tarefas e ferramentas.</tspan></text>
+<line x1="686" y1="1282" x2="686" y2="1362" stroke="#d6d9d6" stroke-width="2"/>
+<text x="710" y="1299" fill="#14373a" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600"><tspan x="710" dy="0">CrewAI · AutoGen · LangGraph · OpenAI Agents SDK</tspan></text>
+<rect x="58" y="1410" width="623" height="246" rx="16" fill="#e2efeb" stroke="#bed5cd"/><rect x="702" y="1410" width="640" height="246" rx="16" fill="#f8e9db" stroke="#e4c7ae"/>
+<text x="85" y="1462" font-family="Georgia,serif" font-size="34" fill="#184c53">O que o mapa acerta</text>
+<circle cx="93" cy="1505" r="7" fill="#238477"/>
+<text x="113" y="1513" fill="#203c3c" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="113" dy="0">Mostra um ecossistema com várias opções.</tspan></text>
+<circle cx="93" cy="1547" r="7" fill="#238477"/>
+<text x="113" y="1555" fill="#203c3c" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="113" dy="0">Diferencia modelos, armazenamento e operação.</tspan></text>
+<circle cx="93" cy="1589" r="7" fill="#238477"/>
+<text x="113" y="1597" fill="#203c3c" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="113" dy="0">Ajuda a encontrar o tipo de ferramenta</tspan><tspan x="113" dy="22">necessário.</tspan></text>
+<text x="729" y="1462" font-family="Georgia,serif" font-size="34" fill="#ac492d">O que precisa de cuidado</text>
+<circle cx="737" cy="1505" r="7" fill="#c45b39"/>
+<text x="757" y="1513" fill="#503a32" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="757" dy="0">São alternativas, não nove etapas obrigatórias.</tspan></text>
+<circle cx="737" cy="1547" r="7" fill="#c45b39"/>
+<text x="757" y="1555" fill="#503a32" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="757" dy="0">RAG pode funcionar sem banco vetorial dedicado.</tspan></text>
+<circle cx="737" cy="1589" r="7" fill="#c45b39"/>
+<text x="757" y="1597" fill="#503a32" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400"><tspan x="757" dy="0">Faltam segurança, custos, testes e governança.</tspan></text>
+<text x="700" y="1708" text-anchor="middle" font-size="30" font-weight="750" font-family="Arial" fill="#184c53">Aprenda o básico → construa → teste → meça → verifique</text>
+<text x="700" y="1753" text-anchor="middle" font-size="18" font-family="Arial" fill="#61716e">Adaptação conceitual e análise: Laboratório Vivo / José Albuquerque · Referência: CL Coding (2026)</text>
+</svg>
