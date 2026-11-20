@@ -14,6 +14,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Kit do leitor — código e modelos](laboratorio/kit-do-leitor/index.html)
 - [Capítulo 13: comparar arquivos](laboratorio/capitulo-13.html)
 - [Complementos — galeria de diagramas e materiais técnicos](complementos/index.html)
+- [20 arquiteturas e mecanismos de redes neurais — diagramas explicados](complementos/20-arquiteturas-redes-neurais/index.html)
 - [100 ideias de prompts para LLMs — catálogo por área](complementos/100-ideias-de-prompts/index.html)
 - [30 estratégias simples de prompts — guia para iniciantes](complementos/30-estrategias-de-prompts/index.html)
 - [Nove fórmulas de redes neurais explicadas passo a passo](complementos/formulas-redes-neurais/index.html)
