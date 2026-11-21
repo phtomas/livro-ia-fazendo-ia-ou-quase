@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="540" viewBox="0 0 1500 540">
+<rect width="1500" height="540" fill="#F9FBFC"/>
+<path d="M0 96H1500" stroke="#D8E3E8" stroke-width="2"/>
+<text x="74" y="65" fill="#182E3F" font-family="DejaVu Sans,sans-serif" font-size="42" font-weight="bold">Faturas: extrair não é aprovar</text>
+<rect x="70.0" y="164" width="240" height="203" rx="19" fill="#FFFFFF" stroke="#166A81" stroke-width="3"/>
+<circle cx="109.0" cy="196" r="21" fill="#166A81"/>
+<text x="109.0" y="204" font-size="23" text-anchor="middle" font-weight="bold" fill="white" font-family="DejaVu Sans,sans-serif">1</text>
+<text x="190.0" y="267" font-size="31" text-anchor="middle" fill="#152F41" font-weight="bold" font-family="DejaVu Sans,sans-serif">Arquivo</text>
+<text x="190.0" y="307" font-size="24" text-anchor="middle" fill="#465B66" font-family="DejaVu Sans,sans-serif">PDF ou imagem</text>
+<path d="M317.0 266H342.0" stroke="#8599A3" stroke-width="4"/>
+<path d="M333.0 257L342.0 266L333.0 275" fill="none" stroke="#8599A3" stroke-width="4"/>
+<rect x="350.0" y="164" width="240" height="203" rx="19" fill="#FFFFFF" stroke="#6C4DB6" stroke-width="3"/>
+<circle cx="389.0" cy="196" r="21" fill="#6C4DB6"/>
+<text x="389.0" y="204" font-size="23" text-anchor="middle" font-weight="bold" fill="white" font-family="DejaVu Sans,sans-serif">2</text>
+<text x="470.0" y="267" font-size="31" text-anchor="middle" fill="#152F41" font-weight="bold" font-family="DejaVu Sans,sans-serif">Extração</text>
+<text x="470.0" y="307" font-size="24" text-anchor="middle" fill="#465B66" font-family="DejaVu Sans,sans-serif">Texto ou OCR</text>
+<path d="M597.0 266H622.0" stroke="#8599A3" stroke-width="4"/>
+<path d="M613.0 257L622.0 266L613.0 275" fill="none" stroke="#8599A3" stroke-width="4"/>
+<rect x="630.0" y="164" width="240" height="203" rx="19" fill="#FFFFFF" stroke="#A75420" stroke-width="3"/>
+<circle cx="669.0" cy="196" r="21" fill="#A75420"/>
+<text x="669.0" y="204" font-size="23" text-anchor="middle" font-weight="bold" fill="white" font-family="DejaVu Sans,sans-serif">3</text>
+<text x="750.0" y="267" font-size="31" text-anchor="middle" fill="#152F41" font-weight="bold" font-family="DejaVu Sans,sans-serif">Estrutura</text>
+<text x="750.0" y="307" font-size="24" text-anchor="middle" fill="#465B66" font-family="DejaVu Sans,sans-serif">JSON tipado</text>
+<path d="M877.0 266H902.0" stroke="#8599A3" stroke-width="4"/>
+<path d="M893.0 257L902.0 266L893.0 275" fill="none" stroke="#8599A3" stroke-width="4"/>
+<rect x="910.0" y="164" width="240" height="203" rx="19" fill="#FFFFFF" stroke="#206B5F" stroke-width="3"/>
+<circle cx="949.0" cy="196" r="21" fill="#206B5F"/>
+<text x="949.0" y="204" font-size="23" text-anchor="middle" font-weight="bold" fill="white" font-family="DejaVu Sans,sans-serif">4</text>
+<text x="1030.0" y="267" font-size="31" text-anchor="middle" fill="#152F41" font-weight="bold" font-family="DejaVu Sans,sans-serif">Validação</text>
+<text x="1030.0" y="307" font-size="24" text-anchor="middle" fill="#465B66" font-family="DejaVu Sans,sans-serif">Valores e datas</text>
+<path d="M1157.0 266H1182.0" stroke="#8599A3" stroke-width="4"/>
+<path d="M1173.0 257L1182.0 266L1173.0 275" fill="none" stroke="#8599A3" stroke-width="4"/>
+<rect x="1190.0" y="164" width="240" height="203" rx="19" fill="#FFFFFF" stroke="#8652A5" stroke-width="3"/>
+<circle cx="1229.0" cy="196" r="21" fill="#8652A5"/>
+<text x="1229.0" y="204" font-size="23" text-anchor="middle" font-weight="bold" fill="white" font-family="DejaVu Sans,sans-serif">5</text>
+<text x="1310.0" y="267" font-size="31" text-anchor="middle" fill="#152F41" font-weight="bold" font-family="DejaVu Sans,sans-serif">Revisão</text>
+<text x="1310.0" y="307" font-size="24" text-anchor="middle" fill="#465B66" font-family="DejaVu Sans,sans-serif">Humano decide</text>
+<rect x="74" y="417" width="1352" height="75" rx="13" fill="#EAF1F3"/>
+<text x="750" y="463" text-anchor="middle" fill="#243E4D" font-family="DejaVu Sans,sans-serif" font-size="23">Sem pagamentos automáticos; registrar inconsistências e origem do documento.</text>
+<text x="74" y="524" fill="#70848C" font-family="DejaVu Sans,sans-serif" font-size="12">Laboratório de IA • IA fazendo IA — ou quase • ilustração vetorial original</text></svg>

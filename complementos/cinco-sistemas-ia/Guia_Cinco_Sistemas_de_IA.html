@@ -1,0 +1,230 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Cinco sistemas de IA — Caderno técnico</title><style>
+@page {size:A4;margin:18mm 17mm 18mm 17mm;@bottom-center{content:counter(page);font-size:9px;color:#677e85}}
+body {font-family:DejaVu Sans, Arial, sans-serif;font-size:10px;line-height:1.5;color:#233944;}
+h1,h2,h3{font-family:DejaVu Sans, sans-serif; color:#153e51;line-height:1.2;break-after:avoid;}h1{font-size:24px;margin:0 0 17px;}h2{font-size:18px;margin:23px 0 12px;border-bottom:1px solid #d2e1e4;padding-bottom:6px;}h3{font-size:13px;margin-top:15px;}
+img{display:block;width:100%;max-height:200px;object-fit:contain;margin:14px auto 18px;break-inside:avoid;}
+p,ul,ol{margin:8px 0;}li{margin:3px 0;}code{font-family:DejaVu Sans Mono,monospace;font-size:9px;overflow-wrap:anywhere;}
+pre{background:#eaf1f4;padding:10px;border-left:3px solid #0e7885;white-space:pre-wrap;font-size:9px;break-inside:avoid;}
+pre code{font-size:9px;}table{border-collapse:collapse;width:100%;font-size:9px;margin:14px 0;break-inside:avoid;}th,td{border:1px solid #cedee3;padding:6px 8px;vertical-align:top;}th{background:#e8f2f4;}thead{display:table-header-group;}
+blockquote{border-left:3px solid #0e7885;background:#f3f6f7;padding:7px 12px; margin:12px 0;}
+</style></head><body><h1>Cinco sistemas de IA — da demonstração à oficina verificável</h1>
+<p><strong>Complemento técnico do livro <em>IA fazendo IA — ou quase</em>.</strong> Edição pública, sem inventários, credenciais ou configuração de laboratório privado.</p>
+<p><strong>Vídeo didático:</strong> <a href="https://youtu.be/P2hft-BH0qA">https://youtu.be/P2hft-BH0qA</a></p>
+<h1>1. Resumo executivo</h1>
+<p>O vídeo de origem (2min27s, formato vertical) afirma que conectar uma interface a uma API de LLM não basta para construir aplicações de IA úteis. Ele organiza o aprendizado em <strong>cinco projetos</strong>: (1) assistente de documentos, (2) recepcionista por voz, (3) processamento de faturas, (4) pesquisa com múltiplas fontes e (5) avaliação de sistemas. O final insiste em dados, recuperação, ferramentas, validação e testes, mais importantes que uma demonstração bonita.</p>
+<p><strong>Nossa adaptação:</strong> construir uma única oficina no laboratório de IA com componentes reaproveitáveis, checkpoints e provas de cada etapa. Não é uma tradução literal do narrador. Não representa endosso do autor original e não reproduz seus desenhos ou personagens.</p>
+<p><strong>Escopo público:</strong> este material apresenta uma arquitetura reproduzível e ensaios com dados artificiais. Não descreve equipamentos, endereços, configurações, armazenamento ou serviços particulares. A instalação em uma máquina física permanece pendente.</p>
+<h1>2. Auditoria de conceitos do vídeo</h1>
+<table>
+<thead>
+<tr>
+  <th>Proposta</th>
+  <th>O que o vídeo ilustra</th>
+  <th>O que a implementação realmente exige</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Documentos com RAG</td>
+  <td>carregar páginas, recuperar trechos e citar origem</td>
+  <td>ingestão, extração, indexação, controle de versão/permissões, métricas de recuperação e verificação de citações</td>
+</tr>
+<tr>
+  <td>Recepção por voz</td>
+  <td>chamada → texto → LLM → calendário → fala</td>
+  <td>reconhecimento de fala, interpretação, tool calling, integração com agenda, confirmação, tratamento de falhas e consentimento</td>
+</tr>
+<tr>
+  <td>Processar faturas</td>
+  <td>documento → campos estruturados</td>
+  <td>extração de texto/OCR quando necessário, esquema, validação de datas/valores, revisão humana e trilha de auditoria</td>
+</tr>
+<tr>
+  <td>Pesquisa</td>
+  <td>consultas a várias fontes, relatório e conflitos</td>
+  <td>proveniência, data e autoria, recuperação múltipla, comparação verificável, indicação de desacordo e revisão</td>
+</tr>
+<tr>
+  <td>Plataforma de avaliação</td>
+  <td>perguntas de teste, modelos, pontuação por versão</td>
+  <td>conjunto de teste rotulado, métricas distintas, custo/latência, regresão, rastreabilidade e gates de aceite</td>
+</tr>
+</tbody>
+</table>
+<p>Os ícones de ferramentas no vídeo são <strong>exemplos</strong>, não uma lista de requisitos. RAG não obriga usar banco vetorial: nosso LAB-RAG-01 utiliza SQLite/FTS5 como caminho inicial. A recuperação de trechos não valida automaticamente a resposta final. Uma avaliação com poucas questões não prova qualidade geral.</p>
+<h1>3. Arquitetura comum proposta</h1>
+<p><img src="00-portal-cinco-sistemas.svg" alt="Arquitetura de referência" /></p>
+<p><strong>Componentes compartilhados:</strong> arquivos autorizados e suas versões; adaptadores de entrada (texto, PDF, áudio); buscador lexical e, se justificar, vetorial; modelo local opcional; conectores de ferramentas isolados; esquema estruturado de saída; avaliação regressiva; logs sem segredos; aprovação humana para ações com efeito.</p>
+<p>Os requisitos de processamento e armazenamento dependem dos modelos escolhidos. Antes de executar componentes pesados, medir CPU, RAM, armazenamento e, quando houver, aceleradores; evitar execução simultânea sem aferição de capacidade.</p>
+<h1>4. Etapa 0 — verificar a infraestrutura, sem alterar o sistema</h1>
+<p>Em uma instalação própria, execute os comandos abaixo somente com autorização e registre o resultado localmente. <strong>Não publique a saída dos comandos</strong>:</p>
+<pre><code class="language-bash">python3 --version
+
+# Ferramentas específicas de GPU são opcionais e devem ser executadas apenas quando aplicáveis
+python3 lab.py diagnostico
+</code></pre>
+<p>Registrar localmente data, requisitos mínimos e estado de execução, sem anexar logs privados ao repositório. <strong>Gate G0:</strong> sistema operacional e acesso autorizados, armazenamento confiável e nenhum procedimento de instalação que modifique drivers sem plano de reversão. Com discos reaproveitados, o SMART e testes de superfície têm precedência sobre RAID. Não expor Ollama, bases e interfaces na internet pública sem autenticação e isolamento.</p>
+<h1>5. Etapa 1 — assistente documental auditável</h1>
+<p><img src="01-rag-documental.svg" alt="Fluxo de documentos" /></p>
+<ol>
+<li><strong>Selecionar fontes autorizadas:</strong> começar com documentos fictícios; depois, manuais próprios. Cada arquivo recebe nome, versão e origem.</li>
+<li><strong>Extrair texto:</strong> preferir texto selecionável; OCR só para imagens/scans. Conferir tabelas, paginação, símbolos elétricos e unidades.</li>
+<li><strong>Particionar e indexar:</strong> trechos com identificador estável, referência de página e metadados. <strong>Não</strong> misturar versões de um mesmo manual sem registrá-las.</li>
+<li><strong>Recuperar:</strong> começar com SQLite FTS5/BM25, reaproveitando <code>LAB-RAG-01</code>. Vetores e rerankers são aprimoramentos a justificar por testes.</li>
+<li><strong>Responder ou abster-se:</strong> o LLM só recebe material autorizado; caso falte evidência, informar que não encontrou. Citação é vinculada ao trecho recuperado, nunca fabricada.</li>
+<li><strong>Medir:</strong> hit@k, cobertura de fontes, precisão de citações e rejeição de perguntas sem respaldo em base de referência.</li>
+</ol>
+<p><strong>Exemplo da oficina:</strong> buscar informações de diagnóstico no manual fictício do computador didático. <strong>Não</strong> considerar o texto de teste um circuito real nem recomendar reparos sem documentação técnica e medições físicas.</p>
+<h1>6. Etapa 2 — recepcionista por voz, em modo seguro</h1>
+<p><img src="02-recepcionista-voz.svg" alt="Fluxo de voz" /></p>
+<ol>
+<li>Entrada de áudio e aviso/consentimento, quando cabíveis.</li>
+<li>Reconhecimento de fala (STT), por exemplo <code>faster-whisper</code>, após verificar dependências, CUDA/driver e desempenho.</li>
+<li>Extração de intenção e parâmetros; confirmar nomes, dia, horário e objetivo.</li>
+<li>Consulta de disponibilidade em calendário autorizado, se houver integração; diferenciar consulta de reserva.</li>
+<li>Solicitar confirmação do usuário <strong>antes de criar eventos</strong> e impedir duplicidade por chave idempotente.</li>
+<li>Síntese de fala (TTS) e confirmação do resultado real, não uma fala inventada.</li>
+</ol>
+<p><strong>Primeiro gate:</strong> diálogo inteiramente simulado, sem telefone, sem calendar API e sem gravações persistidas. O comando <code>python3 lab.py voz &quot;Quero marcar uma visita&quot;</code> não cria eventos.</p>
+<h1>7. Etapa 3 — processador de faturas com revisão</h1>
+<p><img src="03-processar-faturas.svg" alt="Fluxo de faturas" /></p>
+<ol>
+<li>Receber um PDF fictício (ou arquivo-texto do protótipo).</li>
+<li>Extrair texto direto; OCR apenas quando o PDF for imagem e houver necessidade.</li>
+<li>Produzir campos tipados: fornecedor, número, data, valor total, imposto, moeda.</li>
+<li>Validar formato, existência, valores não negativos, consistência de campos e possíveis duplicidades.</li>
+<li>Marcar incertezas e solicitar revisão humana antes de registrar, enviar ou pagar qualquer valor.</li>
+<li>Registrar evidência do arquivo e da decisão, sem expor dados sensíveis.</li>
+</ol>
+<p>O protótipo usa uma fatura <strong>fictícia</strong> e somente verifica estrutura; não reconhece layouts arbitrários, não executa OCR e <strong>não</strong> se conecta ao sistema financeiro.</p>
+<h1>8. Etapa 4 — pesquisa em várias fontes</h1>
+<p><img src="04-pesquisa-fonte.svg" alt="Fluxo de pesquisa" /></p>
+<ol>
+<li>Definir pergunta e escopo antes da busca.</li>
+<li>Buscar documentos e referências com identidade, data, autoria e URL quando existirem.</li>
+<li>Normalizar afirmações por tema, preservando trechos e evitando confundir opinião com evidência.</li>
+<li>Identificar acordos, divergências, versões e limitações de cada fonte.</li>
+<li>Gerar relatório com links, passagens relevantes e lacunas a investigar.</li>
+<li>Encerrar com parecer provisório e pontos de auditoria humana.</li>
+</ol>
+<p>O ensaio local apenas compara números de duas fontes fictícias (30 e 60 dias). <strong>Números diferentes não são prova de contradição contextual</strong>; podem ser versões ou casos distintos.</p>
+<h1>9. Etapa 5 — plataforma de avaliação (transversal)</h1>
+<p><img src="05-avaliacao.svg" alt="Fluxo de avaliação" /></p>
+<p>Uma avaliação confiável separa pelo menos quatro medidas:</p>
+<table>
+<thead>
+<tr>
+  <th>Medida</th>
+  <th>Pergunta</th>
+  <th>Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Recuperação hit@k</td>
+  <td>A fonte esperada apareceu entre as k primeiras?</td>
+  <td>conjunto de perguntas com fonte rotulada</td>
+</tr>
+<tr>
+  <td>Qualidade factual</td>
+  <td>A afirmação foi sustentada pela fonte?</td>
+  <td>comparação e inspeção de trechos</td>
+</tr>
+<tr>
+  <td>Segurança de ações</td>
+  <td>Foi pedido consentimento? Houve efeitos não autorizados?</td>
+  <td>logs de simulação e testes de falha</td>
+</tr>
+<tr>
+  <td>Operação</td>
+  <td>Quanto tempo, CPU/RAM/VRAM e custo consumiu?</td>
+  <td>telemetria reproduzível por versão</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Amostra funcional já criada:</strong> três questões sintéticas, com <code>hit@2 = 1,0</code> nesta sessão, e dez testes de unidade passando no núcleo local. Isto <strong>não prova desempenho da IA</strong>: é apenas um teste da implementação lexical e dos dados artificiais. O próprio ensaio precisa crescer com casos negativos, conflitos e documentos difíceis.</p>
+<h1>10. Plano de implementação por gates</h1>
+<table>
+<thead>
+<tr>
+  <th>Gate</th>
+  <th>Entrega</th>
+  <th>Critério de saída</th>
+  <th>Situação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>G0</td>
+  <td>linha de base do laboratório de IA</td>
+  <td>inventário e acesso remoto reproduzível</td>
+  <td>pendente: computador real</td>
+</tr>
+<tr>
+  <td>G1</td>
+  <td>protótipo Python</td>
+  <td>testes locais e dados fictícios</td>
+  <td><strong>10/10 PASS no ensaio de autoria (dados fictícios)</strong></td>
+</tr>
+<tr>
+  <td>G2</td>
+  <td>RAG integrado</td>
+  <td>reutilizar LAB-RAG-01, citar e abster</td>
+  <td>pendente de integração</td>
+</tr>
+<tr>
+  <td>G3</td>
+  <td>pesquisa multi-fonte</td>
+  <td>identificar divergências com origem</td>
+  <td>parcial: demo lexical</td>
+</tr>
+<tr>
+  <td>G4</td>
+  <td>leitura de faturas</td>
+  <td>extrair, validar, revisar</td>
+  <td>parcial: arquivo de exemplo</td>
+</tr>
+<tr>
+  <td>G5</td>
+  <td>fluxo de voz</td>
+  <td>STT → confirmação → TTS</td>
+  <td>parcial: simulação de intenção</td>
+</tr>
+<tr>
+  <td>G6</td>
+  <td>QA contínuo</td>
+  <td>avaliação antes de cada versão</td>
+  <td>parcial: conjunto inicial sintético</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ordem recomendada:</strong> G0 → G1 → G2 + G6 → G3 → G4 → G5. É prudente medir primeiro modelos leves e evitar cinco serviços pesados simultâneos.</p>
+<h1>11. Comandos de execução da demonstração</h1>
+<p>No repositório, entre em <code>laboratorio/cinco-sistemas-ia/</code> e rode:</p>
+<pre><code class="language-bash">python3 -m unittest discover -s testes -v
+python3 lab.py diagnostico
+python3 lab.py documentos &quot;Qual o prazo de reembolso?&quot;
+python3 lab.py voz &quot;Quero marcar uma visita&quot;
+python3 lab.py fatura
+python3 lab.py pesquisa
+python3 lab.py avaliar --saida saida/avaliacao.json
+</code></pre>
+<p>Todos os comandos são locais. Não é necessário instalar bibliotecas externas para rodar os exemplos. Veja o README do projeto para os critérios de conferência.</p>
+<h1>12. Destino editorial e reuso</h1>
+<p><strong>Complemento público:</strong> <code>complementos/cinco-sistemas-ia-laboratório de IA/</code> conterá este caderno, seis SVGs editáveis e links cruzados com RAG, ferramentas e avaliações, seguindo o padrão existente no GitHub.</p>
+<p><strong>Código:</strong> <code>laboratorio/laboratório de IA-cinco-sistemas/</code> poderá conter os exemplos e testes de dados fictícios, sem resultados privados, tokens e binários pesados.</p>
+<p><strong>Vídeo didático:</strong> versão em português publicada no YouTube: <a href="https://youtu.be/P2hft-BH0qA">https://youtu.be/P2hft-BH0qA</a>. O repositório contém o link, não uma cópia do MP4. Não subir MP4 diretamente ao repositório.</p>
+<h1>13. Referências para consulta e auditoria</h1>
+<ul>
+<li>Vídeo original fornecido pelo usuário, <code>VID-20261120-WA0022.mp4</code>, duração 2m27s. A análise foi feita por amostras sequenciais de imagens e legendas visíveis. <strong>Não foi produzida transcrição verificada palavra a palavra da locução original.</strong></li>
+<li>Repositório do livro e catálogo: <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase">https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase</a></li>
+<li>Laboratório RAG existente: <a href="https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio/rag-pratico">https://github.com/phtomas/livro-ia-fazendo-ia-ou-quase/tree/main/laboratorio/rag-pratico</a></li>
+<li>Ollama Linux: <a href="https://ollama.com/download/linux">https://ollama.com/download/linux</a></li>
+<li>Docling: <a href="https://docling-project.github.io/docling/getting_started/installation/">https://docling-project.github.io/docling/getting_started/installation/</a></li>
+<li>Faster-Whisper: <a href="https://github.com/SYSTRAN/faster-whisper">https://github.com/SYSTRAN/faster-whisper</a></li>
+<li>Promptfoo e avaliações: <a href="https://www.promptfoo.dev/docs/getting-started/">https://www.promptfoo.dev/docs/getting-started/</a></li>
+</ul>
+<blockquote>
+<p>Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.</p>
+</blockquote>
+</body></html>

@@ -1,0 +1,5 @@
+[
+  {"id":"D01","pergunta":"Qual é o prazo de reembolso após a compra?","fonte_esperada":"01-politica-reembolso.txt","top_k":2},
+  {"id":"D02","pergunta":"O que verificar no computador didático com vídeo instável e relógio?","fonte_esperada":"02-manual-ficticio.txt","top_k":2},
+  {"id":"D03","pergunta":"Qual instrumento mede sinais com canais CH1 CH2?","fonte_esperada":"03-inventario.txt","top_k":2}
+]

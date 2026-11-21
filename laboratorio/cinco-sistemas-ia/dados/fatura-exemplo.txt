@@ -1,0 +1,6 @@
+FATURA TOTALMENTE FICTÍCIA, SEM EFEITO FINANCEIRO
+Fornecedor: Exemplo Componentes LTDA
+Número: INV-0042
+Data: 12/03/2026
+Total: R$ 1.240,00
+Imposto: R$ 99,20

@@ -1,0 +1,1 @@
+INVENTÁRIO FICTÍCIO DE BANCADA. Instrumento A: osciloscópio com canais CH1 e CH2. Instrumento B: multímetro. Instrumento C: analisador lógico. O osciloscópio está associado ao teste de sinais e relógio.

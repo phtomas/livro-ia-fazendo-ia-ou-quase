@@ -25,6 +25,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Tool Calling — com e sem LangGraph](complementos/tool-calling-com-ou-sem-langgraph/index.html)
 - [8 abordagens de modelos e sistemas para agentes](complementos/modelos-e-sistemas-para-agentes/index.html)
 - [Guia rápido — 120 conceitos de LLMs](complementos/llm-120-conceitos/index.html)
+- [Cinco sistemas de IA — vídeo, caderno técnico e laboratório reproduzível](complementos/cinco-sistemas-ia/index.html)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.html)
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
 - [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)

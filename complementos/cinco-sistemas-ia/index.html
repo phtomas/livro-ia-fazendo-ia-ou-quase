@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinco sistemas reais de IA | laboratório de IA | IA fazendo IA — ou quase</title>
+<meta name="description" content="Cinco projetos de IA aplicados ao laboratório de IA: documentação RAG, recepção por voz, faturas, pesquisa e avaliação, com documentação original, diagramas e testes.">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+:root{--azul:#153e51;--verde:#0e7885;--fundo:#f6f9f9;--borda:#c9dce1;--texto:#193747}
+body{background:var(--fundo);color:var(--texto);font-family:system-ui,Arial,sans-serif;line-height:1.55;margin:0}
+.pagina{max-width:1100px;margin:auto;padding:0 23px 65px}.topo{background:#e4f1f2;border-bottom:2px solid #c6dddf;padding:55px 0 42px}
+.topo h1{color:var(--azul);font:400 clamp(2.1rem,5vw,4rem)/1.07 Georgia,serif;margin:14px 0}.topo p{max-width:790px;font-size:1.11rem}
+.ey{font-size:.79rem;letter-spacing:.1em;text-transform:uppercase;font-weight:750;color:var(--verde)}
+.migalhas{padding:15px 0;font-size:.9rem}.migalhas a,.links a{color:#0a697f}
+.imagem{display:block;width:100%;height:auto;border:1px solid var(--borda);background:white;margin:25px 0 34px}
+.grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0 38px}
+.modulo{background:#fff;padding:23px;border:1px solid var(--borda);border-top:5px solid var(--verde)}
+.modulo h3{font:400 1.5rem/1.2 Georgia,serif;color:var(--azul);margin:10px 0}
+.modulo p{margin:.6em 0}.modulo img{display:block;width:100%;height:auto;border:1px solid #d6e1e5}
+.estatus{color:#8c4b1f;font-weight:700}.links{display:flex;gap:18px;flex-wrap:wrap;margin:22px 0}
+.links a{display:inline-block;background:white;border:1px solid #99bac1;padding:9px 13px;text-decoration:underline;text-underline-offset:3px}
+.comparar{width:100%;border-collapse:collapse;background:white}.comparar td,.comparar th{border:1px solid var(--borda);padding:11px;vertical-align:top}.comparar th{background:#dcecef;color:var(--azul)}
+section h2{font:400 2.1rem Georgia,serif;color:var(--azul);margin:40px 0 15px}.nota{border-left:4px solid #c0782b;background:#fff7ed;padding:17px 20px;margin:24px 0}
+pre{background:#17364a;color:#fff;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:7px}
+a:focus-visible{outline:3px solid #ac6623;outline-offset:3px}
+@media(max-width:730px){.grade{grid-template-columns:1fr}.topo{padding:35px 0 25px}.modulo{padding:16px}}
+</style>
+</head>
+<body>
+<header class="topo"><div class="pagina"><div class="ey">Complemento técnico • laboratório de IA / primeira versão</div><h1>Cinco sistemas de IA.<br>Uma oficina verificável.</h1><p>Projetos de documentos, voz, faturas e pesquisa; com um quinto sistema dedicado a medir a qualidade dos outros quatro. Um roteiro de aprendizado, não uma promessa de software em produção.</p></div></header>
+<main class="pagina">
+<div class="migalhas"><a href="../../index.html">Portal</a> · <a href="../index.html">Complementos</a> · Cinco sistemas de IA</div>
+<img class="imagem" src="00-portal-cinco-sistemas.svg" alt="Cinco sistemas independentes sobre serviços e critérios compartilhados">
+<div class="links"><a href="https://youtu.be/P2hft-BH0qA" target="_blank" rel="noopener noreferrer">Assistir ao vídeo didático</a><a href="Guia_Cinco_Sistemas_de_IA.pdf">Caderno técnico (PDF)</a><a href="../../laboratorio/laboratório de IA-cinco-sistemas/README.md">Código e testes</a><a href="../rag-pipeline/index.html">Arquitetura RAG existente</a><a href="../../laboratorio/rag-pratico/index.html">LAB-RAG-01 já publicado</a></div>
+<section><h2>Os cinco projetos</h2><div class="grade">
+<article class="modulo"><div class="ey">01 / RAG</div><h3>Assistente documental</h3><img src="01-rag-documental.svg" alt="Documentos, preparação, índice, recuperação e resposta com referência"><p>Consulta de manuais com trechos e referências. A base de ensino já existe no LAB-RAG-01; não vamos duplicá-la.</p></article>
+<article class="modulo"><div class="ey">02 / Voz</div><h3>Recepcionista assistida</h3><img src="02-recepcionista-voz.svg" alt="Fala, transcrição, intenção, confirmação e eventual calendário"><p>Da fala ao texto, depois ferramentas e confirmação. O protótipo inicial não conecta telefone ou calendário real.</p></article>
+<article class="modulo"><div class="ey">03 / Dados</div><h3>Processamento de faturas</h3><img src="03-processar-faturas.svg" alt="Arquivo, extração, campos, validação e revisão humana"><p>Extrair informações estruturadas com checagens de formato. Validar uma fatura não é autorizá-la nem pagá-la.</p></article>
+<article class="modulo"><div class="ey">04 / Fontes</div><h3>Pesquisa comparativa</h3><img src="04-pesquisa-fonte.svg" alt="Questão, coleta, cotejo, relatório e revisão"><p>Comparar versões e evidências, indicando contradições e incertezas em vez de produzir conclusões infundadas.</p></article>
+<article class="modulo"><div class="ey">05 / Qualidade</div><h3>Plataforma de avaliação</h3><img src="05-avaliacao.svg" alt="Casos de referência, execução, métricas, regressão e aprovação"><p>Casos de teste e métricas claras. Uma avaliação deve acompanhar todos os demais módulos desde o começo.</p></article>
+</div></section>
+<section><h2>O que já foi provado?</h2><table class="comparar"><thead><tr><th>Escopo</th><th>Estado</th><th>Observação</th></tr></thead><tbody>
+<tr><td>Programa demonstrativo local</td><td>10/10 testes unitários PASS em dados fictícios</td><td>Dados inteiramente fictícios; testes executados no ambiente de autoria, não em equipamento real.</td></tr>
+<tr><td>RAG documental</td><td>Base existente</td><td>LAB-RAG-01 no acervo do livro; integração com outros módulos ainda pendente.</td></tr>
+<tr><td>GPU, voz, agenda, OCR avançado</td><td class="estatus">Pendente</td><td>Não foi realizado ensaio físico ou conexão real.</td></tr>
+</tbody></table>
+<div class="nota"><strong>Regra editorial:</strong> não transformar demonstração ou teste sintético em alegação de desempenho geral. O sistema precisa registrar seus limites.</div></section>
+<section><h2>Experimente o núcleo sem serviços externos</h2><p>Na pasta do projeto, com Python 3 disponível:</p><pre>python3 -m unittest discover -s testes -v
+python3 lab.py diagnostico
+python3 lab.py avaliar --saida saida/avaliacao.json</pre><p>Os dados de demonstração não contêm chaves de API nem registros pessoais.</p></section>
+<footer><p><a href="../../index.html">Voltar ao portal</a> · <a href="../index.html">Outros complementos</a></p><p>Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.</p><p><small>Publicação didática: sem configuração de servidores, IPs, credenciais, dados pessoais ou resultados particulares de laboratório.</small></p></footer>
+</main></body></html>
