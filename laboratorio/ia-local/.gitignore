@@ -1,0 +1,9 @@
+.env
+.env.*
+.venv/
+__pycache__/
+*.pyc
+saida/
+modelos/
+backups/
+dados/exemplo.pdf

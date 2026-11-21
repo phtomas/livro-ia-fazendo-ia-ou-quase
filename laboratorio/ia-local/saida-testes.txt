@@ -1,0 +1,10 @@
+test_api_simulada (test_lab.TestOficina.test_api_simulada) ... ok
+test_conflito (test_lab.TestOficina.test_conflito) ... ok
+test_payload (test_lab.TestOficina.test_payload) ... ok
+test_prazo_invalido (test_lab.TestOficina.test_prazo_invalido) ... ok
+test_redirecionamento_bloqueado (test_lab.TestOficina.test_redirecionamento_bloqueado) ... ok
+test_sem_vigente (test_lab.TestOficina.test_sem_vigente) ... ok
+test_vigente (test_lab.TestOficina.test_vigente) ... ok
+
+Ran 7 tests
+OK

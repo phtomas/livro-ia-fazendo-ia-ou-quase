@@ -1,0 +1,4 @@
+[
+  {"id":"POL-002","versao":2,"vigente":false,"prazo_dias":30,"texto":"Política fictícia anterior: devolução em até 30 dias."},
+  {"id":"POL-003","versao":3,"vigente":true,"prazo_dias":45,"texto":"Política fictícia vigente: devolução em até 45 dias."}
+]

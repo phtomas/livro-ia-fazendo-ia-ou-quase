@@ -34,6 +34,8 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 
 - [LAB-AGENTE-01 — Crie seu primeiro agente: videoaula, código e testes](laboratorio/agente-matinal/index.html)
 
+- [LAB-LOCAL-01 — IA local privada: videoaula, implantação, código e testes](laboratorio/ia-local/index.html)
+
 > Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.
 
 **Atenção:** sempre use dados fictícios, não exponha tokens e confira requisitos e versões. Publique apenas conteúdo autorizado e não exponha informações sensíveis.

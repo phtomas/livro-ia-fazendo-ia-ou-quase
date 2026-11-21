@@ -1,0 +1,8 @@
+{
+  "model": "qwen2.5:3b",
+  "stream": false,
+  "messages": [
+    {"role":"system","content":"Crie apenas um rascunho em português; não envie nada."},
+    {"role":"user","content":"Cliente fictício pede devolução. Política POL-003: 45 dias."}
+  ]
+}

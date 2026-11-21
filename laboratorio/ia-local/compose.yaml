@@ -1,0 +1,37 @@
+# Laboratório didático, CPU por padrão. Não é configuração de produção.
+services:
+  ollama:
+    image: ollama/ollama:latest
+    environment:
+      OLLAMA_NO_CLOUD: '1'
+    ports:
+      - '127.0.0.1:11434:11434'
+    volumes:
+      - modelos:/root/.ollama
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    depends_on:
+      - ollama
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      ENABLE_OPENAI_API: 'false'
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?gere o segredo local antes de iniciar}
+    ports:
+      - '127.0.0.1:3000:8080'
+    volumes:
+      - webui:/app/backend/data
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    profiles: [automacao]
+    environment:
+      N8N_DIAGNOSTICS_ENABLED: 'false'
+      GENERIC_TIMEZONE: UTC
+      TZ: UTC
+    ports:
+      - '127.0.0.1:5678:5678'
+    volumes:
+      - n8n_data:/home/node/.n8n
+volumes:
+  modelos:
+  webui:
+  n8n_data:

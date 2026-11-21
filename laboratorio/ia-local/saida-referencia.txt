@@ -1,0 +1,2 @@
+Prazo conferido: 45 dias [POL-003]
+Modo offline: nenhuma chamada ao modelo.
