@@ -1,0 +1,14 @@
+# Briefing de 2026-11-23
+
+## Prioridades
+- [TASK-001] 09:00 | Revisar proposta técnica
+- [MSG-005] 09:30 | Documento fiscal pendente
+- [MSG-001] 10:00 | Proposta precisa de validação
+- [TASK-002] 13:00 | Conferir documento de entrega
+- [MSG-003] 15:00 | Entrega de revisão
+
+## Compromissos
+- [EVT-001] 08:30 | Reunião de acompanhamento
+- [EVT-002] 14:00 | Revisão do projeto piloto
+
+**Nenhuma mensagem enviada, alterada ou excluída.**

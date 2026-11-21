@@ -1,0 +1,16 @@
+{
+  "nome": "briefing-matinal-demonstracao",
+  "modo": "offline-dados-ficticios",
+  "permissoes": {
+    "ler_caixa": true,
+    "ler_agenda": true,
+    "ler_tarefas": true,
+    "gerar_relatorio_local": true,
+    "enviar_email": false,
+    "modificar_agenda": false,
+    "apagar_mensagem": false,
+    "efetuar_pagamento": false,
+    "acessar_rede": false
+  },
+  "politica_de_saida": "Não incluir dados pessoais nem inventar fatos; citar IDs da fonte; não executar ações externas."
+}

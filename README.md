@@ -32,6 +32,8 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Arquitetura de um pipeline RAG — diagrama revisado](complementos/rag-pipeline/index.html)
 - [LAB-RAG-01 — laboratório prático com código e testes](laboratorio/rag-pratico/index.html)
 
+- [LAB-AGENTE-01 — Crie seu primeiro agente: videoaula, código e testes](laboratorio/agente-matinal/index.html)
+
 > Nada é “funcionou” sem prova. Simplicidade é força. Isole e meça antes de adivinhar. Não reinvente a roda. E cresçam juntos.
 
 **Atenção:** sempre use dados fictícios, não exponha tokens e confira requisitos e versões. Publique apenas conteúdo autorizado e não exponha informações sensíveis.

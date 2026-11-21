@@ -1,0 +1,6 @@
+[
+ {"id":"TASK-001","titulo":"Revisar proposta técnica","prazo":"2026-11-23T09:00:00","concluida":false},
+ {"id":"TASK-002","titulo":"Conferir documento de entrega","prazo":"2026-11-23T13:00:00","concluida":false},
+ {"id":"TASK-003","titulo":"Organizar arquivo de referência","prazo":"2026-11-27T17:00:00","concluida":false},
+ {"id":"TASK-004","titulo":"Enviar resumo já finalizado","prazo":"2026-11-23T08:00:00","concluida":true}
+]
