@@ -20,6 +20,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Nove fórmulas de redes neurais explicadas passo a passo](complementos/formulas-redes-neurais/index.html)
 - [As 9 camadas de LLMs e IA generativa — mapa e análise em português](complementos/stack-llm-ia-generativa-2026/index.html)
 - [Fundamentos de Machine Learning — das bases clássicas às LLMs](complementos/fundamentos-machine-learning-para-llms/index.html)
+- [Caderno visual de IA e ML — 15 diagramas e PDF](complementos/caderno-visual-fundamentos-ia-ml/index.html)
 - [Panorama: IA, ML, DL, IA generativa, LLMs, RAG e agentes](complementos/panorama-ia-ml-dl-genai-llm-rag-agentes/index.html)
 - [Tool Calling — com e sem LangGraph](complementos/tool-calling-com-ou-sem-langgraph/index.html)
 - [8 abordagens de modelos e sistemas para agentes](complementos/modelos-e-sistemas-para-agentes/index.html)

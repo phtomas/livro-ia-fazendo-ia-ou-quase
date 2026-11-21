@@ -1,0 +1,110 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Caderno visual revisado em português sobre fundamentos de inteligência artificial, ML, Deep Learning, Transformers, LLMs e RAG.">
+<title>Caderno visual — fundamentos de IA e ML | IA fazendo IA — ou quase</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+.cv{max-width:1060px;margin:auto;padding:32px 22px 90px}.cv h1{font:400 clamp(2.3rem,5vw,4.6rem)/1.07 Georgia,serif;letter-spacing:-.03em;margin:14px 0 20px}
+.ey{font:700 .8rem Consolas,monospace;text-transform:uppercase;letter-spacing:.08em;color:#a74731}.intro{font-size:1.15rem;line-height:1.7;max-width:850px}
+.banner{background:#ece7dc;padding:25px;margin:28px 0;border-left:4px solid #a74731;line-height:1.6}.banner p{margin:0 0 8px}
+.catalogo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:28px 0 45px}.catalogo a{display:block;background:#fff;border:1px solid #c5c0b3;padding:13px;text-decoration:none;color:#21322e;line-height:1.3}.catalogo b{color:#a74731;margin-right:7px}
+.sheet{background:#fff;border:1px solid #c5c0b3;margin:34px 0 65px;padding:18px}.figurehead h2{font:400 clamp(1.5rem,3vw,2.2rem)/1.2 Georgia,serif;margin:10px 0 5px}.figurehead p{color:#445953;line-height:1.6;margin:5px 0 16px}.figure{display:block;background:#e8f1f5;text-align:center}.figure img{display:block;width:100%;height:auto;max-height:1100px;object-fit:contain;margin:auto}.actions{display:flex;gap:22px;flex-wrap:wrap;font-weight:700;font-size:.92rem}.actions a,.links a{text-underline-offset:3px;color:#934129}.links{display:flex;gap:20px;flex-wrap:wrap;font-size:1.06rem;margin:23px 0}.small{font-size:.9rem;line-height:1.6;color:#465752}@media(max-width:780px){.catalogo{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.catalogo{grid-template-columns:1fr}.sheet{padding:9px}.cv{padding:23px 14px}}
+</style></head><body>
+<header class="mast"><div class="shell"><a class="logo" href="../../index.html"><span class="mark">IA.</span><span class="name">Laboratório Vivo</span></a><nav class="nav" aria-label="Navegação principal"><a href="../../index.html">Início</a><a href="../../livros/index.html">Livros do autor</a><a href="../../SUMARIO.html">Capítulos</a><a href="../../laboratorio/README.html">Laboratório</a><a href="../index.html" aria-current="page">Complementos</a><a href="../../ATUALIZACOES_E_ERRATAS.html">Atualizações</a></nav></div></header>
+<main class="cv" id="inicio"><span class="ey">Complemento ilustrado · novembro de 2026 · revisão técnica</span><h1>Caderno visual de inteligência artificial e aprendizado de máquina</h1>
+<p class="intro">Quinze pranchas explicativas, com diagramas editáveis em SVG, para percorrer os fundamentos de IA, aprendizado de máquina, redes neurais, modelos de linguagem e recuperação de informações. O <strong>PDF reúne capa e quinze pranchas em 16 páginas</strong>; aqui, cada tema pode ser consultado separadamente.</p>
+<div class="links"><a href="Caderno_Visual_IA_ML_Completo.pdf"><strong>Baixar PDF completo (A4)</strong></a><a href="../fundamentos-machine-learning-para-llms/index.html">Ler o caderno documental já existente</a><a href="../index.html">Voltar à galeria de complementos</a></div>
+<div class="banner"><p><strong>Leitura complementar, sem repetição desnecessária.</strong> Este material é uma versão visual de consulta rápida. O <a href="../fundamentos-machine-learning-para-llms/caderno.html">caderno documental</a> continua reunindo explicações, exercícios e fórmulas detalhadas.</p><p><strong>Numeração:</strong> o capítulo 3 não constava do conjunto de referência recebido. A sequência original foi mantida; não há conteúdo inventado para preencher a lacuna.</p><p><strong>Critério editorial:</strong> fluxos e curvas são esquemáticos, não resultados de ensaios experimentais. RAG não garante respostas corretas e o teste final de ML não pode ser usado para afinar o modelo.</p></div>
+<h2 style="font:400 2rem Georgia,serif">Sumário das pranchas</h2><div class="catalogo"><a href="#cap-01"><b>01</b> Introdução à inteligência artificial</a>
+<a href="#cap-02"><b>02</b> Introdução ao aprendizado de máquina</a>
+<a href="#cap-04"><b>04</b> Tipos de aprendizado de máquina</a>
+<a href="#cap-05"><b>05</b> Dados e pré-processamento</a>
+<a href="#cap-06"><b>06</b> Algoritmos de ML — parte 1</a>
+<a href="#cap-07"><b>07</b> Algoritmos de ML — parte 2</a>
+<a href="#cap-08"><b>08</b> Treinamento e avaliação</a>
+<a href="#cap-09"><b>09</b> Métricas de avaliação</a>
+<a href="#cap-10"><b>10</b> Fundamentos de deep learning</a>
+<a href="#cap-11a"><b>11A</b> Arquiteturas neurais</a>
+<a href="#cap-11b"><b>11B</b> Transformers e atenção</a>
+<a href="#cap-12a"><b>12A</b> PLN, tokens e embeddings</a>
+<a href="#cap-12b"><b>12B</b> IA generativa e LLMs</a>
+<a href="#cap-13a"><b>13A</b> Engenharia de prompts</a>
+<a href="#cap-13b"><b>13B</b> Arquitetura RAG</a></div>
+<article class="sheet" id="cap-01">
+      <div class="figurehead"><span class="ey">Prancha 01 de 15 · Capítulo 01</span><h2>Introdução à inteligência artificial</h2><p>Conceitos básicos, aplicações e limites da IA atual.</p></div>
+      <a class="figure" href="assets/01-introducao-a-inteligencia-artificial.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/01-introducao-a-inteligencia-artificial.svg" alt="Caderno visual sobre IA, capacidades, história e aplicações; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/01-introducao-a-inteligencia-artificial.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-02">
+      <div class="figurehead"><span class="ey">Prancha 02 de 15 · Capítulo 02</span><h2>Introdução ao aprendizado de máquina</h2><p>Diferenças entre métodos clássicos e sistemas que aprendem com dados.</p></div>
+      <a class="figure" href="assets/02-introducao-ao-aprendizado-de-maquina.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/02-introducao-ao-aprendizado-de-maquina.svg" alt="Caderno visual sobre IA, ML, DL e ciclo do modelo; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/02-introducao-ao-aprendizado-de-maquina.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-04">
+      <div class="figurehead"><span class="ey">Prancha 03 de 15 · Capítulo 04</span><h2>Tipos de aprendizado de máquina</h2><p>Quatro maneiras de aprender e as perguntas que cada uma ajuda a responder.</p></div>
+      <a class="figure" href="assets/04-tipos-de-aprendizado-de-maquina.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/04-tipos-de-aprendizado-de-maquina.svg" alt="Caderno visual sobre Supervisionado, não supervisionado, semissupervisionado e reforço; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/04-tipos-de-aprendizado-de-maquina.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-05">
+      <div class="figurehead"><span class="ey">Prancha 04 de 15 · Capítulo 05</span><h2>Dados e pré-processamento</h2><p>Como preparar exemplos, codificar atributos e evitar contaminar o teste.</p></div>
+      <a class="figure" href="assets/05-dados-e-pre-processamento.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/05-dados-e-pre-processamento.svg" alt="Caderno visual sobre Preparação e vazamento de dados; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/05-dados-e-pre-processamento.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-06">
+      <div class="figurehead"><span class="ey">Prancha 05 de 15 · Capítulo 06</span><h2>Algoritmos de ML — parte 1</h2><p>Modelos simples e interpretáveis para classificações e estimativas.</p></div>
+      <a class="figure" href="assets/06-algoritmos-de-ml-parte-1.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/06-algoritmos-de-ml-parte-1.svg" alt="Caderno visual sobre Regressões, árvores e florestas; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/06-algoritmos-de-ml-parte-1.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-07">
+      <div class="figurehead"><span class="ey">Prancha 06 de 15 · Capítulo 07</span><h2>Algoritmos de ML — parte 2</h2><p>Famílias com hipóteses e custos computacionais diferentes.</p></div>
+      <a class="figure" href="assets/07-algoritmos-de-ml-parte-2.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/07-algoritmos-de-ml-parte-2.svg" alt="Caderno visual sobre KNN, K-means, SVM, Naive Bayes e boosting; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/07-algoritmos-de-ml-parte-2.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-08">
+      <div class="figurehead"><span class="ey">Prancha 07 de 15 · Capítulo 08</span><h2>Treinamento e avaliação</h2><p>Separação de dados, viés, variância e validação sem vazamento.</p></div>
+      <a class="figure" href="assets/08-treinamento-e-avaliacao.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/08-treinamento-e-avaliacao.svg" alt="Caderno visual sobre Generalização, validação e regularização; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/08-treinamento-e-avaliacao.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-09">
+      <div class="figurehead"><span class="ey">Prancha 08 de 15 · Capítulo 09</span><h2>Métricas de avaliação</h2><p>Métricas adequadas ao custo de cada erro, incluindo desbalanceamento.</p></div>
+      <a class="figure" href="assets/09-metricas-de-avaliacao.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/09-metricas-de-avaliacao.svg" alt="Caderno visual sobre Acurácia, precisão, revocação, F1 e erros de regressão; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/09-metricas-de-avaliacao.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-10">
+      <div class="figurehead"><span class="ey">Prancha 09 de 15 · Capítulo 10</span><h2>Fundamentos de deep learning</h2><p>Da rede multicamadas à atualização de pesos.</p></div>
+      <a class="figure" href="assets/10-fundamentos-de-deep-learning.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/10-fundamentos-de-deep-learning.svg" alt="Caderno visual sobre Neurônios, gradientes e ativação; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/10-fundamentos-de-deep-learning.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-11a">
+      <div class="figurehead"><span class="ey">Prancha 10 de 15 · Capítulo 11A</span><h2>Arquiteturas neurais</h2><p>As famílias de redes e a função de seus mecanismos recorrentes.</p></div>
+      <a class="figure" href="assets/11A-arquiteturas-neurais.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/11A-arquiteturas-neurais.svg" alt="Caderno visual sobre CNN, RNN, LSTM e GRU; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/11A-arquiteturas-neurais.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-11b">
+      <div class="figurehead"><span class="ey">Prancha 11 de 15 · Capítulo 11B</span><h2>Transformers e atenção</h2><p>Mecanismo de atenção e diferenças entre BERT, GPT e T5.</p></div>
+      <a class="figure" href="assets/11B-transformers-e-atencao.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/11B-transformers-e-atencao.svg" alt="Caderno visual sobre Atenção escalada, codificadores e decodificadores; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/11B-transformers-e-atencao.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-12a">
+      <div class="figurehead"><span class="ey">Prancha 12 de 15 · Capítulo 12A</span><h2>PLN, tokens e embeddings</h2><p>Tokenização, IDs e vetores, sem confundir tokens com palavras.</p></div>
+      <a class="figure" href="assets/12A-pln-tokens-embeddings.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/12A-pln-tokens-embeddings.svg" alt="Caderno visual sobre Do texto a representações vetoriais; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/12A-pln-tokens-embeddings.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-12b">
+      <div class="figurehead"><span class="ey">Prancha 13 de 15 · Capítulo 12B</span><h2>IA generativa e LLMs</h2><p>O que acontece ao treinar e ao usar modelos generativos.</p></div>
+      <a class="figure" href="assets/12B-ia-generativa-e-llms.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/12B-ia-generativa-e-llms.svg" alt="Caderno visual sobre Treinamento, inferência e limitações; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/12B-ia-generativa-e-llms.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-13a">
+      <div class="figurehead"><span class="ey">Prancha 14 de 15 · Capítulo 13A</span><h2>Engenharia de prompts</h2><p>Exemplos, saídas estruturadas e avaliação verificável.</p></div>
+      <a class="figure" href="assets/13A-prompts-e-engenharia-de-llms.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/13A-prompts-e-engenharia-de-llms.svg" alt="Caderno visual sobre Clareza, critérios e testes; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/13A-prompts-e-engenharia-de-llms.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<article class="sheet" id="cap-13b">
+      <div class="figurehead"><span class="ey">Prancha 15 de 15 · Capítulo 13B</span><h2>Arquitetura RAG</h2><p>RAG em duas trilhas e a diferença entre recuperar e ajustar modelos.</p></div>
+      <a class="figure" href="assets/13B-arquitetura-rag.svg" title="Abrir SVG em tamanho completo"><img loading="lazy" src="assets/13B-arquitetura-rag.svg" alt="Caderno visual sobre Indexação, consulta e resposta fundamentada; diagrama vetorial em português" /></a>
+      <p class="actions"><a href="assets/13B-arquitetura-rag.svg">Abrir o diagrama SVG ampliado</a> <a href="#inicio">Voltar ao sumário</a></p>
+    </article>
+<section class="banner"><h2 style="font:400 1.65rem Georgia,serif;margin:0 0 9px">Material relacionado</h2><p>Para ampliar o estudo: <a href="../formulas-redes-neurais/index.html">fórmulas de redes neurais</a>, <a href="../20-arquiteturas-redes-neurais/index.html">arquiteturas neurais</a>, <a href="../rag-pipeline/index.html">pipeline RAG</a> e <a href="../../laboratorio/rag-pratico/index.html">laboratório RAG reproduzível</a>.</p><p class="small">Conceitos e artes revisados e redesenhados para esta edição didática. As imagens manuscritas de referência não estão incluídas. A origem e licença das anotações de referência ainda precisam ser confirmadas antes da publicação pública desta adaptação.</p></section>
+</main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Nada é “funcionou” sem prova.</span></div></footer>
+</body></html>
