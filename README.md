@@ -23,6 +23,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Caderno visual de IA e ML — 15 diagramas e PDF](complementos/caderno-visual-fundamentos-ia-ml/index.html)
 - [Panorama: IA, ML, DL, IA generativa, LLMs, RAG e agentes](complementos/panorama-ia-ml-dl-genai-llm-rag-agentes/index.html)
 - [Tool Calling — com e sem LangGraph](complementos/tool-calling-com-ou-sem-langgraph/index.html)
+- [10 conceitos essenciais de MCP — diagrama e guia técnico](complementos/10-conceitos-mcp/index.html)
 - [8 abordagens de modelos e sistemas para agentes](complementos/modelos-e-sistemas-para-agentes/index.html)
 - [Guia rápido — 120 conceitos de LLMs](complementos/llm-120-conceitos/index.html)
 - [Cinco sistemas de IA — vídeo, caderno técnico e laboratório reproduzível](complementos/cinco-sistemas-ia/index.html)
