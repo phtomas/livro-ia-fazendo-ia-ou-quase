@@ -54,7 +54,8 @@ for x,w,t,sub,accent in [(60,465,'HOST','Aplicação com a IA', '#d7eaf1'),(577,
 # host diagram
 rect(93,354,185,118,'#f0f7fc',13,stroke='#9bbcca',sw=2)
 circ(133,385,13,'#286a89');rect(115,400,36,34,'#89bccd',8)
-txt(167,388,'IA / agente',24,'#16485e',700)
+# Mantém o rótulo dentro da caixa de 185 px (x=93..278); evitar transbordamento.
+txt(156,388,'IA / agente',18,'#16485e',700)
 txt(167,424,'decide',20,'#517585')
 rect(307,363,187,95,'#f8f9fb',13,stroke='#b3c1cf',sw=2)
 txt(399,397,'Clientes',26,'#304c64',700,'middle');txt(399,430,'MCP',27,'#304c64',800,'middle')
