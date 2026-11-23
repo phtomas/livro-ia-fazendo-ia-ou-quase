@@ -29,6 +29,7 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Cinco sistemas de IA — vídeo, caderno técnico e laboratório reproduzível](complementos/cinco-sistemas-ia/index.html)
 - [Atualizações e erratas](ATUALIZACOES_E_ERRATAS.html)
 - [40 perguntas essenciais sobre LLMs — guia visual](complementos/llm-40-perguntas/index.html)
+- [LLMs explicados — roteiro auditado, exercícios e fontes](complementos/estudo-auditado-llms/index.html)
 - [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)
 - [Arquitetura de um pipeline RAG — diagrama revisado](complementos/rag-pipeline/index.html)
 - [LAB-RAG-01 — laboratório prático com código e testes](laboratorio/rag-pratico/index.html)
