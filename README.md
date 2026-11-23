@@ -33,7 +33,6 @@ Este portal reúne sumário, documentação complementar, experimentos, exemplos
 - [Arquitetura funcional de um agente de IA — infográfico original](complementos/arquitetura-agente-ia/index.html)
 - [Arquitetura de um pipeline RAG — diagrama revisado](complementos/rag-pipeline/index.html)
 - [LAB-RAG-01 — laboratório prático com código e testes](laboratorio/rag-pratico/index.html)
-- [RAG — estudo auditado de 18 páginas, correções, cinco testes e fontes](complementos/rag-estudo-auditado/index.html)
 
 - [LAB-AGENTE-01 — Crie seu primeiro agente: videoaula, código e testes](laboratorio/agente-matinal/index.html)
 
