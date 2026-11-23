@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Estudo auditado de LLMs: roteiro sem duplicações, ressalvas técnicas, exercícios verificáveis e fontes consultadas.">
+<title>Estudo auditado de LLMs | IA fazendo IA — ou quase</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{background:#f7f4ed}main{max-width:1120px;margin:auto;padding:30px 22px 88px}
+.intro{border-bottom:1px solid #c9c4b7;padding:45px 0 36px}
+.ey{font:700 .79rem Consolas,monospace;letter-spacing:.10em;color:#a74731;text-transform:uppercase}
+h1{font:400 clamp(2.7rem,6vw,5rem)/1.1 Georgia,serif;letter-spacing:-.045em;max-width:960px;margin:15px 0 19px}
+h2{font:400 clamp(1.8rem,3vw,2.7rem)/1.18 Georgia,serif;margin:48px 0 19px}
+h3{font-size:1.16rem;margin:22px 0 9px}.lead{font-size:1.17rem;line-height:1.76;max-width:890px;color:#39453e}
+.meta{font:600 .8rem Consolas,monospace;color:#5c675e}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.links a{border:1px solid #c6c1b6;background:#fff;text-decoration:none;font-weight:650;padding:9px 14px}
+.callout{background:#ede8dc;border-left:3px solid #a74731;padding:18px 22px;margin:27px 0}.callout p:last-child{margin:0}
+.tablewrap{overflow-x:auto;margin:20px 0}.tablewrap table{border-collapse:collapse;width:100%;min-width:660px;background:white;font-size:.94rem}
+th,td{border:1px solid #d4d1c9;padding:12px 14px;vertical-align:top;text-align:left}
+thead th{background:#e7e6e0}td:first-child{font-weight:650}
+.ex{border:1px solid #cac5b9;background:white;padding:19px 22px;margin:15px 0}
+.ex h3{margin:0 0 10px}.ex p:last-child{margin-bottom:0}
+pre{background:#e9edea;border:1px solid #d3dad3;padding:16px;white-space:pre-wrap;overflow:auto;font:14px/1.55 Consolas,monospace}
+a{overflow-wrap:anywhere}ul li,ol li{margin-bottom:8px}
+small{font-size:.82rem}
+@media(max-width:690px){main{padding:18px 16px 70px}.intro{padding:25px 0}.mast .shell{padding:13px 16px}}
+</style>
+<script data-goatcounter="https://iafazendoia.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="mast"><div class="shell"><a class="logo" href="../../index.html"><span class="mark">IA.</span><span class="name">Laboratório Vivo</span></a><nav class="nav" aria-label="Navegação principal"><a href="../../index.html">Início</a><a href="../../SUMARIO.html">Capítulos</a><a href="../../laboratorio/README.html">Laboratório</a><a href="../index.html" aria-current="page">Complementos</a></nav></div></header>
+<main>
+<section class="intro">
+<span class="ey">Caderno complementar / Revisão técnica / 22·11·2026</span>
+<h1>LLMs explicados.<br>Estudar, conferir, provar.</h1>
+<p class="lead">Roteiro original de estudo e verificação motivado pelas 18 páginas numeradas de <em>LLMs Explained — Complete Practical Guide</em>. Em vez de duplicar nossas publicações, reunimos <strong>links para o acervo existente, pontos que exigem precisão técnica e exercícios com critérios de aceitação</strong>.</p>
+<p class="meta">IA fazendo IA — ou quase · Complemento editorial · Revisão documental: PASS · Execução de exercícios: NOT RUN</p>
+<nav class="links" aria-label="Atalhos"><a href="#percurso">O que estudar</a><a href="#auditoria">Auditoria de conceitos</a><a href="#pratica">Exercícios</a><a href="#fontes">Fontes consultadas</a><a href="AUDITORIA.md">Registro em Markdown</a></nav>
+<div class="callout"><strong>Transparência editorial.</strong> O material de referência foi recebido como imagens, sem informação suficiente sobre autoria e licença de republicação. Por isso, este complemento <strong>não redistribui a tradução integral nem copia tabelas ou diagramas</strong> do guia recebido. As explicações e os exercícios abaixo são uma elaboração independente, com referências rastreáveis. As datas e limites de cada fonte constam da <a href="REFERENCIAS.md">bibliografia detalhada</a>.</div>
+</section>
+<section id="percurso">
+<h2>1. Aproveitar o que já publicamos</h2>
+<p>Para estudar o assunto com menos repetição, siga esta ordem. Cada link leva a conteúdo já existente no nosso próprio repositório.</p>
+<div class="tablewrap"><table><thead><tr><th>Objetivo</th><th>Material já disponível</th><th>O que acrescentamos aqui</th></tr></thead><tbody>
+<tr><td>Entender LLM, token, parâmetro, atenção e contexto</td><td><a href="../llm-40-perguntas/index.html">40 perguntas essenciais</a> e <a href="../llm-120-conceitos/index.html">120 conceitos</a></td><td>Cuidados com generalizações, exemplos e critérios de conferência</td></tr>
+<tr><td>Conectar Machine Learning a LLMs</td><td><a href="../fundamentos-machine-learning-para-llms/index.html">Fundamentos de Machine Learning</a> e <a href="../caderno-visual-fundamentos-ia-ml/index.html">caderno visual</a></td><td>Separar arquitetura, processo de treino, prompt e consulta externa</td></tr>
+<tr><td>Visualizar a atenção e a matemática</td><td><a href="../formulas-redes-neurais/index.html">Nove fórmulas explicadas</a> e <a href="../20-arquiteturas-redes-neurais/index.html">20 arquiteturas</a></td><td>Evitar tratar intuições de Q/K/V como definições algorítmicas</td></tr>
+<tr><td>Praticar RAG com provas</td><td><a href="../../laboratorio/rag-pratico/index.html">LAB-RAG-01</a> e <a href="../rag-pipeline/index.html">pipeline RAG</a></td><td>Separar qualidade da recuperação, das citações e da resposta final</td></tr>
+<tr><td>Aplicar JSON, faturas e avaliações</td><td><a href="../cinco-sistemas-ia/index.html">Cinco sistemas de IA</a></td><td>Casos negativos, esquema de validação e critérios de aprovação</td></tr>
+</tbody></table></div>
+</section>
+<section id="auditoria">
+<h2>2. O que uma leitura rigorosa precisa distinguir</h2>
+<p>As frases abaixo são <strong>notas de precisão</strong>, não uma lista de erros atribuídos automaticamente ao documento de origem. Onde o guia simplifica, explicamos as condições em que a simplificação funciona.</p>
+<div class="tablewrap"><table><thead><tr><th>Tema</th><th>Formulação rigorosa</th><th>Fonte</th></tr></thead><tbody>
+<tr><td>Previsão de tokens</td><td>É um objetivo importante em modelos autorregressivos; não caracteriza sozinho toda a família de modelos de linguagem.</td><td><a href="#f1">[F1]</a>, <a href="#f2">[F2]</a></td></tr>
+<tr><td>Transformer</td><td>O artigo de 2017 apresenta uma arquitetura específica; encoders, decoders e variantes atuais não devem ser descritos como idênticos ao desenho original.</td><td><a href="#f1">[F1]</a></td></tr>
+<tr><td>Q, K e V</td><td>São projeções aprendidas; a analogia “procura / combina / transporta” ajuda, mas não substitui o cálculo da atenção.</td><td><a href="#f1">[F1]</a></td></tr>
+<tr><td>Tokenização</td><td>As divisões variam conforme o tokenizador; contar palavras não equivale a contar tokens.</td><td><a href="#f2">[F2]</a></td></tr>
+<tr><td>Temperatura e top-p</td><td>São controles dependentes do algoritmo e da configuração de geração; temperatura não é uma medida de veracidade nem garante efeito na decodificação gulosa.</td><td><a href="#f3">[F3]</a></td></tr>
+<tr><td>RAG e alucinações</td><td>Recuperar informação pode fundamentar respostas; é necessário testar recuperação, fidelidade, citações e abstenção. Não existe garantia automática de veracidade.</td><td><a href="#f4">[F4]</a>, <a href="#f5">[F5]</a></td></tr>
+<tr><td>Perplexidade</td><td>Não é medida geral de utilidade ou segurança. Comparações exigem mesma configuração de avaliação, dados e tratamento adequado da tokenização.</td><td><a href="#f3">[F3]</a>, <a href="#f4">[F4]</a></td></tr>
+<tr><td>JSON estruturado</td><td>Um JSON pode ser sintaticamente válido, obedecer a um esquema e ainda conter informações falsas. Valide tipos, regras de negócio e evidências da fonte.</td><td><a href="#f6">[F6]</a></td></tr>
+<tr><td>Texto → SQL</td><td>SQL gerado não deve ser executado sem verificar permissões, consultas permitidas e limites; uma transação somente leitura é uma defesa, não uma solução isolada.</td><td><a href="#f7">[F7]</a>, <a href="#f8">[F8]</a></td></tr>
+<tr><td>Segurança de agentes</td><td>Conteúdo recuperado, páginas e arquivos são dados potencialmente hostis; instruções neles embutidas não devem ampliar privilégios da aplicação.</td><td><a href="#f8">[F8]</a></td></tr>
+<tr><td>Pesos abertos</td><td>Disponibilizar pesos não garante transparência dos dados de treino ou direitos irrestritos de uso. Leia as licenças específicas.</td><td><a href="#f9">[F9]</a></td></tr>
+</tbody></table></div>
+<div class="callout"><strong>Uma distinção essencial:</strong> um exemplo de SDK apresentado como <em>pseudocódigo</em> não comprova que uma API, importação, nome de modelo ou parâmetro realmente exista. Na publicação de código, separar sempre: <em>exemplo conceitual</em>, <em>executável testado</em> e <em>execução em produção validada</em>.</div>
+</section>
+<section id="pratica">
+<h2>3. Exercícios com critérios de aceitação</h2>
+<p>Esta seção é a contribuição nova. Todos os exemplos devem usar dados fictícios. Nenhum resultado de execução é declarado como aprovado antes de ser efetivamente medido.</p>
+<article class="ex"><h3>01 — Token ou parâmetro?</h3><p>Explique a distinção em até cinco frases. Depois teste uma mesma frase com dois tokenizadores reais e anote quantos IDs de tokens cada um retornou.</p><p><strong>Aceitação:</strong> não confundir unidade de entrada/saída com peso treinável; incluir versão e identificador de cada tokenizador; não inventar contagens. <a href="#f2">[F2]</a></p></article>
+<article class="ex"><h3>02 — Reconstruir o fluxo de geração</h3><p>Desenhe: texto → tokenizador → IDs → embeddings e informação posicional → blocos de modelo → escores → decodificação → texto. Marque o ponto em que a geração se repete.</p><p><strong>Aceitação:</strong> diferenciar treinamento de inferência; dizer que o fluxo esquematiza um modelo gerador autorregressivo, não todos os modelos.</p></article>
+<article class="ex"><h3>03 — As quatro formas de adaptação</h3><p>Apresente o mesmo caso de perguntas sobre um regulamento: pré-treinamento, ajuste fino, prompting e RAG.</p><p><strong>Aceitação:</strong> explicitar quais processos alteram parâmetros e quais fornecem contexto em tempo de execução. Distinguir documento atualizado de aprendizado armazenado nos pesos.</p></article>
+<article class="ex"><h3>04 — Extrair uma fatura sem adivinhar</h3><p>Crie uma fatura <strong>fictícia</strong> e extraia número, data, moeda e total em centavos da moeda. Se algum campo não estiver no documento, use <code>null</code>, sem inventar valores.</p>
+<pre>{
+  "numero": "TESTE-001",
+  "data": "2026-11-22",
+  "moeda": "BRL",
+  "total_centavos": 12500
+}</pre>
+<p><strong>Aceitação:</strong> (1) JSON válido; (2) esquema e tipos corretos; (3) data de calendário válida; (4) moeda explicitamente identificada; (5) correspondência dos valores com a fatura; (6) revisão de divergências por pessoa autorizada. Os dados acima são apenas um exemplo fictício, não uma extração executada. <a href="#f6">[F6]</a></p></article>
+<article class="ex"><h3>05 — Recuperação e resposta não são a mesma nota</h3><p>Formule dez perguntas com respostas verificáveis sobre documentos públicos, incluindo duas sem resposta no acervo. Separe recuperação <em>hit@k</em>, suporte factual, correção das referências e abstenções.</p><p><strong>Aceitação:</strong> registrar documentos, versão, trechos relevantes, resposta e resultado por questão. Não usar uma única taxa de acerto para afirmar que todo o sistema é confiável. <a href="#f5">[F5]</a></p></article>
+<article class="ex"><h3>06 — Classificar reclamações de teste</h3><p>Elabore 20 reclamações fictícias com rótulos revisados por humano, incluindo casos ambíguos e casos com múltiplos assuntos. Compare a classificação do sistema com esse gabarito.</p><p><strong>Aceitação:</strong> taxonomia explícita, matriz de confusão ou contagem por classe, erros comentados e conclusão limitada ao pequeno conjunto de teste. Não extrapolar desempenho para o mundo real.</p></article>
+<article class="ex"><h3>07 — Avaliar respostas com uma rubrica</h3><p>Dê notas de 0 a 2, separadamente, para correção, relevância, completude, fundamentação e conformidade ao formato. Compare duas respostas à mesma pergunta.</p><p><strong>Aceitação:</strong> justificar cada nota com evidência; informar avaliador, amostra, prompt e versão. Não misturar uma impressão de fluência com prova factual. <a href="#f4">[F4]</a></p></article>
+<article class="ex"><h3>08 — Texto para SQL com proteção</h3><p>Desenhe uma aplicação que transforma pedidos em consultas a um banco <strong>fictício</strong>: expor somente o esquema autorizado; bloquear escrita; impor permissões no servidor; validar sintaxe, tabelas e limites; parametrizar valores; inspecionar o plano; registrar a revisão.</p><p><strong>Aceitação:</strong> comandos que alteram dados são rejeitados mesmo quando disfarçados de pedido legítimo. Testes negativos devem provar o bloqueio; não executar SQL produzido pelo modelo diretamente contra banco real. <a href="#f7">[F7]</a>, <a href="#f8">[F8]</a></p></article>
+</section>
+<section id="fontes">
+<h2>4. Fontes consultadas e rastreabilidade</h2>
+<p>As referências abaixo permitem conferir as afirmações técnicas, e não apenas confiar nesta página. Consulte também o <a href="REFERENCIAS.md">registro detalhado, com finalidade e limitações de cada fonte</a>.</p>
+<ol>
+<li id="f0"><strong>[F0] Documento motivador.</strong> <em>LLMs Explained — Complete Practical Guide</em>, 18 páginas numeradas e capa, recebidas por imagens. Autor, editora, URL e licença não informados nas imagens. Material utilizado para orientação temática e análise crítica; não republicado.</li>
+<li id="f1"><strong>[F1]</strong> Vaswani et al. (2017), <em>Attention Is All You Need</em>. <a href="https://arxiv.org/abs/1706.03762" rel="noopener noreferrer">arXiv 1706.03762</a> — arquitetura Transformer e atenção.</li>
+<li id="f2"><strong>[F2]</strong> Hugging Face, <a href="https://huggingface.co/docs/transformers/main_classes/tokenizer" rel="noopener noreferrer">documentação de tokenizadores</a> — unidades, IDs e segmentação.</li>
+<li id="f3"><strong>[F3]</strong> Hugging Face, <a href="https://huggingface.co/docs/transformers/main_classes/text_generation" rel="noopener noreferrer">configuração da geração de texto</a> — estratégias, temperatura e top-p.</li>
+<li id="f4"><strong>[F4]</strong> NIST (2024), <a href="https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence" rel="noopener noreferrer">AI RMF: Generative AI Profile (NIST AI 600-1)</a> — avaliação, riscos, validade e confiabilidade.</li>
+<li id="f5"><strong>[F5]</strong> Es et al. (2024), <a href="https://aclanthology.org/2024.eacl-demo.16/" rel="noopener noreferrer">RAGAs: Automated Evaluation of Retrieval Augmented Generation</a>, EACL — avaliação de RAG.</li>
+<li id="f6"><strong>[F6]</strong> Python JSON Schema, <a href="https://python-jsonschema.readthedocs.io/en/stable/validate/" rel="noopener noreferrer">documentação de validação</a> — limites e mecanismos de validação de esquemas.</li>
+<li id="f7"><strong>[F7]</strong> PostgreSQL, <a href="https://www.postgresql.org/docs/18/sql-set-transaction.html" rel="noopener noreferrer">SET TRANSACTION: READ ONLY</a> — proteção transacional, restrições e limites de leitura.</li>
+<li id="f8"><strong>[F8]</strong> OWASP, <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/" rel="noopener noreferrer">LLM01: Prompt Injection (edição 2025)</a> — conteúdo não confiável e segurança de ferramentas.</li>
+<li id="f9"><strong>[F9]</strong> Hugging Face Hub, <a href="https://huggingface.co/docs/hub/repositories-licenses" rel="noopener noreferrer">Licenses</a> — permissões de redistribuição e uso.</li>
+</ol>
+<div class="callout"><strong>Estado da revisão:</strong> comparação com os complementos existentes e verificação documental das ressalvas técnicas realizadas. Os exercícios são roteiros propostos: <strong>NOT RUN</strong> até existirem entradas, saídas e resultados reproduzíveis. <a href="AUDITORIA.md">Ver registro de auditoria editorial e pendências</a>.</div>
+</section>
+</main>
+<footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Caderno original de apoio ao estudo · revisão documental, não certificação de modelos</span></div></footer>
+</body></html>
