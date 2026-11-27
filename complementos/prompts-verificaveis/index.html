@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Como testar prompts com evidências: casos negativos, critérios de aceitação e fontes — complemento de IA fazendo IA — ou quase">
+<title>Prompts verificáveis | IA fazendo IA — ou quase</title><link rel="stylesheet" href="../../styles.css">
+<style>
+main{max-width:1100px;margin:auto;padding:32px 22px 85px}.ey{font:700 .78rem Consolas,monospace;letter-spacing:.08em;color:#a74731}
+.hero{border-bottom:1px solid #c7c2b8;padding:38px 0 36px}
+h1{font:400 clamp(2.5rem,5vw,4.6rem)/1.13 Georgia,serif;letter-spacing:-.03em;margin:14px 0}
+h2{font:400 clamp(1.7rem,3vw,2.6rem) Georgia,serif;margin:38px 0 16px}
+.lead{font-size:1.18rem;max-width:870px}.links{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0}
+.links a{background:white;padding:9px 13px;border:1px solid #c6c2b8}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.panel{border:1px solid #cbc6bc;padding:20px;background:#fff}.panel h3{margin:0 0 10px;font-size:1.2rem}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #d6d1c8;padding:11px;vertical-align:top;text-align:left}th{background:#e9e4da}
+pre{white-space:pre-wrap;overflow:auto;padding:18px;background:#e8ece7;font:14px/1.5 Consolas,monospace}
+.note{background:#ede8dc;padding:18px 22px;border-left:3px solid #a74731;margin:26px 0}
+small,.subtle{color:#5d635d}@media(max-width:660px){.grid2{grid-template-columns:1fr}main{padding:20px 15px 60px}}
+</style><script data-goatcounter="https://iafazendoia.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></head>
+<body><header class="mast"><div class="shell"><a class="logo" href="../../index.html"><span class="mark">IA.</span><span class="name">Laboratório Vivo</span></a><nav class="nav"><a href="../../index.html">Início</a><a href="../index.html">Complementos</a><a href="../../laboratorio/README.html">Laboratórios</a></nav></div></header>
+<main><section class="hero"><span class="ey">OFICINA DE ESTUDO / REVISÃO EDITORIAL 2026</span><h1>Prompts verificáveis.<br>Não basta pedir bonito.</h1>
+<p class="lead">Uma maneira prática de transformar instruções em <strong>experimentos auditáveis</strong>. Este complemento responde ao desafio que falta em muitos catálogos: como distinguir uma resposta plausível de uma resposta demonstravelmente correta?</p>
+<p class="subtle"><strong>Estado:</strong> revisão documental PASS · execução de testes de modelos NOT RUN · nenhum resultado inventado.</p>
+<div class="links"><a href="#contrato">Contrato de teste</a><a href="#casos">Exercícios</a><a href="AUDITORIA.md">Auditoria</a><a href="REFERENCIAS.md">Fontes consultadas</a></div>
+<div class="note"><strong>Proveniência:</strong> estudo motivado pelo caderno <em>ChatGPT Prompts — 100+ Ready-to-Use Prompts</em>, de <strong>Data, Code & Clarity</strong> (@DataCodeClarity), recebido em 18 imagens contendo 104 prompts. A licença não foi informada; portanto, não publicamos aqui imagens, catálogo transcrito ou PDF traduzido. O conteúdo desta página é um complemento original, não uma nova edição da obra.</div></section>
+
+<section><h2>1. O que já existe no acervo</h2>
+<p>Não acrescentamos um terceiro catálogo. Para escrever ou melhorar prompts, consulte nossos <a href="../100-ideias-de-prompts/index.html">100 exemplos em dez temas</a> e <a href="../30-estrategias-de-prompts/index.html">30 estratégias simples</a>. Para testar processos que usam IA, consulte <a href="../cinco-sistemas-ia/index.html">Cinco sistemas de IA</a>.</p>
+<div class="grid2">
+<div class="panel"><h3>Um pedido bem formulado</h3><p>Define tarefa, dados disponíveis, público, saída e limites. Pode reduzir ambiguidades, mas <strong>não verifica sozinho</strong> fatos, contas, acesso a ferramentas ou execução.</p></div>
+<div class="panel"><h3>Um resultado comprovado</h3><p>Exige caso de teste, evidência de referência, medição, tratamento de falhas e conclusão limitada ao ensaio. Não confunda autoavaliação de um modelo com auditoria independente.</p></div>
+</div></section>
+
+<section id="contrato"><h2>2. Contrato mínimo de avaliação</h2>
+<p>Antes de comparar dois prompts, fixe as variáveis que podem afetar os resultados. Registre pelo menos:</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Campo</th><th>Exigência</th><th>Exemplo de evidência</th></tr></thead><tbody>
+<tr><td>Tarefa</td><td>Definir a saída esperada</td><td>Extrair 4 campos de uma fatura fictícia</td></tr>
+<tr><td>Entrada</td><td>Guardar prompt e documento de teste</td><td>Arquivo sintético e hash</td></tr>
+<tr><td>Modelo</td><td>Registrar modelo e versão quando conhecidos</td><td>Nome, versão, parâmetros de geração</td></tr>
+<tr><td>Gabarito</td><td>Preparar resposta de referência independente</td><td>JSON revisado por humano ou regra determinística</td></tr>
+<tr><td>Critério</td><td>Medir correção, completude e segurança separadas</td><td>Campos exatos; evidência ausente; falha segura</td></tr>
+<tr><td>Limite</td><td>Definir o que a prova <em>não</em> demonstra</td><td>Casos fictícios não provam desempenho em produção</td></tr>
+</tbody></table></div></section>
+
+<section id="casos"><h2>3. Quatro experimentos originais</h2>
+<p>Os exercícios abaixo foram elaborados para esta oficina, em vez de repetir os prompts recebidos.</p>
+<div class="grid2">
+<article class="panel"><h3>EXP-01 · Precisão numérica</h3><p>Forneça uma tabela fictícia de receita e despesas, com total conhecido. Peça ao modelo que calcule margem, mas verifique tudo com uma função determinística.</p><p><strong>Critério:</strong> resultado matemático exato, referência correta às linhas e identificação de dados faltantes.</p></article>
+<article class="panel"><h3>EXP-02 · Não inventar currículo</h3><p>Apresente apenas um currículo fictício e uma vaga inventada. Peça adaptação do currículo mantendo estritamente as experiências documentadas.</p><p><strong>Critério:</strong> nenhuma conquista, curso, salário ou ferramenta criada sem apoio no texto original.</p></article>
+<article class="panel"><h3>EXP-03 · SQL sem efeitos colaterais</h3><p>Use um esquema de banco fictício e exija uma consulta de leitura. Inclua pedidos adversariais para alterar tabelas ou revelar dados proibidos.</p><p><strong>Critério:</strong> comandos de escrita ou acesso não autorizado devem ser barrados pelo <em>executor e pelas permissões</em>, não apenas pela frase do prompt.</p></article>
+<article class="panel"><h3>EXP-04 · Revisão com gabarito externo</h3><p>Obtenha duas respostas para uma mesma questão técnica; depois, compare-as com documentação oficial previamente selecionada.</p><p><strong>Critério:</strong> citar documento, versão, evidência e divergências; evitar declarar PASS porque o próprio modelo afirmou estar certo.</p></article>
+</div>
+<h2>4. Registro reutilizável</h2>
+<p>Modelo de registro para qualquer um dos quatro experimentos:</p>
+<pre>experimento: EXP-01
+versao_prompt: nao_definida
+modelo_e_versao: nao_definido
+entrada_e_hash: pendente
+referencia_independente: pendente
+resultado_observado: nao_executado
+teste_negativo: nao_executado
+decisao: NOT_RUN
+limites: requer execucao e evidencias</pre>
+<p>Exemplos de falhas devem ser guardados junto com as execuções bem-sucedidas. O objetivo não é obter respostas “mais bonitas”, mas aprender a distinguir <strong>plausibilidade, utilidade e prova</strong>.</p></section>
+
+<section><h2>5. Leitura crítica da referência recebida</h2>
+<div class="grid2">
+<div class="panel"><h3>O que aproveitar</h3><p>Organização temática, campos para contexto, tarefas bem delimitadas, formato de saída, exemplos e revisão iterativa.</p></div>
+<div class="panel"><h3>O que relativizar</h3><p>“Atue como especialista” não concede perícia; solicitar etapas não garante raciocínio melhor; pedir revisão ao mesmo modelo não fornece uma testemunha independente; resultados sobre mercado e pessoas exigem dados verdadeiros e atuais.</p></div>
+</div>
+<div class="note"><strong>Fontes e direitos:</strong> documento motivador <a href="REFERENCIAS.md">[F0]</a>; engenharia de prompts e avaliação <a href="REFERENCIAS.md">[F1–F4]</a>; segurança e injeção de prompts <a href="REFERENCIAS.md">[F5]</a>; orientação complementar de prompting <a href="REFERENCIAS.md">[F6]</a>. Os quatro exercícios não foram executados. <a href="AUDITORIA.md">Veja a auditoria integral</a>.</div></section>
+</main><footer><div class="shell"><span>José Albuquerque · IA fazendo IA — ou quase</span><span class="micro">Complemento editorial original · nenhuma reprodução integral de material de terceiros</span></div></footer></body></html>
